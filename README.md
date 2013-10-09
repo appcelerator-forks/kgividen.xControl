@@ -1,6 +1,8 @@
 xControl
 ========
 
+This project is created using Appcelerator Titanium.
+
 Easily control your Insteon devices.  List all of your Insteon devices and use an on/off button or a slider to adjust accordingly.  
 
 Currently requires an ISY controller and you need the ip/dns and port number.  xControl will then automatically load all your Insteon devices and create a button with a slider for each device.  Currently this works best for lighting control.
