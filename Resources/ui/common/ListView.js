@@ -6,6 +6,9 @@ var ListView = function (props) {
 	//*************PROPERTIES (Set from the ApplicationWindow.js)****************************
 	//todo: There is probably a better way to pass these in.  Alloy?
 	var deviceBtnProps = props.deviceBtnProps;
+	var deviceSceneOnBtnProps = props.deviceSceneOnBtnProps;
+	var deviceSceneOffBtnProps = props.deviceSceneOffBtnProps;
+	var deviceSceneLabelProps = props.deviceSceneLabelProps;
 	var deviceTableViewProps = props.deviceTableViewProps;
 	var parentSeparatorProps = props.parentSeparatorProps;
 	var deviceSliderProps = props.deviceSliderProps;
@@ -122,7 +125,6 @@ var ListView = function (props) {
 
 //************** END PULL TO REFRESH ************************
 	function updateStatusOfDevicesOnView(xmlData) {
-		
 		try{
 			var xml = xmlData.responseXML;
 		}catch(e){
@@ -139,6 +141,7 @@ var ListView = function (props) {
 			var statusValue = nodes.item(i).getElementsByTagName('property').item(0).getAttribute('value');
 
 			//update the buttons by the address/id
+			//todo: instead of iterating over the list every time we should use a library to get the exact button and just update it.
 			for (var j = 0; j < listOfUIDevices.length; j++) {
 				if (listOfUIDevices[j].address == address && listOfUIDevices[j].type == 'button') {
 					if (status == 'On') {
@@ -148,9 +151,8 @@ var ListView = function (props) {
 					}
 				} else if (listOfUIDevices[j].address == address && listOfUIDevices[j].type == 'slider') {
 					var level = statusValue / 255 * 100;
-					listOfUIDevices[j].value = level;
+					listOfUIDevices[j].value = level;				
 				}
-
 				if (listOfUIDevices[j].address == address && listOfUIDevices[j].type == 'label') {
 					var level = statusValue / 255 * 100;
 					listOfUIDevices[j].text = Math.round(level);
@@ -173,10 +175,27 @@ var ListView = function (props) {
 		if (devicesInListView != null && devicesInListView.length > 0) {
 			for (var i = 0; i < devicesInListView.length; i++) {
 				var deviceRow = Titanium.UI.createTableViewRow(deviceRowProps);
-				if (!devicesInListView[i].parent) {//if it doesn't have a parent then it's a folder
+				if (devicesInListView[i].type =='Folder') {
 					var parentSeparator = Ti.UI.createLabel(parentSeparatorProps);
 					parentSeparator.text = devicesInListView[i].displayName;
 					deviceRow.add(parentSeparator);
+				} else if (devicesInListView[i].type == 'scene') {
+					
+					
+					var data = {
+						address : devicesInListView[i].address,
+						name : devicesInListView[i].displayName
+					};
+					//create a scene row and push it on.
+					var sceneLbl = createDeviceSceneLbl(data);					
+					var sceneOnBtn = createDeviceSceneOnBtn(data);
+					var sceneOffBtn = createDeviceSceneOffBtn(data);
+					var deviceSliderAndLabel = createDeviceSlider(data);
+					deviceRow.add(sceneLbl);
+					deviceRow.add(sceneOnBtn);
+					deviceRow.add(sceneOffBtn);
+					// deviceRow.add(deviceSliderAndLabel.slider);
+					// deviceRow.add(deviceSliderAndLabel.label);
 				} else {
 					var data = {
 						name : devicesInListView[i].displayName,
@@ -231,7 +250,7 @@ var ListView = function (props) {
 		listOfUIDevices.push(deviceSlider);
 		listOfUIDevices.push(deviceSliderLabel);
 
-		var sliderAndLabel = ( {
+		var sliderAndLabel = ({
 			slider : deviceSlider,
 			label : deviceSliderLabel
 		});
@@ -239,6 +258,36 @@ var ListView = function (props) {
 		return sliderAndLabel;
 	}
 	
+	var createDeviceSceneLbl = function(data) {
+		var sceneLbl = Titanium.UI.createLabel(deviceSceneLabelProps);
+		sceneLbl.text = data.name;
+		listOfUIDevices.push(sceneLbl);
+	
+		return sceneLbl;
+	}
+	
+	//Let's create a scene button to add to the table view
+	var createDeviceSceneOnBtn = function(data) {
+		var sceneBtn = Titanium.UI.createButton(deviceSceneOnBtnProps);
+		listOfUIDevices.push(sceneBtn);
+
+		sceneBtn.addEventListener('click', function(e) {
+			devices.sceneOn(updateStatusOfDevicesOnView, data.address);
+		});
+		
+		return sceneBtn;
+	}
+	
+	var createDeviceSceneOffBtn = function(data) {
+		var sceneBtn = Titanium.UI.createButton(deviceSceneOffBtnProps);
+		listOfUIDevices.push(sceneBtn);
+
+		sceneBtn.addEventListener('click', function(e) {
+			devices.sceneOff(updateStatusOfDevicesOnView, data.address);
+		});
+		
+		return sceneBtn;
+	}
 	
 	//Open Settings
 	var openSettingsBtn = Ti.UI.createButton(openSettingsBtnProps);

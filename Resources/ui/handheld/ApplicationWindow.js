@@ -39,12 +39,60 @@ function ApplicationWindow() {
 				fontWeight : 'bold',
 				fontFamily : 'Helvetica Neue'
 			},
-			backgroundImage : '/images/btn-active.png',
+			backgroundImage : '/images/btn.png',
 			backgroundSelectedImage : '/images/btn-hover.png',
 			selectedImage : '/images/btn-hover.png',
 			onImage : '/images/btn-active.png',
 			offImage : '/images/btn.png',
 			type : 'button'
+		},
+		deviceSceneOnBtnProps : {
+			title : 'On',
+			color: '#fff',
+			width : '22%',
+			top : "5%",
+			height : 40,
+			left : '50%',
+			font : {
+				fontSize : 20,
+				fontWeight : 'bold',
+				fontFamily : 'Helvetica Neue'
+			},
+			backgroundImage : '/images/btn.png',
+			backgroundSelectedImage : '/images/btn-hover.png',
+			selectedImage : '/images/btn-hover.png',
+			onImage : '/images/btn-active.png',
+			offImage : '/images/btn.png',
+			type : 'scene'
+		},
+		deviceSceneOffBtnProps : {
+			title : 'Off',
+			color: '#fff',
+			width : '22%',
+			height : 40,
+			left : '75%',
+			font : {
+				fontSize : 20,
+				fontWeight : 'bold',
+				fontFamily : 'Helvetica Neue'
+			},
+			backgroundImage : '/images/btn.png',
+			backgroundSelectedImage : '/images/btn-hover.png',
+			selectedImage : '/images/btn-hover.png',
+			onImage : '/images/btn-active.png',
+			offImage : '/images/btn.png',
+			type : 'scene'
+		},
+		deviceSceneLabelProps : {
+			color : 'white',
+			font : {
+				fontFamily : 'Helvetica Neue',
+				fontSize : 14
+			},
+			textAlign : 'left',
+			width : '50%',
+			height : 'auto',
+			left : 15
 		},
 		deviceTableViewProps : {
 			top:20,

@@ -28,6 +28,14 @@ exports.getCurrentStatusOfDevices = function(callback) {
 	ISY.getDevicesStatusXML(callback);
 }
 
+exports.sceneOn = function(callback, address){
+	var level = 255;
+	ISY.deviceOn(callback, address, level);	
+}
+
+exports.sceneOff = function(callback, address){
+	ISY.deviceOff(callback, address);	
+}
 var getCurrentStatusOfDevices = function(responseData, data) {
 	//This is called after the toggle device so it will refresh after the toggle.
 	//Then the updateStatusOfDevicesOnView is called to refresh the view.  That's what the data.callback is but it's a little hokey to pass that through like that.
@@ -62,16 +70,17 @@ var processFoldersAndNodes = function (xmlData, callback) {
 	var xml = xmlData.responseXML;
 	
 	var nodesXML = xml.documentElement.getElementsByTagName('node');
+
 	var foldersAndNodes = getFolders(xmlData);
 	
 	//get the nodes
 	for (var i = 0; i < nodesXML.length; i++) {
 		var nodeAddress = nodesXML.item(i).getElementsByTagName('address').item(0).text;
 		var nodeName = nodesXML.item(i).getElementsByTagName('name').item(0).text;
-		if ( nodeParent = nodesXML.item(i).getElementsByTagName('parent').item(0) != null) {
+		if (nodesXML.item(i).getElementsByTagName('parent').item(0) != null) {
 			var nodeParent = nodesXML.item(i).getElementsByTagName('parent').item(0).text;
 		} else {
-			var nodeParent = '111';
+			var nodeParent = '111'; //This is hardcoded as the MISC folder.
 		}
 
 		Ti.API.info('node name: ' + nodeName + ' address:' + nodeAddress);
@@ -82,11 +91,32 @@ var processFoldersAndNodes = function (xmlData, callback) {
 				foldersAndNodes[j].folderNodes.push({
 					nodeName : nodeName,
 					nodeAddress : nodeAddress,
-					nodeParent : nodeParent
+					nodeParent : nodeParent,
+					nodeType : 'load'
 				});
 			}
 		}
 	}	
+
+	//get the scenes
+	var groupsXML = xml.documentElement.getElementsByTagName('group');
+	//Add a default parent for scenes/groups
+	var folderNodes = [];
+	foldersAndNodes.push({
+		folderName : 'Scenes (Status is not available for scenes.)',
+		folderAddress : '222',
+		folderNodes : folderNodes
+	});
+	for (var i = 0; i < groupsXML.length; i++) {
+		var groupAddress = groupsXML.item(i).getElementsByTagName('address').item(0).text;
+		var groupName = groupsXML.item(i).getElementsByTagName('name').item(0).text;	
+		//since we just added the Scenes Folder we know it's the last one.  So we'll just add all these to the last folder
+		foldersAndNodes[foldersAndNodes.length - 1].folderNodes.push({
+			nodeName : groupName,
+			nodeAddress : groupAddress,
+			nodeType: 'scene'			
+		});
+	}
 	callback(foldersAndNodes);
 }
 
@@ -110,7 +140,7 @@ function getFolders(xmlData){
 		folderAddress : '111',
 		folderNodes : folderNodes
 	});
-	
+		
 	Ti.API.info('folders:' + folders.toString);
 	
 	return folders;
@@ -127,6 +157,8 @@ var toggleDevice = function(callback,statusXML,address) {
 		ISY.deviceFastOn(getCurrentStatusOfDevices, address, callback);
 	}
 }
+
+
 
 
 //*************************************HELPER METHODS*************************************
