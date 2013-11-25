@@ -1,5 +1,5 @@
 exports.doRestCall = function(callback, append_url, data) {
-	var restURL = 'http://' + Titanium.App.Properties.getString('ipaddress') + ':' + Titanium.App.Properties.getString('port') + '/rest/';
+	var restURL = Titanium.App.Properties.getString('http') + '://' + Titanium.App.Properties.getString('ipaddress') + ':' + Titanium.App.Properties.getString('port') + '/rest/';
 	var url = restURL + append_url;
 	var authString = Ti.App.Properties.getString('username') + ':' + Ti.App.Properties.getString('password');
 	var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());

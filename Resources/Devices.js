@@ -124,10 +124,11 @@ function getFolders(xmlData){
 	var xml = xmlData.responseXML;
 	var foldersXML = xml.documentElement.getElementsByTagName('folder');
 	var folders = [];
+	var folderNodes = [];
 	for (var i = 0; i < foldersXML.length; i++) {
+		folderNodes = [];
 		var folderAddress = foldersXML.item(i).getElementsByTagName('address').item(0).text;
-		var folderName = foldersXML.item(i).getElementsByTagName('name').item(0).text;
-		var folderNodes = [];
+		var folderName = foldersXML.item(i).getElementsByTagName('name').item(0).text;		
 		folders.push({
 			folderName : folderName,
 			folderAddress : folderAddress,
@@ -136,7 +137,7 @@ function getFolders(xmlData){
 	}
 	//Add a default parent for those devices that don't have one
 	folders.push({
-		folderName : 'Misc',
+		folderName : 'Default',
 		folderAddress : '111',
 		folderNodes : folderNodes
 	});

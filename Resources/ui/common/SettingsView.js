@@ -53,6 +53,9 @@ var SettingsView = function (props, listView) {
 			label:'Server',
 			field: 'ipaddress'
 		},{
+			label:'Method',
+			field: 'http'
+		},{
 			label:'Port',
 			field: 'port'
 		},{
@@ -66,6 +69,7 @@ var SettingsView = function (props, listView) {
 	var connTblData=[];
 	
 	var def_ipaddress = Titanium.App.Properties.getString('ipaddress');
+	var def_http = Titanium.App.Properties.getString('http');
 	var def_port = Titanium.App.Properties.getString('port');
 	var def_username = Titanium.App.Properties.getString('username');
 	var def_password = Titanium.App.Properties.getString('password');
@@ -83,20 +87,26 @@ var SettingsView = function (props, listView) {
 		    textFields[i].hintText = 'IP/DNS';
 		}
 		
+		if(connectionData[i].field == 'http') {
+		    textFields[i].value = def_http;
+		    textFields[i].passwordMask = false;
+		    textFields[i].hintText = 'Default: http';
+		}
+		
 		if(connectionData[i].field == 'port') {
 		    textFields[i].value = def_port;
-		    textFields[i].hintText = 'Type Port...';
+		    textFields[i].hintText = 'Default: 80';
 		}
 		
 		if(connectionData[i].field == 'username') {
 		    textFields[i].value = def_username;
-		    textFields[i].hintText = 'Type User Name...';
+		    textFields[i].hintText = 'User Name';
 		}
 		
 		if(connectionData[i].field == 'password') {
 		    textFields[i].passwordMask = true;
 		    textFields[i].value = def_password;
-		    textFields[i].hintText = 'Type Password...';
+		    textFields[i].hintText = 'Password';
 		}
 		row.add(label);
 		row.add(textFields[i]);
@@ -111,15 +121,23 @@ var SettingsView = function (props, listView) {
 	function saveConnectionInfo() { 
 		// get the user name and password values here and save them using //Ti.App.Properties.setString()... but how??? 
 		var ipaddress = textFields[0].value;
-		var port = textFields[1].value;
-		var username = textFields[2].value;
-		var password = textFields[3].value;
+		var http = textFields[1].value;
+		var port = textFields[2].value;
+		var username = textFields[3].value;
+		var password = textFields[4].value;
 		Ti.App.Properties.setString('ipaddress', ipaddress);
-		Ti.App.Properties.setString('port', port);
+		if(http != ''){
+			Ti.App.Properties.setString('http', http);	
+		}else{
+			Ti.App.Properties.setString('http', 'http');
+		}
+		if(port != ''){
+			Ti.App.Properties.setString('port', port);
+		}else{
+			Ti.App.Properties.setString('port', '80');
+		}
 		Ti.App.Properties.setString('username', username);
 		Ti.App.Properties.setString('password', password);
-		Ti.API.info('user and pass' + username + ' ' + password + ipaddress + port);
-		// devices.getDevicesLive(populateDevicesDB);		
 	};
 	
 //****DEVICES INFORMATION*********
