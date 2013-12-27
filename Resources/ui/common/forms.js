@@ -11,6 +11,7 @@ exports.TYPE_PICKER = 'picker';
 exports.TYPE_TEXT = 'text';
 exports.TYPE_SUBMIT = 'submit';
 exports.TYPE_BUTTON = 'button';
+exports.TYPE_BASIC_PICKER = 'basic_picker';
 
 var isAndroid = Ti.Platform.osname === 'android';
 var textFieldDefaults = {
@@ -50,7 +51,7 @@ var setupPickerTextField = function(textField, pickerType, data) {
         
         textField.addEventListener('focus', function(e) {
                 e.source.blur(); 
-                require('semiModalPicker').createSemiModalPicker({
+                require('ui/common/semiModalPicker').createSemiModalPicker({
                         textField: textField,
                         value: textField.value,
                         type: pickerType,
@@ -129,6 +130,33 @@ var addField = function(field, fieldRefs) {
                         form.fireEvent(id, {values:values});        
                 });        
                 form.container.add(button);
+                fieldRefs[id] = button;
+        } else if (type == exports.TYPE_BASIC_PICKER){
+        	var picker = Ti.UI.createPicker();
+			var data = [];
+			data[0]=Ti.UI.createPickerRow({title:field.data[0],id:field.data[0]});
+			data[1]=Ti.UI.createPickerRow({title:field.data[1],id:field.data[1]});
+			
+			
+			// turn on the selection indicator (off by default)
+			picker.selectionIndicator = true;
+			
+			picker.add(data);
+			
+			form.container.add.add(picker);
+						
+			picker.addEventListener('change',function(e){
+				Ti.API.info("You selected row: "+ e.row +", column: "+ e.column +", id: " + e.row.id);
+                var values = {};
+                for (var i in fieldRefs) {
+                    values[i] = fieldRefs[i].value;        
+                }
+                form.fireEvent(id, {value: e.row.id});
+			});
+			
+			//sets the starting selectedRow
+			// picker.setSelectedRow(0,field.startup,true);
+			picker.setSelectedRow(1,1,true);
         }
         
         // Add our prepared UI component to the form
