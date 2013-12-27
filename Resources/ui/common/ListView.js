@@ -298,13 +298,7 @@ var ListView = function (props) {
 
 	function openSettings() {	
 		self.remove(deviceTableView);
-		var SettingsView;
-			
-		if(isTablet){
-			SettingsView = require('ui/common/SettingsView');
-		}else{
-			SettingsView = require('ui/handheld/SettingsView');
-		}
+		var SettingsView = SettingsView = require('ui/common/SettingsView');
 		var settingsView = new SettingsView({settingsViewProps: settingsViewProps},self);
 		self.add(settingsView);
 	}

@@ -18,7 +18,39 @@ function ApplicationWindow() {
 	    Ti.UI.UPSIDE_PORTRAIT
 	];	
 	//construct UI
+	
+	var settingsViewProps = {
+		formProps : {
+			backgroundColor : '#ddd',
+			height: '100%',
+			width: '100%',
+			color: 'white'
+		},
+		formLabelProps : {
+			top: '5dp',
+            left: '35dp',
+            color: '#222',
+            font: {
+                    fontSize: '16dp',
+                    fontWeight: 'bold'
+            },
+            height: 'auto',
+            width: 'auto'
+		},
+		formButton : {
+            height: '40dp',
+            width: '200dp',
+            top:'10dp'
+    	},
+		formSubmitButton : {
+	        height: '40dp',
+	        width: '100dp',
+	        top:'10dp'
+	
+		}	
+	}	
 	var listView = new ListView({
+		settingsViewProps : settingsViewProps,
 		openSettingsBtnProps : {
 			title : '',
 			height : 30,
@@ -146,7 +178,7 @@ function ApplicationWindow() {
 			top : 4,
 			left : 4,
 			backgroundImage : '/images/glyphicons_081_refresh.png'
-		}				
+		}		
 	});
 	var floorPlanView = new FloorPlanView();
 	

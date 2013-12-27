@@ -4,11 +4,13 @@ function addRemoveDevices() {
 	var devices = require('Devices');
 		
 	var closeBtn = Ti.UI.createButton({
-		title : 'Close'
+		title : 'Close',
+
 	});
 		
 	var self = Ti.UI.createWindow({
-		rightNavButton: closeBtn
+		rightNavButton: closeBtn,
+		backgroundColor : '#ddd'
 	});	
 	
 	self.orientationModes = [
@@ -20,29 +22,51 @@ function addRemoveDevices() {
 		self.close();
 	});
 	
-	var deviceSection = Ti.UI.createTableViewSection({
-		headerTitle:'Title                                            Visible'
+	var devicesTableView = Ti.UI.createTableView({
+		top:25,
+		height:'100%',
+		borderColor:'#959EAC',
+		borderWidth:1,
+		borderRadius:5,
+		editable: true
 	});
+	
+	if(Ti.Platform.osname === 'android'){
+		closeBtn.top='94%';
+		closeBtn.right='5%';
+		devicesTableView.height = '90%';
+		self.add(closeBtn);
+	}
+	
+	// Create a Label.
+	var headerTitle = Ti.UI.createLabel({
+		text : 'Title',
+		color: 'black',
+		top : 1,
+		left : 5
+	});
+	
+	var visibleTitle = Ti.UI.createLabel({
+		text : 'Visible',
+		color : 'black',
+		top : 1,
+		left : '56%'
+	});	
+	// Add to the parent view.
+	self.add(headerTitle);
+	self.add(visibleTitle);
+		
 		
 	function populateTvDevicesTbl(retData){
 		var deviceTblData = [];
-		//need to add the header/section and then start adding switches.
-		deviceTblData[0] = deviceSection;
+
 		for (var i = 0; i < retData.length; i++) {
 			deviceTblData[i+1] = addDeviceTblRow(retData[i]);
 		}
 		devicesTableView.setData(deviceTblData);		
 	}
 	
-	var devicesTableView = Ti.UI.createTableView({
-		top:5,
-		height:'100%',
-		borderColor:'#959EAC',
-		borderWidth:1,
-		borderRadius:5,
-		editable: true,
-		data:[deviceSection]	
-	});
+
 
 	devicesTableView.addEventListener('delete',function(e) {
 		db.deleteDevice(e.rowData.id);
@@ -50,7 +74,7 @@ function addRemoveDevices() {
 		
 	function addDeviceTblRow(device) {
 		var row = Ti.UI.createTableViewRow({
-			height:40
+			height:45
 		});
 		
 		//Create a Button.
@@ -149,6 +173,7 @@ function addRemoveDevices() {
 		// Create a Label.
 		var lblDeviceType = Ti.UI.createLabel({
 			font:{fontSize:12},
+			color : 'black',
 			left : '35%',
 			textAlign : 'left'
 		});
@@ -158,6 +183,7 @@ function addRemoveDevices() {
 		// Create a Label.
 		var deviceLbl = Ti.UI.createLabel({
 			text : device.displayName,
+			color: 'black',
 			left: 10,
 			textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT			
 		});
