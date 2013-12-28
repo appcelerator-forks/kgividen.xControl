@@ -1,7 +1,13 @@
 exports.doRestCall = function(callback, append_url, data) {
-	var restURL = Titanium.App.Properties.getString('http') + '://' + Titanium.App.Properties.getString('ipaddress') + ':' + Titanium.App.Properties.getString('port') + '/rest/';
+	var conn = Titanium.App.Properties.getString('conn_current');
+	if(!conn){
+		alert('Connection Error! Please check the connection information.');
+		return;
+	}
+	conn = JSON.parse(conn);
+	var restURL = conn.method + '://' + conn.ipaddress + ':' + conn.port + '/rest/';
 	var url = restURL + append_url;
-	var authString = Ti.App.Properties.getString('username') + ':' + Ti.App.Properties.getString('password');
+	var authString = conn.username + ':' + conn.password;
 	var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());
 	Ti.API.info('url: ' + url);
 	var xhr = Ti.Network.createHTTPClient({
