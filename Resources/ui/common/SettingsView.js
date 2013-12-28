@@ -72,7 +72,7 @@ function SettingsWindow(props,listView) {
 			connectionInfo = {};
 			if(Titanium.App.Properties.getString('ipaddress')){
 				connectionInfo.ipaddress = Titanium.App.Properties.getString('ipaddress');
-				connectionInfo.http = Titanium.App.Properties.getString('http');
+				connectionInfo.method = Titanium.App.Properties.getString('http');
 				connectionInfo.port = Titanium.App.Properties.getString('port');
 				connectionInfo.username = Titanium.App.Properties.getString('username');
 				connectionInfo.password = Titanium.App.Properties.getString('password');
