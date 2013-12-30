@@ -21,10 +21,11 @@ var ListView = function (props) {
 
 	var devices = require('Devices');
 	var db = require('db');
+	var _ = require('underscore-min')._;
 
 	var self = Ti.UI.createView();
 
-	var listOfUIDevices = [];
+	var listOfUIDevices = []; //This is used for when we update the status of the devices we know what we need to update.
 
 	var deviceTableView = Ti.UI.createTableView(deviceTableViewProps);
 
@@ -139,29 +140,39 @@ var ListView = function (props) {
 			var address = nodes.item(i).getAttribute('id');
 			var status = nodes.item(i).getElementsByTagName('property').item(0).getAttribute('formatted');
 			var statusValue = nodes.item(i).getElementsByTagName('property').item(0).getAttribute('value');
-
-			//update the buttons by the address/id
-			//todo: instead of iterating over the list every time we should use a library to get the exact button and just update it.
-			for (var j = 0; j < listOfUIDevices.length; j++) {
-				if (listOfUIDevices[j].address == address && listOfUIDevices[j].type == 'button') {
-					if (status == 'On') {
-						listOfUIDevices[j].backgroundImage = deviceBtnProps.onImage;
-					} else {
-						listOfUIDevices[j].backgroundImage = deviceBtnProps.offImage;
-					}
-				} else if (listOfUIDevices[j].address == address && listOfUIDevices[j].type == 'slider') {
-					var level = statusValue / 255 * 100;
-					listOfUIDevices[j].value = level;				
-				}
-				if (listOfUIDevices[j].address == address && listOfUIDevices[j].type == 'label') {
-					var level = statusValue / 255 * 100;
-					listOfUIDevices[j].text = Math.round(level);
-				}
+	
+			//Get all of the elements that match this address.  i.e. button, slider, etc.
+			var currentDevice = _.filter(listOfUIDevices,function(device){
+				return device.address == address;
+			});
+			
+			if (!currentDevice){
+				continue;
 			}
+			
+			//update each of the updated graphics with the correct image states or values.
+			_.each(currentDevice, function(device){
+				if (device.type == 'button') {
+					if (status == 'On') {
+						device.backgroundImage = deviceBtnProps.onImage;
+					} else {
+						device.backgroundImage = deviceBtnProps.offImage;
+					}
+				} else if (device.type == 'slider') {
+					var level = statusValue / 255 * 100;
+					device.value = level;				
+				}
+				
+		 		if (device.type == 'label') {
+					var level = statusValue / 255 * 100;
+					device.text = Math.round(level);
+				}
+			});
 		}
 	}
 
 	function showDevicesInListView() {
+		//gets all the devices from the DB that are tagged as visible by the user in the settings view.
 		db.getListViewDevices(showDevices);
 	}
 
@@ -169,7 +180,7 @@ var ListView = function (props) {
 		showDevicesInListView();
 	}
 
-	//show only the ones that are supposed to be shown in the list view
+	//show only the ones that are supposed to be shown in the list view by adding them each to a table view.
 	function showDevices(devicesInListView) {
 		var deviceTblData = [];
 		if (devicesInListView != null && devicesInListView.length > 0) {
@@ -180,8 +191,6 @@ var ListView = function (props) {
 					parentSeparator.text = devicesInListView[i].displayName;
 					deviceRow.add(parentSeparator);
 				} else if (devicesInListView[i].type == 'scene') {
-					
-					
 					var data = {
 						address : devicesInListView[i].address,
 						name : devicesInListView[i].displayName
@@ -194,8 +203,7 @@ var ListView = function (props) {
 					deviceRow.add(sceneLbl);
 					deviceRow.add(sceneOnBtn);
 					deviceRow.add(sceneOffBtn);
-					// deviceRow.add(deviceSliderAndLabel.slider);
-					// deviceRow.add(deviceSliderAndLabel.label);
+
 				} else {
 					var data = {
 						name : devicesInListView[i].displayName,
