@@ -4,6 +4,11 @@ exports.createDb = function() {
 	Ti.Database.install('validControl.sqlite', DATABASE_NAME);
 };
 
+exports.clearDb = function() {
+	var db = Ti.Database.open(DATABASE_NAME);
+	db.execute('DELETE FROM devices');
+	db.close();
+}
 exports.selectDevices = function(callback, data){
 	var retData = [];
 	var db = Ti.Database.open(DATABASE_NAME);

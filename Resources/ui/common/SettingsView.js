@@ -1,21 +1,30 @@
 //Settings View Component Constructor
 function SettingsWindow(props,listView) {
 	var forms = require('ui/common/forms');
+	var db = require('db');
+	
+	var CONN_CURRENT = 'conn_current';
+	var CONN_REMOTE = 'Remote';
+	var CONN_LOCAL = 'Local';
+	var NETWORK_BTN_REMOTE_TITLE = "Remote Connection";
+	var NETWORK_BTN_LOCAL_TITLE = "Local Connection";
+	
 	var currentConnType = Ti.App.Properties.getString('network_type');
 	var networkBtnTitle = "";
-	if(currentConnType == 'Remote'){
-		networkBtnTitle = "Remote Connection";			
+	if(currentConnType == CONN_REMOTE){
+		networkBtnTitle = NETWORK_BTN_REMOTE_TITLE;			
 	}else{
-		networkBtnTitle = "Local Connection";
+		networkBtnTitle = NETWORK_BTN_LOCAL_TITLE;
 	}
 	var connectionData = [
-			{ title:networkBtnTitle, type:'button', id:'changeNetwork'},
+			{ title:networkBtnTitle, type:'button', id:'changeNetworkBtn'},
 	        { title:'Server', type:'text', id:'ipaddress' },
 	        { title:'Method', type:'text', id:'method' },
 	        { title:'Port', type:'number', id:'port' },
 	        { title:'Username', type:'text', id:'username' },
 	        { title:'Password', type:'password', id:'password' },
 	        { title:'Add/Remove Devices', type:'button', id:'addRemoveDevices' },
+	        { title:'Clear All Data', type:'button', id:'clearDataPrompt' },
 	        { title:'Close', type:'submit', id:'close' }
        	];
 	var self = Ti.UI.createView(props.settingsViewProps.formProps);
@@ -34,15 +43,15 @@ function SettingsWindow(props,listView) {
 		listView.fireEvent('myFocus',{ 'scroller': e.source });
 	});
 	
-	form.addEventListener('changeNetwork', function(e) {
+	form.addEventListener('changeNetworkBtn', function(e) {
 		var currentType = Ti.App.Properties.getString('network_type');
 		//Toggle the network Type todo:There's probably a more concise way to do this
 		if(currentType == "Remote"){
-			Ti.App.Properties.setString('network_type',"Local");
-			form.fieldRefs.changeNetwork.title = "Local Connection";	
+			Ti.App.Properties.setString('network_type',CONN_LOCAL);
+			form.fieldRefs.changeNetworkBtn.title = NETWORK_BTN_LOCAL_TITLE;	
 		}else{
-			Ti.App.Properties.setString('network_type',"Remote");
-			form.fieldRefs.changeNetwork.title = "Remote Connection";	
+			Ti.App.Properties.setString('network_type',CONN_REMOTE);
+			form.fieldRefs.changeNetworkBtn.title = NETWORK_BTN_REMOTE_TITLE;	
 		}
 		getConnectionInfo(Ti.App.Properties.getString('network_type'));
 	});
@@ -59,12 +68,47 @@ function SettingsWindow(props,listView) {
 		}	
 	});
 	
+	form.addEventListener('clearDataPrompt', function(e) {
+		var dialog = Ti.UI.createAlertDialog({
+		  	confirm : 0,
+		    cancel: 1,
+		    buttonNames: ['Confirm', 'Cancel'],
+		    message: 'Are you sure you want to delete all the data?',
+		    title: 'Clear All Data'
+		  });
+		dialog.addEventListener('click', function(e){
+			if (e.index === e.source.cancel){
+				Ti.API.info('The cancel button was clicked');
+			}
+			if (e.index === e.source.confirm){
+				clearData();
+			}
+		  });
+		dialog.show();
+	});
+
 	self.add(form);
-		
-	function getConnectionInfo(connType){
+	
+	function clearData(){
+		db.clearDb();
+		Ti.App.Properties.removeProperty('ipaddress');
+		Ti.App.Properties.removeProperty('http');
+		Ti.App.Properties.removeProperty('port');
+		Ti.App.Properties.removeProperty('username');
+		Ti.App.Properties.removeProperty('password');
+		Ti.App.Properties.removeProperty('conn_' + CONN_LOCAL);
+		Ti.App.Properties.removeProperty('conn_' + CONN_REMOTE);
+		Ti.App.Properties.removeProperty('conn_' + CONN_CURRENT);
+		for (var i in form.fieldRefs){
+			form.fieldRefs[i].value = "";	
+		}
+
+		alert("Data has been cleared.");
+	}	
+	function getConnectionInfo(network_type){
 		var connectionInfo = {};
 		//connType is Remote or Local
-		connectionInfo = JSON.parse(Titanium.App.Properties.getString('conn_' + connType));
+		connectionInfo = JSON.parse(Titanium.App.Properties.getString('conn_' + network_type));
 		
 		if (!connectionInfo){
 			//this is for backwards compatibility with the old way we used to store connections.
@@ -140,7 +184,7 @@ function SettingsWindow(props,listView) {
 	}
 	
 	function saveConnectionInfo(data){		
-		var connectionType = Ti.App.Properties.getString('network_type');
+		var networkType = Ti.App.Properties.getString('network_type');
 		if(data.method){
 			var method = data.method;	
 		}else{
@@ -160,12 +204,16 @@ function SettingsWindow(props,listView) {
 			'password' : data.password
 		}
 		var dataStr = JSON.stringify(data);
-		Ti.App.Properties.setString('conn_' + connectionType, dataStr);
+		Ti.App.Properties.setString('conn_' + networkType, dataStr);
 		//Store it to the current settings so when we use the rest server it will work
-		Ti.App.Properties.setString('conn_current', dataStr);
+		Ti.App.Properties.setString(CONN_CURRENT, dataStr);
 		
 		Ti.API.info('user and pass' + data.username + ' ' + data.password + data.ipaddress + port);
 	};
+	
+	
+
+	
 	getConnectionInfo(Titanium.App.Properties.getString('network_type'));			
 	return self;
 }
