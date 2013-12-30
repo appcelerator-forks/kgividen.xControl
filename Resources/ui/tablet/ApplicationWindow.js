@@ -19,121 +19,8 @@ function ApplicationWindow() {
 	];	
 
 //****************SETTINGS VIEW PROPERTIES***********************
-	// var settingsViewProps = [{	
-		// title : "Settings",
-		// connectionInfoTableViewProps : { 
-			// scrollable:false,
-			// top:5,
-			// height: Ti.UI.SIZE,
-			// width: '95%',
-			// left:10,
-			// borderColor:'#959EAC', 
-			// borderWidth:1,
-			// borderRadius:5
-		// },	
-		// tvConnectionInfoHeaderProps : {
-			// text : 'Connection Information',
-			// height : 50,
-			// width : 250,
-			// top : 5,
-			// left : 10,
-			// textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT
-		// },
-		// connTVRowProps : { 
-			// // height : '100%',
-			// // selectionStyle : 'none'
-		// },
-		// connTVRowLblProps : {
-			// font:{fontSize:'40%',fontWeight:'bold'},
-			// width:'100%',
-			// textAlign:'left',
-			// left:8,
-			// selectionStyle:'none'
-		// },
-// 		
-		// //This controls the height of the rows so everything in the conntbl is related to this height.
-		// connTVRowTextFieldProps : {
-			// font:{fontSize:'40%'},
-		    // keyboardType:Titanium.UI.KEYBOARD_DEFAULT,
-		    // autocorrect:true,
-		    // height:'60dp',
-		    // width:'100%',
-		    // left:'50%',
-		    // returnKeyType:Ti.UI.RETURNKEY_DONE,
-		    // clearButtonMode:Titanium.UI.INPUT_BUTTONMODE_ONFOCUS
-	  	// },
-		// tvDevicesTblProps : {
-			// top : 1,
-			// height:'35%',
-			// width:'95%',
-			// left: 10,
-			// borderColor:'#959EAC',
-			// borderWidth:1,
-			// borderRadius:5,
-			// editable:true		
-		// },
-		// tvDevicesHeaderProps : {
-			// text : 'Devices',
-			// top : 2,
-			// height : 50,
-			// width : 150,
-			// left : 10	,
-			// textAlign : 'left'
-		// },
-		// tvInListViewLblProps : {
-			// text : 'Visible',
-			// top : 0,
-			// height : 50,
-			// width : 150,
-			// left : '66%',
-			// textAlign : 'left'
-		// },
-		// swInListViewProps : {
-			// left:'65%',
-		// },
-		// tvInFloorPlanViewLblProps : {
-			// text : 'FloorPlan',
-			// top : 10,
-			// height : 50,
-			// width : 150,
-			// left : '70%',
-			// textAlign : 'left'
-		// },
-		// tvDevicesLblProps : {
-			// font:{fontSize:32,fontWeight:'bold'},
-			// left: 10,
-			// textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT			
-		// },
-		// tvDeviceLblTypeProps : {
-			// font:{fontSize:24},
-			// left : '50%',
-			// textAlign : 'left'
-		// },
-		// populateDevicesBtnProps : {
-			// title : 'Get New Devices',
-			// font:{fontSize:32,fontWeight:'bold'},
-			// top : 10,
-			// left : '62%',
-			// height : '8%',
-			// width : '35%'
-		// },
-		// closeBtnProps : {
-			// top : 5,
-			// title : 'Close',
-			// font:{fontSize:32,fontWeight:'bold'},
-		// }
-		// // addBackgroundBtnProps : {
-			// // title:'Change Floor Plan Background',
-			// // font:{fontSize:32,fontWeight:'bold'},
-			// // top:'80%',
-			// // left:10, 
-			// // height:'10%', 
-			// // width:'60%',
-			// // image:'/images/camera.png'	
-		// // }
-	// }];
 	
-		var settingsViewProps = {
+	var settingsViewProps = {
 		formProps : {
 			backgroundColor : '#ddd',
 			height: '100%',
@@ -153,7 +40,7 @@ function ApplicationWindow() {
 		},
 		formButton : {
             height: '40dp',
-            width: '200dp',
+            width: '220dp',
             top:'20dp'
     	},
 		formSubmitButton : {
@@ -162,7 +49,7 @@ function ApplicationWindow() {
 	        top:'20dp'
 	
 		}	
-}
+	}
 	
 //****************LIST VIEW PROPERTIES***********************
 	var listView = new ListView({

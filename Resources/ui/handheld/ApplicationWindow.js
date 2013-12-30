@@ -39,7 +39,7 @@ function ApplicationWindow() {
 		},
 		formButton : {
             height: '40dp',
-            width: '200dp',
+            width: '220dp',
             top:'10dp'
     	},
 		formSubmitButton : {

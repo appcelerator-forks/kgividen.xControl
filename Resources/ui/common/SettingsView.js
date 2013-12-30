@@ -6,8 +6,8 @@ function SettingsWindow(props,listView) {
 	var CONN_CURRENT = 'conn_current';
 	var CONN_REMOTE = 'Remote';
 	var CONN_LOCAL = 'Local';
-	var NETWORK_BTN_REMOTE_TITLE = "Remote Connection";
-	var NETWORK_BTN_LOCAL_TITLE = "Local Connection";
+	var NETWORK_BTN_REMOTE_TITLE = "Remote Connection Enabled";
+	var NETWORK_BTN_LOCAL_TITLE = "Local Connection Enabled";
 	
 	var currentConnType = Ti.App.Properties.getString('network_type');
 	var networkBtnTitle = "";
