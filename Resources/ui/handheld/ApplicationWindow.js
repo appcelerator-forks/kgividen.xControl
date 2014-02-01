@@ -55,7 +55,7 @@ function ApplicationWindow() {
 			title : '',
 			height : 30,
 			width : 30,
-			top : '2%',
+			top : '3%',
 			left : '90%',
 			dest : 'settingsWin',
 			backgroundColor: 'transparent',
@@ -127,7 +127,7 @@ function ApplicationWindow() {
 			left : 15
 		},
 		deviceTableViewProps : {
-			top:20,
+			top:'6%',
 			separatorColor: 'transparent',
 			backgroundColor: 'transparent',
 			left:10,
