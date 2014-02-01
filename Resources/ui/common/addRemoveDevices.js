@@ -5,12 +5,14 @@ function addRemoveDevices() {
 		
 	var closeBtn = Ti.UI.createButton({
 		title : 'Close',
+		top: '90%',
+		right : '8%'
 
 	});
 		
 	var self = Ti.UI.createWindow({
 		rightNavButton: closeBtn,
-		backgroundColor : '#ddd'
+		backgroundColor : 'white'
 	});	
 	
 	self.orientationModes = [
@@ -22,22 +24,17 @@ function addRemoveDevices() {
 		self.close();
 	});
 	
+	self.add(closeBtn);
+		
 	var devicesTableView = Ti.UI.createTableView({
 		top:25,
-		height:'100%',
+		height:'85%',
 		borderColor:'#959EAC',
 		borderWidth:1,
 		borderRadius:5,
 		editable: true
 	});
-	
-	if(Ti.Platform.osname === 'android'){
-		closeBtn.top='94%';
-		closeBtn.right='5%';
-		devicesTableView.height = '90%';
-		self.add(closeBtn);
-	}
-	
+
 	// Create a Label.
 	var headerTitle = Ti.UI.createLabel({
 		text : 'Title',
@@ -73,10 +70,16 @@ function addRemoveDevices() {
 	});
 		
 	function addDeviceTblRow(device) {
-		var row = Ti.UI.createTableViewRow({
-			height:45
-		});
+		var row = Ti.UI.createTableViewRow();
 		
+		//set the row height depending on the platform.
+		if(Ti.Platform.osname === 'android'){
+			row.height = 80;
+		}else{
+			row.height = '10%';	
+		}
+		
+				
 		//Create a Button.
 		var moveDownBtn = Ti.UI.createButton({
 			left : '81%',

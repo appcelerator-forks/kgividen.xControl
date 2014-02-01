@@ -19,7 +19,8 @@ var textFieldDefaults = {
         width: '250dp',
         top: '10dp',
         color: '#222',
-        borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+        backgroundColor: 'white'
+        // borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 };
 var keyboardMap = {};
 keyboardMap[exports.TYPE_EMAIL] = Ti.UI.KEYBOARD_EMAIL;
@@ -175,7 +176,8 @@ var addFields = function(fields, fieldRefs) {
 exports.createForm = function(o) {
         var container = Ti.UI.createView({
                 layout: 'vertical',
-                height: 'auto'
+                height: 'auto',
+                backgroundColor : '#ddd'
         });
         var fieldRefs = {};
         var form = Ti.UI.createScrollView({

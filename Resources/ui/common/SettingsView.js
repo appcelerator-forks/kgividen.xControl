@@ -16,23 +16,25 @@ function SettingsWindow(props,listView) {
 	}else{
 		networkBtnTitle = NETWORK_BTN_LOCAL_TITLE;
 	}
+	//todo: move background color to props.
 	var connectionData = [
 			{ title:networkBtnTitle, type:'button', id:'changeNetworkBtn'},
-	        { title:'Server', type:'text', id:'ipaddress' },
-	        { title:'Method', type:'text', id:'method' },
-	        { title:'Port', type:'number', id:'port' },
-	        { title:'Username', type:'text', id:'username' },
-	        { title:'Password', type:'password', id:'password' },
-	        { title:'Add/Remove Devices', type:'button', id:'addRemoveDevices' },
-	        { title:'Clear All Data', type:'button', id:'clearDataPrompt' },
-	        { title:'Close', type:'submit', id:'close' }
+	        { title:'Server', type:'text', id:'ipaddress'},
+	        { title:'Method', type:'text', id:'method'},
+	        { title:'Port', type:'number', id:'port'},
+	        { title:'Username', type:'text', id:'username'},
+	        { title:'Password', type:'password', id:'password'},
+	        { title:'Add/Remove Devices', type:'button', id:'addRemoveDevices'},
+	        { title:'Clear All Data', type:'button', id:'clearDataPrompt'},
+	        { title:'Close', type:'submit', id:'close'}
        	];
 	var self = Ti.UI.createView(props.settingsViewProps.formProps);
 		
 	var form = forms.createForm({
 	        style: forms.STYLE_LABEL,
 	        fields: connectionData,
-	        props: props.settingsViewProps
+	        props: props.settingsViewProps,
+	        backgroundColor : 'white'
 	});
 	
 	form.addEventListener('close', function(e) {

@@ -55,7 +55,7 @@ function ApplicationWindow() {
 			title : '',
 			height : 30,
 			width : 30,
-			top : 1,
+			top : '2%',
 			left : '90%',
 			dest : 'settingsWin',
 			backgroundColor: 'transparent',

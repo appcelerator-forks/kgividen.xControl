@@ -7,8 +7,7 @@ function ApplicationWindow() {
 
 	//create component instance
 	var self = Ti.UI.createWindow({
-		backgroundImage : 'images/metal-bg.png',
-		navBarHidden : true
+		backgroundImage : 'images/metal-bg.png'
 	});
 	
 	self.orientationModes = [
@@ -40,7 +39,7 @@ function ApplicationWindow() {
 		},
 		formButton : {
             height: '40dp',
-            width: '220dp',
+            width: '250dp',
             top:'20dp'
     	},
 		formSubmitButton : {
