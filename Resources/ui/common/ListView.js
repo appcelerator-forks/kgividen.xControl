@@ -246,6 +246,10 @@ var ListView = function (props) {
 		var deviceSliderLabel = Titanium.UI.createLabel(deviceSliderLabelProps);
 		deviceSliderLabel.type = 'label';
 		deviceSliderLabel.address = data.address;
+		//use the default for android.  (todo: move this to a view setting)
+		if(osname == 'android'){
+			delete deviceSliderProps.thumbImage;			
+		}
 		var deviceSlider = Titanium.UI.createSlider(deviceSliderProps);
 		deviceSlider.address = data.address;
 

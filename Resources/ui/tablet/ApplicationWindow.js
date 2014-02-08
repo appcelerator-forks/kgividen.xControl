@@ -7,7 +7,8 @@ function ApplicationWindow() {
 
 	//create component instance
 	var self = Ti.UI.createWindow({
-		backgroundImage : 'images/metal-bg.png'
+		backgroundImage : 'images/metal-bg.png',
+		navBarHidden : true
 	});
 	
 	self.orientationModes = [

@@ -8,7 +8,8 @@ function ApplicationWindow() {
 	var self = Ti.UI.createWindow({
 		backgroundImage : 'images/metal-bg.png',
 		height: '100%',
-		width: '100%'
+		width: '100%',
+		navBarHidden : true
 	});
 	
 	self.orientationModes = [
