@@ -1,0 +1,9 @@
+android/ATTR_PROJECT_NAME=xControl
+android/abi=armeabi
+android/distribute_path=/Users/kgividen/Data/Titanium/xControl/delivery
+android/keystore_alias=xControl
+android/keystore_password=xabler
+android/keystore_path=/Users/kgividen/.android/key/xControlKeystore
+android/recent_output=/Users/kgividen/Data/Titanium/xControl/delivery
+android/sdk_version=2.3.3
+eclipse.preferences.version=1
