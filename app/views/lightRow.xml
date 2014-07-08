@@ -1,0 +1,10 @@
+<Alloy>
+    <TableViewRow class="lightRow">
+        <Button id="btn" class="btnOff" title="{displayName}" address="{address}"/>
+        <View class="sliderContainer" type="{type}">
+            <Slider id="slider" address="{address}" />
+            <Label id="sliderLbl" />
+        </View>
+        <Label id="group" class="group" text="{displayName}" />
+    </TableViewRow>
+</Alloy>

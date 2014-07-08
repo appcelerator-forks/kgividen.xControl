@@ -1,0 +1,12 @@
+<Alloy>
+    <Window id="win">
+        <View class="container-view">
+            <Label class="label-H5">Set a device to be visible or not and change order of devices.</Label>
+            <TableView id="devicesTableView" class="tableview-form" dataCollection="device">
+                    <Require src="settingsDeviceRow"/>
+            </TableView>
+            <Button id="refreshDevicesBtn">Check For New Devices</Button>
+            <Button id="closeBtn">Save and Close</Button>
+        </View>
+    </Window>
+</Alloy>

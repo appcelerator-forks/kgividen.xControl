@@ -1,0 +1,32 @@
+"#lightingContainerView" : {
+    backgroundImage: '/images/themes/default/background.png'
+},
+"#lightTableView" : {
+//    top:'6%',
+    width:Ti.UI.Fill,
+    separatorColor: 'transparent',
+    backgroundColor: 'transparent',
+    left:10,
+    borderWidth:0
+},
+
+//todo: These btn classes are also on the lightRow.tss they really should only need to be in one place
+//todo: but we update the classes in the lighting controller so they also have to be here for whatever reason.
+".btnOn" : {
+    backgroundImage : '/images/themes/default/btn-active.png'
+},
+".btnOff" : {
+    backgroundImage : '/images/themes/default/btn.png'
+},
+"#btn" : {
+    color: '#fff',
+    width : '45%',
+    height : 40,
+    left : 2,
+    font : {
+        fontSize : 20,
+        fontWeight : 'bold',
+        fontFamily : 'Helvetica Neue'
+    },
+    zIndex : 5
+},

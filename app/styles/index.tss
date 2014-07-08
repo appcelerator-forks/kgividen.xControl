@@ -1,0 +1,8 @@
+//todo REMOVE THIS IF WE DON't NEED IT.
+".modalWin": {
+	backgroundImage: '/images/themes/default/background.png',
+	backgroundRepeat : true,
+	navBarHidden:true,
+	tabBarHidden:true,
+	layout : 'vertical'
+}

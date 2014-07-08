@@ -1,0 +1,32 @@
+".deviceTableViewRow":{
+    height: '8%'
+},
+".deviceRowLbl":{
+    left:10,
+	height : '8%',
+	width: '60%',
+	color:'#333',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	font:{
+		fontFamily:Alloy.CFG.fontNormal,
+		fontSize:16
+	}
+},
+".deviceRowTypeLbl":{
+    left:'65%',
+	width:'10%',
+	color:'#333',
+	font:{
+		fontFamily:Alloy.CFG.fontNormal,
+		fontSize:8
+	}
+},
+".deviceRowSwitch":{
+    left:'77%',
+	height:'7%',
+}
+
+".deviceRowSortIdTxt":{
+    left:'80%',
+	height:'80%',
+}

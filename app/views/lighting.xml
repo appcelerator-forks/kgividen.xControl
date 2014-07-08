@@ -1,0 +1,7 @@
+<Alloy>
+    <View id="lightingContainerView">
+        <TableView id="lightTableView" dataCollection="device" dataFilter="whereShowInLightingView">
+                <Require src="lightRow" />
+        </TableView>
+    </View>
+</Alloy>
