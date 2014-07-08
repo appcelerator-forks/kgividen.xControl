@@ -1,6 +1,9 @@
 xControl
 ========
 
+CHECKOUT THE AlloyImplementation branch.  The code there is much cleaner since we've implemented Alloy, Promises, Underscore and a bunch of other things.  It looks and works much better.  We will be switching to that code base soon.
+
+========
 This project is created using Appcelerator Titanium.  The MVC architecture currently needs work in this project so some things are mixed.  We are aware of this and need to fix it but we are considering Alloy so until that time we know it's a bit messy.
 
 Easily control your Insteon devices.  List all of your Insteon devices and use an on/off button or a slider to adjust accordingly.  
