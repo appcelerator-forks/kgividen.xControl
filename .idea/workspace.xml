@@ -2,75 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b5b93c4-21e4-4669-9f8c-7f0837154a9b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Devices.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ISYRestCalls.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/Icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/KS_nav_ui.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/KS_nav_views.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/RestCall.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/NavigationController.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/appicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-long-land-hdpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-long-land-ldpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-long-port-hdpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-long-port-ldpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-notlong-land-hdpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-notlong-land-ldpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-notlong-land-mdpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-notlong-port-hdpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-notlong-port-ldpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/android/images/res-notlong-port-mdpi/default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/bj.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/db.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/icon-57.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/icon-72.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/icon72.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/BUTT_drk_off.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/BUTT_drk_on.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/BUTT_grn_on.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/BUTT_grn_selected.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/FloorPlan.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/applications_system.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/btn-active.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/btn-hover.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/btn.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/camera.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/fullsize.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/glyphicons_081_refresh.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/glyphicons_212_down_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/glyphicons_213_up_arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/metal-bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/metal-slider-channel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/metal-slider-handle.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/metal-slider-handle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/metal-slider-progress.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/metal-slider-progress.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/images/refresh-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/Default-568h@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/Default-Landscape.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/Default-Portrait.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/Default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/Default@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/NavigationController.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/iphone/appicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/common/FloorPlanView.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/common/ListView.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/common/SettingsView.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/common/addRemoveDevices.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/common/forms.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/common/semiModalPicker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/handheld/ApplicationWindow.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/ui/tablet/ApplicationWindow.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/underscore-min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/validControl.sqlite" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Resources/xIcon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/i18n/en/strings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/i18n/ja/strings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest" afterPath="$PROJECT_DIR$/manifest" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tiapp.xml" afterPath="$PROJECT_DIR$/tiapp.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/README" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/TODO" afterPath="$PROJECT_DIR$/app/TODO" />
     </list>
     <ignored path="xControl.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -143,11 +78,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2445">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="67" column="22" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.30181086" vertical-offset="0" max-vertical-offset="994">
+              <caret line="20" column="81" selection-start-line="20" selection-start-column="81" selection-end-line="20" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -162,6 +107,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/app/TODO" />
+        <option value="$PROJECT_DIR$/README.md" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-151" />
@@ -231,24 +184,6 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -277,6 +212,16 @@
       <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -285,20 +230,7 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -329,19 +261,20 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
       <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -365,6 +298,130 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
     <list size="0" />
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -377,12 +434,12 @@
       <changelist id="9b5b93c4-21e4-4669-9f8c-7f0837154a9b" name="Default" comment="" />
       <created>1404851130943</created>
       <updated>1404851130943</updated>
-      <workItem from="1404851132262" duration="21000" />
+      <workItem from="1404851132262" duration="544000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21000" />
+    <option name="totallyTimeSpent" value="544000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-151" y="-1178" width="1600" height="1178" extended-state="6" />
@@ -438,10 +495,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/TODO">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029069768" vertical-offset="0" max-vertical-offset="1032">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2445">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="67" column="22" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30181086" vertical-offset="0" max-vertical-offset="994">
+          <caret line="20" column="81" selection-start-line="20" selection-start-column="81" selection-end-line="20" selection-end-column="81" />
           <folding />
         </state>
       </provider>
