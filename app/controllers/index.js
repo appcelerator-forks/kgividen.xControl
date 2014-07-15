@@ -1,5 +1,3 @@
-var osname = Ti.Platform.osname;
-
 //***************************MENU STUFF ***************************
 function createSideMenu(sections, controller) {
     var s = Ti.UI.createTableViewSection();
@@ -114,7 +112,7 @@ $.ds.rightTableView.addEventListener('click', function selectRow(e) {
 // ***************************END MENU STUFF***************************
 
 function startUI(){
-    if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
+    if (osname == "ios") {
         $.win.open({
             transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
         });
@@ -156,3 +154,9 @@ Ti.Gesture.addEventListener('orientationchange', function() {
 $.win.addEventListener("close", function(){
     $.destroy();
 });
+
+if(osname == "android") {
+    $.win.addEventListener('open', function () {
+        $.win.activity.actionBar.hide();
+    });
+}

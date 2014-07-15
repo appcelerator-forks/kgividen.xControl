@@ -1,15 +1,16 @@
 {
-	"global": {
-        "theme":"default"
-    },
-	"env:development": {}, 
-	"env:test": {}, 
-	"env:production": {}, 
-	"os:android": {},
-	"os:blackberry": {},
-	"os:ios": {},
-	"os:mobileweb": {},
-	"dependencies": {
-        "ds.slideMenu":"0.1"
-    }
+  "global": {
+    "theme": "default"
+  },
+  "env:development": {},
+  "env:test": {},
+  "env:production": {},
+  "os:android": {},
+  "os:blackberry": {},
+  "os:ios": {},
+  "os:mobileweb": {},
+  "dependencies": {
+    "ds.slideMenu": "0.1",
+    "com.mattmcfarland.fontawesome": "*"
+  }
 }

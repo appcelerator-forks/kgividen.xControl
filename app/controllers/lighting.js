@@ -2,23 +2,23 @@ function updateStatus(){
     return device.getAllDevicesStatus().then(updateLightsStatus);
 }
 function updateLightsStatus(nodesByAddressAndStatus){
-//    Ti.API.info("nodesbuaddressand status: " + JSON.stringify(nodesByAddressAndStatus));
     var lightTVData = $.lightTableView.getData()[0].getRows();
     _.each(lightTVData, function(row){
         if(row.model.type == 'light') {
             var btn = row.getChildren()[0];
+            //todo: This crashes android right now.
             var sliderContainer = row.getChildren()[1].getChildren();
+            // Ti.API.info("sliderContainer: " + JSON.stringify(row.getChildren()));
+
             var current = _.findWhere(nodesByAddressAndStatus, {address:btn.address});
-//            Ti.API.info("btn: " + JSON.stringify(btn.title) + " current: " + JSON.stringify(current));
 
             if(current.level > 0){
-//                Ti.API.info("level > 0 remove class!!!!!!");
                 $.removeClass(btn, 'btnOff');
                 $.addClass(btn, 'btnOn');
+                $.addClass(btn, 'btn');
             } else {
-//                Ti.API.info("level < 0 add class btnOff!!!!!!");
-
                 $.addClass(btn, 'btnOff');
+                $.addClass(btn, 'btn');
             }
             //slider
             sliderContainer[0].value = current.level;
@@ -37,9 +37,31 @@ function whereShowInLightingView(collection) {
 
 
 Alloy.Collections.device.fetch();
+
 updateStatus();
 
 //LISTENERS
 $.lightingContainerView.addEventListener("close", function(){
     $.destroy();
 });
+
+if(osname == "android"){
+    $.refreshControlBtn.addEventListener('click', function () {
+        Ti.API.info('refreshstart');
+        return device.getAllDevicesStatus()
+            .then(updateLightsStatus);
+    });
+}
+
+if(osname=="ios") {
+    $.refreshControl.addEventListener('refreshstart', function () {
+        Ti.API.info('refreshstart');
+        return device.getAllDevicesStatus()
+            .then(updateLightsStatus)
+            .then(function () {
+                    $.refreshControl.endRefreshing();
+            });
+    });
+}
+
+

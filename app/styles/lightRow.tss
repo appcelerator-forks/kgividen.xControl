@@ -1,17 +1,38 @@
 ".lightRow":{
     backgroundColor: 'transparent',
     selectionStyle : 'none',
-    height : 45
+    height : 50
 },
+".groupRow" : {
+    height : 40
+}
+".lightRow[formFactor=tablet]":{
+    height : 80
+},
+".groupRow[formFactor=tablet]" : {
+    height : 40
+}
 //todo: These btn classes are also on the lighting.tss they really should only need to be in one place
 //todo: but we update the classes in the lighting controller so they also have to be there for whatever reason.
 "#btn" : {
     color: '#fff',
     width : '45%',
-    height : 40,
-    left : 2,
+    height : '80%',
+    left : '3%',
     font : {
-        fontSize : 20,
+        fontSize : '20%',
+        fontWeight : 'bold',
+        fontFamily : 'Helvetica Neue'
+    },
+    zIndex : 5
+},
+"#btn[formFactor=tablet]" : {
+    color: '#fff',
+    width : '45%',
+    height : '80%',
+    left : '3%',
+    font : {
+        fontSize : '20%',
         fontWeight : 'bold',
         fontFamily : 'Helvetica Neue'
     },
@@ -30,8 +51,8 @@
     min : 0,
     max : 100,
     value : 0,
-    width : '45%',
-    left : '46%',
+    width : '42%',
+    left : '49%',
     leftTrackImage : '/images/themes/default/metal-slider-progress.png',
     rightTrackImage : '/images/themes/default/metal-slider-channel.png',
 },
@@ -52,15 +73,19 @@
 ".group" : {
     color : 'white',
     font : {
-        fontSize : 20
+        fontSize : '30%'
     },
-    height : 20,
-    width : 250,
+    width : Ti.UI.Fill,
     left : 5,
     textAlign : 'left'
-},
+}
+//OLD way...with 3.3 hide works correctly
 ".hide" :{
     height:0,
     width:0,
-    backgroundColor:'blue'
+    backgroundImage:''
 }
+
+".hide[platform=ios]" : {
+    thumbImage : ''
+},

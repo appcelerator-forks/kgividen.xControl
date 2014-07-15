@@ -1,5 +1,4 @@
 var xhr = require('/qxhr');
-var Q = require('/q');
 var baseURL;
 var connection = {};
 //TODO INIT connection so it loads it for ever instance.
@@ -71,12 +70,12 @@ exports.getListOfDevices = function(){
 
 //HELPER METHODS
 function getAllDevicesStatus(){
-    //We need this delay cause the response can come back faster than when it's updated by the toggle.
+    //We need this delay cause the response can come back faster than when it's updated by a toggle.  i.e. The rest will update but not the one that toggled it.
     return delayed(1000)
         .then(devicesGetStatus)
         .then(function(data){
             var deferred = Q.defer();
-            var delay = Q.delay();
+            // var delay = Q.delay();
             var xml = Ti.XML.parseString(data);
             var nodes = xml.documentElement.getElementsByTagName('node');
             var nodesJSON = convertNodesStatusToJson(nodes);

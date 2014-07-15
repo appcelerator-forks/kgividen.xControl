@@ -10,6 +10,12 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 Alloy.Collections.device = Alloy.createCollection("Device");
+var osname = "android";
+if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
+    osname = "ios";
+}
 
-device = require('isy');
+var device = require('isy');
 device.init();
+
+var Q = require('/q');

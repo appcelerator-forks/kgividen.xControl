@@ -25,20 +25,20 @@
                 <TableViewRow><Button id="closeBtn">Save and Close</Button></TableViewRow>
             </TableViewSection>
         </TableView>
-        <TableView class="tableview-form" platform="android">
-            <TableViewRow><Button id="changeNetworkBtn"></Button></TableViewRow>
-            <TableViewRow><View class="view-row-separator"/></TableViewRow>
-            <TableViewRow><Label class="label-tableviewsection-header" text="SETTINGS" /></TableViewRow>
-            <TableViewRow><TextField id="server" inputType="text" title="" hintText="Server IP/DNS" /></TableViewRow>
-            <TableViewRow><TextField id="method" inputType="text" title="" hintText="HTTP or HTTPS" /></TableViewRow>
-            <TableViewRow><TextField id="port" inputType="text" title="" hintText="Port" /></TableViewRow>
-            <TableViewRow><TextField id="username" inputType="text" title="" hintText="Username" /></TableViewRow>
-            <TableViewRow><TextField id="password" inputType="text" title="" hintText="Password" passwordMask="true"/></TableViewRow>
-            <TableViewRow><View class="view-row-separator"/></TableViewRow>
-            <TableViewRow><Button id="getListOfDevicesBtn">Update Devices</Button></TableViewRow>
-            <TableViewRow><Button id="clearData">Clear Data</Button></TableViewRow>
-            <TableViewRow><Button id="closeBtn">Save and Close</Button></TableViewRow>
-        </TableView>
+        <ScrollView class="tableview-form" platform="android">
+            <Button id="changeNetworkBtn"></Button>
+            <View class="view-row-separator"/>
+            <Label class="label-tableviewsection-header" text="SETTINGS" />
+            <TextField id="server" inputType="text" title="" hintText="Server IP/DNS" />
+            <TextField id="method" inputType="text" title="" hintText="HTTP or HTTPS" />
+            <TextField id="port" inputType="text" title="" hintText="Port" />
+            <TextField id="username" inputType="text" title="" hintText="Username" />
+            <TextField id="password" inputType="text" title="" hintText="Password" passwordMask="true"/>
+            <View class="view-row-separator"/>
+            <Button id="getListOfDevicesBtn">Update Devices</Button>>
+            <Button id="clearData">Clear Data</Button>
+            <Button id="closeBtn">Save and Close</Button>
+        </ScrollView>
     </Window>
 </Alloy>
 

@@ -8,8 +8,8 @@
     <description>not specified</description>
     <copyright>2014 by kgividen</copyright>
     <icon>appicon.png</icon>
-    <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
+    <fullscreen>true</fullscreen>
+    <navbar-hidden>true</navbar-hidden>
     <analytics>false</analytics>
     <guid>ce9aa102-6d54-437f-96ae-4db9177c904d</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
@@ -45,8 +45,8 @@
     <property name="ti.android.largeHeap">true</property>
     <!--<property name="ti.android.threadstacksize" type="int">32768</property>-->
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>18</tool-api-level>
         <manifest android:versionCode="4" android:versionName="1.3">
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>
             <supports-screens android:anyDensity="false"/>
             <!--android:largeScreens="true" android:normalScreens="true"
                 android:smallScreens="false" android:xlargeScreens="false"/-->
@@ -72,7 +72,7 @@
         <target device="mobileweb">false</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>3.2.2.GA</sdk-version>
+    <sdk-version>3.3.0.RC</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

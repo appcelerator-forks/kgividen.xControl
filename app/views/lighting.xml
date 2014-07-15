@@ -1,7 +1,15 @@
 <Alloy>
-    <View id="lightingContainerView">
+    <View id="lightingContainerView" platform="ios">
         <TableView id="lightTableView" dataCollection="device" dataFilter="whereShowInLightingView">
-                <Require src="lightRow" />
+            <RefreshControl id="refreshControl"></RefreshControl>
+            <Require src="lightRow" />
         </TableView>
+    </View>
+    <View id="lightingContainerView" platform="android">
+        <Button id="refreshControlBtn" icon="fa-refresh"/>
+        <TableView id="lightTableView" dataCollection="device" dataFilter="whereShowInLightingView">
+            <Require src="lightRow" />
+        </TableView>
+        <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
     </View>
 </Alloy>

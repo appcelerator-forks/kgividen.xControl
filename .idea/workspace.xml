@@ -2,45 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b5b93c4-21e4-4669-9f8c-7f0837154a9b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/Ti.Manifest" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/appicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/map/bubble.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/map/green_pin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/map/purple_pin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/map/red_pin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/blackberry/splash-600x1024.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/appicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/Default-Landscape.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/Default-Landscape.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/Default-Portrait.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/Default-Portrait.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/Default.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/Default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/apple_startup_images/README" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/splash/README" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/splash/appc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/splash/splash.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/splash/splash.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/mobileweb/splash/titanium.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/tizen/appicon.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/iphone/Default-568h@2x.png" afterPath="$PROJECT_DIR$/app/assets/iphone/Default-568h@2x.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/iphone/Default-Landscape.png" afterPath="$PROJECT_DIR$/app/assets/iphone/Default-Landscape.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/iphone/Default-Portrait.png" afterPath="$PROJECT_DIR$/app/assets/iphone/Default-Portrait.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/iphone/Default.png" afterPath="$PROJECT_DIR$/app/assets/iphone/Default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/iphone/Default@2x.png" afterPath="$PROJECT_DIR$/app/assets/iphone/Default@2x.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/appicon.png" afterPath="$PROJECT_DIR$/app/assets/android/appicon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/iphone/appicon.png" afterPath="$PROJECT_DIR$/app/assets/iphone/appicon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/default.png" afterPath="$PROJECT_DIR$/app/assets/android/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-long-land-hdpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-long-land-hdpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-long-land-ldpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-long-land-ldpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-long-port-hdpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-long-port-hdpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-long-port-ldpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-long-port-ldpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-notlong-land-hdpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-notlong-land-hdpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-notlong-land-ldpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-notlong-land-ldpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-notlong-land-mdpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-notlong-land-mdpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-notlong-port-hdpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-notlong-port-hdpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-notlong-port-ldpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-notlong-port-ldpi/default.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/android/images/res-notlong-port-mdpi/default.png" afterPath="$PROJECT_DIR$/app/assets/android/images/res-notlong-port-mdpi/default.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/index_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/lighting_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/settings_spec.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/alloy.js" afterPath="$PROJECT_DIR$/app/alloy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/ti.alloy/hooks/alloy.js" afterPath="$PROJECT_DIR$/plugins/ti.alloy/hooks/alloy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/themes/default/styles/app.tss" afterPath="$PROJECT_DIR$/app/themes/default/styles/app.tss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config.json" afterPath="$PROJECT_DIR$/app/config.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/index.js" afterPath="$PROJECT_DIR$/app/controllers/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/index.xml" afterPath="$PROJECT_DIR$/app/views/index.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/lib/isy.js" afterPath="$PROJECT_DIR$/app/lib/isy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/lightRow.js" afterPath="$PROJECT_DIR$/app/controllers/lightRow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/lightRow.tss" afterPath="$PROJECT_DIR$/app/styles/lightRow.tss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/lighting.js" afterPath="$PROJECT_DIR$/app/controllers/lighting.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/lighting.tss" afterPath="$PROJECT_DIR$/app/styles/lighting.tss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/lighting.xml" afterPath="$PROJECT_DIR$/app/views/lighting.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/settings.xml" afterPath="$PROJECT_DIR$/app/views/settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/settingsDeviceList.xml" afterPath="$PROJECT_DIR$/app/views/settingsDeviceList.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tiapp.xml" afterPath="$PROJECT_DIR$/tiapp.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xControl.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,8 +74,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -103,11 +83,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tiapp.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tiapp.xml">
+      <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7465209" vertical-offset="269" max-vertical-offset="1275">
-              <caret line="68" column="29" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1531" max-vertical-offset="2505">
+              <caret line="143" column="78" selection-start-line="143" selection-start-column="1" selection-end-line="143" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lighting.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/lighting.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9549689" vertical-offset="0" max-vertical-offset="1095">
+              <caret line="41" column="17" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,14 +122,42 @@
         <option value="$PROJECT_DIR$/scripts/shadow.sh" />
         <option value="$PROJECT_DIR$/scripts/xcontrolandroid.sh" />
         <option value="$PROJECT_DIR$/scripts/xcontrolkindle.sh" />
+        <option value="$PROJECT_DIR$/spec/index_spec.js" />
+        <option value="$PROJECT_DIR$/spec/lighting_spec.js" />
+        <option value="$PROJECT_DIR$/spec/settings_spec.js" />
+        <option value="$PROJECT_DIR$/specs/index_spec.js" />
+        <option value="$USER_HOME$/Desktop/temp.json" />
+        <option value="$PROJECT_DIR$/app/lib/isy.js" />
+        <option value="$PROJECT_DIR$/app/alloy.js" />
+        <option value="$PROJECT_DIR$/app/views/lightingTableView.xml" />
+        <option value="$PROJECT_DIR$/app/controllers/lightingTableView.js" />
+        <option value="$PROJECT_DIR$/app/views/lightingTV.xml" />
+        <option value="$PROJECT_DIR$/app/styles/lightingTV.tss" />
+        <option value="$PROJECT_DIR$/app/controllers/lightingTV.js" />
+        <option value="$PROJECT_DIR$/app/views/lighting.xml" />
+        <option value="$PROJECT_DIR$/app/views/index.xml" />
+        <option value="$PROJECT_DIR$/app/views/lightRow.xml" />
+        <option value="$PROJECT_DIR$/app/controllers/lightRow.js" />
+        <option value="$PROJECT_DIR$/platform/android/res/values/myTheme.xml" />
+        <option value="$PROJECT_DIR$/platform/android/res/values/builtin_themes.xml" />
+        <option value="$PROJECT_DIR$/tiapp.xml" />
+        <option value="$PROJECT_DIR$/app/controllers/lighting.js" />
+        <option value="$PROJECT_DIR$/app/controllers/index.js" />
+        <option value="$PROJECT_DIR$/app/styles/lightRow.tss" />
+        <option value="$PROJECT_DIR$/app/styles/lighting.tss" />
+        <option value="$PROJECT_DIR$/app/themes/dark/styles/app.tss" />
+        <option value="$PROJECT_DIR$/app/themes/default/styles/app.tss" />
+        <option value="$PROJECT_DIR$/app/themes/sonar-night/styles/app.tss" />
+        <option value="$PROJECT_DIR$/app/views/settings.xml" />
+        <option value="$PROJECT_DIR$/app/views/settingsDeviceList.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-151" />
+    <option name="x" value="-758" />
     <option name="y" value="-1178" />
     <option name="width" value="1600" />
-    <option name="height" value="1178" />
+    <option name="height" value="1120" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -169,6 +187,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -215,14 +235,30 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xControl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xControl" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -241,9 +277,13 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../xControlOriginal" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJSON" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/assets/fonts" />
+      <recent name="$PROJECT_DIR$/app/assets/images/themes/default" />
       <recent name="$PROJECT_DIR$/app/assets/android/images" />
       <recent name="$PROJECT_DIR$/app/assets/android" />
       <recent name="$PROJECT_DIR$/app/assets/iphone" />
@@ -476,21 +516,29 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9b5b93c4-21e4-4669-9f8c-7f0837154a9b" name="Default" comment="" />
       <created>1404851130943</created>
       <updated>1404851130943</updated>
       <workItem from="1404851132262" duration="544000" />
-      <workItem from="1404852308056" duration="499000" />
+      <workItem from="1404852308056" duration="661000" />
+      <workItem from="1405108084155" duration="2048000" />
+      <workItem from="1405361214946" duration="3265000" />
+      <workItem from="1405434738512" duration="7333000" />
+      <workItem from="1405444305953" duration="1829000" />
+      <workItem from="1405446148471" duration="13273000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1043000" />
+    <option name="totallyTimeSpent" value="28953000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-151" y="-1178" width="1600" height="1178" extended-state="6" />
+    <frame x="-758" y="-1178" width="1600" height="1120" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -498,6 +546,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32934132" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -511,7 +560,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17137356" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22978178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -535,11 +584,150 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2415">
+          <caret line="114" column="17" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/lighting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="990">
+          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lighting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="330">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/lighting.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="570">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1534" max-vertical-offset="2415">
+          <caret line="114" column="17" selection-start-line="114" selection-start-column="17" selection-end-line="114" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/lighting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="915" max-vertical-offset="1110">
+          <caret line="61" column="45" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/settings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="750">
+          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lighting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="300">
+          <caret line="10" column="70" selection-start-line="10" selection-start-column="70" selection-end-line="10" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/lighting.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="570">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2445">
+          <caret line="108" column="48" selection-start-line="108" selection-start-column="47" selection-end-line="108" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/lighting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="705">
+          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/xcontrolandroid.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="135">
+          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/temp.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="330">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tiapp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1275">
+          <caret line="40" column="97" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/index_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="180">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/shadow.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="165">
+          <caret line="4" column="312" selection-start-line="4" selection-start-column="310" selection-end-line="4" selection-end-column="312" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tiapp.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="269" max-vertical-offset="1275">
+          <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/alloy.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
           <caret line="5" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -547,19 +735,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1005" max-vertical-offset="2445">
           <caret line="67" column="22" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="405">
           <caret line="20" column="81" selection-start-line="20" selection-start-column="81" selection-end-line="20" selection-end-column="81" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/TODO">
@@ -570,29 +756,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31690142" vertical-offset="0" max-vertical-offset="994">
-          <caret line="21" column="65" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2445">
-          <caret line="67" column="22" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/alloy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.072533846" vertical-offset="0" max-vertical-offset="1034">
-          <caret line="5" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.31690142" vertical-offset="0" max-vertical-offset="994">
+          <caret line="21" column="65" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -600,23 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.030150754" vertical-offset="0" max-vertical-offset="995">
           <caret line="2" column="243" selection-start-line="2" selection-start-column="243" selection-end-line="2" selection-end-column="243" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/shadow.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06030151" vertical-offset="0" max-vertical-offset="995">
-          <caret line="4" column="312" selection-start-line="4" selection-start-column="310" selection-end-line="4" selection-end-column="312" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/xcontrolandroid.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1009">
-          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -624,14 +776,199 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.014506769" vertical-offset="0" max-vertical-offset="1034">
           <caret line="1" column="41" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/shadow.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.062305298" vertical-offset="0" max-vertical-offset="963">
+          <caret line="4" column="312" selection-start-line="4" selection-start-column="310" selection-end-line="4" selection-end-column="312" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/index_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.077002056" vertical-offset="0" max-vertical-offset="974">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/temp.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="330">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/xcontrolandroid.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="949">
+          <caret line="0" column="41" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/lib/isy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42789224" vertical-offset="0" max-vertical-offset="4455">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/alloy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="644">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/settings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/settings.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06987578" vertical-offset="0" max-vertical-offset="644">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/index.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="7" column="75" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/menurow.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13975155" vertical-offset="0" max-vertical-offset="690">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/index.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="644">
+          <caret line="1" column="60" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/lightRow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8846154" vertical-offset="0" max-vertical-offset="705">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/lightRow.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7204969" vertical-offset="691" max-vertical-offset="1440">
+          <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tiapp.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7465209" vertical-offset="269" max-vertical-offset="1275">
-          <caret line="68" column="29" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.1262136" vertical-offset="657" max-vertical-offset="1275">
+          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/settingsDeviceList.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2562112" vertical-offset="0" max-vertical-offset="644">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="750">
+          <caret line="1" column="54" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/themes/sonar-night/styles/app.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04658385" vertical-offset="0" max-vertical-offset="6945">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/themes/default/styles/app.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="6435">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/themes/dark/styles/app.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04658385" vertical-offset="0" max-vertical-offset="6900">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/styles/lighting.tss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.023291925" vertical-offset="0" max-vertical-offset="870">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1531" max-vertical-offset="2505">
+          <caret line="143" column="78" selection-start-line="143" selection-start-column="1" selection-end-line="143" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lighting.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1863354" vertical-offset="0" max-vertical-offset="644">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/lightRow.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0931677" vertical-offset="0" max-vertical-offset="644">
+          <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/lighting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9549689" vertical-offset="0" max-vertical-offset="1095">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
       </provider>
