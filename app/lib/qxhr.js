@@ -1,6 +1,7 @@
 var Q = require('q');
 
 exports.loadUrl = function(conn, data) {
+    Ti.API.info("data: " + JSON.stringify(data));
     var deferred = Q.defer();
     var xhr = Titanium.Network.createHTTPClient({
         validatesSecureCertificate : false,
@@ -20,6 +21,9 @@ exports.loadUrl = function(conn, data) {
     };
 
     var onerror = function() {
+        var errorString = 'Connection Error! Please check the connection information. URL: ' + conn.url;
+        if(conn.username) errorString += " User: " + conn.username;
+        alert(errorString);
         deferred.reject(new Error({
             code : "Status: " + xhr.status,
             message : xhr.responseText

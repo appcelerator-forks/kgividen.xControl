@@ -29,6 +29,7 @@ exports.init = function() {
         ];
 
         connection.connectiontype = 'GET';
+        connection.username = conn.username; //This is so we can throw an error and let them know what the user was.
     }
 };
 
