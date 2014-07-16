@@ -49,7 +49,7 @@ function saveConnectionInfo(){
 $.closeBtn.addEventListener('click', function () {
     saveConnectionInfo();
     Alloy.createController("index").getView().open();
-    $.win.close();
+    $.settingsWin.close();
 });
 
 $.clearData.addEventListener('click', function () {
@@ -91,7 +91,7 @@ $.changeNetworkBtn.addEventListener('click', function(e) {
 });
 
 
-$.win.addEventListener("close", function(){
+$.settingsWin.addEventListener("close", function(){
     $.destroy();
 });
 getConnectionInfo();

@@ -21,8 +21,8 @@ function rowSelect(e) {
             alert("Lights");
             break;
         case "settings":
-            $.win.close();
             Alloy.createController("settings").getView().open();
+            $.win.close();
             break;
         default:
             if(e.row.sectionView == "webView") {
@@ -39,7 +39,7 @@ var rightMenu = [
     },{
         title: 'Settings',
         type: 'menu',
-        icon: '/images/themes/default/gear.png',
+        icon: 'fa-gear',
         action: 'settings'
     }
 ];
@@ -59,7 +59,7 @@ var leftMenu = [
     },{
         title: 'Lights',
         type: 'menu',
-        icon: '/images/themes/default/ic_search.png',
+        icon: 'fa-lightbulb-o',
         action: 'lights'
     }
 ];

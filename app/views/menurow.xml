@@ -1,8 +1,7 @@
 <Alloy>
   <TableViewRow id="row">
-    <ImageView id="icon"/>
-    <View class="vgroup">
-      <Label id="title"/>
-    </View>
+        <Label id="rowIcon" class="icon"/>
+        <Label id="title"/>
+        <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
   </TableViewRow>
 </Alloy>

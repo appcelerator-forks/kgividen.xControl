@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="win" class="vertical" title="Settings">
+    <Window id="settingsWin" class="vertical" title="Settings">
         <TableView class="tableview-form" platform="ios">
             <TableViewSection>
                 <TableViewRow><View class="view-row-separator"/></TableViewRow>

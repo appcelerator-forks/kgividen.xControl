@@ -20,15 +20,18 @@
 "#row[platform=android formFactor=tablet]": {
   height : 96
 },
-"#icon": {
+".icon": {
   left: 5,
-  width: 25,
-  height: 25
+  color : '#999',
+  font: {
+    fontSize: 25,
+  }
 },
-"#icon[platform=android formFactor=tablet]": {
+".icon[platform=android formFactor=tablet]": {
   left:5,
-  width: 75,
-  height: 75
+  font: {
+    fontSize: 75
+  }
 }
 "#title": {
   left:35,
