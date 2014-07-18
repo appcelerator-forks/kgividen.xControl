@@ -60,10 +60,14 @@ exports.definition = {
                 db.close();
                 collection.sort();
                 collection.trigger('sync');
+            },
+            whereShowInView : function(view_name, types) {
+                var typeList = "'" + types.join("','") + "'";
+                return this.fetch({
+                    query: "SELECT * FROM " + this.config.adapter.collection_name +" WHERE " + view_name + " = 1 AND type IN(" + typeList + ")"
+                });
             }
         });
-        // end extend
-
         return Collection;
     }
 };

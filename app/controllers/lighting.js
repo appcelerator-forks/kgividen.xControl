@@ -28,16 +28,11 @@ function updateLightsStatus(nodesByAddressAndStatus){
     });
 }
 
-Alloy.Globals.updateStatus = updateStatus;
 //filter only models that are supposed to be in the view.
-//This is used in the lighting.xml view
-function whereShowInLightingView(collection) {
-    return collection.where({ showInLightingView: 1 });
-}
+Alloy.Collections.device.whereShowInView("showInLightingView",["light","folder"]);
 
-
-Alloy.Collections.device.fetch();
-
+//Set this to a global so it can be used in the lightRow after a toggle or setLevel
+Alloy.Globals.updateStatus = updateStatus;
 updateStatus();
 
 //LISTENERS

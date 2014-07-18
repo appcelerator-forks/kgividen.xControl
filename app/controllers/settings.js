@@ -7,18 +7,6 @@ var currentNetworkType = Titanium.App.Properties.getString('currentNetworkType')
 
 function getConnectionInfo(){
     var connectionInfo = Titanium.App.Properties.getObject('conn_' + currentNetworkType) || {};
-//    if (!connectionInfo){
-//        //this is for backwards compatibility with the old way we used to store connections.
-//        //We'll see if that exists since the connectionInfo didn't work the new way and we'll load them up
-//        connectionInfo = {};
-//        if(Titanium.App.Properties.getString('ipaddress')){
-//            connectionInfo.ipaddress = Titanium.App.Properties.getString('ipaddress');
-//            connectionInfo.method = Titanium.App.Properties.getString('http');
-//            connectionInfo.port = Titanium.App.Properties.getString('port');
-//            connectionInfo.username = Titanium.App.Properties.getString('username');
-//            connectionInfo.password = Titanium.App.Properties.getString('password');
-//        }
-//    }
     $.changeNetworkBtn.title = (currentNetworkType == CONN_REMOTE) ? NETWORK_BTN_REMOTE_TITLE : NETWORK_BTN_LOCAL_TITLE;;
     $.server.value = connectionInfo.server || '';
     $.method.value = connectionInfo.method || '';

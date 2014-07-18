@@ -26,12 +26,13 @@ $.refreshDevicesBtn.addEventListener('click', function () {
         _.each(data,function(item){
             _.defaults(item,{id:item.address}, {displayName:item.name}, {showInLightingView:1}, {parent:"unkown"}, {type:"unknown"});
         });
-
         //Add all of the new records in the collection that came from the hardware device.
         _.each(data, function (item) {
             //We only want to add new devices.
             var deviceArray = devices.where({address: item.address});  //get the model from the collection if it's already been added.
+//            Ti.API.info("deviceArray: " + JSON.stringify(deviceArray));
             if (!deviceArray[0]) {
+                Ti.API.info("created device model: " + JSON.stringify(item));
                 var deviceModel = Alloy.createModel('Device', item);
                 deviceModel.save();
             }
@@ -50,11 +51,10 @@ $.closeBtn.addEventListener('click', function () {
         //todo: Reordering the devices but there has to be a better way to do this...
         _.each(deviceTvData, function (d) {
             var model = devices.get(d.alloy_id);
-            model.save({sortId: i});
+            model.save({sortId: i}, {silent: true});
             i++;
         });
     }
-//    devices.fetch();
 });
 
 $.win.addEventListener("close", function(){

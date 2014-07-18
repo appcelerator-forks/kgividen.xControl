@@ -107,11 +107,8 @@ function getListOfDevices(){
     return getFoldersAndNodes().then(function(data){
         var deferred = Q.defer();
         var xml = Ti.XML.parseString(data);
-        var nodesXML = xml.documentElement.getElementsByTagName('node');
-        var foldersXML = xml.documentElement.getElementsByTagName('folder');
-
-        var nodesJSON = convertNodesListToJSON(nodesXML);
-        var foldersJSON = convertFoldersJSON(foldersXML);
+        var nodesJSON = convertNodesListToJSON(xml);
+        var foldersJSON = convertFoldersJSON(xml.documentElement.getElementsByTagName('folder'));
 
         var foldersAndNodes = {
             nodes: nodesJSON,
@@ -127,16 +124,10 @@ function getListOfDevices(){
 
             //IF there was a folder then add it.  If not skip this and just add the nodes.
             if (obj) {
-                //make the address the id
-//                obj.id = key;
-//                delete obj.address;
-
                 //add the sortId and then increment it
                 obj.sortId = i;
-                obj.type = "folder";
                 i++;
                 newArray.push(obj);
-
             }
 
             //add each of the nodes
@@ -229,25 +220,32 @@ function convertNodesStatusToJson(xml) {
 
 function convertNodesListToJSON(xml) {
     var nodesJSON = [];
-    for (var i = 0; i < xml.length; i++) {
-        var address = xml.item(i).getElementsByTagName('address').item(0).text;
-        var name = xml.item(i).getElementsByTagName('name').item(0).text;
-        var parent = '111'; //This is hardcoded as the MISC folder.
-        if (xml.item(i).getElementsByTagName('parent').item(0) != null) {
-            parent = xml.item(i).getElementsByTagName('parent').item(0).text;
-        }
-        var type = xml.item(i).getElementsByTagName('type').item(0).text;
-        //todo Someday check for type and categorize them into lights, sensors, etc.  For now we'll hardcode light
 
-        nodesJSON.push({
-            id: address,
-            name: name,
-            parent: parent,
-            type: 'light'
-        });
+    //Add Nodes
+    parseXMLNodes(xml.documentElement.getElementsByTagName('node'), "light");
+
+    //Add Scenes
+    parseXMLNodes(xml.documentElement.getElementsByTagName('group'), "scene");
+
+
+    function parseXMLNodes(xml, type){
+        for (var i = 0; i < xml.length; i++) {
+            var address = xml.item(i).getElementsByTagName('address').item(0).text;
+            var name = xml.item(i).getElementsByTagName('name').item(0).text;
+            var parent = '111'; //This is hardcoded as the MISC folder.
+            if (xml.item(i).getElementsByTagName('parent').item(0) != null) {
+                parent = xml.item(i).getElementsByTagName('parent').item(0).text;
+            }
+            nodesJSON.push({
+                id: address,
+                name: name,
+                parent: parent,
+                type: type
+            });
+        }
     }
 
-    return groupedJSON = _.groupBy(nodesJSON,'parent');
+    return _.groupBy(nodesJSON,'parent');
 }
 
 function convertFoldersJSON(xml) {
@@ -258,7 +256,8 @@ function convertFoldersJSON(xml) {
         var address = xml.item(i).getElementsByTagName('address').item(0).text;
         foldersJSON.push({
             name: name,
-            address: address
+            address: address,
+            type: "folder"
         });
     }
     return foldersJSON;
