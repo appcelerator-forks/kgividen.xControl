@@ -417,6 +417,9 @@
 ".vertical":{
     layout:'vertical'
 },
+".horizontal":{
+    layout:'horizontal'
+},
 ".container-view":{
     top: '5%',
     layout:'vertical'

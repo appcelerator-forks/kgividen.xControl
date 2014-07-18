@@ -1,0 +1,10 @@
+<Alloy>
+    <TableViewRow class="sceneRow">
+        <View class="horizontal">
+            <Label id="sceneLbl" text="{displayName}"></Label>
+            <Button id="btnOn" class="btn" title="On" address="{address}"/>
+            <Button id="btnOff" class="btn" title="Off" address="{address}"/>
+            <Label id="group" class="group" text="{displayName}" />
+        </View>
+    </TableViewRow>
+</Alloy>

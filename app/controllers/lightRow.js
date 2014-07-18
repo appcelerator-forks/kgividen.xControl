@@ -31,7 +31,6 @@ if ($model) {
 
 $.btn.addEventListener('click', function(e) {
     //We have to add a delay here cause the ISY will respond with a doc even though the light isn't at the right level and so we'd be off...
-    Ti.API.info("e address: " + JSON.stringify(e.source.address));
     device.toggle(e.source.address).then(Alloy.Globals.updateStatus);
 });
 

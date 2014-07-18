@@ -18,7 +18,12 @@ function rowSelect(e) {
     var args = {url: e.row.url};
     switch(e.row.action) {
         case "lights":
-            alert("Lights");
+            $.ds.contentview.removeAllChildren();
+            $.ds.contentview.add(Alloy.createController("lighting").getView());
+            break;
+        case "scenes":
+            $.ds.contentview.removeAllChildren();
+            $.ds.contentview.add(Alloy.createController("scenes").getView());
             break;
         case "settings":
             Alloy.createController("settings").getView().open();
@@ -60,7 +65,14 @@ var leftMenu = [
         title: 'Lights',
         type: 'menu',
         icon: 'fa-lightbulb-o',
+        iconColor: 'yellow',
         action: 'lights'
+    },{
+        title: 'Scenes',
+        type: 'menu',
+        icon: 'fa-adjust',
+        iconColor: 'blue',
+        action: 'scenes'
     }
 ];
 
@@ -140,7 +152,9 @@ function startUI(){
     }
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("lighting").getView());
+    //todo set back to lighting as default.
+//    $.ds.contentview.add(Alloy.createController("lighting").getView());
+    $.ds.contentview.add(Alloy.createController("scenes").getView());
 }
 
 

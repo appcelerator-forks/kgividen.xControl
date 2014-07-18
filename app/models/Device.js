@@ -40,27 +40,27 @@ exports.definition = {
             comparator: function(collection) {
                 return collection.get('sortId');
             },
-            updatePositions : function() {
-                var collection = this;
-                var dbName = collection.config.adapter.db_name;
-                var table = collection.config.adapter.collection_name;
-                var columns = collection.config.columns;
-                db = Ti.Database.open(dbName);
-                db.execute("BEGIN;");
-                collection.each(function(model) {
-//                    if (!model.sort) {
-//                        model.id = util.guid();
-//                        model.attributes[model.idAttribute ] = model.id;
-//                    }
-                    var sql = "UPDATE " + table + " SET sortId = " + model.get('sortId') + " WHERE " + model.idAttribute + " = '" + model.id + "'";
-//                    Ti.API.info("sql: " + sql);
-                    db.execute(sql);
-                });
-                db.execute("COMMIT;");
-                db.close();
-                collection.sort();
-                collection.trigger('sync');
-            },
+//            updatePositions : function() {
+//                var collection = this;
+//                var dbName = collection.config.adapter.db_name;
+//                var table = collection.config.adapter.collection_name;
+//                var columns = collection.config.columns;
+//                db = Ti.Database.open(dbName);
+//                db.execute("BEGIN;");
+//                collection.each(function(model) {
+////                    if (!model.sort) {
+////                        model.id = util.guid();
+////                        model.attributes[model.idAttribute ] = model.id;
+////                    }
+//                    var sql = "UPDATE " + table + " SET sortId = " + model.get('sortId') + " WHERE " + model.idAttribute + " = '" + model.id + "'";
+////                    Ti.API.info("sql: " + sql);
+//                    db.execute(sql);
+//                });
+//                db.execute("COMMIT;");
+//                db.close();
+//                collection.sort();
+//                collection.trigger('sync');
+//            },
             whereShowInView : function(view_name, types) {
                 var typeList = "'" + types.join("','") + "'";
                 return this.fetch({

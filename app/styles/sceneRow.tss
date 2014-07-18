@@ -1,0 +1,57 @@
+".sceneRow":{
+    backgroundColor: 'transparent',
+    selectionStyle : 'none',
+    height : 50
+},
+".sceneRow[formFactor=tablet]":{
+    height : 80
+},
+"#sceneLbl" : {
+    width: '50%',
+    color : 'white',
+    font : {
+        fontSize : '20%'
+    },
+    left : 5,
+    textAlign : 'left'
+},
+".groupRow" : {
+    height : 40
+},
+".groupRow[formFactor=tablet]" : {
+    height : 40
+},
+//todo: These btn classes are also on the scenes.tss they really should only need to be in one place
+//todo: but we update the classes in the scenes controller so they also have to be there for whatever reason.
+".btn" : {
+    backgroundImage : '/images/themes/default/btn.png',
+    color: '#fff',
+    width : '20%',
+    height : '80%',
+    left : '3%',
+    font : {
+        fontSize : '20%',
+        fontWeight : 'bold',
+        fontFamily : 'Helvetica Neue'
+    },
+    zIndex : 5
+},
+".group" : {
+    color : 'white',
+    font : {
+        fontSize : '30%'
+    },
+    width : Ti.UI.Fill,
+    left : 5,
+    textAlign : 'left'
+}
+//OLD way...with 3.3 hide works correctly
+".hide" :{
+    height:0,
+    width:0,
+    backgroundImage:''
+}
+
+".hide[platform=ios]" : {
+    thumbImage : ''
+},

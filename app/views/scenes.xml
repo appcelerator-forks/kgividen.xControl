@@ -1,0 +1,15 @@
+<Alloy>
+    <View id="sceneContainerView" platform="ios">
+        <TableView id="sceneTableView" dataCollection="device">
+            <RefreshControl id="refreshControl"></RefreshControl>
+            <Require src="sceneRow" />
+        </TableView>
+    </View>
+    <View id="sceneContainerView" platform="android">
+        <Button id="refreshControlBtn" icon="fa-refresh"/>
+        <TableView id="sceneTableView" dataCollection="device">
+            <Require src="sceneRow" />
+        </TableView>
+        <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
+    </View>
+</Alloy>

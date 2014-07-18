@@ -57,6 +57,15 @@ exports.toggle = function (address){
     });
 };
 
+exports.sceneOn = function(address){
+    var level = 255;
+    deviceOn(address, level);
+};
+
+exports.sceneOff = function(address){
+    deviceOff(address);
+};
+
 //Should be in the format of
 //[{address: "adress of device",
 // level: "level of device"}]
