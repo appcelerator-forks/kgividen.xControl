@@ -1,5 +1,5 @@
 <Alloy>
-    <Window id="win" tabBarHidden="true" navBarHidden="true" fullscreen="true">
+    <Window id="win" fullscreen="true">
         <Require type="widget" src="ds.slideMenu" id="ds"/>
     </Window>
 </Alloy>

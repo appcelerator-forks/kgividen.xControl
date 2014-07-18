@@ -29,7 +29,7 @@
 	width : Ti.Platform.displayCaps.platformWidth,
 	height : Ti.UI.Fill,
 	top : "44",
-	backgroundColor : 'white'
+	backgroundColor : 'black'
 },
 "#shadowview": {
 	shadowColor:"black",

@@ -22,7 +22,6 @@
 },
 ".icon": {
   left: 5,
-  color : '#999',
   font: {
     fontSize: 25,
   }

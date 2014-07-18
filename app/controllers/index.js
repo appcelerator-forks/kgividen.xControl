@@ -45,6 +45,7 @@ var rightMenu = [
         title: 'Settings',
         type: 'menu',
         icon: 'fa-gear',
+        iconColor: '#999',
         action: 'settings'
     }
 ];
@@ -152,9 +153,7 @@ function startUI(){
     }
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
-    //todo set back to lighting as default.
-//    $.ds.contentview.add(Alloy.createController("lighting").getView());
-    $.ds.contentview.add(Alloy.createController("scenes").getView());
+    $.ds.contentview.add(Alloy.createController("lighting").getView());
 }
 
 

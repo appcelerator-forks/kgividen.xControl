@@ -1,5 +1,4 @@
-//todo REMOVE THIS IF WE DON't NEED IT.
-".modalWin": {
+"#win": {
 	backgroundImage: '/images/themes/default/background.png',
 	backgroundRepeat : true,
 	navBarHidden:true,
