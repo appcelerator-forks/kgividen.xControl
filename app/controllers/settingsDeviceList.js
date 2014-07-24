@@ -7,14 +7,21 @@ function transformFunction(model) {
     return transform;
 }
 
-//LISTENERS
-$.refreshDevicesBtn.addEventListener('click', function () {
+function refreshDevices(){
     device.getListOfDevices().then(function (data) {
         var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
 
         //add all of the defaults if they aren't there for the model
         _.each(data,function(item){
-            _.defaults(item,{id:item.address}, {displayName:item.name}, {showInLightingView:1}, {parent:"unkown"}, {type:"unknown"});
+            _.defaults(item,{id:item.address}, {displayName:item.name}, {parent:"unkown"}, {type:"unknown"});
+            if(item.type == "scene") {
+                item.showInScenesView = 1;
+            } else if (item.type =="folder"){
+                item.showInLightingView = 1;
+                item.showInFavoritesView = 1;
+            } else {
+                item.showInLightingView = 1;
+            }
         });
 
         //Add all of the new records in the collection that came from the hardware device.
@@ -29,7 +36,8 @@ $.refreshDevicesBtn.addEventListener('click', function () {
         });
         devices.fetch();
     });
-});
+}
+//LISTENERS
 
 $.closeBtn.addEventListener('click', function () {
     Ti.API.info("CLOSING!!!!"); //TODO add an indicator here.
@@ -54,6 +62,7 @@ $.win.addEventListener("close", function(){
 
 $.win.addEventListener("open", function(){
     Alloy.Collections.device.fetch();
+    refreshDevices();
     $.chooseViewBar.index = 0;
 });
 

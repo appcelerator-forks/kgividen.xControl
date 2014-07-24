@@ -47,9 +47,9 @@ $.clearData.addEventListener('click', function () {
     var model;
 
     while (model = deviceCol.first()) {
-        model.destroy();
+        model.destroy({silent: true});
     }
-    Alloy.Collections.device.reset();
+    Alloy.Collections.device.reset({silent: true});
     Ti.App.Properties.setObject('conn_' + CONN_REMOTE, {});
     Ti.App.Properties.setObject('conn_' + CONN_LOCAL, {});
     Ti.App.Properties.setObject('conn_current', {});

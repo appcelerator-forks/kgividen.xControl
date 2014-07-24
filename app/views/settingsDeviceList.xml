@@ -12,7 +12,6 @@
             <TableView id="devicesTableView" class="tableview-form" dataFunction="updateUI" dataTransform="transformFunction" dataCollection="device">
                     <Require src="settingsDeviceRow"/>
             </TableView>
-            <Button id="refreshDevicesBtn">Check For New Devices</Button>
             <Button id="closeBtn">Save and Close</Button>
         </View>
     </Window>
