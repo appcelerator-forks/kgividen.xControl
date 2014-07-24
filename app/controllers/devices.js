@@ -29,15 +29,17 @@ function updateLightsStatus(nodesByAddressAndStatus){
 }
 
 //filter only models that are supposed to be in the view.
-Alloy.Collections.device.whereShowInView("showInLightingView",["scene"]);
-//Alloy.Collections.device.whereShowInView("showInLightingView",["scene","folder"]);
+//Alloy.Collections.device.whereShowInView("showInLightingView",["light","folder"]);
+var args = arguments[0] || {};
+Ti.API.info("args:" + JSON.stringify(args.viewName));
+Alloy.Collections.device.whereShowInView(args.viewName);
 
 //Set this to a global so it can be used in the lightRow after a toggle or setLevel
 Alloy.Globals.updateStatus = updateStatus;
 updateStatus();
 
 //LISTENERS
-$.sceneContainerView.addEventListener("close", function(){
+$.lightingContainerView.addEventListener("close", function(){
     $.destroy();
 });
 

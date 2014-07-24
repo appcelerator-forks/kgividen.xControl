@@ -1,16 +1,30 @@
 if ($model) {
-//    Ti.API.info("ROW MODEL: " + JSON.stringify($model));
-    if($model.get('showInLightingView')){
-        $.lightSwitch.setValue(true);
+    if($model.get($.deviceRow.viewName)){
+        $.deviceRowSwitch.setValue(true);
     }else{
-        $.lightSwitch.setValue(false);
+        $.deviceRowSwitch.setValue(false);
     }
 }
 
-$.lightSwitch.addEventListener('change', function(e) {
-    $model.set({
+$.deviceRowSwitch.addEventListener('change', function(e) {
+    var viewName = $.deviceRow.viewName;
+    if(viewName == "showInFavoritesView") {
+        $model.set({
+            showInFavoritesView: (e.value) ? 1 : 0
+        }, {
+            silent: true
+        });
+    } else if (viewName == "showInLightingView"){
+        $model.set({
             showInLightingView: (e.value) ? 1 : 0
-        },{
-           silent: true
-    });
+        }, {
+            silent: true
+        });
+    } else if (viewName == "showInScenesView") {
+        $model.set({
+            showInScenesView: (e.value) ? 1 : 0
+        }, {
+            silent: true
+        });
+    }
 });

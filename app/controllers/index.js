@@ -17,22 +17,25 @@ function createSideMenu(sections, controller) {
 function rowSelect(e) {
     var args = {url: e.row.url};
     switch(e.row.action) {
+        case "favorites":
+            $.ds.contentview.removeAllChildren();
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView"}).getView());
+            break;
         case "lights":
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("lighting").getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInLightingView"}).getView());
             break;
         case "scenes":
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("scenes").getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInScenesView"}).getView());
             break;
         case "settings":
             Alloy.createController("settings").getView().open();
             $.win.close();
             break;
         default:
-            if(e.row.sectionView == "webView") {
-                Alloy.createController(e.row.sectionView, args).getView();
-            }
+            $.ds.contentview.removeAllChildren();
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView"}).getView());
     }
 }
 
@@ -62,6 +65,12 @@ var leftMenu = [
     {
         title: 'Menu',
         header: true
+    },{
+        title: 'Favorites',
+        type: 'menu',
+        icon: 'fa-heart-o',
+        iconColor: 'red',
+        action: 'favorites'
     },{
         title: 'Lights',
         type: 'menu',
@@ -153,7 +162,7 @@ function startUI(){
     }
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("lighting").getView());
+    $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView"}).getView());
 }
 
 

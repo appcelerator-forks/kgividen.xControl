@@ -1,3 +1,11 @@
+var viewName = "showInFavoritesView"
+
+//This is used for adding the correct viewName to the model/collection for the table view.
+function transformFunction(model) {
+    var transform = model.toJSON();
+    transform.viewName = viewName;
+    return transform;
+}
 
 //LISTENERS
 $.refreshDevicesBtn.addEventListener('click', function () {
@@ -46,4 +54,28 @@ $.win.addEventListener("close", function(){
 
 $.win.addEventListener("open", function(){
     Alloy.Collections.device.fetch();
+    $.chooseViewBar.index = 0;
+});
+
+$.chooseViewBar.addEventListener("click", function(e){
+    Ti.API.info(e.index);
+    switch(e.index) {
+        case 0:
+            Ti.API.info("favorites");
+            viewName = "showInFavoritesView";
+            updateUI(); //This calls the dataFunction in the view.
+            break;
+        case 1:
+            Ti.API.info("lighting");
+            viewName = "showInLightingView";
+            updateUI();
+            break;
+        case 2:
+            Ti.API.info("scenes");
+            viewName = "showInScenesView";
+            updateUI();
+            break;
+        default:
+            Ti.API.info("favorites");
+    }
 });

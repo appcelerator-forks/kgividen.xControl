@@ -1,5 +1,6 @@
 exports.definition = {
     config : {
+        //todo The different views and sortIDs should probably be moved into another model.
         "columns" : {
 //            "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
             "sortId" : "INTEGER",
@@ -7,6 +8,11 @@ exports.definition = {
             "displayName" : "TEXT",
             "address" : "TEXT",
             "showInLightingView" : "INTEGER",
+            "lightingSortId" : "INTEGER",
+            "showInFavoritesView" : "INTEGER",
+            "favoritesSortId" : "INTEGER",
+            "showInScenesView" : "INTEGER",
+            "scenesSortId" : "INTEGER",
             "type" : "TEXT",
             "parent" : "TEXT"
         },
@@ -15,7 +21,12 @@ exports.definition = {
             "name" : "",
             "displayName" : "",
             "address" : "",
-            "showInLightingView" : false,
+            "showInLightingView" : 0,
+            "lightingSortId" : 0,
+            "showInFavoritesView" : 0,
+            "favoritesSortId" : 0,
+            "showInScenesView" : 0,
+            "scenesSortId" : 0,
             "type" : "unknown",
             "parent" : "unknown"
         },
@@ -61,10 +72,11 @@ exports.definition = {
 //                collection.sort();
 //                collection.trigger('sync');
 //            },
-            whereShowInView : function(view_name, types) {
-                var typeList = "'" + types.join("','") + "'";
+            whereShowInView : function(view_name) {
+                var sql = "SELECT * FROM " + this.config.adapter.collection_name +" WHERE " + view_name;
+                Ti.API.info(sql);
                 return this.fetch({
-                    query: "SELECT * FROM " + this.config.adapter.collection_name +" WHERE " + view_name + " = 1 AND type IN(" + typeList + ")"
+                    query: sql
                 });
             }
         });

@@ -8,4 +8,9 @@
 //    editable: true,
     moveable: true,
     moving:true
+},
+"#chooseViewBar": {
+    bottom:'1%',
+	left:'1%',
+    width:'98%',
 }

@@ -1,8 +1,15 @@
 <Alloy>
     <Window id="win" tabBarHidden="true">
         <View class="container-view">
+            <TabbedBar id="chooseViewBar" module="/TabbedBar">
+                <Labels>
+                    <Label>Favorites</Label>
+                    <Label>Lighting</Label>
+                    <Label>Scenes</Label>
+                </Labels>
+            </TabbedBar>
             <Label class="label-H5">Set a device to be visible or not and change order of devices.</Label>
-            <TableView id="devicesTableView" class="tableview-form" dataCollection="device">
+            <TableView id="devicesTableView" class="tableview-form" dataFunction="updateUI" dataTransform="transformFunction" dataCollection="device">
                     <Require src="settingsDeviceRow"/>
             </TableView>
             <Button id="refreshDevicesBtn">Check For New Devices</Button>
