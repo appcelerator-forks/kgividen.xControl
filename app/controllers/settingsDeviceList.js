@@ -11,18 +11,24 @@ function refreshDevices(){
     device.getListOfDevices().then(function (data) {
         var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
 
-        //add all of the defaults if they aren't there for the model
         _.each(data,function(item){
+            //add all of the defaults if they aren't there for the model
             _.defaults(item,{id:item.address}, {displayName:item.name}, {parent:"unkown"}, {type:"unknown"});
+            //add them into their categories and into the favorites.
             if(item.type == "scene") {
                 item.showInScenesView = 1;
             } else if (item.type =="folder"){
                 item.showInLightingView = 1;
-                item.showInFavoritesView = 1;
             } else {
                 item.showInLightingView = 1;
             }
         });
+
+        //Set the first of each to show up in the favorites view so it's not blank.
+        _.findWhere(data, {type: "light"}).showInFavoritesView = 1;
+        _.findWhere(data, {type: "folder"}).showInFavoritesView = 1;
+        _.findWhere(data, {type: "scene"}).showInFavoritesView = 1;
+
 
         //Add all of the new records in the collection that came from the hardware device.
         _.each(data, function (item) {
