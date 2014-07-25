@@ -5,11 +5,7 @@ function updateLightsStatus(nodesByAddressAndStatus){
     var lightTVData = $.lightTableView.getData()[0].getRows();
     _.each(lightTVData, function(row){
         if(row.model.type == 'light') {
-            var btn = row.getChildren()[0];
-            //todo: This crashes android right now.
-            var sliderContainer = row.getChildren()[1].getChildren();
-            // Ti.API.info("sliderContainer: " + JSON.stringify(row.getChildren()));
-
+            var btn = row.getChildren()[0].getChildren()[0];
             var current = _.findWhere(nodesByAddressAndStatus, {address:btn.address});
 
             if(current.level > 0){
@@ -20,10 +16,13 @@ function updateLightsStatus(nodesByAddressAndStatus){
                 $.addClass(btn, 'btnOff');
                 $.addClass(btn, 'btn');
             }
+
+            var sliderContainer = row.getChildren()[0].getChildren()[1];
+
             //slider
-            sliderContainer[0].value = current.level;
+            sliderContainer.getChildren()[0].value = current.level;
             //sliderLbl
-            sliderContainer[1].text = current.level;
+            sliderContainer.getChildren()[1].text = current.level;
         }
     });
 }
