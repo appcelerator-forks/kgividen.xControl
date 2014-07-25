@@ -31,7 +31,6 @@ function updateLightsStatus(nodesByAddressAndStatus){
 //filter only models that are supposed to be in the view.
 //Alloy.Collections.device.whereShowInView("showInLightingView",["light","folder"]);
 var args = arguments[0] || {};
-Ti.API.info("args:" + JSON.stringify(args.viewName));
 Alloy.Collections.device.whereShowInView(args.viewName, args.sortBy);
 
 //Set this to a global so it can be used in the lightRow after a toggle or setLevel
@@ -45,7 +44,6 @@ $.lightingContainerView.addEventListener("close", function(){
 
 if(osname == "android"){
     $.refreshControlBtn.addEventListener('click', function () {
-        Ti.API.info('refreshstart');
         return device.getAllDevicesStatus()
             .then(updateLightsStatus);
     });
@@ -53,7 +51,6 @@ if(osname == "android"){
 
 if(osname=="ios") {
     $.refreshControl.addEventListener('refreshstart', function () {
-        Ti.API.info('refreshstart');
         return device.getAllDevicesStatus()
             .then(updateLightsStatus)
             .then(function () {

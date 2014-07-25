@@ -35,7 +35,6 @@ function refreshDevices(){
             //We only want to add new devices.
             var deviceArray = devices.where({address: item.address});  //get the model from the collection if it's already been added.
             if (!deviceArray[0]) {
-                Ti.API.info("created device model: " + JSON.stringify(item));
                 var deviceModel = Alloy.createModel('Device', item);
                 deviceModel.save();
             }
@@ -53,7 +52,6 @@ function updateViewsSortOrder(viewName){
             var model = devices.get(d.alloy_id);
             switch(viewName) {
                 case "showInFavoritesView":
-                    Ti.API.info("SAVE: " +model.get('displayName') + " favoritesSortId: " + i);
                     model.save({favoritesSortId: i}, {silent: true});
                     break;
                 case "showInLightingView":
@@ -97,7 +95,6 @@ $.win.addEventListener("open", function(){
 });
 
 $.chooseViewBar.addEventListener("click", function(e){
-    Ti.API.info(JSON.stringify(e));
     switch(e.index) {
         case 0:
             updateViewsSortOrder(viewName);

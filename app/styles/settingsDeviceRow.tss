@@ -1,9 +1,10 @@
 ".deviceTableViewRow":{
-    height: '10%'
+//    height: '10%'
+    height: '40'
 },
 ".deviceRowLbl":{
     left:10,
-	height : '10%',
+//	height : '10%',
 	width: '60%',
 	color:'#333',
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -23,10 +24,5 @@
 },
 ".deviceRowSwitch":{
     left:'77%',
-	height:'5%',
-}
-
-".deviceRowSortIdTxt":{
-    left:'80%',
-	height:'80%',
+//	height:'5%',
 }

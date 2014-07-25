@@ -16,17 +16,19 @@ if ($model) {
             $.group.hide();
         }
     } else {
-        //TODO Do we need this for android with 3.3?
-        // OLD WAY.  with 3.3 hide() works correctly.
+        // OLD WAY.  with 3.3 hide() works correctly on ios but not android.
         var hideStyle = $.createStyle({
             classes: 'hide'
         });
         if ($model.get('type') == "folder") {
-            $.btn.applyProperties(hideStyle);
-            $.slider.applyProperties(hideStyle);
-            $.sliderLbl.applyProperties(hideStyle);
+            $.lightContainer.applyProperties(hideStyle);
+            $.sceneContainer.applyProperties(hideStyle);
             $.deviceRow.applyProperties(rowGroupStyle);
-        } else {
+        } else if ($model.get('type') == "scene") {
+            $.lightContainer.applyProperties(hideStyle);
+            $.group.applyProperties(hideStyle);
+        } else if ($model.get('type') == "light") {
+            $.sceneContainer.applyProperties(hideStyle);
             $.group.applyProperties(hideStyle);
         }
     }
@@ -45,7 +47,6 @@ $.slider.addEventListener('touchend', function(e) {
 
 $.sceneBtnOn.addEventListener('click', function(e) {
     //We have to add a delay here cause the ISY will respond with a doc even though the scene isn't at the right level and so we'd be off...
-    Ti.API.info("e: " + JSON.stringify(e));
     device.sceneOn(e.source.address);
 });
 $.sceneBtnOff.addEventListener('click', function(e) {

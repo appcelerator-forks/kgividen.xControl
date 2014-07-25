@@ -11,7 +11,6 @@ $.deviceRowSwitch.addEventListener('change', function(e) {
 
     var obj = {};
     obj[viewName] = (e.value) ? 1 : 0;
-    Ti.API.info("obj: " + JSON.stringify(obj));
     $model.set(obj, {
         silent: true
     });
