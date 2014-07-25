@@ -32,7 +32,7 @@ function updateLightsStatus(nodesByAddressAndStatus){
 //Alloy.Collections.device.whereShowInView("showInLightingView",["light","folder"]);
 var args = arguments[0] || {};
 Ti.API.info("args:" + JSON.stringify(args.viewName));
-Alloy.Collections.device.whereShowInView(args.viewName);
+Alloy.Collections.device.whereShowInView(args.viewName, args.sortBy);
 
 //Set this to a global so it can be used in the lightRow after a toggle or setLevel
 Alloy.Globals.updateStatus = updateStatus;

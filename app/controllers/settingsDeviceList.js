@@ -43,22 +43,46 @@ function refreshDevices(){
         devices.fetch();
     });
 }
-//LISTENERS
 
-$.closeBtn.addEventListener('click', function () {
-    Ti.API.info("CLOSING!!!!"); //TODO add an indicator here.
+function updateViewsSortOrder(viewName){
     var devices = Alloy.Collections.device;
     var i = 0;
-    $.win.close();
     if($.devicesTableView.data[0]) {
         var deviceTvData = $.devicesTableView.data[0].rows;
-        //todo: Reordering the devices but there has to be a better way to do this...
         _.each(deviceTvData, function (d) {
             var model = devices.get(d.alloy_id);
-            model.save({sortId: i}, {silent: true});
+            switch(viewName) {
+                case "showInFavoritesView":
+                    Ti.API.info("SAVE: " +model.get('displayName') + " favoritesSortId: " + i);
+                    model.save({favoritesSortId: i}, {silent: true});
+                    break;
+                case "showInLightingView":
+                    model.save({lightingSortId: i}, {silent: true});
+                    break;
+                case "showInScenesView":
+                    model.save({scenesSortId: i}, {silent: true});
+                    break;
+                default:
+            }
             i++;
         });
     }
+}
+//LISTENERS
+
+$.closeBtn.addEventListener('click', function () {
+    updateViewsSortOrder(viewName);
+    $.win.close();
+
+//    if($.devicesTableView.data[0]) {
+//        var deviceTvData = $.devicesTableView.data[0].rows;
+//        //todo: Reordering the devices but there has to be a better way to do this...
+//        _.each(deviceTvData, function (d) {
+//            var model = devices.get(d.alloy_id);
+//            model.save({sortId: i}, {silent: true});
+//            i++;
+//        });
+//    }
 });
 
 $.win.addEventListener("close", function(){
@@ -67,30 +91,36 @@ $.win.addEventListener("close", function(){
 });
 
 $.win.addEventListener("open", function(){
-    Alloy.Collections.device.fetch();
+    Alloy.Collections.device.sortByID("favoritesSortId");
     refreshDevices();
     $.chooseViewBar.index = 0;
 });
 
 $.chooseViewBar.addEventListener("click", function(e){
-    Ti.API.info(e.index);
+    Ti.API.info(JSON.stringify(e));
     switch(e.index) {
         case 0:
-            Ti.API.info("favorites");
+            updateViewsSortOrder(viewName);
             viewName = "showInFavoritesView";
+            Alloy.Collections.device.sortByID("favoritesSortId");
             updateUI(); //This calls the dataFunction in the view.
             break;
         case 1:
-            Ti.API.info("lighting");
+            updateViewsSortOrder(viewName);
             viewName = "showInLightingView";
+            Alloy.Collections.device.sortByID("lightingSortId");
             updateUI();
             break;
         case 2:
-            Ti.API.info("scenes");
+            updateViewsSortOrder(viewName);
             viewName = "showInScenesView";
+            Alloy.Collections.device.sortByID("scenesSortId");
             updateUI();
             break;
         default:
-            Ti.API.info("favorites");
+            updateViewsSortOrder(viewName);
+            viewName = "showInFavoritesView";
+            Alloy.Collections.device.sortByID("favoritesSortId");
+            updateUI(); //This calls the dataFunction in the view.
     }
 });

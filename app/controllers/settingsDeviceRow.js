@@ -8,23 +8,11 @@ if ($model) {
 
 $.deviceRowSwitch.addEventListener('change', function(e) {
     var viewName = $.deviceRow.viewName;
-    if(viewName == "showInFavoritesView") {
-        $model.set({
-            showInFavoritesView: (e.value) ? 1 : 0
-        }, {
-            silent: true
-        });
-    } else if (viewName == "showInLightingView"){
-        $model.set({
-            showInLightingView: (e.value) ? 1 : 0
-        }, {
-            silent: true
-        });
-    } else if (viewName == "showInScenesView") {
-        $model.set({
-            showInScenesView: (e.value) ? 1 : 0
-        }, {
-            silent: true
-        });
-    }
+
+    var obj = {};
+    obj[viewName] = (e.value) ? 1 : 0;
+    Ti.API.info("obj: " + JSON.stringify(obj));
+    $model.set(obj, {
+        silent: true
+    });
 });

@@ -19,15 +19,15 @@ function rowSelect(e) {
     switch(e.row.action) {
         case "favorites":
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "favoritesSortId"}).getView());
             break;
         case "lights":
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInLightingView"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInLightingView", sortBy: "lightingSortId"}).getView());
             break;
         case "scenes":
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInScenesView"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInScenesView", sortBy: "lightingSortId"}).getView());
             break;
         case "settings":
             Alloy.createController("settings").getView().open();
@@ -35,7 +35,7 @@ function rowSelect(e) {
             break;
         default:
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "favoritesSortId"}).getView());
     }
 }
 
@@ -162,7 +162,7 @@ function startUI(){
     }
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView"}).getView());
+    $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "favoritesSortId"}).getView());
 }
 
 

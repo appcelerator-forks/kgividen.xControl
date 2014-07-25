@@ -48,9 +48,9 @@ exports.definition = {
 
     extendCollection : function(Collection) {
         _.extend(Collection.prototype, {
-            comparator: function(collection) {
-                return collection.get('sortId');
-            },
+//            comparator: function(collection) {
+//                return collection.get('sortId');
+//            },
 //            updatePositions : function() {
 //                var collection = this;
 //                var dbName = collection.config.adapter.db_name;
@@ -72,8 +72,15 @@ exports.definition = {
 //                collection.sort();
 //                collection.trigger('sync');
 //            },
-            whereShowInView : function(view_name) {
-                var sql = "SELECT * FROM " + this.config.adapter.collection_name +" WHERE " + view_name;
+            whereShowInView : function(view_name, sortBy) {
+                var sql = "SELECT * FROM " + this.config.adapter.collection_name +" WHERE " + view_name + " ORDER BY " + sortBy + " ASC";
+                Ti.API.info(sql);
+                return this.fetch({
+                    query: sql
+                });
+            },
+            sortByID : function(sortBy) {
+                var sql = "SELECT * FROM " + this.config.adapter.collection_name + " ORDER BY " + sortBy + " ASC";
                 Ti.API.info(sql);
                 return this.fetch({
                     query: sql
