@@ -69,19 +69,19 @@ var leftMenu = [
         title: 'Favorites',
         type: 'menu',
         icon: 'fa-heart-o',
-        iconColor: 'red',
+        iconColor: '#999',
         action: 'favorites'
     },{
         title: 'Lights',
         type: 'menu',
         icon: 'fa-lightbulb-o',
-        iconColor: 'yellow',
+        iconColor: '#999',
         action: 'lights'
     },{
         title: 'Scenes',
         type: 'menu',
         icon: 'fa-adjust',
-        iconColor: 'blue',
+        iconColor: '#999',
         action: 'scenes'
     }
 ];

@@ -1,21 +1,5 @@
-"Label": {
-  color: "black",
-  font: {
-    fontSize: "16"
-  }
-},
-"Label[platform=android formFactor=tablet]": {
-  color: "black",
-  font: {
-    fontSize: "26"
-  }
-},
-".vgroup": {
-  layout: "vertical",
-  height: Ti.UI.SIZE
-},
 "#row": {
-  height:40
+  height:40,
 },
 "#row[platform=android formFactor=tablet]": {
   height : 96
@@ -31,13 +15,12 @@
   font: {
     fontSize: 75
   }
-}
+},
 "#title": {
   left:35,
   color: 'black'
 },
 "#title[platform=android formFactor=tablet]": {
-  left:85,
   height : '100dp',
   color: 'black'
 }
