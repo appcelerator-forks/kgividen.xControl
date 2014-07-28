@@ -9,12 +9,43 @@ function transformFunction(model) {
 
 function refreshDevices(){
     device.getListOfDevices().then(function (data) {
+        //TEMP Fake Data DEBUG
+//        var data = [
+//            {
+//                "name": "Kitchen",
+//                "address": "29763",
+//                "type": "folder",
+//                "sortId": 0
+//            },
+//            {
+//                "name": "Backyard Floods",
+//                "parent": "29763",
+//                "type": "light",
+//                "sortId": 1,
+//                "address": "20 88 48 1"
+//            },
+//            {
+//                "name": "Kitchen 3way",
+//                "parent": "29763",
+//                "type": "light",
+//                "sortId": 2,
+//                "address": "20 91 DD 1"
+//            },
+//            {
+//                "name": "Kitchen Sink",
+//                "parent": "29763",
+//                "type": "light",
+//                "sortId": 3,
+//                "address": "20 95 1D 1"
+//            }
+//        ];
         var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
 
         _.each(data,function(item){
             //add all of the defaults if they aren't there for the model
             _.defaults(item,{id:item.address}, {displayName:item.name}, {parent:"unkown"}, {type:"unknown"});
             //add them into their categories and into the favorites.
+
             if(item.type == "scene") {
                 item.showInScenesView = 1;
             } else if (item.type =="folder"){
@@ -25,10 +56,20 @@ function refreshDevices(){
         });
 
         //Set the first of each to show up in the favorites view so it's not blank.
-        _.findWhere(data, {type: "light"}).showInFavoritesView = 1;
-        _.findWhere(data, {type: "folder"}).showInFavoritesView = 1;
-        _.findWhere(data, {type: "scene"}).showInFavoritesView = 1;
+        var tempType = _.findWhere(data, {type: "light"});
+        if (typeof tempType !='undefined'){
+            tempType.showInFavoritesView = 1;
+        }
 
+        tempType= _.findWhere(data, {type: "folder"});
+        if (typeof tempType !='undefined'){
+            tempType.showInFavoritesView = 1;
+        }
+
+        tempType = _.findWhere(data, {type: "scene"});
+        if (typeof tempType !='undefined'){
+            tempType.showInFavoritesView = 1;
+        }
 
         //Add all of the new records in the collection that came from the hardware device.
         _.each(data, function (item) {
@@ -48,8 +89,13 @@ function updateViewsSortOrder(viewName){
     var i = 0;
     if($.devicesTableView.data[0]) {
         var deviceTvData = $.devicesTableView.data[0].rows;
+        Ti.API.info("deviceTvData: " + JSON.stringify(deviceTvData));
+
         _.each(deviceTvData, function (d) {
             var model = devices.get(d.alloy_id);
+            Ti.API.info("d: " + JSON.stringify(d));
+            Ti.API.info("model: " + JSON.stringify(model));
+
             switch(viewName) {
                 case "showInFavoritesView":
                     model.save({favoritesSortId: i}, {silent: true});
@@ -66,21 +112,32 @@ function updateViewsSortOrder(viewName){
         });
     }
 }
+//We have to pass in the data on Android because we are swapping the rows manually.
+function updateViewsSortOrderAndroid(viewName, deviceTvData){
+    var devices = Alloy.Collections.device;
+    var i = 0;
+    _.each(deviceTvData, function (d) {
+        var model = devices.get(d.alloy_id);
+        switch(viewName) {
+            case "showInFavoritesView":
+                model.save({favoritesSortId: i}, {silent: true});
+                break;
+            case "showInLightingView":
+                model.save({lightingSortId: i}, {silent: true});
+                break;
+            case "showInScenesView":
+                model.save({scenesSortId: i}, {silent: true});
+                break;
+            default:
+        }
+        i++;
+    });
+}
 //LISTENERS
 
 $.closeBtn.addEventListener('click', function () {
     updateViewsSortOrder(viewName);
     $.win.close();
-
-//    if($.devicesTableView.data[0]) {
-//        var deviceTvData = $.devicesTableView.data[0].rows;
-//        //todo: Reordering the devices but there has to be a better way to do this...
-//        _.each(deviceTvData, function (d) {
-//            var model = devices.get(d.alloy_id);
-//            model.save({sortId: i}, {silent: true});
-//            i++;
-//        });
-//    }
 });
 
 $.win.addEventListener("close", function(){
@@ -100,7 +157,6 @@ $.chooseViewBar.addEventListener("click", function(e){
             updateViewsSortOrder(viewName);
             viewName = "showInFavoritesView";
             Alloy.Collections.device.sortByID("favoritesSortId");
-            updateUI(); //This calls the dataFunction in the view.
             break;
         case 1:
             updateViewsSortOrder(viewName);
@@ -121,3 +177,48 @@ $.chooseViewBar.addEventListener("click", function(e){
             updateUI(); //This calls the dataFunction in the view.
     }
 });
+
+var data = [];
+
+
+//ANDROID MOVE ORDER OF ROWS IN TABLE VIEW CODE
+$.devicesTableView.addEventListener('click', function(e) {
+//    data = $.devicesTableView.getData();
+    data = $.devicesTableView.data[0].rows;
+    var action = e.source.action,
+        index = e.index,
+        isFirstRow = index === 0,
+        isLastRow = index + 1 === data.length;
+    if(action === 'moveUp' && !isFirstRow) {
+        swapRows(index, index - 1);
+    } else if(action === 'moveDown' && !isLastRow) {
+        swapRows(index, index + 1);
+    }
+});
+
+function swapRows(indexOne, indexTwo) {
+//    Ti.API.info("data[indexOne]: " + JSON.stringify(data[indexOne]));
+//    Ti.API.info("data[indexTwo]: " + JSON.stringify(data[indexTwo]));
+//    Ti.API.info("data before: " + JSON.stringify(data));
+    var temp = data[indexOne];
+    data[indexOne] = data[indexTwo];
+    data[indexTwo] = temp;
+    Ti.API.info("data after: " + JSON.stringify(data));
+    updateViewsSortOrderAndroid(viewName, data);
+    switch(viewName) {
+        case "showInFavoritesView":
+            Alloy.Collections.device.sortByID("favoritesSortId");
+            break;
+        case "showInLightingView":
+            Alloy.Collections.device.sortByID("lightingSortId");
+            break;
+        case "showInScenesView":
+            Alloy.Collections.device.sortByID("scenesSortId");
+            break;
+        default:
+            Alloy.Collections.device.sortByID("favoritesSortId");
+    }
+    updateUI();
+}
+
+

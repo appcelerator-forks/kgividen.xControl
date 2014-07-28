@@ -5,7 +5,7 @@
 ".deviceRowLbl":{
     left:10,
 //	height : '10%',
-	width: '60%',
+	width: '50%',
 	color:'#333',
 	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font:{
@@ -14,7 +14,7 @@
 	}
 },
 ".deviceRowTypeLbl":{
-    left:'65%',
+    left:'55%',
 	width:'10%',
 	color:'#333',
 	font:{
@@ -23,6 +23,26 @@
 	}
 },
 ".deviceRowSwitch":{
-    left:'77%',
+    left:'75%',
 //	height:'5%',
+},
+
+//Android differences
+".deviceRowTypeLbl[platform=android]":{
+    left:'45%'
+},
+".deviceRowSwitch[platform=android]":{
+    left:'55%',
+},
+"#moveUp[platform=android]": {
+   left:'77%',
+   font: {
+     fontSize: 25
+   }
+ },
+"#moveDown[platform=android]": {
+    left:'85%',
+    font: {
+        fontSize: 25
+    }
 }

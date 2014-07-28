@@ -1,7 +1,15 @@
 <Alloy>
-    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" viewName="{viewName}" class="deviceTableViewRow" sortId="{sortId}">
+    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" viewName="{viewName}" class="deviceTableViewRow" sortId="{sortId}" platform="ios">
         <Label class="deviceRowLbl" text="{displayName}"></Label>
         <Label class="deviceRowTypeLbl" text="{type}"></Label>
         <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>
+    </TableViewRow>
+    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" viewName="{viewName}" class="deviceTableViewRow" sortId="{sortId}" platform="android">
+        <Label class="deviceRowLbl" text="{displayName}"></Label>
+        <Label class="deviceRowTypeLbl" text="{type}"></Label>
+        <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>
+        <Label id="moveUp" icon="fa-arrow-up" action="moveUp"></Label>
+        <Label id="moveDown" icon="fa-arrow-down" action="moveDown"></Label>
+        <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
     </TableViewRow>
 </Alloy>
