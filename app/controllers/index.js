@@ -18,18 +18,22 @@ function rowSelect(e) {
     var args = {url: e.row.url};
     switch(e.row.action) {
         case "favorites":
+            $.destroy();
             $.ds.contentview.removeAllChildren();
             $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "favoritesSortId"}).getView());
             break;
         case "lights":
+            $.destroy();
             $.ds.contentview.removeAllChildren();
             $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInLightingView", sortBy: "lightingSortId"}).getView());
             break;
         case "scenes":
+            $.destroy();
             $.ds.contentview.removeAllChildren();
             $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInScenesView", sortBy: "lightingSortId"}).getView());
             break;
         case "settings":
+            $.destroy();
             Alloy.createController("settings").getView().open();
             $.win.close();
             break;

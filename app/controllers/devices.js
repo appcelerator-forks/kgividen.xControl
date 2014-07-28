@@ -28,7 +28,6 @@ function updateLightsStatus(nodesByAddressAndStatus){
 }
 
 //filter only models that are supposed to be in the view.
-//Alloy.Collections.device.whereShowInView("showInLightingView",["light","folder"]);
 var args = arguments[0] || {};
 Alloy.Collections.device.whereShowInView(args.viewName, args.sortBy);
 
@@ -39,6 +38,11 @@ updateStatus();
 //LISTENERS
 $.lightingContainerView.addEventListener("close", function(){
     $.destroy();
+    Ti.API.info("DESTROY TABLEVIEW!!!");
+    for (var i = tableView.data[0].rows.length-1; i >= 0; i--) {
+        $.lightTableView.deleteRow(i);
+    }
+    $.lightTableView.setData([]);
 });
 
 if(osname == "android"){
