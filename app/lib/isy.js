@@ -149,11 +149,9 @@ function getListOfDevices(){
             });
         });
 
-
         deferred.resolve(newArray);
         return deferred.promise;
     });
-
 }
 
 //ISY hardware Calls

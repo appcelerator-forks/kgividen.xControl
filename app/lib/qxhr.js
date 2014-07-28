@@ -1,7 +1,6 @@
 var Q = require('q');
 
 exports.loadUrl = function(conn, data) {
-    Ti.API.info("data: " + JSON.stringify(data));
     var deferred = Q.defer();
     var xhr = Titanium.Network.createHTTPClient({
         validatesSecureCertificate : false,
