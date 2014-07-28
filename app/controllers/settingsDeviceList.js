@@ -111,10 +111,9 @@ function updateViewsSortOrder(viewName){
 }
 //We have to pass in the data on Android because we are swapping the rows manually.
 function updateViewsSortOrderAndroid(viewName, deviceTvData){
-    var devices = Alloy.Collections.device;
     var i = 0;
     _.each(deviceTvData, function (d) {
-        var model = devices.get(d.alloy_id);
+        var model = Alloy.Collections.device.get(d.alloy_id);
         switch(viewName) {
             case "showInFavoritesView":
                 model.save({favoritesSortId: i}, {silent: true});
@@ -194,13 +193,9 @@ $.devicesTableView.addEventListener('click', function(e) {
 });
 
 function swapRows(indexOne, indexTwo) {
-//    Ti.API.info("data[indexOne]: " + JSON.stringify(data[indexOne]));
-//    Ti.API.info("data[indexTwo]: " + JSON.stringify(data[indexTwo]));
-//    Ti.API.info("data before: " + JSON.stringify(data));
     var temp = data[indexOne];
     data[indexOne] = data[indexTwo];
     data[indexTwo] = temp;
-    Ti.API.info("data after: " + JSON.stringify(data));
     updateViewsSortOrderAndroid(viewName, data);
     switch(viewName) {
         case "showInFavoritesView":
