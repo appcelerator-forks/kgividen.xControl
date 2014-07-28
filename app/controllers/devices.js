@@ -61,5 +61,23 @@ if(osname=="ios") {
             });
     });
 }
+//Buttons
+$.lightTableView.addEventListener('click', function(e) {
+    if(e.source.address && e.source.id == "btn"){
+        device.toggle(e.source.address).then(Alloy.Globals.updateStatus);
+    }
+    if(e.source.address && e.source.id == "sceneBtnOn"){
+        device.sceneOn(e.source.address);
+    }
+    if(e.source.address && e.source.id == "sceneBtnOff"){
+        device.sceneOff(e.source.address);
+    }
+});
 
-
+$.lightTableView.addEventListener('touchend', function(e) {
+    if(e.source.id == "slider") {
+        var level = Math.round(e.source.value);
+        device.setLevel(e.source.address, level).then(Alloy.Globals.updateStatus);
+        e.row.getChildren()[0].getChildren()[1].getChildren()[1].text = level;  //Slider label
+    }
+});

@@ -93,9 +93,6 @@ function updateViewsSortOrder(viewName){
 
         _.each(deviceTvData, function (d) {
             var model = devices.get(d.alloy_id);
-            Ti.API.info("d: " + JSON.stringify(d));
-            Ti.API.info("model: " + JSON.stringify(model));
-
             switch(viewName) {
                 case "showInFavoritesView":
                     model.save({favoritesSortId: i}, {silent: true});
