@@ -179,7 +179,6 @@ var data = [];
 
 //ANDROID MOVE ORDER OF ROWS IN TABLE VIEW CODE
 $.devicesTableView.addEventListener('click', function(e) {
-//    data = $.devicesTableView.getData();
     data = $.devicesTableView.data[0].rows;
     var action = e.source.action,
         index = e.index,
