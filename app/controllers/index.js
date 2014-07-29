@@ -162,27 +162,28 @@ function startUI(){
             exitMsg.show(); // show the leaving dialog
             return false;
         });
+
+        $.win.addEventListener('open', function () {
+            $.win.activity.actionBar.hide();
+        });
+
         $.win.open();
     }
+
+    $.win.addEventListener('close', function(){
+        $.destroy();
+    });
+
+    Ti.Gesture.addEventListener('orientationchange', function() {
+        $.ds.handleRotation();
+    });
+
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "favoritesSortId"}).getView());
 }
 
-
 if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here
 
-//******************** LISTENERS ********************
-Ti.Gesture.addEventListener('orientationchange', function() {
-    $.ds.handleRotation();
-});
 
-$.win.addEventListener("close", function(){
-    $.destroy();
-});
 
-if(osname == "android") {
-    $.win.addEventListener('open', function () {
-        $.win.activity.actionBar.hide();
-    });
-}

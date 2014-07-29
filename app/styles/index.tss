@@ -1,7 +1,6 @@
 "#win": {
 	backgroundImage: '/images/themes/default/background.png',
 	backgroundRepeat : true,
-	navBarHidden:true,
 	tabBarHidden:true,
 	layout : 'vertical'
 }

@@ -23,6 +23,7 @@
         fontWeight : 'bold',
         fontFamily : 'Helvetica Neue'
     },
+    horizontalWrap : false,
     zIndex : 5
 },
 "#btn[formFactor=tablet]" : {

@@ -13,7 +13,7 @@
 ".icon[platform=android formFactor=tablet]": {
   left:5,
   font: {
-    fontSize: 75
+    fontSize: 60
   }
 },
 "#title": {
@@ -21,6 +21,9 @@
   color: 'black'
 },
 "#title[platform=android formFactor=tablet]": {
-  height : '100dp',
+  left:80,
+  font: {
+    fontSize: 30
+  },
   color: 'black'
 }
