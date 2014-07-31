@@ -1,32 +1,32 @@
 exports.definition = {
     config : {
-        //todo The different views and sortIDs should probably be moved into another model.
+        //todo The different views and SortIds should be moved into their own model.
         "columns" : {
 //            "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
-            "sortId" : "INTEGER",
+            "SortId" : "INTEGER",
             "name" : "TEXT",
             "displayName" : "TEXT",
             "address" : "TEXT",
             "showInLightingView" : "INTEGER",
-            "lightingSortId" : "INTEGER",
+            "showInLightingViewSortId" : "INTEGER",
             "showInFavoritesView" : "INTEGER",
-            "favoritesSortId" : "INTEGER",
+            "showInFavoritesViewSortId" : "INTEGER",
             "showInScenesView" : "INTEGER",
-            "scenesSortId" : "INTEGER",
+            "showInScenesViewSortId" : "INTEGER",
             "type" : "TEXT",
             "parent" : "TEXT"
         },
         "defaults" : {
-            "sortId" : 0,
+            "SortId" : 0,
             "name" : "",
             "displayName" : "",
             "address" : "",
             "showInLightingView" : 0,
-            "lightingSortId" : 0,
+            "showInLightingViewSortId" : 0,
             "showInFavoritesView" : 0,
-            "favoritesSortId" : 0,
+            "showInFavoritesViewSortId" : 0,
             "showInScenesView" : 0,
-            "scenesSortId" : 0,
+            "showInScenesViewSortId" : 0,
             "type" : "unknown",
             "parent" : "unknown"
         },
@@ -49,7 +49,7 @@ exports.definition = {
     extendCollection : function(Collection) {
         _.extend(Collection.prototype, {
 //            comparator: function(collection) {
-//                return collection.get('sortId');
+//                return collection.get('SortId');
 //            },
 //            updatePositions : function() {
 //                var collection = this;
@@ -63,7 +63,7 @@ exports.definition = {
 ////                        model.id = util.guid();
 ////                        model.attributes[model.idAttribute ] = model.id;
 ////                    }
-//                    var sql = "UPDATE " + table + " SET sortId = " + model.get('sortId') + " WHERE " + model.idAttribute + " = '" + model.id + "'";
+//                    var sql = "UPDATE " + table + " SET SortId = " + model.get('SortId') + " WHERE " + model.idAttribute + " = '" + model.id + "'";
 ////                    Ti.API.info("sql: " + sql);
 //                    db.execute(sql);
 //                });

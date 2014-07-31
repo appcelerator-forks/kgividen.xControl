@@ -1,14 +1,15 @@
 <Alloy>
-    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" viewName="{viewName}" class="deviceTableViewRow" sortId="{sortId}" platform="ios">
+    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" showInViewName="{showInViewName}" class="deviceTableViewRow" SortId="{SortId}" platform="ios">
         <Label class="deviceRowLbl" text="{displayName}"></Label>
         <Label class="deviceRowTypeLbl" text="{type}"></Label>
         <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>
     </TableViewRow>
-    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" viewName="{viewName}" className="deviceRow" class="deviceTableViewRow" sortId="{sortId}" platform="android">
+    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" showInViewName="{showInViewName}" className="deviceRow" class="deviceTableViewRow" SortId="{SortId}" platform="android">
         <View>
             <Label class="deviceRowLbl" text="{displayName}"></Label>
             <Label class="deviceRowTypeLbl" text="{type}"></Label>
             <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>
+            <!--<TextField id="deviceRowSortId" class="deviceRowSortId" />-->
             <Label id="moveUp" icon="fa-arrow-circle-up" action="moveUp"></Label>
             <Label id="moveDown" icon="fa-arrow-circle-down" action="moveDown"></Label>
             <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
