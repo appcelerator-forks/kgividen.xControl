@@ -9,8 +9,13 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
-Alloy.Collections.device = Alloy.createCollection("Device");
+var VIEW_ID_FAVORITES = 1;
+var VIEW_ID_LIGHTS = 2;
+var VIEW_ID_SCENES = 3;
 
+Alloy.Collections.device = Alloy.createCollection("Device");
+Alloy.Collections.deviceInView = Alloy.createCollection("DeviceInView");
+Alloy.Collections.view = Alloy.createCollection("View");
 
 var osname = "android";
 if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {

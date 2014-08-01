@@ -1,10 +1,10 @@
 <Alloy>
-    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" showInViewName="{showInViewName}" class="deviceTableViewRow" SortId="{SortId}" platform="ios">
+    <TableViewRow id="deviceRow" viewId="{viewId}" class="deviceTableViewRow" SortId="{SortId}" platform="ios">
         <Label class="deviceRowLbl" text="{displayName}"></Label>
         <Label class="deviceRowTypeLbl" text="{type}"></Label>
         <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>
     </TableViewRow>
-    <TableViewRow id="deviceRow" alloy_id="{alloy_id}" showInViewName="{showInViewName}" className="deviceRow" class="deviceTableViewRow" SortId="{SortId}" platform="android">
+    <TableViewRow id="deviceRow" viewId="{viewId}" className="deviceRow" class="deviceTableViewRow" SortId="{SortId}" platform="android">
         <View>
             <Label class="deviceRowLbl" text="{displayName}"></Label>
             <Label class="deviceRowTypeLbl" text="{type}"></Label>

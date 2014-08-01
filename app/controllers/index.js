@@ -20,17 +20,17 @@ function rowSelect(e) {
         case "favorites":
             $.destroy();
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "showInFavoritesViewSortId"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
             break;
         case "lights":
             $.destroy();
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInLightingView", sortBy: "showInLightingViewSortId"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_LIGHTS, sortBy: "showInLightingViewSortId"}).getView());
             break;
         case "scenes":
             $.destroy();
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInScenesView", sortBy: "showInLightingViewSortId"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_SCENES, sortBy: "showInLightingViewSortId"}).getView());
             break;
         case "settings":
             $.destroy();
@@ -39,7 +39,7 @@ function rowSelect(e) {
             break;
         default:
             $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "showInFavoritesViewSortId"}).getView());
+            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
     }
 }
 
@@ -180,7 +180,7 @@ function startUI(){
 
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("devices", {viewName: "showInFavoritesView", sortBy: "showInFavoritesViewSortId"}).getView());
+    $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
 }
 
 if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here
