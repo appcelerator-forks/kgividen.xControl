@@ -1,0 +1,10 @@
+<Alloy>
+    <Window id="win" backgroundColor="white" layout="vertical">
+        <Button top="30" id="printDeviceInViewBtn">Print DeviceInView Table</Button>
+        <Button id="printDeviceBtn">Print Device Table</Button>
+        <Button id="printViewBtn">Print View Table</Button>
+        <Button id="printSortByIdBtn">printSortById</Button>
+        <Button id="closeBtn">Close</Button>
+        <TextArea height="70%" id="output"></TextArea>
+    </Window>
+</Alloy>

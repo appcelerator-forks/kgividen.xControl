@@ -1,3 +1,14 @@
+//TODO DEBUG
+var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"xabler"};
+Ti.API.info(data);
+Ti.App.Properties.setObject('conn_current', data);
+Ti.App.Properties.setObject('conn_Remote', data);
+Ti.App.Properties.setObject('conn_Local', data);
+
+
+
+
+
 //***************************MENU STUFF ***************************
 function createSideMenu(sections, controller) {
     var s = Ti.UI.createTableViewSection();
@@ -37,6 +48,11 @@ function rowSelect(e) {
             Alloy.createController("settings").getView().open();
             $.win.close();
             break;
+        case "debug":
+            $.destroy();
+            Alloy.createController("debug").getView().open();
+            $.win.close();
+            break;
         default:
             $.ds.contentview.removeAllChildren();
             $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
@@ -54,6 +70,12 @@ var rightMenu = [
         icon: 'fa-gear',
         iconColor: '#999',
         action: 'settings'
+    },{
+        title: 'Debug Window',
+        type: 'menu',
+        icon: 'fa-gear',
+        iconColor: '#999',
+        action: 'debug'
     }
 ];
 
