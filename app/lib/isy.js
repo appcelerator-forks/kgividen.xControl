@@ -2,12 +2,9 @@ var xhr = require('/qxhr');
 var baseURL;
 var connection = {};
 //TODO INIT connection so it loads it for ever instance.
-
-
 exports.init = function() {
     //This is the saved connection object set by the user
     var conn = Ti.App.Properties.getObject('conn_current');
-
     if (!conn) {
         alert('Connection Error! Please check the connection information. No connection info set.');
         Alloy.createController("settings").getView().open();
