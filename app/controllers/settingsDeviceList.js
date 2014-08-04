@@ -12,12 +12,14 @@ function addToView(deviceId, viewId) {
         "DeviceId" : deviceId,
         "ViewId" : viewId
     };
+    Ti.API.info("Added this deviceId: " + deviceId + " to viewID: " + viewId);
     Alloy.createModel('DeviceInView', model).save({silent: true});
 }
 
 function refreshDevices(){
     device.getListOfDevices().then(function (data) {
-
+        //TODO Take out fake data line
+//        data = fakeData;
         _.each(data,function(item){
             //add all of the defaults if they aren't there for the model
             _.defaults(item,{displayName:item.name}, {parent:"unknown"}, {type:"unknown"});
@@ -25,15 +27,17 @@ function refreshDevices(){
 
         //Add all of the new records in the collection that came from the hardware device.
         var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
+//        var devices = Alloy.Collections.device.sortById(viewId);
+        devices.fetch();
         _.each(data, function (item) {
             //We only want to add new devices.
             var deviceArray = devices.where({address: item.address});  //get the model from the collection if it's already been added.
             if (!deviceArray[0]) {
+                Ti.API.info("NOT DUPLICATE!!!!");
                 var deviceModel = Alloy.createModel('Device', item);
-                deviceModel.save();
+                deviceModel.save({silent: true});
 
                 //add them into their categories and one of them into the favorites.
-                Ti.API.info("deviceModel.id: " + deviceModel.id + " deviceModel.type:" + deviceModel.get('type'));
                 if(deviceModel.get('type') == "scene") {
                     addToView(deviceModel.id, VIEW_ID_SCENES);
                 } else if (deviceModel.get('type') == "folder"){
@@ -41,52 +45,61 @@ function refreshDevices(){
                 } else {
                     addToView(deviceModel.id, VIEW_ID_LIGHTS);  //add to lighting view
                 }
+            }else{
+                Ti.API.info("DUPLICATE!!!!");
             }
         });
-        Alloy.Collections.deviceInView.fetch();
-        devices.fetch();
-
+//        Alloy.Collections.deviceInView.fetch();
+//        devices.fetch();
+//        Alloy.Collections.device.sortById(viewId);
         //If we've never populated the favorites before lets do it so there's some data in there for them to see.
-        if(!Ti.App.Properties.getBool('isFavoritesPopulatedOnce')) {
-            var devicesJSON = devices.toJSON();
-            Ti.API.info("devicesJSON: " + JSON.stringify(devicesJSON));
-            //Set the first of each to show up in the favorites view so it's not blank.
-            var tempType = _.findWhere(devicesJSON, {type: "light"});
-            Ti.API.info("tempType: " + JSON.stringify(tempType));
-            if (typeof tempType != 'undefined') {
-                addToView(tempType.id, VIEW_ID_FAVORITES);
-            }
-
-            tempType = _.findWhere(devicesJSON, {type: "folder"});
-            if (typeof tempType != 'undefined') {
-                addToView(tempType.id, VIEW_ID_FAVORITES);
-            }
-
-            tempType = _.findWhere(devicesJSON, {type: "scene"});
-            if (typeof tempType != 'undefined') {
-                addToView(tempType.id, VIEW_ID_FAVORITES);
-            }
-            Alloy.Collections.deviceInView.fetch();
-            devices.fetch();
-            Ti.App.Properties.setBool('isFavoritesPopulatedOnce', true);
-        }
+//        if(!Ti.App.Properties.getBool('isFavoritesPopulatedOnce')) {
+//            Ti.API.info("Populating Favorites for the First Time!");
+//            devices.fetch();
+//            var devicesJSON = devices.toJSON();
+//            //Set the first of each to show up in the favorites view so it's not blank.
+//            var tempType = _.findWhere(devicesJSON, {type: "light"});
+//            Ti.API.info("tempType: " + JSON.stringify(tempType));
+//            if (typeof tempType != 'undefined') {
+//                addToView(tempType.id, VIEW_ID_FAVORITES);
+//            }
+//
+//            tempType = _.findWhere(devicesJSON, {type: "folder"});
+//            if (typeof tempType != 'undefined') {
+//                addToView(tempType.id, VIEW_ID_FAVORITES);
+//            }
+//
+//            tempType = _.findWhere(devicesJSON, {type: "scene"});
+//            if (typeof tempType != 'undefined') {
+//                addToView(tempType.id, VIEW_ID_FAVORITES);
+//            }
+//            Ti.App.Properties.setBool('isFavoritesPopulatedOnce', true);
+//        }
+        Alloy.Collections.deviceInView.fetch();
+        Alloy.Collections.device.sortById(viewId);
     });
 }
 
 //TODO refactor
-function updateViewsSortOrder(viewName){
-    var devices = Alloy.Collections.device;
+function updateViewsSortOrder(viewId){
+    Alloy.Collections.deviceInView.fetch(); //We need to fetch again cause if we added it via the on/off button we need to refresh that's it's there.
     var i = 0;
     if($.devicesTableView.data[0]) {
         var deviceTvData = $.devicesTableView.data[0].rows;
-        var viewSortId = viewId + "SortId";
+        _.each(deviceTvData, function (device) {
 
-        _.each(deviceTvData, function (d) {
-            var model = devices.get(d.id);
-            var obj = {};
-            obj[viewSortId] = i;
-            model.save(obj, {silent: true});
-            i++;
+            if(device.deviceId) {
+                //if device is in the deviceInView set it's sort order to i.
+                var modelInView = Alloy.Collections.deviceInView.where({DeviceId: device.deviceId, ViewId: viewId});
+                Ti.API.info("modelInView: " + JSON.stringify(modelInView));
+                //where returns an array but we just need the first one if it's there.
+                if (modelInView.length > 0) {
+                    Ti.API.info("modelInView[0]: " + JSON.stringify(modelInView[0]));
+                    Ti.API.info("i: " + i);
+                    modelInView[0].save({"SortId": i}, {silent: true});
+                }
+                i++;
+            }
         });
     }
 }
@@ -108,12 +121,11 @@ function updateViewsSortOrder(viewName){
 //    }
 //}
 //LISTENERS
-
 $.closeBtn.addEventListener('click', function () {
 //    if(osname == "android"){
 //        updateViewsSortOrderAndroid(viewId);
 //    }else{
-//        updateViewsSortOrder(viewId);
+        updateViewsSortOrder(viewId);
 //    }
     $.win.close();
 });
@@ -124,7 +136,6 @@ $.win.addEventListener("close", function(){
 });
 
 $.win.addEventListener("open", function(){
-//    Alloy.Collections.device.sortByID("showInFavoritesViewSortId");
     refreshDevices();
     $.chooseViewBar.index = 0;
 });
@@ -132,27 +143,27 @@ $.win.addEventListener("open", function(){
 $.chooseViewBar.addEventListener("click", function(e){
     switch(e.index) {
         case 0:
-//            updateViewsSortOrder(viewId);
+            updateViewsSortOrder(viewId);
             viewId = VIEW_ID_FAVORITES;
-//            Alloy.Collections.device.sortByID(viewName + "SortId");
+            Alloy.Collections.device.sortById(viewId);
             updateUI();
             break;
         case 1:
-//            updateViewsSortOrder(viewId);
+            updateViewsSortOrder(viewId);
             viewId = VIEW_ID_LIGHTS;
-//            Alloy.Collections.device.sortByID(viewName + "SortId");
+            Alloy.Collections.device.sortById(viewId);
             updateUI();
             break;
         case 2:
-//            updateViewsSortOrder(viewId);
+            updateViewsSortOrder(viewId);
             viewId = VIEW_ID_SCENES;
-//            Alloy.Collections.device.sortByID(viewName + "SortId");
+            Alloy.Collections.device.sortById(viewId);
             updateUI();
             break;
         default:
-//            updateViewsSortOrder(viewId);
+            updateViewsSortOrder(viewId);
             viewId = VIEW_ID_FAVORITES;
-//            Alloy.Collections.device.sortByID(viewName + "SortId");
+            Alloy.Collections.device.sortById(viewId);
             updateUI(); //This calls the dataFunction in the view.
     }
 });
@@ -236,3 +247,55 @@ function swapRows(indexOne, indexTwo) {
 //}
 
 
+
+//FAKE DATA
+
+var fakeData = [
+    {
+        "name": "Kitchen Folder",
+        "address": "29763",
+        "type": "folder"
+    },
+    {
+        "name": "Backyard Floods",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 88 48 1"
+    },
+    {
+        "name": "Kitchen 3way",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 91 DD 1"
+    },
+    {
+        "name": "Kitchen Sink",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 95 1D 1"
+    },
+    {
+        "name": "Patio",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 A8 FC 1"
+    },
+    {
+        "name": "Dining Area",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 AE 83 1"
+    },
+    {
+        "name": "Kitchen Under Cabinets",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 B1 50 1"
+    },
+    {
+        "name": "Kitchen Light",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 B2 AF 1"
+    }
+];

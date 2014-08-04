@@ -1,8 +1,7 @@
 if ($model) {
+//    Ti.API.info("settingsDeviceRow model: " + JSON.stringify($model));
     var viewId = $.deviceRow.viewId;
-//    Ti.API.info("model: " + JSON.stringify($model));
     var modelId = $model.id;
-//    Ti.API.info("modelId: " + JSON.stringify(modelId)  + " viewID: " + viewId);
 
     var isModelInView = Alloy.Collections.deviceInView.where({DeviceId:modelId, ViewId:viewId}).length > 0;
     if(isModelInView){
@@ -21,10 +20,12 @@ $.deviceRowSwitch.addEventListener('change', function(e) {
     };
     if(e.value){
         //Add record to DeviceInView
+//        Ti.API.info("Add record to DeviceInView: " + JSON.stringify(model));
         Alloy.createModel('DeviceInView', model).save({silent: true});
     } else {
         //Remove record from DeviceInView
-        var devices = Alloy.Collections.deviceInView.where({"DeviceId" : deviceId},{"ViewId":viewId});
+//        Ti.API.info("Remove record from DeviceInView: " + JSON.stringify(model) + " viewID: " + viewId);
+        var devices = Alloy.Collections.deviceInView.where({"DeviceId" : deviceId, "ViewId":viewId});
         _.each(devices, function(device){
             device.destroy({silent: true});
         });

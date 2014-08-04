@@ -1,5 +1,5 @@
 <Alloy>
-    <TableViewRow id="deviceRow" viewId="{viewId}" class="deviceTableViewRow" SortId="{SortId}" platform="ios">
+    <TableViewRow id="deviceRow" deviceId="{id}" viewId="{viewId}" class="deviceTableViewRow" SortId="{SortId}" platform="ios">
         <Label class="deviceRowLbl" text="{displayName}"></Label>
         <Label class="deviceRowTypeLbl" text="{type}"></Label>
         <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>

@@ -63,7 +63,7 @@ $.clearData.addEventListener('click', function () {
 $.getListOfDevicesBtn.addEventListener('click', function () {
     saveConnectionInfo();
     Alloy.Collections.deviceInView.fetch();
-    Alloy.Globals.deviceInViewJSON = Alloy.Collections.deviceInView.toJSON(); //So we can access it in the tableViewRow
+//    Alloy.Globals.deviceInViewJSON = Alloy.Collections.deviceInView.toJSON(); //So we can access it in the tableViewRow
     Alloy.createController('settingsDeviceList').getView().open();
 });
 
@@ -86,22 +86,21 @@ $.settingsWin.addEventListener("close", function(){
 });
 getConnectionInfo();
 
-var defaultViewData = [
-    {
-        "name" : "Favorites"
-    },
-    {
-        "name" : "Lighting"
 
-    },
-    {
-        "name" : "Scenes"
-    }
-];
-Alloy.Collections.view.reset(defaultViewData);
-_.each(defaultViewData, function (item) {
-    var model = Alloy.createModel('View', item);
-    model.save({silent: true});
-});
-Alloy.Collections.view.fetch();
-Ti.API.info("Views: " + JSON.stringify(Alloy.Collections.view));
+
+//Set Default Data
+if(!Ti.App.Properties.getBool('isDefaultDataSet')){
+    Ti.API.info("Setting Default Data!");
+    var defaultViewData = [
+        {"name" : "Favorites"},
+        {"name" : "Lighting"},
+        {"name" : "Scenes"}
+    ];
+//    Alloy.Collections.view.reset(defaultViewData);
+    _.each(defaultViewData, function (item) {
+        var model = Alloy.createModel('View', item);
+        model.save({silent: true});
+    });
+    Alloy.Collections.view.fetch();
+    Ti.App.Properties.setBool('isDefaultDataSet', true);
+}

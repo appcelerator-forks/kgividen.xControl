@@ -10,7 +10,6 @@ exports.definition = {
             "parent" : "TEXT"
         },
         "defaults" : {
-            "SortId" : 0,
             "name" : "",
             "displayName" : "",
             "address" : "",
@@ -37,19 +36,22 @@ exports.definition = {
         _.extend(Collection.prototype, {
             whereShowInView : function(viewId) {
 //                var sql = "SELECT * FROM " + this.config.adapter.collection_name + " WHERE " + view_name + " ORDER BY " + sortBy + " ASC";
-                var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id WHERE ViewId=" + viewId;
+                var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id WHERE ViewId=" + viewId + " ORDER BY xControlDeviceInView.SortId ASC";
+                Ti.API.info(sql);
+                return this.fetch({
+                    query: sql
+                });
+            },
+            sortById : function(viewId) {
+//                var sql = "SELECT * FROM " + this.config.adapter.collection_name + " ORDER BY " + sortBy + " ASC";
+//                var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDevices.id = xControlDeviceInView.DeviceId";
+                var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlDeviceInView.DeviceId, xControlDeviceInView.ViewId, ifnull(xControlDeviceInView.SortId,9999) as SortId FROM xControlDevices LEFT JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id AND ViewId=" + viewId + " ORDER BY SortId";
+
                 Ti.API.info(sql);
                 return this.fetch({
                     query: sql
                 });
             }
-//            sortByID : function(sortBy) {
-//                var sql = "SELECT * FROM " + this.config.adapter.collection_name + " ORDER BY " + sortBy + " ASC";
-//                Ti.API.info(sql);
-//                return this.fetch({
-//                    query: sql
-//                });
-//            }
         });
         return Collection;
     }
