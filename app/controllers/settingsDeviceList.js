@@ -26,14 +26,19 @@ function refreshDevices(){
         });
 
         //Add all of the new records in the collection that came from the hardware device.
-        var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
-//        var devices = Alloy.Collections.device.sortById(viewId);
-        devices.fetch();
+//        var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
+        var devices = Alloy.Collections.device;
+        devices.sortById(viewId);
+//        devices.fetch();
         _.each(data, function (item) {
             //We only want to add new devices.
-            var deviceArray = devices.where({address: item.address});  //get the model from the collection if it's already been added.
+            var deviceArray = [];
+            if(devices){
+                deviceArray = devices.where({address: item.address}); //get the model from the collection if it's already been added.
+            }
             if (!deviceArray[0]) {
-                Ti.API.info("NOT DUPLICATE!!!!");
+                Ti.API.info("NOT DUPLICATE!!!! deviceArray[0]: " + JSON.stringify(deviceArray[0]));
+
                 var deviceModel = Alloy.createModel('Device', item);
                 deviceModel.save({silent: true});
 
@@ -87,15 +92,14 @@ function updateViewsSortOrder(viewId){
     if($.devicesTableView.data[0]) {
         var deviceTvData = $.devicesTableView.data[0].rows;
         _.each(deviceTvData, function (device) {
-
             if(device.deviceId) {
                 //if device is in the deviceInView set it's sort order to i.
                 var modelInView = Alloy.Collections.deviceInView.where({DeviceId: device.deviceId, ViewId: viewId});
-                Ti.API.info("modelInView: " + JSON.stringify(modelInView));
+//                Ti.API.info("modelInView: " + JSON.stringify(modelInView));
                 //where returns an array but we just need the first one if it's there.
                 if (modelInView.length > 0) {
-                    Ti.API.info("modelInView[0]: " + JSON.stringify(modelInView[0]));
-                    Ti.API.info("i: " + i);
+//                    Ti.API.info("modelInView[0]: " + JSON.stringify(modelInView[0]));
+//                    Ti.API.info("i: " + i);
                     modelInView[0].save({"SortId": i}, {silent: true});
                 }
                 i++;
@@ -121,6 +125,21 @@ function updateViewsSortOrder(viewId){
 //    }
 //}
 //LISTENERS
+
+//$.devicesTableView.addEventListener('move', function (e){
+//    Ti.API.info("e: " + JSON.stringify(e));
+//    var blah = {DeviceId: e.source.deviceId, ViewId: viewId, SortId: e.index};
+////    var modelInView = Alloy.Collections.deviceInView.where({DeviceId: e.source.deviceId, ViewId: viewId});
+////    var blah2 = Alloy.Collections.deviceInView.sortedIndex(blah, 'SortId');
+////    Ti.API.info(JSON.stringify("blah2: " + blah2));
+////    Alloy.Collections.deviceInView.fetch();
+//    var modelInView = Alloy.Collections.deviceInView.where({DeviceId: e.source.deviceId, ViewId: viewId});
+//    Ti.API.info("modelInView: " + JSON.stringify(modelInView));
+//    if (modelInView.length > 0) {
+//        Ti.API.info("modelInView[0]: " + JSON.stringify(modelInView[0]));
+//        modelInView[0].save({"SortId":  e.index}, {silent: true});
+//    }
+//});
 $.closeBtn.addEventListener('click', function () {
 //    if(osname == "android"){
 //        updateViewsSortOrderAndroid(viewId);

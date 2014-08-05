@@ -20,7 +20,7 @@ $.deviceRowSwitch.addEventListener('change', function(e) {
     };
     if(e.value){
         //Add record to DeviceInView
-//        Ti.API.info("Add record to DeviceInView: " + JSON.stringify(model));
+        Ti.API.info("Add record to DeviceInView: " + JSON.stringify(model));
         Alloy.createModel('DeviceInView', model).save({silent: true});
     } else {
         //Remove record from DeviceInView
