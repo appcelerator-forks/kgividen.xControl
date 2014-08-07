@@ -1,14 +1,3 @@
-//TODO DEBUG
-var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"xabler"};
-Ti.API.info(data);
-Ti.App.Properties.setObject('conn_current', data);
-Ti.App.Properties.setObject('conn_Remote', data);
-Ti.App.Properties.setObject('conn_Local', data);
-
-
-
-
-
 //***************************MENU STUFF ***************************
 function createSideMenu(sections, controller) {
     var s = Ti.UI.createTableViewSection();
