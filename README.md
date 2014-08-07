@@ -1,10 +1,7 @@
 xControl
 ========
 
-CHECKOUT THE AlloyImplementation BRANCH.  The code there is much cleaner since we've implemented Alloy, Promises, Underscore and a bunch of other things.  It looks and works much better.  We will be switching to that code base soon.
-
-========
-This project is created using Appcelerator Titanium.  The MVC architecture currently needs work in this project so some things are mixed.  We are aware of this and need to fix it but we are considering Alloy so until that time we know it's a bit messy.
+This project is created using Appcelerator Titanium.
 
 Easily control your Insteon devices.  List all of your Insteon devices and use an on/off button or a slider to adjust accordingly.  
 
@@ -15,3 +12,10 @@ This list view makes it easy to see which lights are on or off.  You can then tu
 Works across all platforms for a consistent UI look and feel.  
 
 Future features will include new themes, auto-discovery and more.  Check http://www.netsmartcompany.com for details.
+
+We have updated this code to be much better.  We have cleaned up a lot of code.  Here are some highlights:
+
+Appcelerator Alloy is now used for a good MVC architecture
+Promises (instead of callback craziness)
+Underscore which we love.
+Many other code enhancements since it's almost a rewrite of the entire code base.

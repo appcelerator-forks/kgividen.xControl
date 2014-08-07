@@ -1,0 +1,54 @@
+".deviceTableViewRow":{
+//    height: '10%'
+    height: '40'
+},
+".deviceRowLbl":{
+    left:10,
+//	height : '10%',
+	width: '50%',
+	color:'#333',
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+	font:{
+		fontFamily:Alloy.CFG.fontNormal,
+		fontSize:16
+	}
+},
+".deviceRowTypeLbl":{
+    left:'55%',
+	width:'10%',
+	color:'#333',
+	font:{
+		fontFamily:Alloy.CFG.fontNormal,
+		fontSize:8
+	}
+},
+".deviceRowSwitch":{
+    left:'75%',
+//	height:'5%',
+},
+
+//Android differences
+".deviceRowTypeLbl[platform=android]":{
+    left:'45%'
+},
+".deviceRowSwitch[platform=android]":{
+    left:'55%',
+},
+".deviceRowSortId[platform=android]":{
+    left:'77%',
+    color: 'black',
+    keyboardType : Ti.UI.KEYBOARD_DECIMAL_PAD,
+    clearOnEdit : true
+},
+"#moveUp[platform=android]": {
+   left:'77%',
+   font: {
+     fontSize: 25
+   }
+},
+"#moveDown[platform=android]": {
+    left:'85%',
+    font: {
+        fontSize: 25
+    }
+}

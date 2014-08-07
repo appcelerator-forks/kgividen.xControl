@@ -1,0 +1,7 @@
+"#win": {
+	backgroundImage: '/images/themes/default/background.png',
+	backgroundRepeat : true,
+	fullscreen:true,
+	tabBarHidden:true,
+	layout : 'vertical'
+}
