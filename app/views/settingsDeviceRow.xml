@@ -4,7 +4,7 @@
         <Label class="deviceRowTypeLbl" text="{type}"></Label>
         <Switch id="deviceRowSwitch" class="deviceRowSwitch" titleOn="Visible"></Switch>
     </TableViewRow>
-    <TableViewRow id="deviceRow" viewId="{viewId}" className="deviceRow" class="deviceTableViewRow" SortId="{SortId}" platform="android">
+    <TableViewRow id="deviceRow" deviceId="{id}" viewId="{viewId}" class="deviceTableViewRow" SortId="{SortId}"  platform="android">
         <View>
             <Label class="deviceRowLbl" text="{displayName}"></Label>
             <Label class="deviceRowTypeLbl" text="{type}"></Label>
