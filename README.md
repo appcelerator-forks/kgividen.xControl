@@ -1,6 +1,8 @@
 xControl
 ========
 
+![alt tag](https://raw.github.com/kgividen/xControl/master/srcGraphics/screenshots/iOS/3.5Port.png)
+
 This project is created using Appcelerator Titanium.
 
 Easily control your Insteon devices.  List all of your Insteon devices and use an on/off button or a slider to adjust accordingly.
