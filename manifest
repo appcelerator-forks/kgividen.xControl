@@ -1,9 +1,8 @@
-#appname:validControl
-#appid:com.netsmartcompany.xControl
-#type:mobile
-#guid:96c328a6-f97d-45e0-8b7f-8ba2f81b0428
-#version:1.0
-#publisher:Netsmart LLC
-#url:http://www.netmsartcompany.com
+#appname:xControlAlloy
+#publisher:kgividen
+#url:http://
 #image:appicon.png
-#desc:Easily control your Insteon devices
+#appid:com.netsmartcompany.xControl
+#desc:not specified
+#type:ipad
+#guid:ce9aa102-6d54-437f-96ae-4db9177c904d

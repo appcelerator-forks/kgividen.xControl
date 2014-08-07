@@ -1,0 +1,15 @@
+<Alloy>
+    <View id="lightingContainerView" platform="ios">
+        <TableView id="lightTableView" dataCollection="device">
+            <RefreshControl id="refreshControl"></RefreshControl>
+            <Require src="deviceRow" />
+        </TableView>
+    </View>
+    <View id="lightingContainerView" platform="android">
+        <Button id="refreshControlBtn" icon="fa-refresh"/>
+        <TableView id="lightTableView" dataCollection="device">
+            <Require src="deviceRow" />
+        </TableView>
+        <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
+    </View>
+</Alloy>
