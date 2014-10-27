@@ -2,7 +2,7 @@ function updateStatus(){
     return device.getAllDevicesStatus().then(updateLightsStatus);
 }
 function updateLightsStatus(nodesByAddressAndStatus){
-    var lightTVData = $.lightTableView.getData()[0].getRows();
+    var lightTVData = $.deviceTableView.getData()[0].getRows();
     _.each(lightTVData, function(row){
         if(row.model.type == 'light') {
             var btn = row.getChildren()[0].getChildren()[0];
@@ -38,13 +38,13 @@ Alloy.Globals.updateStatus = updateStatus;
 updateStatus();
 
 //LISTENERS
-$.lightingContainerView.addEventListener("close", function(){
+$.deviceContainerView.addEventListener("close", function(){
     $.destroy();
     Ti.API.info("DESTROY TABLEVIEW!!!");
     for (var i = tableView.data[0].rows.length-1; i >= 0; i--) {
-        $.lightTableView.deleteRow(i);
+        $.deviceTableView.deleteRow(i);
     }
-    $.lightTableView.setData([]);
+    $.deviceTableView.setData([]);
 });
 
 if(osname == "android"){
@@ -64,7 +64,7 @@ if(osname=="ios") {
     });
 }
 //Buttons
-$.lightTableView.addEventListener('click', function(e) {
+$.deviceTableView.addEventListener('click', function(e) {
     if(e.source.address && e.source.id == "btn"){
         device.toggle(e.source.address).then(Alloy.Globals.updateStatus);
     }
@@ -76,7 +76,7 @@ $.lightTableView.addEventListener('click', function(e) {
     }
 });
 
-$.lightTableView.addEventListener('touchend', function(e) {
+$.deviceTableView.addEventListener('touchend', function(e) {
     if(e.source.id == "slider") {
         var level = Math.round(e.source.value);
         device.setLevel(e.source.address, level).then(Alloy.Globals.updateStatus);

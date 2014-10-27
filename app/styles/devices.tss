@@ -1,10 +1,10 @@
-"#lightingContainerView" : {
+"#deviceContainerView" : {
     zIndex:2,
     backgroundImage: '/images/themes/default/background.png',
     layout:'vertical',
 
 },
-"#lightTableView" : {
+"#deviceTableView" : {
       width:Ti.UI.Fill,
       separatorColor: 'transparent',
       backgroundColor: 'transparent',
