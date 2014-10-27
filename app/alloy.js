@@ -26,3 +26,5 @@ var device = require('isy');
 device.init();
 
 var Q = require('/q');
+
+var xDebug = false;

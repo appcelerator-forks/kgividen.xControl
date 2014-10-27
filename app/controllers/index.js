@@ -69,14 +69,18 @@ var rightMenu = [
         icon: 'fa-gear',
         iconColor: '#999',
         action: 'settings'
-    },{
+    }
+];
+
+if(xDebug){
+    rightMenu.push({
         title: 'Debug Window',
-        type: 'menu',
+            type: 'menu',
         icon: 'fa-gear',
         iconColor: '#999',
         action: 'debug'
-    }
-];
+    });
+}
 
 var rightData = [];
 rightData[0] = createSideMenu(rightMenu, "menurow");
