@@ -46,7 +46,7 @@ exports.toggle = function (address){
         Ti.API.info(data);
         var deviceStatus = processDeviceStatusXML(data);
         Ti.API.info('status is ToggleDevice: ' + deviceStatus + ' Address of device: ' + address);
-        if (deviceStatus == 'On') {
+        if (deviceStatus != 'Off') {
             deviceFastOff(address);
         } else {
             deviceFastOn(address);
