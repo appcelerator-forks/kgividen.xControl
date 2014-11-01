@@ -165,5 +165,5 @@ exports.handleRotation = function() {
 		// }
 	// }
 	$.movableview.width = $.navview.width = $.contentview.width = Ti.Platform.displayCaps.platformWidth;
-	$.movableview.height = $.contentview.height = Ti.Platform.displayCaps.getPlatformHeight();
+	$.movableview.height = $.contentview.height = Ti.Platform.displayCaps.getPlatformHeight;
 };
