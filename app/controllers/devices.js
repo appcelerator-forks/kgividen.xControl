@@ -29,9 +29,7 @@ function updateLightsStatus(nodesByAddressAndStatus){
 
 //filter only models that are supposed to be in the view.
 var args = arguments[0] || {};
-//TODO
-//Alloy.Collections.device.whereShowInView(args.viewName, args.sortBy);
-Alloy.Collections.device.whereShowInView(args.viewId);
+$.device.whereShowInView(args.viewId);
 
 //Set this to a global so it can be used in the lightRow after a toggle or setLevel
 Alloy.Globals.updateStatus = updateStatus;

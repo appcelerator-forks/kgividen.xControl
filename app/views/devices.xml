@@ -1,13 +1,14 @@
 <Alloy>
+    <Collection id="device" src="Device" instance="true"/>
     <View id="deviceContainerView" platform="ios">
-        <TableView id="deviceTableView" dataCollection="device">
+        <TableView id="deviceTableView" dataCollection="$.device">
             <RefreshControl id="refreshControl"></RefreshControl>
             <Require src="deviceRow" />
         </TableView>
     </View>
     <View id="deviceContainerView" platform="android">
         <Button id="refreshControlBtn" icon="fa-refresh"/>
-        <TableView id="deviceTableView" dataCollection="device">
+        <TableView id="deviceTableView" dataCollection="$.device">
             <Require src="deviceRow" />
         </TableView>
         <Widget id="fa" src="com.mattmcfarland.fontawesome"/>

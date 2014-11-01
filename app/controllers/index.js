@@ -205,7 +205,7 @@ function startUI(){
 
     //Empty the current contentView
     $.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
+    $.ds.contentview.add(Alloy.createController("devicesViewsContainer").getView());
 }
 
 if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here

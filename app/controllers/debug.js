@@ -1,13 +1,13 @@
 $.printDeviceInViewBtn.addEventListener('click', function () {
-    var blah = Alloy.Collections.deviceInView;
-    Alloy.Collections.deviceInView.fetch();
+    var blah = $.deviceInView;
+    $.deviceInView.fetch();
     Ti.API.info("deviceInView: " + JSON.stringify(blah));
     $.output.value = JSON.stringify(blah);
 });
 
 $.printDeviceBtn.addEventListener('click', function () {
-    var blah = Alloy.Collections.device;
-    Alloy.Collections.device.fetch();
+    var blah = $.device;
+    blah.fetch();
     Ti.API.info("device: " + JSON.stringify(blah));
     $.output.value = JSON.stringify(blah);
 });
@@ -20,8 +20,8 @@ $.printViewBtn.addEventListener('click', function () {
 });
 
 $.printSortByIdBtn.addEventListener('click', function () {
-    var blah = Alloy.Collections.device;
-    Alloy.Collections.device.sortById(1);
+    var blah = $.device;
+    blah.sortById(1);
     Ti.API.info("printSortById: " + JSON.stringify(blah));
     $.output.value = JSON.stringify(blah);
 });
