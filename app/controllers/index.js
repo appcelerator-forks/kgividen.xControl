@@ -25,22 +25,15 @@ function createSideMenu(sections, controller) {
 
 //This is what happens when a menu row is selected.
 function rowSelect(e) {
-    var args = {url: e.row.url};
     switch(e.row.action) {
         case "favorites":
-            $.destroy();
-            $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES - 1);
             break;
         case "lights":
-            $.destroy();
-            $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_LIGHTS, sortBy: "showInLightingViewSortId"}).getView());
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_LIGHTS - 1);
             break;
         case "scenes":
-            $.destroy();
-            $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_SCENES, sortBy: "showInLightingViewSortId"}).getView());
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_SCENES - 1);
             break;
         case "settings":
             $.destroy();
@@ -53,8 +46,7 @@ function rowSelect(e) {
             $.win.close();
             break;
         default:
-            $.ds.contentview.removeAllChildren();
-            $.ds.contentview.add(Alloy.createController("devices", {viewId: VIEW_ID_FAVORITES, sortBy: "showInFavoritesViewSortId"}).getView());
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES - 1);
     }
 }
 
@@ -204,7 +196,7 @@ function startUI(){
     });
 
     //Empty the current contentView
-    $.ds.contentview.removeAllChildren();
+//    $.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("devicesViewsContainer").getView());
 }
 
