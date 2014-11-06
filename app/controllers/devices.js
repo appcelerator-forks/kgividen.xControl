@@ -1,6 +1,9 @@
-function updateStatus(){
+var updateStatus = function (){
     return device.getAllDevicesStatus().then(updateLightsStatus);
-}
+};
+
+exports.updateStatus = updateStatus;
+
 function updateLightsStatus(nodesByAddressAndStatus){
     var lightTVData = $.deviceTableView.getData()[0].getRows();
     _.each(lightTVData, function(row){
@@ -31,8 +34,6 @@ function updateLightsStatus(nodesByAddressAndStatus){
 var args = arguments[0] || {};
 $.device.whereShowInView(args.viewId);
 
-//Set this to a global so it can be used in the lightRow after a toggle or setLevel
-Alloy.Globals.updateStatus = updateStatus;
 updateStatus();
 
 //LISTENERS
@@ -64,7 +65,8 @@ if(osname=="ios") {
 //Buttons
 $.deviceTableView.addEventListener('click', function(e) {
     if(e.source.address && e.source.id == "btn"){
-        device.toggle(e.source.address).then(Alloy.Globals.updateStatus);
+        device.toggle(e.source.address)
+            .then(updateStatus());
     }
     if(e.source.address && e.source.id == "sceneBtnOn"){
         device.sceneOn(e.source.address);
@@ -77,7 +79,8 @@ $.deviceTableView.addEventListener('click', function(e) {
 $.deviceTableView.addEventListener('touchend', function(e) {
     if(e.source.id == "slider") {
         var level = Math.round(e.source.value);
-        device.setLevel(e.source.address, level).then(Alloy.Globals.updateStatus);
+        device.setLevel(e.source.address, level)
+            .then(updateStatus());
         e.row.getChildren()[0].getChildren()[1].getChildren()[1].text = level;  //Slider label
     }
 });

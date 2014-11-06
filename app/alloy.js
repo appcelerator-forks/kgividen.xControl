@@ -9,9 +9,9 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
-var VIEW_ID_FAVORITES = 1;
-var VIEW_ID_LIGHTS = 2;
-var VIEW_ID_SCENES = 3;
+var VIEW_ID_FAVORITES = 0;
+var VIEW_ID_LIGHTS = 1;
+var VIEW_ID_SCENES = 2;
 
 Alloy.Collections.device = Alloy.createCollection("Device");
 Alloy.Collections.deviceInView = Alloy.createCollection("DeviceInView");

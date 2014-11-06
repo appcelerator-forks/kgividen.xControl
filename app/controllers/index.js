@@ -27,13 +27,13 @@ function createSideMenu(sections, controller) {
 function rowSelect(e) {
     switch(e.row.action) {
         case "favorites":
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES - 1);
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
             break;
         case "lights":
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_LIGHTS - 1);
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_LIGHTS);
             break;
         case "scenes":
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_SCENES - 1);
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_SCENES);
             break;
         case "settings":
             $.destroy();
@@ -46,7 +46,7 @@ function rowSelect(e) {
             $.win.close();
             break;
         default:
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES - 1);
+            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
     }
 }
 
