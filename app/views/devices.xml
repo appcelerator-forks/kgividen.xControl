@@ -2,7 +2,7 @@
     <Collection id="device" src="Device" instance="true"/>
     <View id="deviceContainerView" platform="ios">
         <TableView id="deviceTableView" dataCollection="$.device">
-            <RefreshControl id="refreshControl"></RefreshControl>
+            <RefreshControl id="refreshControl" />
             <Require src="deviceRow" />
         </TableView>
     </View>
