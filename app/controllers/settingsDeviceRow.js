@@ -5,8 +5,10 @@ if ($model) {
 
     var isModelInView = Alloy.Collections.deviceInView.where({DeviceId:modelId, ViewId:viewId}).length > 0;
     if(isModelInView){
+//        Ti.API.debug("Switch should be true");
         $.deviceRowSwitch.setValue(true);
     }else{
+//        Ti.API.debug("Switch should be false");
         $.deviceRowSwitch.setValue(false);
     }
 }
@@ -20,7 +22,7 @@ $.deviceRowSwitch.addEventListener('change', function(e) {
     };
     if(e.value){
         //Add record to DeviceInView
-        Ti.API.info("Add record to DeviceInView: " + JSON.stringify(model));
+//        Ti.API.info("Add record to DeviceInView: " + JSON.stringify(model));
         Alloy.createModel('DeviceInView', model).save({silent: true});
     } else {
         //Remove record from DeviceInView

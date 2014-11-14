@@ -62,7 +62,7 @@ $.clearData.addEventListener('click', function () {
 
 $.getListOfDevicesBtn.addEventListener('click', function () {
     saveConnectionInfo();
-    Alloy.Collections.deviceInView.fetch();
+    //Alloy.Collections.deviceInView.fetch();
 //    Alloy.Globals.deviceInViewJSON = Alloy.Collections.deviceInView.toJSON(); //So we can access it in the tableViewRow
     Alloy.createController('settingsDeviceList').getView().open();
 });

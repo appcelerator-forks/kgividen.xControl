@@ -17,6 +17,7 @@ function addToView(deviceId, viewId) {
 }
 
 function refreshDevices(){
+    //device is set in alloy.js
     device.getListOfDevices().then(function (data) {
         //TODO Take out fake data line
 //        data = fakeData;
@@ -29,7 +30,6 @@ function refreshDevices(){
 //        var devices = Alloy.Collections.device;  //Alloy.Collections.device is defined in alloy.js
         var devices = Alloy.Collections.device;
         devices.sortById(viewId);
-//        devices.fetch();
         _.each(data, function (item) {
             //We only want to add new devices.
             var deviceArray = [];
@@ -160,6 +160,7 @@ $.win.addEventListener("open", function(){
 });
 
 $.chooseViewBar.addEventListener("click", function(e){
+    //TODO this switch is no longer needed.
     switch(e.index) {
         case 0:
             updateViewsSortOrder(viewId);
