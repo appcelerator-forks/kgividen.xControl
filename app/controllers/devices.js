@@ -5,65 +5,100 @@ var updateStatus = function (){
 exports.updateStatus = updateStatus;
 
 function updateLightsStatus(nodesByAddressAndStatus){
-    var lightTVData = $.deviceTableView.getData()[0].getRows();
-    _.each(lightTVData, function(row){
-        if(row.model.type == 'light') {
-            var btn = row.getChildren()[0].getChildren()[0];
-            var current = _.findWhere(nodesByAddressAndStatus, {address:btn.address});
+    _.each($.scrollableView.getViews(), function(view){
+        if (view.getData()[0] && view.getData()[0].getRows()){
+            _.each(view.getData()[0].getRows(), function(row){
+                if(row.model.type == 'light') {
+                    var btn = row.getChildren()[0].getChildren()[0];   //todo: this is crashing android.
+                    var current = _.findWhere(nodesByAddressAndStatus, {address:btn.address});
 
-            if(current.level > 0){
-                $.removeClass(btn, 'btnOff');
-                $.addClass(btn, 'btnOn');
-                $.addClass(btn, 'btn');
-            } else {
-                $.addClass(btn, 'btnOff');
-                $.addClass(btn, 'btn');
-            }
-
-            var sliderContainer = row.getChildren()[0].getChildren()[1];
-
-            //slider
-            sliderContainer.getChildren()[0].value = current.level;
-            //sliderLbl
-            sliderContainer.getChildren()[1].text = current.level;
+                    if(current.level > 0){
+                        $.removeClass(btn, 'btnOff');
+                        $.addClass(btn, 'btnOn');
+                        $.addClass(btn, 'btn');
+                    } else {
+                        $.addClass(btn, 'btnOff');
+                        $.addClass(btn, 'btn');
+                    }
+                    var sliderContainer = row.getChildren()[0].getChildren()[1];
+                    //slider
+                    sliderContainer.getChildren()[0].value = current.level;
+                    //sliderLbl
+                    sliderContainer.getChildren()[1].text = current.level;
+                }
+            });
         }
     });
 }
 
-//filter only models that are supposed to be in the view.
-var args = arguments[0] || {};
-$.device.whereShowInView(args.viewId);
 
-updateStatus();
 
-//LISTENERS
-$.deviceContainerView.addEventListener("close", function(){
-    $.destroy();
-    Ti.API.info("DESTROY TABLEVIEW!!!");
-    for (var i = tableView.data[0].rows.length-1; i >= 0; i--) {
-        $.deviceTableView.deleteRow(i);
-    }
-    $.deviceTableView.setData([]);
-});
-
-if(osname == "android"){
-    $.refreshControlBtn.addEventListener('click', function () {
-        return device.getAllDevicesStatus()
-            .then(updateLightsStatus);
+function favFilter(collection){
+    return collection.where({
+        ViewId:VIEW_ID_FAVORITES
     });
 }
 
-if(osname=="ios") {
-    $.refreshControl.addEventListener('refreshstart', function () {
+function lightFilter(collection){
+    return collection.where({
+        ViewId:VIEW_ID_LIGHTS
+    });
+}
+
+function sceneFilter(collection){
+    return collection.where({
+        ViewId:VIEW_ID_SCENES
+    });
+}
+
+$.device.whereShow();
+updateStatus();
+
+//LISTENERS
+$.scrollableView.addEventListener("close", function(){
+    $.destroy();
+    Ti.API.info("DESTROY TABLEVIEW!!!");
+});
+
+if(osname == "android"){
+//    $.refreshControlBtn.addEventListener('click', function () {
+//        return device.getAllDevicesStatus()
+//            .then(updateLightsStatus);
+//    });
+}
+
+if(osname == "ios") {
+    //todo: There should be a better way to do this rather than duplicate the control
+    // but if the same one is added to multiple tableViews things crap out
+    $.refreshControlFav.addEventListener('refreshstart', function refreshControl(){
+        Ti.API.debug("Inside refresh control");
         return device.getAllDevicesStatus()
             .then(updateLightsStatus)
             .then(function () {
-                    $.refreshControl.endRefreshing();
+                $.refreshControlFav.endRefreshing();
+            });
+    });
+
+    $.refreshControlLights.addEventListener('refreshstart', function refreshControl(){
+        Ti.API.debug("Inside refresh control");
+        return device.getAllDevicesStatus()
+            .then(updateLightsStatus)
+            .then(function () {
+                $.refreshControlLights.endRefreshing();
+            });
+    });
+
+    $.refreshControlScenes.addEventListener('refreshstart', function refreshControl(){
+        Ti.API.debug("Inside refresh control");
+        return device.getAllDevicesStatus()
+            .then(updateLightsStatus)
+            .then(function () {
+                $.refreshControlLights.endRefreshing();
             });
     });
 }
 //Buttons
-$.deviceTableView.addEventListener('click', function(e) {
+$.scrollableView.addEventListener('click', function(e) {
     if(e.source.address && e.source.id == "btn"){
         device.toggle(e.source.address)
             .then(updateStatus());
@@ -76,7 +111,7 @@ $.deviceTableView.addEventListener('click', function(e) {
     }
 });
 
-$.deviceTableView.addEventListener('touchend', function(e) {
+$.scrollableView.addEventListener('touchend', function(e) {
     if(e.source.id == "slider") {
         var level = Math.round(e.source.value);
         device.setLevel(e.source.address, level)

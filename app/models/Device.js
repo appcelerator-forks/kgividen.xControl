@@ -45,6 +45,13 @@ exports.definition = {
                     query: sql
                 });
             },
+            whereShow: function() {
+                var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id";
+                Ti.API.info(sql);
+                return this.fetch({
+                    query: sql
+                });
+            },
             sortById : function(viewId) {
                 var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlDeviceInView.DeviceId, xControlDeviceInView.ViewId, ifnull(xControlDeviceInView.SortId,9999) as SortId FROM xControlDevices LEFT JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id AND ViewId=" + viewId;
 

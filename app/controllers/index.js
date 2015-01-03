@@ -197,7 +197,7 @@ function startUI(){
 
     //Empty the current contentView
 //    $.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("devicesViewsContainer").getView());
+    $.ds.contentview.add(Alloy.createController("devices").getView());
 }
 
 if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here

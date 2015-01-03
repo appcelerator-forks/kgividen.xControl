@@ -1,15 +1,20 @@
+"#scrollableView" : {
+    zIndex:2,
+    backgroundImage: '/images/themes/default/background.png',
+},
+
 "#deviceContainerView" : {
     zIndex:2,
     backgroundImage: '/images/themes/default/background.png',
     layout:'vertical',
 
 },
-"#deviceTableView" : {
+".deviceTableView" : {
       width:Ti.UI.Fill,
       separatorColor: 'transparent',
       backgroundColor: 'transparent',
       borderWidth:0
-  },
+},
 
 //todo: These btn classes are also on the lightRow.tss they really should only need to be in one place
 //todo: but we update the classes in the lighting controller so they also have to be here for whatever reason.
@@ -42,8 +47,11 @@
 ".btnOff" : {
     backgroundImage : '/images/themes/default/btn.png'
 },
-
-"#refreshControlBtn[platform=android]" : {
+"#refreshBtnView[platform=android]" : {
+  top:5,
+  height: 60
+},
+"#refreshBtn[platform=android]" : {
     left:10,
     height : 60,
     width : 60,

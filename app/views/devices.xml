@@ -1,16 +1,23 @@
 <Alloy>
     <Collection id="device" src="Device" instance="true"/>
-    <View id="deviceContainerView" platform="ios">
-        <TableView id="deviceTableView" dataCollection="$.device">
-            <RefreshControl id="refreshControl" />
-            <Require src="deviceRow" />
-        </TableView>
-    </View>
-    <View id="deviceContainerView" platform="android">
-        <Button id="refreshControlBtn" icon="fa-refresh"/>
-        <TableView id="deviceTableView" dataCollection="$.device">
-            <Require src="deviceRow" />
-        </TableView>
-        <Widget id="fa" src="com.mattmcfarland.fontawesome"/>
+    <View id="deviceContainerView">
+        <View id="refreshBtnView" platform="android">
+            <Button id="refreshBtn" icon="fa-refresh" platform="android"/>
+            <Widget id="fa" src="com.mattmcfarland.fontawesome" platform="android"/>
+        </View>
+        <ScrollableView id="scrollableView" showPagingControl="true">
+            <TableView id="favoritesTableView" class="deviceTableView" dataFilter="favFilter" dataCollection="$.device">
+                <RefreshControl id="refreshControlFav" platform="ios" />
+                <Require src="deviceRow" />
+            </TableView>
+            <TableView id="lightsTableView"  class="deviceTableView" dataFilter="lightFilter" dataCollection="$.device">
+                <RefreshControl id="refreshControlLights" platform="ios" />
+                <Require src="deviceRow" />
+            </TableView>
+            <TableView id="scenesTableView"  class="deviceTableView" dataFilter="sceneFilter" dataCollection="$.device">
+                <RefreshControl id="refreshControlScenes" platform="ios" />
+                <Require src="deviceRow" />
+            </TableView>
+        </ScrollableView>
     </View>
 </Alloy>
