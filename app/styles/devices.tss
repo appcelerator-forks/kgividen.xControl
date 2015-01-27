@@ -2,23 +2,94 @@
     zIndex:2,
     backgroundImage: '/images/themes/default/background.png',
 },
-
-"#deviceContainerView" : {
+".container" : {
+      backgroundColor: 'transparent',
+},
+".deviceContainerView" : {
     zIndex:2,
     backgroundImage: '/images/themes/default/background.png',
     layout:'vertical',
 
 },
-".deviceTableView" : {
+".deviceListView" : {
       width:Ti.UI.Fill,
       separatorColor: 'transparent',
       backgroundColor: 'transparent',
       borderWidth:0
 },
-
-//todo: These btn classes are also on the lightRow.tss they really should only need to be in one place
-//todo: but we update the classes in the lighting controller so they also have to be here for whatever reason.
-"#btn" : {
+".deviceItem" : {
+  backgroundColor: "transparent"
+},
+".deviceItem[platform=ios]" : {
+  selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE //No style
+},
+".sliderLbl" : {
+    text : '0',
+    color : '#999',
+    font : {
+        fontFamily : 'Helvetica Neue',
+        fontSize : 14
+    },
+    textAlign : 'left',
+    width : 30,
+    left : '94%'
+},
+".slider" : {
+    min : 0,
+    max : 100,
+    value : 0,
+    width : '42%',
+    left : '49%',
+    leftTrackImage : '/images/themes/default/metal-slider-progress.png',
+    rightTrackImage : '/images/themes/default/metal-slider-channel.png',
+},
+".slider[platform=ios]" : {
+    thumbImage : '/images/themes/default/metal-slider-handle.png',
+},
+".groupItem" : {
+    backgroundColor: "transparent"
+},
+".groupLbl" : {
+    color : 'white',
+    font : {
+        fontSize : '30%'
+    },
+    width : Ti.UI.Fill,
+    left : 5,
+    textAlign : 'left',
+},
+".sceneLbl" : {
+    width: '50%',
+    color : 'white',
+    font : {
+        fontSize : '20%'
+    },
+    left : 5,
+    textAlign : 'left'
+},
+".sceneBtn" : {
+    backgroundImage : '/images/themes/default/btn.png',
+    color: '#fff',
+    width : '20%',
+    height : '80%',
+    left : '3%',
+    font : {
+        fontSize : '20%',
+        fontWeight : 'bold',
+        fontFamily : 'Helvetica Neue'
+    },
+    zIndex : 5
+},
+".sceneContainer":{
+    backgroundColor: 'transparent',
+    height : 50
+},
+".sceneContainer[formFactor=tablet]":{
+    height : 80
+},
+".btn" : {
+    backgroundImage : '/images/themes/default/btn.png',
+    backgroundSelectedImage : '/images/themes/default/btn-active.png',
     color: '#fff',
     width : '45%',
     height : '80%',
@@ -31,7 +102,7 @@
     horizontalWrap : false,
     zIndex : 5
 },
-"#btn[formFactor=tablet]" : {
+".btn[formFactor=tablet]" : {
     height : '80%',
     left : '3%',
     font : {

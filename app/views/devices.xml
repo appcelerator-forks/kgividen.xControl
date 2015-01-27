@@ -1,23 +1,57 @@
 <Alloy>
     <Collection id="device" src="Device" instance="true"/>
-    <View id="deviceContainerView">
+    <View class="deviceContainerView">
         <View id="refreshBtnView" platform="android">
             <Button id="refreshBtn" icon="fa-refresh" platform="android"/>
             <Widget id="fa" src="com.mattmcfarland.fontawesome" platform="android"/>
         </View>
         <ScrollableView id="scrollableView" showPagingControl="true">
-            <TableView id="favoritesTableView" class="deviceTableView" dataFilter="favFilter" dataCollection="$.device">
+            <ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="light">
+                <Templates>
+                    <ItemTemplate name="light">
+                        <View class="container" onClick="btnClick" onChange="updateSliderLbl" onTouchend="sendSliderVal">
+                            <Button id="btn" bindId="btn" class="btn" />
+                            <View>
+                                <Slider bindId="slider" class="slider" />
+                                <Label bindId="sliderLbl" class="sliderLbl" />
+                            </View>
+                        </View>
+                    </ItemTemplate>
+                    <ItemTemplate name="groupLbl">
+                            <Label bindId="groupLbl" class="groupLbl" />
+                    </ItemTemplate>
+                    <ItemTemplate name="scene">
+                        <View class="container horizontal sceneContainer">
+                            <Label bindId="sceneLbl" class="sceneLbl"/>
+                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="btnClick"/>
+                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="btnClick"/>
+                        </View>
+                    </ItemTemplate>
+                </Templates>
                 <RefreshControl id="refreshControlFav" platform="ios" />
-                <Require src="deviceRow" />
-            </TableView>
-            <TableView id="lightsTableView"  class="deviceTableView" dataFilter="lightFilter" dataCollection="$.device">
-                <RefreshControl id="refreshControlLights" platform="ios" />
-                <Require src="deviceRow" />
-            </TableView>
-            <TableView id="scenesTableView"  class="deviceTableView" dataFilter="sceneFilter" dataCollection="$.device">
-                <RefreshControl id="refreshControlScenes" platform="ios" />
-                <Require src="deviceRow" />
-            </TableView>
+                <ListSection id="deviceListSection" dataFilter="favFilter"
+                             dataFunction="updateUI" dataTransform="transformFunction"
+                             dataCollection="$.device">
+                    <ListItem template="{template}" class="deviceItem" modelId="{modelId}" address="{address}" itemType="{type}" sortId="{sortId}"
+                              btn:title="{displayName}"
+                              slider:value="{sliderVal}" sliderLbl:text="{sliderVal}"
+                              groupLbl:text="{displayName}"
+                              sceneLbl:text="{displayName}" sceneBtnOn:title="On"
+                              sceneBtnOff:title="Off" />
+                </ListSection>
+            </ListView>
+            <!--<TableView id="favoritesTableView" class="deviceTableView" dataFilter="favFilter" dataCollection="$.device">-->
+                <!--<RefreshControl id="refreshControlFav" platform="ios" />-->
+                <!--<Require src="deviceRow" />-->
+            <!--</TableView>-->
+            <!--<TableView id="lightsTableView"  class="deviceTableView" dataFilter="lightFilter" dataCollection="$.device">-->
+                <!--<RefreshControl id="refreshControlLights" platform="ios" />-->
+                <!--<Require src="deviceRow" />-->
+            <!--</TableView>-->
+            <!--<TableView id="scenesTableView"  class="deviceTableView" dataFilter="sceneFilter" dataCollection="$.device">-->
+                <!--<RefreshControl id="refreshControlScenes" platform="ios" />-->
+                <!--<Require src="deviceRow" />-->
+            <!--</TableView>-->
         </ScrollableView>
     </View>
 </Alloy>

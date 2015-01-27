@@ -35,7 +35,7 @@ exports.definition = {
     extendCollection : function(Collection) {
         _.extend(Collection.prototype, {
             comparator: function(collection) {
-//                Ti.API.info("In comparator!" + collection.get('SortId'));
+//                Ti.API.info("In comparator! SortId: " + collection.get('SortId') + "collection: " + JSON.stringify(collection));
                 return collection.get('SortId');
             },
             whereShowInView : function(viewId) {
