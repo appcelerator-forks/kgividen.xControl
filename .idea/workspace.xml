@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b5b93c4-21e4-4669-9f8c-7f0837154a9b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/deviceRow.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Device.js" afterPath="$PROJECT_DIR$/app/models/Device.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/com.appcelerator.titanium.android.core.prefs" afterPath="$PROJECT_DIR$/.settings/com.appcelerator.titanium.android.core.prefs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/devices.js" afterPath="$PROJECT_DIR$/app/controllers/devices.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/devices.tss" afterPath="$PROJECT_DIR$/app/styles/devices.tss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/devices.xml" afterPath="$PROJECT_DIR$/app/views/devices.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/widgets/ds.slideMenu/controllers/widget.js" afterPath="$PROJECT_DIR$/app/widgets/ds.slideMenu/controllers/widget.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="xControl.iws" />
@@ -73,38 +72,28 @@
       <file leaf-file-name="devices.tss" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/styles/devices.tss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-38.076923" vertical-offset="0" max-vertical-offset="2070">
-              <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+            <state vertical-scroll-proportion="-26.076923" vertical-offset="1122" max-vertical-offset="2070">
+              <caret line="120" column="9" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="devices.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="devices.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devices.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43945312" vertical-offset="120" max-vertical-offset="930">
-              <caret line="23" column="65" selection-start-line="23" selection-start-column="65" selection-end-line="23" selection-end-column="65" />
+            <state vertical-scroll-proportion="-4.1538463" vertical-offset="1077" max-vertical-offset="2025">
+              <caret line="79" column="120" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="devices.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="devices.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-107.30769" vertical-offset="0" max-vertical-offset="2955">
-              <caret line="186" column="51" selection-start-line="186" selection-start-column="51" selection-end-line="186" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deviceRow.tss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/styles/deviceRow.tss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1890">
-              <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.23734178" vertical-offset="0" max-vertical-offset="2910">
+              <caret line="15" column="31" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -123,9 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/styles/lightRow.tss" />
-        <option value="$PROJECT_DIR$/app/views/lightRow.xml" />
-        <option value="$PROJECT_DIR$/app/controllers/lightRow.js" />
         <option value="$PROJECT_DIR$/app/controllers/lighting.js" />
         <option value="$PROJECT_DIR$/../../github/TiModules/TabbedBar/TabbedBar.js" />
         <option value="$PROJECT_DIR$/app/lib/TabbedBar.js" />
@@ -148,7 +134,6 @@
         <option value="$PROJECT_DIR$/app/models/device.js" />
         <option value="$USER_HOME$/Desktop/Aon/CRM WSDL/Discovery.wsdl" />
         <option value="$PROJECT_DIR$/app/widgets/ds.slideMenu/controllers/widget.js" />
-        <option value="$PROJECT_DIR$/app/views/devicesViewsContainer.xml" />
         <option value="$PROJECT_DIR$/app/views/settings.xml" />
         <option value="$PROJECT_DIR$/app/views/debug.xml" />
         <option value="$PROJECT_DIR$/app/controllers/debug.js" />
@@ -171,9 +156,13 @@
         <option value="$PROJECT_DIR$/app/styles/settingsDeviceList.tss" />
         <option value="$PROJECT_DIR$/app/controllers/settingsDeviceList.js" />
         <option value="$USER_HOME$/Desktop/temp.json" />
-        <option value="$PROJECT_DIR$/app/controllers/devices.js" />
-        <option value="$PROJECT_DIR$/app/views/devices.xml" />
         <option value="$PROJECT_DIR$/app/styles/devices.tss" />
+        <option value="$PROJECT_DIR$/app/controllers/devicesTemplate.js" />
+        <option value="$PROJECT_DIR$/app/views/devicesTemplate.xml" />
+        <option value="$PROJECT_DIR$/app/views/devicesViewsContainer.xml" />
+        <option value="$PROJECT_DIR$/app/views/devices.xml" />
+        <option value="$PROJECT_DIR$/app/controllers/devices.js" />
+        <option value="$PROJECT_DIR$/scripts/xcontrol_build_android.sh" />
       </list>
     </option>
   </component>
@@ -227,74 +216,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xControl" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -626,12 +547,12 @@
       <workItem from="1419961466012" duration="51000" />
       <workItem from="1419961530145" duration="21909000" />
       <workItem from="1420492191622" duration="28240000" />
-      <workItem from="1422292264979" duration="40381000" />
+      <workItem from="1422292264979" duration="47612000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="356663000" />
+    <option name="totallyTimeSpent" value="363894000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -662,7 +583,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2685775" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43512973" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43512973" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -772,13 +693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="889">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devicesViewsContainer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.016666668" vertical-offset="0" max-vertical-offset="900">
-          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -1019,34 +933,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/deviceRow.tss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1890">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-107.30769" vertical-offset="0" max-vertical-offset="2955">
-          <caret line="186" column="51" selection-start-line="186" selection-start-column="51" selection-end-line="186" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/devices.tss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.076923" vertical-offset="0" max-vertical-offset="2070">
-          <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+        <state vertical-scroll-proportion="-26.076923" vertical-offset="1122" max-vertical-offset="2070">
+          <caret line="120" column="9" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/devicesViewsContainer.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.015400411" vertical-offset="0" max-vertical-offset="974">
+          <caret line="1" column="47" selection-start-line="1" selection-start-column="47" selection-end-line="1" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/xcontrol_build_android.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17405063" vertical-offset="0" max-vertical-offset="948">
+          <caret line="11" column="91" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devices.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43945312" vertical-offset="120" max-vertical-offset="930">
-          <caret line="23" column="65" selection-start-line="23" selection-start-column="65" selection-end-line="23" selection-end-column="65" />
+        <state vertical-scroll-proportion="-4.1538463" vertical-offset="1077" max-vertical-offset="2025">
+          <caret line="79" column="120" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/devices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23734178" vertical-offset="0" max-vertical-offset="2910">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="31" />
           <folding />
         </state>
       </provider>

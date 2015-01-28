@@ -69,9 +69,6 @@ if(osname == "android"){
 if(osname == "ios") {
     //todo: There should be a better way to do this rather than duplicate the control
     // but if the same one is added to multiple tableViews things crap out
-//TODO: reenable these
-
-
     $.refreshControlFav.addEventListener('refreshstart', function refreshControl(){
         Ti.API.debug("Inside refresh control");
         return device.getAllDevicesStatus()
@@ -83,23 +80,23 @@ if(osname == "ios") {
 
 
 
-//    $.refreshControlLights.addEventListener('refreshstart', function refreshControl(){
-//        Ti.API.debug("Inside refresh control");
-//        return device.getAllDevicesStatus()
-//            .then(updateLightsStatus)
-//            .then(function () {
-//                $.refreshControlLights.endRefreshing();
-//            });
-//    });
-//
-//    $.refreshControlScenes.addEventListener('refreshstart', function refreshControl(){
-//        Ti.API.debug("Inside refresh control");
-//        return device.getAllDevicesStatus()
-//            .then(updateLightsStatus)
-//            .then(function () {
-//                $.refreshControlLights.endRefreshing();
-//            });
-//    });
+    $.refreshControlLights.addEventListener('refreshstart', function refreshControl(){
+        Ti.API.debug("Inside refresh control");
+        return device.getAllDevicesStatus()
+            .then(updateLightsStatus)
+            .then(function () {
+                $.refreshControlLights.endRefreshing();
+            });
+    });
+
+    $.refreshControlScenes.addEventListener('refreshstart', function refreshControl(){
+        Ti.API.debug("Inside refresh control");
+        return device.getAllDevicesStatus()
+            .then(updateLightsStatus)
+            .then(function () {
+                $.refreshControlLights.endRefreshing();
+            });
+    });
 }
 
 
