@@ -18,7 +18,8 @@
       borderWidth:0
 },
 ".deviceItem" : {
-  backgroundColor: "transparent"
+  backgroundColor: "transparent",
+  height:70
 },
 ".deviceItem[platform=ios]" : {
   selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE //No style
@@ -39,11 +40,11 @@
     max : 100,
     value : 0,
     width : '42%',
-    left : '49%',
-    leftTrackImage : '/images/themes/default/metal-slider-progress.png',
-    rightTrackImage : '/images/themes/default/metal-slider-channel.png',
+    left : '49%'
 },
 ".slider[platform=ios]" : {
+    leftTrackImage : '/images/themes/default/metal-slider-progress.png',
+    rightTrackImage : '/images/themes/default/metal-slider-channel.png',
     thumbImage : '/images/themes/default/metal-slider-handle.png',
 },
 ".groupItem" : {
@@ -93,23 +94,13 @@
     color: '#fff',
     width : '45%',
     height : '80%',
-    left : '3%',
+    left : '2%',
     font : {
         fontSize : '20%',
         fontWeight : 'bold',
         fontFamily : 'Helvetica Neue'
     },
     horizontalWrap : false,
-    zIndex : 5
-},
-".btn[formFactor=tablet]" : {
-    height : '80%',
-    left : '3%',
-    font : {
-        fontSize : '20%',
-        fontWeight : 'bold',
-        fontFamily : 'Helvetica Neue'
-    },
     zIndex : 5
 },
 ".btnOn" : {

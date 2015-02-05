@@ -9,10 +9,11 @@
             <ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="light">
                 <Templates>
                     <ItemTemplate name="light">
-                        <View class="container" onClick="btnClick" onChange="updateSliderLbl" onTouchend="sendSliderVal">
-                            <Button id="btn" bindId="btn" class="btn" />
+                        <View class="container">
+                            <Button bindId="btn" class="btn" onClick="btnClick" />
                             <View>
-                                <Slider bindId="slider" class="slider" />
+                                <Slider bindId="slider" class="slider" onChange="updateSliderLbl" onStop="sendSliderVal" platform="ios"/>
+                                <Slider bindId="slider" class="slider" onStop="sendSliderVal" platform="android"/>
                                 <Label bindId="sliderLbl" class="sliderLbl" />
                             </View>
                         </View>
@@ -29,7 +30,7 @@
                     </ItemTemplate>
                 </Templates>
                 <RefreshControl id="refreshControlFav" platform="ios" />
-                <ListSection id="deviceListSectionFav" dataFilter="favFilter"
+                <ListSection dataFilter="favFilter"
                              dataFunction="updateUI" dataTransform="transformFunction"
                              dataCollection="$.device">
                     <ListItem template="{template}" class="deviceItem" modelId="{modelId}" address="{address}" itemType="{type}" sortId="{sortId}"
@@ -43,11 +44,11 @@
             <ListView id="lightsListView" class="deviceListView" defaultItemTemplate="light">
                 <Templates>
                     <ItemTemplate name="light">
-                        <View class="container" onClick="btnClick" onChange="updateSliderLbl"
-                              onTouchend="sendSliderVal">
+                        <View class="container" onClick="btnClick">
                             <Button id="btn" bindId="btn" class="btn"/>
                             <View>
-                                <Slider bindId="slider" class="slider"/>
+                                <Slider bindId="slider" class="slider" onChange="updateSliderLbl" onStop="sendSliderVal" platform="ios"/>
+                                <Slider bindId="slider" class="slider" onStop="sendSliderVal" platform="android"/>
                                 <Label bindId="sliderLbl" class="sliderLbl"/>
                             </View>
                         </View>
@@ -79,11 +80,11 @@
             <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="light">
                 <Templates>
                     <ItemTemplate name="light">
-                        <View class="container" onClick="btnClick" onChange="updateSliderLbl"
-                              onTouchend="sendSliderVal">
+                        <View class="container" onClick="btnClick" >
                             <Button id="btn" bindId="btn" class="btn"/>
                             <View>
-                                <Slider bindId="slider" class="slider"/>
+                                <Slider bindId="slider" class="slider" onChange="updateSliderLbl" onStop="sendSliderVal" platform="ios"/>
+                                <Slider bindId="slider" class="slider" onStop="sendSliderVal" platform="android"/>
                                 <Label bindId="sliderLbl" class="sliderLbl"/>
                             </View>
                         </View>
@@ -112,19 +113,6 @@
                               sceneBtnOff:title="Off"/>
                 </ListSection>
             </ListView>
-
-            <!--<TableView id="favoritesTableView" class="deviceTableView" dataFilter="favFilter" dataCollection="$.device">-->
-                <!--<RefreshControl id="refreshControlFav" platform="ios" />-->
-                <!--<Require src="deviceRow" />-->
-            <!--</TableView>-->
-            <!--<TableView id="lightsTableView"  class="deviceTableView" dataFilter="lightFilter" dataCollection="$.device">-->
-                <!--<RefreshControl id="refreshControlLights" platform="ios" />-->
-                <!--<Require src="deviceRow" />-->
-            <!--</TableView>-->
-            <!--<TableView id="scenesTableView"  class="deviceTableView" dataFilter="sceneFilter" dataCollection="$.device">-->
-                <!--<RefreshControl id="refreshControlScenes" platform="ios" />-->
-                <!--<Require src="deviceRow" />-->
-            <!--</TableView>-->
         </ScrollableView>
     </View>
 </Alloy>

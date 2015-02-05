@@ -5,16 +5,15 @@ var updateStatus = function (){
 exports.updateStatus = updateStatus;
 
 function updateLightsStatus(nodesByAddressAndStatus){
-     Ti.API.debug("In Update Lights Status!!!!!");
     _.each($.scrollableView.getViews(), function(view){
         var viewSections = view.getSections();
-        //TODO: this will only update the favorites view since it's viewSections[0]
+        //We use viewSections[0] because we only have one section on each of the views.
         var items = (viewSections) ? viewSections[0].getItems() : null;
         if (viewSections && items){
             _.each(items, function(item, index){
                 if (item.properties.itemType == 'light') {
                     var current = _.findWhere(nodesByAddressAndStatus, {address:item.properties.address});
-                    Ti.API.debug("current" + JSON.stringify(current));
+//                    Ti.API.debug("current:" + JSON.stringify(current));
                     if(current.level > 0){
                         //todo: Get this hardcoded image out of here some how
                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
@@ -24,10 +23,11 @@ function updateLightsStatus(nodesByAddressAndStatus){
                     }
 
                     item.slider.value = item.sliderLbl.text = current.level;
-                    viewSections[0].updateItemAt(index, item);  //update the GUI
+//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
                 }
             });
         }
+        viewSections[0].setItems(items);
     });
 }
 
@@ -80,23 +80,23 @@ if(osname == "ios") {
 
 
 
-    $.refreshControlLights.addEventListener('refreshstart', function refreshControl(){
-        Ti.API.debug("Inside refresh control");
-        return device.getAllDevicesStatus()
-            .then(updateLightsStatus)
-            .then(function () {
-                $.refreshControlLights.endRefreshing();
-            });
-    });
-
-    $.refreshControlScenes.addEventListener('refreshstart', function refreshControl(){
-        Ti.API.debug("Inside refresh control");
-        return device.getAllDevicesStatus()
-            .then(updateLightsStatus)
-            .then(function () {
-                $.refreshControlLights.endRefreshing();
-            });
-    });
+//    $.refreshControlLights.addEventListener('refreshstart', function refreshControl(){
+//        Ti.API.debug("Inside refresh control");
+//        return device.getAllDevicesStatus()
+//            .then(updateLightsStatus)
+//            .then(function () {
+//                $.refreshControlLights.endRefreshing();
+//            });
+//    });
+//
+//    $.refreshControlScenes.addEventListener('refreshstart', function refreshControl(){
+//        Ti.API.debug("Inside refresh control");
+//        return device.getAllDevicesStatus()
+//            .then(updateLightsStatus)
+//            .then(function () {
+//                $.refreshControlLights.endRefreshing();
+//            });
+//    });
 }
 
 
@@ -146,41 +146,33 @@ function btnClick(e){
 
 function updateSliderLbl(e) {
     Ti.API.debug("updateSliderLbl");
-//    Ti.API.debug("e: " + JSON.stringify(e));
     var level = Math.round(e.source.value);
-    var section = e.section;
-    Ti.API.debug("e.itemIndex: " + JSON.stringify(e.itemIndex));
-    Ti.API.debug("e.itemIndex.sliderLbl: " + JSON.stringify(e.itemIndex.sliderLbl));
-
-    var item = section.getItemAt(e.itemIndex);
-    Ti.API.debug("item: " + JSON.stringify(item));
+    var item = e.section.getItemAt(e.itemIndex);
+    Ti.API.debug("level: " + level);
 
     item.sliderLbl.text = level;  //Slider label
+    //This needs to be done to update the sliderLBL but for now it doesn't work right because this conflicts with the update status
     //TODO Android makes the slider jerky if you update it
     if(osname == "ios") {
-        section.updateItemAt(e.itemIndex, item);  //update the GUI
+        e.section.updateItemAt(e.itemIndex, item);  //update the GUI
     }
+
 }
 
 function sendSliderVal(e) {
     Ti.API.debug("sendSliderVal");
-//    Ti.API.debug("e: " + JSON.stringify(e));
+    var item = e.section.getItemAt(e.itemIndex);
 
-    var item = e.section.items[e.itemIndex];
-    var itemType = e.bindId;;
+    var itemType = e.bindId;
     var address = item.properties.address;
-
-    Ti.API.debug("itemType: " + itemType);
-    Ti.API.debug("address: " + address);
-
-
     if(address && itemType == "slider") {
         var level = Math.round(e.source.value);
-        Ti.API.debug("e: " + JSON.stringify(e));
         device.setLevel(address, level)
             .then(updateStatus());
 
         item.sliderLbl.text = level;  //Slider label
+        item.slider.value = level;
+
         //TODO Android makes the slider jerky if you update it
         if(osname == "ios") {
             e.section.updateItemAt(e.itemIndex, item);  //update the GUI

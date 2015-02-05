@@ -12,12 +12,12 @@ _.each(myViews, function(v) {
 // However, it would probably be better to update the status of the controls
 // on every page when the control status changes instead of requerying
 var viewNumber = 0;
-$.scrollableView.addEventListener('scroll',function(e){
-    if(viewNumber != e.currentPage){
-        Ti.API.info("Page Changed!");
-        viewNumber = e.currentPage; // And saving for next time change notification
-        if(!_.isUndefined(e.currentPage)){
-            myViews[e.currentPage].updateStatus();
-        }
-    }
-});
+//$.scrollableView.addEventListener('scroll',function(e){
+//    if(viewNumber != e.currentPage){
+//        Ti.API.info("Page Changed!");
+//        viewNumber = e.currentPage; // And saving for next time change notification
+//        if(!_.isUndefined(e.currentPage)){
+//            myViews[e.currentPage].updateStatus();
+//        }
+//    }
+//});
