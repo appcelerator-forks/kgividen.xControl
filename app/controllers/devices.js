@@ -11,12 +11,11 @@ function updateLightsStatus(nodesByAddressAndStatus){
         var items = (viewSections) ? viewSections[0].getItems() : null;
         if (viewSections && items){
             _.each(items, function(item, index){
-                if (item.properties.itemType == 'light') {
-                    var current = _.findWhere(nodesByAddressAndStatus, {address:item.properties.address});
-//                    Ti.API.debug("current:" + JSON.stringify(current));
+                if (item.btn.type == 'light') {
+                    var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
                     if(current.level > 0){
                         //todo: Get this hardcoded image out of here some how
-                       item.btn.backgroundImage = '/images/themes/default/btn-active.png';
+                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
                     } else {
                         //todo: Get this hardcoded image out of here some how
                         item.btn.backgroundImage = '/images/themes/default/btn.png';
@@ -58,25 +57,25 @@ $.scrollableView.addEventListener("close", function(){
     Ti.API.info("DESTROY TABLEVIEW!!!");
 });
 
-if(osname == "android"){
-    $.refreshBtn.addEventListener('click', function () {
-        Ti.API.debug("Inside refresh control");
-        return device.getAllDevicesStatus()
-            .then(updateLightsStatus);
-    });
-}
+//if(osname == "android"){
+//    $.refreshBtn.addEventListener('click', function () {
+//        Ti.API.debug("Inside refresh control");
+//        return device.getAllDevicesStatus()
+//            .then(updateLightsStatus);
+//    });
+//}
 
 if(osname == "ios") {
     //todo: There should be a better way to do this rather than duplicate the control
     // but if the same one is added to multiple tableViews things crap out
-    $.refreshControlFav.addEventListener('refreshstart', function refreshControl(){
-        Ti.API.debug("Inside refresh control");
-        return device.getAllDevicesStatus()
-            .then(updateLightsStatus)
-            .then(function () {
-                $.refreshControlFav.endRefreshing();
-            });
-    });
+//    $.refreshControlFav.addEventListener('refreshstart', function refreshControl(){
+//        Ti.API.debug("Inside refresh control");
+//        return device.getAllDevicesStatus()
+//            .then(updateLightsStatus)
+//            .then(function () {
+//                $.refreshControlFav.endRefreshing();
+//            });
+//    });
 
 
 
@@ -123,11 +122,11 @@ function transformFunction(model) {
 
 //***************ON EVENTS CALLED FROM THE XML *********************
 function btnClick(e){
-    Ti.API.debug("btnClick");
     var item = e.section.items[e.itemIndex];
-    var itemType = item.properties.itemType;
-    var address = item.properties.address;
+    var itemType = item.btn.type;
+    var address = item.btn.address;
 
+    Ti.API.debug("item.btn.address: " + item.btn.address + " type: " + itemType);
     if(!address){
         return;
     }
@@ -145,10 +144,10 @@ function btnClick(e){
 }
 
 function updateSliderLbl(e) {
-    Ti.API.debug("updateSliderLbl");
+//    Ti.API.debug("updateSliderLbl");
     var level = Math.round(e.source.value);
     var item = e.section.getItemAt(e.itemIndex);
-    Ti.API.debug("level: " + level);
+//    Ti.API.debug("level: " + level);
 
     item.sliderLbl.text = level;  //Slider label
     //This needs to be done to update the sliderLBL but for now it doesn't work right because this conflicts with the update status
@@ -162,9 +161,12 @@ function updateSliderLbl(e) {
 function sendSliderVal(e) {
     Ti.API.debug("sendSliderVal");
     var item = e.section.getItemAt(e.itemIndex);
-
+    Ti.API.debug("e: " + JSON.stringify(e));
+    Ti.API.debug("address: " + JSON.stringify(item.btn.address));
     var itemType = e.bindId;
-    var address = item.properties.address;
+    var address = item.btn.address;
+
+
     if(address && itemType == "slider") {
         var level = Math.round(e.source.value);
         device.setLevel(address, level)
@@ -179,3 +181,38 @@ function sendSliderVal(e) {
         }
     }
 }
+
+
+//$.device.map(function(d){
+//    var displayName = d.get("displayName");
+//    var btn = Titanium.UI.createButton({
+//        title: displayName,
+//        class: "btn"
+//    });
+//    var slider = Titanium.UI.createSlider({
+//        class: "slider"
+//    });
+//
+//    var deviceItemView = Titanium.UI.createView({
+//        class:"deviceItemView"
+//    });
+//    deviceItemView.add(btn);
+//    deviceItemView.add(slider);
+//
+//    $.scrollView.add(deviceItemView);
+//Add the button
+//    var btn = Alloy.createWidget('com.netsmart.buttonToggle', null, {
+//        "defaultState":"on",
+//        "id":"toggleBtnWidget",
+//        "title":displayName
+//    });
+//    $.scrollView.add(btn.getView());
+//
+//
+////    Add the slider
+//    var slider = Alloy.createWidget('com.netsmart.slider', null, {
+//        "defaultState":"0",
+//        "id":"sliderWidget"
+//    });
+//    $.scrollView.add(slider.getView());
+//});

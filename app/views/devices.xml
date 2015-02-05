@@ -12,8 +12,7 @@
                         <View class="container">
                             <Button bindId="btn" class="btn" onClick="btnClick" />
                             <View>
-                                <Slider bindId="slider" class="slider" onChange="updateSliderLbl" onStop="sendSliderVal" platform="ios"/>
-                                <Slider bindId="slider" class="slider" onStop="sendSliderVal" platform="android"/>
+                                <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
                                 <Label bindId="sliderLbl" class="sliderLbl" />
                             </View>
                         </View>
@@ -31,30 +30,24 @@
                 </Templates>
                 <RefreshControl id="refreshControlFav" platform="ios" />
                 <ListSection dataFilter="favFilter"
-                             dataFunction="updateUI" dataTransform="transformFunction"
+                             dataTransform="transformFunction"
                              dataCollection="$.device">
-                    <ListItem template="{template}" class="deviceItem" modelId="{modelId}" address="{address}" itemType="{type}" sortId="{sortId}"
-                              btn:title="{displayName}"
-                              slider:value="{sliderVal}" sliderLbl:text="{sliderVal}"
-                              groupLbl:text="{displayName}"
-                              sceneLbl:text="{displayName}" sceneBtnOn:title="On"
-                              sceneBtnOff:title="Off" />
+                    <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
                 </ListSection>
             </ListView>
             <ListView id="lightsListView" class="deviceListView" defaultItemTemplate="light">
                 <Templates>
                     <ItemTemplate name="light">
-                        <View class="container" onClick="btnClick">
-                            <Button id="btn" bindId="btn" class="btn"/>
+                        <View class="container">
+                            <Button bindId="btn" class="btn" onClick="btnClick" />
                             <View>
-                                <Slider bindId="slider" class="slider" onChange="updateSliderLbl" onStop="sendSliderVal" platform="ios"/>
-                                <Slider bindId="slider" class="slider" onStop="sendSliderVal" platform="android"/>
-                                <Label bindId="sliderLbl" class="sliderLbl"/>
+                                <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
+                                <Label bindId="sliderLbl" class="sliderLbl" />
                             </View>
                         </View>
                     </ItemTemplate>
                     <ItemTemplate name="groupLbl">
-                        <Label bindId="groupLbl" class="groupLbl"/>
+                        <Label bindId="groupLbl" class="groupLbl" />
                     </ItemTemplate>
                     <ItemTemplate name="scene">
                         <View class="container horizontal sceneContainer">
@@ -64,33 +57,26 @@
                         </View>
                     </ItemTemplate>
                 </Templates>
-                <RefreshControl id="refreshControlLights" platform="ios" />
-                <ListSection id="deviceListSectionLights" dataFilter="lightFilter"
+                <RefreshControl id="refreshControlFav" platform="ios" />
+                <ListSection dataFilter="lightFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
-                    <ListItem template="{template}" class="deviceItem" modelId="{modelId}" address="{address}"
-                              itemType="{type}" sortId="{sortId}"
-                              btn:title="{displayName}"
-                              slider:value="{sliderVal}" sliderLbl:text="{sliderVal}"
-                              groupLbl:text="{displayName}"
-                              sceneLbl:text="{displayName}" sceneBtnOn:title="On"
-                              sceneBtnOff:title="Off"/>
+                    <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
                 </ListSection>
             </ListView>
             <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="light">
                 <Templates>
                     <ItemTemplate name="light">
-                        <View class="container" onClick="btnClick" >
-                            <Button id="btn" bindId="btn" class="btn"/>
+                        <View class="container">
+                            <Button bindId="btn" class="btn" onClick="btnClick" />
                             <View>
-                                <Slider bindId="slider" class="slider" onChange="updateSliderLbl" onStop="sendSliderVal" platform="ios"/>
-                                <Slider bindId="slider" class="slider" onStop="sendSliderVal" platform="android"/>
-                                <Label bindId="sliderLbl" class="sliderLbl"/>
+                                <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
+                                <Label bindId="sliderLbl" class="sliderLbl" />
                             </View>
                         </View>
                     </ItemTemplate>
                     <ItemTemplate name="groupLbl">
-                        <Label bindId="groupLbl" class="groupLbl"/>
+                        <Label bindId="groupLbl" class="groupLbl" />
                     </ItemTemplate>
                     <ItemTemplate name="scene">
                         <View class="container horizontal sceneContainer">
@@ -100,17 +86,11 @@
                         </View>
                     </ItemTemplate>
                 </Templates>
-                <RefreshControl id="refreshControlScenes" platform="ios" />
-                <ListSection id="deviceListSectionScenes" dataFilter="sceneFilter"
+                <RefreshControl id="refreshControlFav" platform="ios" />
+                <ListSection dataFilter="sceneFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
-                    <ListItem template="{template}" class="deviceItem" modelId="{modelId}" address="{address}"
-                              itemType="{type}" sortId="{sortId}"
-                              btn:title="{displayName}"
-                              slider:value="{sliderVal}" sliderLbl:text="{sliderVal}"
-                              groupLbl:text="{displayName}"
-                              sceneLbl:text="{displayName}" sceneBtnOn:title="On"
-                              sceneBtnOff:title="Off"/>
+                    <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
                 </ListSection>
             </ListView>
         </ScrollableView>

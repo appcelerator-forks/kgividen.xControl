@@ -1,16 +1,18 @@
 {
-  "global": {
-    "theme": "default"
-  },
-  "env:development": {},
-  "env:test": {},
-  "env:production": {},
-  "os:android": {},
-  "os:blackberry": {},
-  "os:ios": {},
-  "os:mobileweb": {},
-  "dependencies": {
-    "ds.slideMenu": "0.1",
-    "com.mattmcfarland.fontawesome": "*"
-  }
+    "global": {
+        "theme": "default"
+    },
+    "env:development": {},
+    "env:test": {},
+    "env:production": {},
+    "os:android": {},
+    "os:blackberry": {},
+    "os:ios": {},
+    "os:mobileweb": {},
+    "dependencies": {
+        "ds.slideMenu": "0.1",
+        "com.mattmcfarland.fontawesome": "*",
+        "com.netsmart.buttonToggle": "1.0",
+        "com.netsmart.slider": "1.0"
+    }
 }
