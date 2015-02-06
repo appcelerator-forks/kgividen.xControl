@@ -5,9 +5,6 @@ Ti.App.Properties.setObject('conn_current', data);
 Ti.App.Properties.setObject('conn_Remote', data);
 Ti.App.Properties.setObject('conn_Local', data);
 
-
-
-
 //***************************MENU STUFF ***************************
 function createSideMenu(sections, controller) {
     var s = Ti.UI.createTableViewSection();
@@ -27,13 +24,14 @@ function createSideMenu(sections, controller) {
 function rowSelect(e) {
     switch(e.row.action) {
         case "favorites":
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
+            Ti.API.debug("children: " + JSON.stringify($.ds.contentview.getChildren()[0].getChildren()));
+            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
             break;
         case "lights":
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_LIGHTS);
+            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_LIGHTS);
             break;
         case "scenes":
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_SCENES);
+            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_SCENES);
             break;
         case "settings":
             $.destroy();
@@ -46,7 +44,7 @@ function rowSelect(e) {
             $.win.close();
             break;
         default:
-            $.ds.contentview.getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
+            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
     }
 }
 
