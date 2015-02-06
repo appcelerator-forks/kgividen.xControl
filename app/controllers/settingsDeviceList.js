@@ -182,34 +182,51 @@ $.chooseViewBar.addEventListener("click", function(e){
     }
 });
 
-
 //ANDROID MOVE ORDER OF ROWS IN TABLE VIEW CODE
-//$.devicesTableView.addEventListener('click', function(e) {
-//
-//    data = $.devicesTableView.data[0].rows;
-//    var action = e.source.action,
-//        index = e.index,
-//        isFirstRow = index === 0,
-//        isLastRow = index + 1 === data.length;
-//
-//    Ti.API.info("Clicked!!!!" + action);
-//
-//
-//    if(action === 'moveUp' && !isFirstRow) {
-//        swapRows(index, index - 1);
-//    } else if(action === 'moveDown' && !isLastRow) {
-//        swapRows(index, index + 1);
-//    }
-//
-//});
+function moveUp(e){
+    //Get the item we clicked on.
+    var item = e.section.getItemAt(e.itemIndex);
+    //Get the item above the item we clicked on
+    var itemAbove = e.section.getItemAt(e.itemIndex - 1);
 
-//function swapRows(indexOne, indexTwo) {
-//    Ti.API.info("swapRows");
-//    var temp = data[indexOne];
-//    data[indexOne] = data[indexTwo];
-//    data[indexTwo] = temp;
-//    $.devicesTableView.data = data;
-//}
+    var deviceId = item.properties.modelId;
+    var deviceIdAbove = itemAbove.properties.modelId;
+
+    var modelInView = $.deviceInViewCollection.where({DeviceId: deviceId, ViewId: viewId});
+    var modelInViewAbove = $.deviceInViewCollection.where({DeviceId: deviceIdAbove, ViewId: viewId});
+
+    //where returns an array but we just need the first one if it's there.
+    if (modelInView.length > 0) {
+        var newIndex = e.itemIndex-1;
+        modelInView[0].save({"SortId": newIndex}, {silent: true});
+        modelInViewAbove[0].save({"SortId": e.itemIndex}, {silent: true});
+    }
+
+    $.deviceCollection.sortById(viewId);
+
+}
+
+function moveDown(e){
+    var item = e.section.getItemAt(e.itemIndex);
+    //Get the item below the item we clicked on
+    var itemBelow = e.section.getItemAt(e.itemIndex + 1);
+
+    var deviceId = item.properties.modelId;
+    var deviceIdBelow = itemBelow.properties.modelId;
+
+    var modelInView = $.deviceInViewCollection.where({DeviceId: deviceId, ViewId: viewId});
+    var modelInViewBelow = $.deviceInViewCollection.where({DeviceId: deviceIdBelow, ViewId: viewId});
+
+    //where returns an array but we just need the first one if it's there.
+    if (modelInView.length > 0) {
+        var newIndex = e.itemIndex+1;
+        modelInView[0].save({"SortId": newIndex}, {silent: true});
+        modelInViewBelow[0].save({"SortId": e.itemIndex}, {silent: true});
+    }
+
+    $.deviceCollection.sortById(viewId);
+}
+
 
 
 

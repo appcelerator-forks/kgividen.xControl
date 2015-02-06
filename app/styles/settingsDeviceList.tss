@@ -73,3 +73,34 @@
         fontSize: 25
     }
 }
+
+
+//Android differences
+".deviceRowTypeLbl[platform=android]":{
+    left:'45%'
+},
+".deviceRowSwitch[platform=android]":{
+    left:'55%',
+},
+".deviceRowSortId[platform=android]":{
+    left:'77%',
+    color: 'black',
+    keyboardType : Ti.UI.KEYBOARD_DECIMAL_PAD,
+    clearOnEdit : true
+},
+".moveUp[platform=android]": {
+   text : '\uf0aa',  //unicode character for font-awesome
+   left:'77%',
+   font: {
+     fontFamily : "FontAwesome",
+     fontSize: 25
+   }
+},
+".moveDown[platform=android]": {
+    text : '\uf0ab',
+    left:'85%',
+    font: {
+        fontFamily : "FontAwesome",
+        fontSize: 25
+    }
+}
