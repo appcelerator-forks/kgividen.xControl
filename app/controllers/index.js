@@ -22,16 +22,21 @@ function createSideMenu(sections, controller) {
 
 //This is what happens when a menu row is selected.
 function rowSelect(e) {
+    if(osname =="android") {
+        var dsScrollView = $.ds.contentview.getChildren()[0].getChildren()[0];
+
+    }
+    var dsScrollView = (osname === "android") ? $.ds.contentview.getChildren()[0].getChildren()[1] : $.ds.contentview.getChildren()[0].getChildren()[0];
+    Ti.API.debug("dsScrollView: " + JSON.stringify(dsScrollView));
     switch(e.row.action) {
         case "favorites":
-            Ti.API.debug("children: " + JSON.stringify($.ds.contentview.getChildren()[0].getChildren()));
-            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
+            dsScrollView.scrollToView(VIEW_ID_FAVORITES);
             break;
         case "lights":
-            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_LIGHTS);
+            dsScrollView.scrollToView(VIEW_ID_LIGHTS);
             break;
         case "scenes":
-            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_SCENES);
+            dsScrollView.scrollToView(VIEW_ID_SCENES);
             break;
         case "settings":
             $.destroy();
@@ -44,7 +49,7 @@ function rowSelect(e) {
             $.win.close();
             break;
         default:
-            $.ds.contentview.getChildren()[0].getChildren()[0].scrollToView(VIEW_ID_FAVORITES);
+            dsScrollView.scrollToView(VIEW_ID_FAVORITES);
     }
 }
 

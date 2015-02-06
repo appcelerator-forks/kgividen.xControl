@@ -57,7 +57,7 @@
                         </View>
                     </ItemTemplate>
                 </Templates>
-                <RefreshControl id="refreshControlFav" platform="ios" />
+                <RefreshControl id="refreshControlLights" platform="ios" />
                 <ListSection dataFilter="lightFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
@@ -86,7 +86,7 @@
                         </View>
                     </ItemTemplate>
                 </Templates>
-                <RefreshControl id="refreshControlFav" platform="ios" />
+                <RefreshControl id="refreshControlScenes" platform="ios" />
                 <ListSection dataFilter="sceneFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
