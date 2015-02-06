@@ -65,13 +65,6 @@ if(osname == "android"){
             transform   :   imgTransform,      //Transform property to change during animation
             duration     : 800         //Duration for the animation in millisecond
         });
-//        var t = Ti.UI.create2DMatrix();
-//        var spin = Titanium.UI.createAnimation();
-//        var clicks = 0;
-//        clicks = clicks+1;
-//        var degrees = clicks *10;
-//        t = t.rotate(360);
-//        spin.transform = t.rotate(360);
         $.refreshBtn.animate(myAnimation);
         Ti.API.debug("Inside refresh control");
         return device.getAllDevicesStatus()
