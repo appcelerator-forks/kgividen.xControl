@@ -1,4 +1,11 @@
 eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=xControl
+iosLaunchConfigurationAttributes/appid=com.netsmartcompany.xControl
+iosLaunchConfigurationAttributes/certificate=NetSmart LLC (CKBRKJ257J)
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/sdk_version=8.1
+iosLaunchConfigurationAttributes/uuid=25b0928a-a4e0-43e5-a70b-379580f1c4a1
 provisioning_profiles/development/00A58E8F-0DD7-46DB-A761-4B06A57E14FF/appid=com.netsmartcompany.xControl
 provisioning_profiles/development/00A58E8F-0DD7-46DB-A761-4B06A57E14FF/name=xControl Dev
 provisioning_profiles/development/00A58E8F-0DD7-46DB-A761-4B06A57E14FF/uuid=00A58E8F-0DD7-46DB-A761-4B06A57E14FF

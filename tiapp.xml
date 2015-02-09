@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>com.netsmartcompany.xControl</id>
     <name>xControl</name>
-    <version>1.0</version>
+    <version>1.4</version>
     <publisher>kgividen</publisher>
     <url>http://</url>
     <description>not specified</description>
@@ -45,7 +45,7 @@
     <property name="ti.android.largeHeap">true</property>
     <!--<property name="ti.android.threadstacksize" type="int">32768</property>-->
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="4" android:versionName="1.3">
+        <manifest android:versionCode="5" android:versionName="1.4">
             <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>
             <supports-screens android:anyDensity="false"/>
             <!--android:largeScreens="true" android:normalScreens="true"

@@ -188,6 +188,10 @@ function moveUp(e){
     var item = e.section.getItemAt(e.itemIndex);
     //Get the item above the item we clicked on
     var itemAbove = e.section.getItemAt(e.itemIndex - 1);
+    Ti.API.debug("itemAbove : " + JSON.stringify(itemAbove));
+    if(!itemAbove){  //first one in the list
+        return;
+    }
 
     var deviceId = item.properties.modelId;
     var deviceIdAbove = itemAbove.properties.modelId;
@@ -209,7 +213,11 @@ function moveUp(e){
 function moveDown(e){
     var item = e.section.getItemAt(e.itemIndex);
     //Get the item below the item we clicked on
+
     var itemBelow = e.section.getItemAt(e.itemIndex + 1);
+    if(!itemBelow){  //last one in the list
+        return;
+    }
 
     var deviceId = item.properties.modelId;
     var deviceIdBelow = itemBelow.properties.modelId;

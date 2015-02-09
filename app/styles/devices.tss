@@ -5,6 +5,9 @@
 ".container" : {
       backgroundColor: 'transparent',
 },
+".horizontal" : {
+    layout:'horizontal'
+},
 ".deviceContainerView" : {
     zIndex:2,
     backgroundImage: '/images/themes/default/background.png',

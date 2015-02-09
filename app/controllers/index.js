@@ -1,9 +1,10 @@
 //TODO DEBUG
-var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"xabler"};
-Ti.API.info(data);
-Ti.App.Properties.setObject('conn_current', data);
-Ti.App.Properties.setObject('conn_Remote', data);
-Ti.App.Properties.setObject('conn_Local', data);
+//var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"xabler"};
+//var data = {"method":"https","server":"160.7.236.184","port":"3005","username":"kgividen","password":"xabler"};
+//Ti.API.info(data);
+//Ti.App.Properties.setObject('conn_current', data);
+//Ti.App.Properties.setObject('conn_Remote', data);
+//Ti.App.Properties.setObject('conn_Local', data);
 
 //***************************MENU STUFF ***************************
 function createSideMenu(sections, controller) {
@@ -27,7 +28,6 @@ function rowSelect(e) {
 
     }
     var dsScrollView = (osname === "android") ? $.ds.contentview.getChildren()[0].getChildren()[1] : $.ds.contentview.getChildren()[0].getChildren()[0];
-    Ti.API.debug("dsScrollView: " + JSON.stringify(dsScrollView));
     switch(e.row.action) {
         case "favorites":
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);

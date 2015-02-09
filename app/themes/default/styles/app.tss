@@ -85,10 +85,14 @@
 		fontSize:'16dp'
 	},
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	color:'#333',
+    //	color:'#fff',
 	// borderWidth : 2,
 	// borderColor : "#666",
 	borderRadius : 3,
+},
+
+"TextField[platform=android]":{
+    color: '#fff'
 },
 
 "Picker[platform=android]":{
