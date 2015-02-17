@@ -1,0 +1,11 @@
+"#container": {
+    height: Ti.UI.SIZE,
+    width: Ti.UI.SIZE
+},
+"#slider" : {
+    min : 0,
+    max : 100,
+    value : 0,
+    width : '42%',
+    left : '49%'
+},

@@ -1,0 +1,6 @@
+<Alloy>
+    <View id="container">
+        <Slider id="slider"></Slider>
+        <Label id="sliderLbl"></Label>
+    </View>
+</Alloy>
