@@ -23,8 +23,8 @@
                     <ItemTemplate name="scene">
                         <View class="container horizontal sceneContainer">
                             <Label bindId="sceneLbl" class="sceneLbl"/>
-                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="btnClick"/>
-                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="btnClick"/>
+                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
                         </View>
                     </ItemTemplate>
                 </Templates>
@@ -52,8 +52,8 @@
                     <ItemTemplate name="scene">
                         <View class="container horizontal sceneContainer">
                             <Label bindId="sceneLbl" class="sceneLbl"/>
-                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="btnClick"/>
-                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="btnClick"/>
+                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
                         </View>
                     </ItemTemplate>
                 </Templates>
@@ -81,8 +81,8 @@
                     <ItemTemplate name="scene">
                         <View class="container horizontal sceneContainer">
                             <Label bindId="sceneLbl" class="sceneLbl"/>
-                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="btnClick"/>
-                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="btnClick"/>
+                            <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+                            <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
                         </View>
                     </ItemTemplate>
                 </Templates>

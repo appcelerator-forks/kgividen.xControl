@@ -29,11 +29,26 @@
             <Button id="changeNetworkBtn"></Button>
             <View class="view-row-separator"/>
             <Label class="label-tableviewsection-header" text="SETTINGS" />
-            <TextField id="server" inputType="text" title="" hintText="Server IP/DNS" />
-            <TextField id="method" inputType="text" title="" hintText="HTTP or HTTPS" />
-            <TextField id="port" inputType="text" title="" hintText="Port" />
-            <TextField id="username" inputType="text" title="" hintText="Username" />
-            <TextField id="password" inputType="text" title="" hintText="Password" passwordMask="true"/>
+            <View class="row-container">
+                <Label class="label-title">Server</Label>
+                <TextField id="server" inputType="text" title="" hintText="Server IP/DNS" />
+            </View>
+            <View class="row-container">
+                <Label class="label-title">Method</Label>
+                <TextField id="method" inputType="text" title="" hintText="HTTP or HTTPS" />
+            </View>
+            <View class="row-container">
+                <Label class="label-title">Port</Label>
+                <TextField id="port" inputType="text" title="" hintText="Port" />
+            </View>
+            <View class="row-container">
+                <Label class="label-title">Username</Label>
+                <TextField id="username" inputType="text" title="" hintText="Username" />
+            </View>
+            <View class="row-container">
+                <Label class="label-title">Password</Label>
+                <TextField id="password" inputType="text" title="" hintText="Password" passwordMask="true"/>
+            </View>
             <View class="view-row-separator"/>
             <Button id="getListOfDevicesBtn">Update Devices</Button>>
             <Button id="clearData">Clear Data</Button>

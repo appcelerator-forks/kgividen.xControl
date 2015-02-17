@@ -133,7 +133,9 @@ function btnClick(e){
     var itemType = item.btn.type;
     var address = item.btn.address;
 
+    Ti.API.debug("Button Click!");
     Ti.API.debug("item.btn.address: " + item.btn.address + " type: " + itemType);
+    Ti.API.debug("item: " + JSON.stringify(item));
     if(!address){
         return;
     }
@@ -141,13 +143,30 @@ function btnClick(e){
         device.toggle(address)
             .then(updateStatus());
     }
-    if(itemType == "sceneBtnOn"){
-        device.sceneOn(address);
-        //todo: update status here?
+}
+
+function sceneOnBtn(e){
+    var item = e.section.items[e.itemIndex];
+    var address = item.btn.address;
+
+    Ti.API.debug("scene on!");
+    Ti.API.debug("item.btn.address: " + item.btn.address);
+    if(!address){
+        return;
     }
-    if(itemType == "sceneBtnOff"){
-        device.sceneOff(address);
+    device.sceneOn(address);
+}
+
+function sceneOffBtn(e){
+    var item = e.section.items[e.itemIndex];
+    var address = item.btn.address;
+
+    Ti.API.debug("scene off!");
+    Ti.API.debug("item.btn.address: " + item.btn.address);
+    if(!address){
+        return;
     }
+    device.sceneOff(address);
 }
 
 function updateSliderLbl(e) {

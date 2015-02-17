@@ -55,6 +55,7 @@ exports.toggle = function (address){
 };
 
 exports.sceneOn = function(address){
+    Ti.API.debug("Scene On!");
     var level = 255;
     deviceOn(address, level);
 };

@@ -15,4 +15,17 @@
 },
 "Label":{
     color:'black'
+},
+".label-title":{
+    color:"#eee",
+    shadowColor:'#000',
+    shadowOffset:{x:0.5, y:0.5},
+    font:{
+        fontFamily:Alloy.CFG.fontNormal,
+        fontSize:12
+    }
+}
+".row-container" : {
+    layout:'horizontal',
+    height:Ti.UI.SIZE,
 }
