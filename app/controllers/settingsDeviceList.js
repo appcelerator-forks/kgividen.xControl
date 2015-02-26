@@ -202,12 +202,11 @@ function updateDisplayName(e){
     var section = $.deviceListView.sections[e.sectionIndex];
     if(!_.isUndefined(e.itemIndex) && (!_.isUndefined(section))) {
         var item = section.getItemAt(e.itemIndex);
-        Ti.API.debug("item properties: " + JSON.stringify(item.properties));
-        Ti.API.debug("e.source.modelId: " + JSON.stringify(item.properties.modelId));
         var deviceModel = $.deviceCollection.get(item.properties.modelId);
         Ti.API.debug("deviceModel: " + JSON.stringify(deviceModel));
-        Ti.API.debug("e.source.value: " + JSON.stringify(e.source.value));
-        deviceModel.set({"displayName": e.source.value});
+        Ti.API.debug("e: " + JSON.stringify(e));
+        Ti.API.debug("e.value: " + JSON.stringify(e.value));
+        deviceModel.set({"displayName": e.value});
         deviceModel.save({silent: true});
     }
 }
