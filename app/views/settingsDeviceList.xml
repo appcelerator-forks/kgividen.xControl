@@ -17,14 +17,14 @@
                         <ItemTemplate name="template">
                             <Label bindId="moveUp" class="moveUp" onClick="moveUp" />
                             <Label bindId="moveDown" class="moveDown" onClick="moveDown" />
-                            <Label bindId="displayName" class="deviceRowLbl"/>
-                            <Label bindId="itemType" class="deviceRowTypeLbl" />
+                            <!--<Label bindId="displayName" class="deviceRowLbl"/>-->
+                            <Label bindId="itemType" class="deviceRowTypeIcon" />
+                            <TextField bindId="displayName" class="deviceRowLbl" onBlur="updateDisplayName"/>
                             <Switch bindId="deviceRowSwitch" class="deviceRowSwitch" onChange="deviceRowSwitchChanged"/>
                         </ItemTemplate>
                     </Templates>
                     <ListSection id="deviceListSection" dataTransform="doTransform" dataFunction="updateUI" dataTransform="transformFunction" dataCollection="$.deviceCollection">
-                        <ListItem class="deviceItem" modelId="{modelId}" displayName:text="{displayName}" itemType:text="{type}" sortId="{sortId}" deviceRowSwitch:value="{deviceRowSwitchVal}" platform="ios" />
-                        <ListItem class="deviceItem" modelId="{modelId}" sortId="{sortId}" displayName:text="{displayName}" itemType:text="{type}" sortId="{sortId}" deviceRowSwitch:value="{deviceRowSwitchVal}" platform="android" />
+                        <ListItem class="deviceItem" modelId="{modelId}" sortId="{sortId}" displayName:value="{displayName}" itemType:text="{typeIcon}" deviceRowSwitch:value="{deviceRowSwitchVal}" />
                     </ListSection>
                 </ListView>
                 <Widget id="fa" src="com.mattmcfarland.fontawesome"/>

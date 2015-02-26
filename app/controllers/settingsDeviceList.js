@@ -6,6 +6,15 @@ function transformFunction(model) {
     transform.viewId = viewId;
     transform.modelId = model.id;
 
+    var type = model.get("type");
+    if(type == "folder") {
+        transform.typeIcon = '\uf114';
+    } else if(type == "scene"){
+        transform.typeIcon = '\uf042';
+    } else if(type == "light"){
+        transform.typeIcon = '\uf0eb';
+    }
+
      //Check to see if model is in the current view
     transform.deviceRowSwitchVal = $.deviceCollection.where({DeviceId:model.id, ViewId:viewId}).length > 0;
 
@@ -68,6 +77,8 @@ function refreshDevices(){
 
 $.deviceListView.addEventListener('move', reportMove);
 function reportMove (e) {
+    Ti.API.debug("IN reportMove!");
+
     var item = e.section.getItemAt(e.itemIndex);
     var deviceId = item.properties.modelId;
     Ti.API.debug('Item ' + e.itemIndex + ' was ' + e.type + 'd! and new index is ' + e.targetItemIndex);
@@ -100,10 +111,13 @@ function updateViewsSortOrder(viewId){
             i++;
         }
     });
+
+
 }
 
 //onchange event for the Switch on the ListItem
 function deviceRowSwitchChanged(e) {
+    Ti.API.debug("IN DeviceRowSwitched!");
     Ti.API.debug("e: " + JSON.stringify(e));
     Ti.API.debug("e value: " + JSON.stringify(e.value));
 
@@ -182,8 +196,26 @@ $.chooseViewBar.addEventListener("click", function(e){
     }
 });
 
+function updateDisplayName(e){
+    Ti.API.debug("IN updateDisplayName!");
+
+    var section = $.deviceListView.sections[e.sectionIndex];
+    if(!_.isUndefined(e.itemIndex) && (!_.isUndefined(section))) {
+        var item = section.getItemAt(e.itemIndex);
+        Ti.API.debug("item properties: " + JSON.stringify(item.properties));
+        Ti.API.debug("e.source.modelId: " + JSON.stringify(item.properties.modelId));
+        var deviceModel = $.deviceCollection.get(item.properties.modelId);
+        Ti.API.debug("deviceModel: " + JSON.stringify(deviceModel));
+        Ti.API.debug("e.source.value: " + JSON.stringify(e.source.value));
+        deviceModel.set({"displayName": e.source.value});
+        deviceModel.save({silent: true});
+    }
+}
+
 //ANDROID MOVE ORDER OF ROWS IN TABLE VIEW CODE
 function moveUp(e){
+    Ti.API.debug("IN moveUp!");
+
     //Get the item we clicked on.
     var item = e.section.getItemAt(e.itemIndex);
     //Get the item above the item we clicked on
@@ -211,6 +243,8 @@ function moveUp(e){
 }
 
 function moveDown(e){
+    Ti.API.debug("IN moveDown!");
+
     var item = e.section.getItemAt(e.itemIndex);
     //Get the item below the item we clicked on
 
