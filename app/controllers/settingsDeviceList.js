@@ -159,8 +159,8 @@ $.closeBtn.addEventListener('click', function () {
 });
 
 $.win.addEventListener("close", function(){
-    $.destroy();
-    Ti.API.info("DESTROYING!!!!");
+    //$.destroy();
+    //Ti.API.info("DESTROYING!!!!");
 });
 
 $.win.addEventListener("open", function(){
@@ -203,9 +203,6 @@ function updateDisplayName(e){
     if(!_.isUndefined(e.itemIndex) && (!_.isUndefined(section))) {
         var item = section.getItemAt(e.itemIndex);
         var deviceModel = $.deviceCollection.get(item.properties.modelId);
-        Ti.API.debug("deviceModel: " + JSON.stringify(deviceModel));
-        Ti.API.debug("e: " + JSON.stringify(e));
-        Ti.API.debug("e.value: " + JSON.stringify(e.value));
         deviceModel.set({"displayName": e.value});
         deviceModel.save({silent: true});
     }

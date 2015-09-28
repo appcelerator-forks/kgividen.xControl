@@ -64,6 +64,7 @@ $.getListOfDevicesBtn.addEventListener('click', function () {
     saveConnectionInfo();
     //Alloy.Collections.deviceInView.fetch();
 //    Alloy.Globals.deviceInViewJSON = Alloy.Collections.deviceInView.toJSON(); //So we can access it in the tableViewRow
+    $.settingsWin.close();
     Alloy.createController('settingsDeviceList').getView().open();
 });
 

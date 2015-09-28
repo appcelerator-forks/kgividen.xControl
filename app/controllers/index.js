@@ -43,6 +43,11 @@ function rowSelect(e) {
             Alloy.createController("settings").getView().open();
             $.win.close();
             break;
+        case "updateDevices":
+            $.destroy();
+            Alloy.createController('settingsDeviceList').getView().open();
+            //$.win.close();
+            break;
         case "debug":
             $.destroy();
             Alloy.createController("debug").getView().open();
@@ -59,11 +64,17 @@ var rightMenu = [
         title: 'Menu',
         header: true
     },{
-        title: 'Settings',
+        title: 'Network Settings',
         type: 'menu',
         icon: 'fa-gear',
         iconColor: '#999',
         action: 'settings'
+    },{
+        title: 'Update/Edit Devices',
+        type: 'menu',
+        icon: 'fa-lightbulb-o',
+        iconColor: '#999',
+        action: 'updateDevices'
     }
 ];
 
