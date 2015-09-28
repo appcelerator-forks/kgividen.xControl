@@ -46,7 +46,7 @@ function rowSelect(e) {
         case "updateDevices":
             $.destroy();
             Alloy.createController('settingsDeviceList').getView().open();
-            //$.win.close();
+            $.win.close();
             break;
         case "debug":
             $.destroy();

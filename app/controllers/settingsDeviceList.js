@@ -150,11 +150,8 @@ function deviceRowSwitchChanged(e) {
 }
 //***************************LISTENERS**********************
 $.closeBtn.addEventListener('click', function () {
-//    if(osname == "android"){
-//        updateViewsSortOrderAndroid(viewId);
-//    }else{
     updateViewsSortOrder(viewId);
-//    }
+    Alloy.createController("index").getView().open();
     $.win.close();
 });
 
