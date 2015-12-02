@@ -23,7 +23,7 @@
                             <Switch bindId="deviceRowSwitch" class="deviceRowSwitch" onChange="deviceRowSwitchChanged"/>
                         </ItemTemplate>
                     </Templates>
-                    <ListSection id="deviceListSection" dataTransform="doTransform" dataFunction="updateUI" dataTransform="transformFunction" dataCollection="$.deviceCollection">
+                    <ListSection id="deviceListSection" dataFunction="updateUI" dataTransform="transformFunction" dataCollection="$.deviceCollection">
                         <ListItem class="deviceItem" modelId="{modelId}" sortId="{sortId}" displayName:value="{displayName}" itemType:text="{typeIcon}" deviceRowSwitch:value="{deviceRowSwitchVal}" />
                     </ListSection>
                 </ListView>

@@ -1,0 +1,19 @@
+"#scrollableView" : {
+    top:'1%',
+    height:'75%',
+    zIndex:2
+},
+".container" : {
+      backgroundColor: 'transparent',
+},
+".horizontal" : {
+    layout:'horizontal'
+},
+".cameraView" : {
+//    top:'1%',
+//    height:'75%',
+//    width:Ti.UI.Fill,
+    separatorColor: 'transparent',
+    backgroundColor: 'transparent',
+    borderWidth:0
+}

@@ -1,0 +1,6 @@
+<Alloy>
+    <View class="cameraView">
+        <ImageView height="640" width="480" id="camera1" />
+        <ImageView height="640" width="480" id="camera11" />
+    </View>
+</Alloy>

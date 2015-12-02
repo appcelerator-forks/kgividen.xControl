@@ -38,6 +38,11 @@ function rowSelect(e) {
         case "scenes":
             dsScrollView.scrollToView(VIEW_ID_SCENES);
             break;
+        case "cameras":
+            $.destroy();
+            Alloy.createController("camerasContainer").getView().open();
+            $.win.close();
+            break;
         case "settings":
             $.destroy();
             Alloy.createController("settings").getView().open();
@@ -118,6 +123,12 @@ var leftMenu = [
         icon: 'fa-adjust',
         iconColor: '#999',
         action: 'scenes'
+    },{
+        title: 'Cameras',
+        type: 'menu',
+        icon: 'fa-camera',
+        iconColor: '#999',
+        action: 'cameras'
     }
 ];
 
@@ -210,8 +221,12 @@ function startUI(){
     });
 
     //Empty the current contentView
-//    $.ds.contentview.removeAllChildren();
+    //$.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("devices").getView());
+
+    //tmp
+    //Alloy.createController("camerasContainer").getView().open();
+    //$.win.close();
 }
 
 if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here

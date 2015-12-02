@@ -1,0 +1,19 @@
+"#win":{
+    zIndex:2,
+    layout : 'vertical'
+},
+"View" : {
+    backgroundColor:'white'
+},
+"Label":{
+    color:'black'
+},
+"#scrollableView":{
+    top:'10%',
+    height: '75%'
+}
+//"#camera11":{
+//    zIndex:2,
+//    top:'10%',
+//    height: '75%'
+//}

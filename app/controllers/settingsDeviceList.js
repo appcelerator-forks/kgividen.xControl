@@ -111,8 +111,6 @@ function updateViewsSortOrder(viewId){
             i++;
         }
     });
-
-
 }
 
 //onchange event for the Switch on the ListItem

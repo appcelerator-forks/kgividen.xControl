@@ -1,0 +1,15 @@
+<Alloy>
+    <Window id="win" title="Cameras">
+        <ScrollableView id="scrollableView" showPagingControl="true">
+            <!--<View>-->
+                <!--<ImageView height="640" width="480" id="camera1" />-->
+                <!--<ImageView height="640" width="480" id="camera11" />-->
+            <!--</View>-->
+            <!--<View>-->
+                <!--<ImageView height="640" width="480" id="camera2" />-->
+                <!--<ImageView height="640" width="480" id="camera2" />-->
+            <!--</View>-->
+        </ScrollableView>
+        <Button id="closeBtn">Close</Button>
+    </Window>
+</Alloy>
