@@ -1,0 +1,3 @@
+[submodule "app/widgets/com.netsmartcompany.floatingActionButton"]
+	path = app/widgets/com.netsmartcompany.floatingActionButton
+	url = https://github.com/kgividen/com.netsmartcompany.floatingActionButton

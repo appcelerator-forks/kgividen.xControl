@@ -1,0 +1,39 @@
+<Alloy>
+    <Collection src="Device" id="deviceCollection"/>
+    <Collection src="DeviceInFolder" instance="true" id="d"/>
+
+    <Window id="addDeviceWindow" title="Add Devices" onBlur="exit" onOpen="refresh">
+        <ListView id="addDeviceListView" platform="ios,android" defaultItemTemplate="lightTemplate">
+
+            <Templates>
+                <ItemTemplate name="lightTemplate" class="item">
+                    <View class="listViewIconLabelRow">
+                        <Label class="lightIcon"/>
+                        <Label bindId="title" class="title" />
+                    </View>
+                </ItemTemplate>
+                <ItemTemplate name="sceneTemplate" class="item">
+                    <View class="listViewIconLabelRow">
+                        <Label class="sceneIcon"/>
+                        <Label bindId="title" class="title" />
+                    </View>
+                </ItemTemplate>
+                <ItemTemplate name="folderTemplate" class="item">
+                    <View class="listViewIconLabelRow">
+                        <Label class="folderIcon"/>
+                        <Label bindId="title" class="title" />
+                    </View>
+                </ItemTemplate>
+            </Templates>
+
+            <HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
+
+            <ListSection dataFilter="filter"
+                         dataTransform="transform"
+                         dataCollection="Device">
+                <ListItem template="{t}" itemId="{id}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" address="{address}" inFolder="{inFolder}" accessoryType="{accessoryType}"/>
+            </ListSection>
+
+        </ListView>
+    </Window>
+</Alloy>

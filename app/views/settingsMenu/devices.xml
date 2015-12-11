@@ -1,0 +1,59 @@
+<Alloy>
+	<Collection src="DeviceInFolder" instance="true" id="d"/>
+
+	<!-- create global instance of collection we'll bind -->
+	<Window id="devicesWin" title="Devices" onBlur="updateFolderSortOrder" onFocus="doOpen">
+		<Widget id="addDevicesFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
+
+		<RightNavButton platform='ios'>
+			<Button id="editDevicesBtn" onClick="editDevicesBtnClicked">Edit</Button>
+		</RightNavButton>
+		<Menu platform="android">
+			<MenuItem title="Edit" onClick="editDevicesBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+
+		<ListView id="devicesListView" platform="ios,android" defaultItemTemplate="lightTemplate" onEditaction="onEditactionClick">
+			<Templates>
+				<ItemTemplate name="lightTemplate" class="item">
+					<View class="listViewIconLabelRow">
+						<Label class="lightIcon"/>
+						<Label bindId="title" class="title" />
+					</View>
+				</ItemTemplate>
+				<ItemTemplate name="sceneTemplate" class="item">
+					<View class="listViewIconLabelRow">
+						<Label class="sceneIcon"/>
+						<Label bindId="title" class="title" />
+					</View>
+				</ItemTemplate>
+				<ItemTemplate name="folderTemplate" class="item">
+					<View class="listViewIconLabelRow">
+						<Label class="folderIcon"/>
+						<Label bindId="title" class="title" />
+					</View>
+				</ItemTemplate>
+				<ItemTemplate name="editTemplate" class="item" platform="android">
+					<Label bindId="title" class="title"/>
+					<Label class="trashIcon" onClick="deleteBtnClick"/>
+					<Label class="infoIcon" onClick="renameItemBtnClick"/>
+					<Label class="upIcon" onClick="moveUp"/>
+					<Label class="downIcon" onClick="moveDown"/>
+				</ItemTemplate>
+			</Templates>
+
+			<HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
+
+			<ListSection  id="devicesListSection"
+						  dataCollection="Device"
+						  dataFilter="filter"
+					 	  dataTransform="transform"
+				          dataFunction="updateUI">
+
+				<ListItem template="{t}" class="movableItem editableItem" itemId="{id}" itemAddress="{address}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" parent:text="{parent}"/>
+			</ListSection>
+
+		</ListView>
+
+	</Window>
+
+</Alloy>

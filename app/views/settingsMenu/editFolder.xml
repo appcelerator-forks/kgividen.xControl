@@ -1,0 +1,15 @@
+<Alloy>
+    <Collection src="Device" instance="true" id="dd"/>
+
+
+    <Window id="mainWindow" onOpen="doOpen">
+        <RightNavButton platform="ios">
+            <Button onClick="saveButtonClicked">Save</Button>
+        </RightNavButton>
+        <Menu platform="android">
+            <MenuItem title="Save" onClick="saveButtonClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+        </Menu>
+        <Label>Edit Folder Name</Label>
+        <TextField id="folderName" class="textField"/>
+    </Window>
+</Alloy>

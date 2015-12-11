@@ -1,0 +1,176 @@
+/*
+
+This is your global styles file. Selectors and rules you define
+here will be applied throughout your app. However, these rules
+have the lowest priority of any style settings.
+
+For more information, see the "Style Priorities" section of
+http://docs.appcelerator.com/titanium/latest/#!/guide/Alloy_Styles_and_Themes
+
+For example, the following would apply to all labels, windows,
+and text fields (depending on platform) in your app unless you
+overrode the settings with other TSS, XML, or JS settings:
+
+'Label[platform=android,windows]': {
+	color: '#000' // all platforms except Android and Windows default to black
+}
+
+'Window': {
+	backgroundColor: '#fff' // white background instead of default transparent or black
+}
+
+'TextField[platform=android]': {
+	height: Ti.UI.SIZE
+}
+
+*/
+
+'Window': {
+	backgroundColor: '#FFF'
+}
+
+'Window[platform=ios]': {
+	barColor: '#CD1625',
+	navTintColor: '#FFF',
+	translucent: false,
+	titleAttributes: {
+		color: '#FFF'
+	}
+}
+
+'Label': {
+	color: '#000'
+}
+
+'ListView': {
+	keepSectionsInSearch: true
+}
+
+'.title': {
+	left: 10,
+	width: '75%',
+	ellipsize: Ti.UI.TEXT_ELLIPSIZE_TRUNCATE_END,
+	height: Ti.UI.SIZE,
+	wordWrap: false,
+	font: {
+		fontSize: 18
+	}
+}
+
+".searchField": {
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	color: '#336699',
+	height: 40,
+	top:10,
+	bottom:10,
+	left:10,
+	right:10,
+	font:{fontSize:20,fontWeight:'bold'},
+	hintText: 'Search'
+}
+
+".textField": {
+     borderWidth: 2,
+     borderColor: '#bbb',
+     borderRadius: 5,
+     left:10,
+     right:10,
+     color :'black',
+     font: {fontSize:16},
+     suppressReturn:false,
+     autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+     autocorrect: true
+ }
+
+'.movableItem' : {
+	canMove:true
+}
+
+'.editableItem' : {
+	canEdit:true
+}
+
+'.fab': {
+    zIndex: 1000,
+    top: '75%',
+    left: '45%',
+    width: 40,
+    height: 40,
+    backgroundColor: '#9C9C9C',
+    borderWidth: 1,
+    borderColor: '#9C9C9C',
+    title: '\uf067',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    },
+    color: '#ffffff'
+}
+
+'.listViewIconLabelRow' : {
+	left : '5%',
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	layout : 'horizontal'
+}
+
+
+//ICONS
+'.infoIcon':{
+    text: '\uf129',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
+'.folderIcon':{
+    text: '\uf114',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
+'.trashIcon':{
+    text: '\uf014',
+    left: '85%',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
+'.sceneIcon':{
+    text: '\uf042',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
+'.lightIcon':{
+    text: '\uf0eb',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
+ ".upIcon[platform=android]": {
+    text : '\uf0aa',  //unicode character for font-awesome
+    left:'60%',
+    font: {
+      fontFamily : "FontAwesome",
+      fontSize: 30
+    }
+ }
+
+ ".downIcon[platform=android]": {
+     text : '\uf0ab',
+     left:'70%',
+     font: {
+         fontFamily : "FontAwesome",
+         fontSize: 30
+     }
+ }

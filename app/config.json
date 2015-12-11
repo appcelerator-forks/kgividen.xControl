@@ -13,6 +13,7 @@
         "ds.slideMenu": "0.1",
         "com.mattmcfarland.fontawesome": "*",
         "com.netsmart.buttonToggle": "1.0",
-        "com.netsmart.slider": "1.0"
+        "com.netsmart.slider": "1.0",
+        "com.netsmartcompany.floatingActionButton": "1.0"
     }
 }

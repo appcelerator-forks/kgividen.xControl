@@ -1,0 +1,17 @@
+'ListItem': {
+    canEdit: true,
+    canMove: true,
+    editActions: [
+        {
+            title: "DELETE",
+        },
+        {
+            color: "#028458",
+            title: "RENAME",
+        }
+    ]
+}
+
+'.infoIcon': {
+    left: '90%'
+}

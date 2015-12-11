@@ -1,0 +1,31 @@
+<Alloy>
+	<!-- iPhone: Use Ti.UI.iOS.NavigationWindow -->
+	<!--<NavigationWindow platform="ios" formFactor="handheld" id="navWin">-->
+	<NavigationWindow platform="ios" id="navWin">
+		<Require src="settingsMenu/folders" onAddFolderClicked="onAddFolderClicked" onEditFolderClicked="onEditFolderClicked" onSelect="onSelect" />
+	</NavigationWindow>
+
+	<!-- iPad: Use Ti.UI.iOS.SplitWindow -->
+	<!--<SplitWindow platform="ios" formFactor="tablet" id="splitWin" showMasterInPortrait="true">-->
+
+		<!--&lt;!&ndash; first child is used as masterView &ndash;&gt;-->
+		<!--<NavigationWindow>-->
+			<!--<Require src="folders" onSelect="onSelect" />-->
+		<!--</NavigationWindow>-->
+
+		<!--&lt;!&ndash; second child is used as devicesView &ndash;&gt;-->
+		<!--<NavigationWindow id="navWin">-->
+
+			<!--&lt;!&ndash; initial empty window &ndash;&gt;-->
+			<!--<Window>-->
+				<!--<Label>Select an article.</Label>-->
+			<!--</Window>-->
+
+		<!--</NavigationWindow>-->
+
+	<!--</SplitWindow>-->
+
+	<!-- Android: Use master as root window -->
+	<Require platform="android" id="foldersCtrl" src="settingsMenu/folders" onAddFolderClicked="onAddFolderClicked" onEditFolderClicked="onEditFolderClicked" onSelect="onSelect"  />
+
+</Alloy>
