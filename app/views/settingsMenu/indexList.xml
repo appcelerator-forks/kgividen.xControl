@@ -1,0 +1,41 @@
+<Alloy>
+		<TableView backgroundColor="#eee" class="tableview-form noScroll" onClick="loadFolders">
+
+			<TableViewSection>
+				<TableViewRow height="70">
+					<Label class="label-H5" textAlign="center">Choose a view to add lights, scenes, etc.</Label>
+				</TableViewRow>
+			</TableViewSection>
+
+			<TableViewSection>
+				<HeaderView>
+					<View class="view-headerview-form">
+						<Label class="label-tableviewsection-header" text="VIEWS"/>
+						<View class="view-row-separator" />
+					</View>
+				</HeaderView>
+
+				<TableViewRow class="row-option" viewName="Favorites" hasChild="true">
+					<View class="view-form-icon-title-row">
+						<Label class="heartIcon icon"></Label>
+						<Label class="title">Favorites</Label>
+					</View>
+				</TableViewRow>
+				<TableViewRow class="row-option" viewName="Lights" hasChild="true">
+					<View class="view-form-icon-title-row">
+						<Label class="lightIcon icon"></Label>
+						<Label class="title">Lights</Label>
+					</View>
+				</TableViewRow>
+				<TableViewRow class="row-option" viewName="Scenes" hasChild="true">
+					<View class="view-form-icon-title-row">
+						<Label class="sceneIcon icon"></Label>
+						<Label class="title">Scenes</Label>
+					</View>
+				</TableViewRow>
+
+			</TableViewSection>
+
+		</TableView>
+</Alloy>
+

@@ -3,6 +3,10 @@ var parentController = parameters.parentController || {};
 var callbackFunction = parameters.callback || null;
 
 // EVENT HANDLERS
+/**
+ * function called when save button clicked that executes the callback from the folders.js
+ * @param  {Object} event
+ */
 function saveButtonClicked(event) {
     var returnParams = {
         success : true,
@@ -12,7 +16,9 @@ function saveButtonClicked(event) {
     // return to comment.js controller to add new comment
     callbackFunction && callbackFunction(returnParams);
 }
-
+/**
+ * function to set the cursor on the text field for giving the new folder a name
+ */
 function doOpen() {
     // set focus to the text input field, but
     // use set time out to give window time to draw

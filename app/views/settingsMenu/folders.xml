@@ -1,23 +1,14 @@
 <Alloy>
-
-	<!-- create global instance of collection we'll bind -->
-	<Collection id="d" src="Device" />
-	<Collection src="DeviceInFolder" />
-
 	<Window id="foldersWin" title="Folders" onFocus="refresh">
 		<RightNavButton platform='ios'>
 			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
 		</RightNavButton>
-		<LeftNavButton platform='ios'>
-			<Button id="closeFolderBtn" onClick="closeFolderBtnClicked">Close</Button>
-		</LeftNavButton>
+
 		<Widget id="addFolderFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
 
 		<Menu platform="android">
 			<MenuItem id="editFolderBtn" title="Edit" onClick="editFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
-			<MenuItem id="closeFolderBtn" title="Close" onClick="closeFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
-
 		<ListView id="folderListView" platform="ios,android" defaultItemTemplate="template" onEditaction="onEditactionClick" onItemclick="select">
 
 			<!-- iOS RefreshControl -->
@@ -51,5 +42,4 @@
 		</ListView>
 
 	</Window>
-
 </Alloy>

@@ -32,7 +32,7 @@ function updateLightsStatus(nodesByAddressAndStatus){
 
 function favFilter(collection) {
     return collection.where({
-        ViewId:VIEW_ID_FAVORITES
+        //ViewId:VIEW_ID_FAVORITES
     });
 }
 
@@ -57,7 +57,7 @@ $.scrollableView.addEventListener("close", function(){
     Ti.API.info("DESTROY TABLEVIEW!!!");
 });
 
-if(osname == "android"){
+if(!OS_IOS){
     $.refreshBtn.addEventListener('click', function () {
         var imgTransform = Ti.UI.create2DMatrix().rotate(0,360);
         //Defines the Animation
@@ -72,7 +72,7 @@ if(osname == "android"){
     });
 }
 
-if(osname == "ios") {
+if(OS_IOS) {
     //todo: There should be a better way to do this rather than duplicate the control
     // but if the same one is added to multiple tableViews things crap out
     $.refreshControlFav.addEventListener('refreshstart', function refreshControl(){

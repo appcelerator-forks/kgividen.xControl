@@ -1,8 +1,13 @@
+'use strict';
+
+var args = arguments[0] || {};
+
 /**
  * self-executing function to organize otherwise inline constructor code
  * @param  {Object} args arguments passed to the controller
  */
 (function constructor(args) {
+    // execute constructor with optional arguments passed to controller
 
     var fakeData = require("/data/fakeData");
     fakeData.createFakeData();
@@ -13,124 +18,65 @@
     if (OS_IOS) {
         // open SplitWindow for iPad
         //if (Alloy.isTablet) {
-            //$.splitWin.open(params);
+        //$.splitWin.open(params);
 
-            // open NavigationWindow for iPhone
+        // open NavigationWindow for iPhone
         //} else {
         $.navWin.open();
         //}
     } else {
-        Ti.API.debug("opening foldersCTRL!!!");
-        $.foldersCtrl.getView().open();
+        //Ti.API.debug("opening foldersWin!!!");
+        $.win.open();
     }
 
-    // execute constructor with optional arguments passed to controller
+    //If the back button is hit it will go back to the index view.
+    if (!OS_IOS) {
+        $.win.addEventListener('android:back',function(e) {
+            Alloy.createController("index").getView().open();
+            $.destroy();
+            return false;
+        });
+    }
 })(arguments[0] || {});
 
-//function onFolderWindowClose(e) {
-//    Ti.API.debug("On window Close trigger!!!");
-//    $.destroy();
-//}
+
 
 
 
 
 /**
- * event listener set via view for the select-event of the folders controller
+ * event listener set via view for when the user clicks the close window button.
  * @param  {Object} e Event
  */
-function onSelect(e) {
-    'use strict';
 
-    // selected model passed with the event
-    var model = e.model;
-
-    var params = {
-        model: model
-    };
-
+function closeSettingsBtnClicked(e) {
+    Ti.API.debug("Settings window close button clicked");
+    Alloy.createController("index").getView().open();
     if (OS_IOS) {
-        params.navWin = $.navWin;
+        $.navWin.close();
+    } else {
+        $.win.close();
     }
+    $.destroy();
+}
 
-    //create the devices controller with the model and get its view
-    var win = Alloy.createController('settingsMenu/devices', params).getView();
 
-    //open the window in the NavigationWindow for iOS
+function loadFoldersCallback(e) {
+//create the devices controller with the model and get its view
+    Ti.API.debug("onLoadFolders e: " + JSON.stringify(e));
+    var params= {
+        "view": e.index,
+        "viewName" : e.row.viewName
+    };
+    var win = Alloy.createController('settingsMenu/folders', params).getView();
+
+//open the window in the NavigationWindow for iOS
     if (OS_IOS) {
-        $.navWin.openWindow(win);
+        $.navWin.openWindow(win);  //TODO we need to pass in the navWin as an Arg
     } else {
         win.open();   //simply open the window on top for Android (and other platforms)
     }
 }
 
-function onAddFolderClicked() {
-    Ti.API.debug("onAddFolderClicked");
-    var win = Alloy.createController("settingsMenu/addFolder", {
-        parentController: $,
-        callback: function (event) {
-            win.close();
-            addFolderCallback(event);
-        }
-    }).getView();
 
-    if (OS_IOS) {
-        $.navWin.openWindow(win);
-    } else {
-        win.open(); //simply open the window on top for Android (and other platforms)
-    }
-}
-
-
-function addFolderCallback(event) {
-    if (event.success) {
-        addFolder(event.content);
-    } else {
-        Ti.API.debug("No Folder Added");
-    }
-}
-
-function addFolder(content) {
-    Ti.API.debug(content);
-    var guid = Ti.Platform.createUUID();
-    var model = {
-        "name" : content,
-        "displayName" : content,
-        "address" : guid,
-        "type" : "folder"
-    };
-    Alloy.createModel('Device', model).save({}, {
-        success : function(model, response) {
-            Ti.API.debug('success: ' + model.toJSON());
-        },
-        error : function(e) {
-            Ti.API.error('error: ' + e.message);
-            alert('Error saving new name ' + e.message);
-        }
-    });
-}
-
-function onEditFolderClicked(e) {
-    Ti.API.debug("onEditFolderClicked");
-    var item = e.section.getItemAt(e.itemIndex);
-
-    var params = {
-        parentController: $,
-        item: item,
-        callback: function (event) {
-            win.close();
-        }
-    };
-
-    if (OS_IOS) {
-        params.navWin = $.navWin;
-    }
-
-    var win = Alloy.createController("settingsMenu/editFolder", params).getView();
-
-    if (OS_IOS) {
-        $.navWin.openWindow(win);
-    } else {
-        win.open(); //simply open the window on top for Android (and other platforms)
-    }
-}
+$.indexList.init({"loadFoldersCallback":loadFoldersCallback});

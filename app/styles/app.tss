@@ -34,7 +34,7 @@ overrode the settings with other TSS, XML, or JS settings:
 	navTintColor: '#FFF',
 	translucent: false,
 	titleAttributes: {
-		color: '#FFF'
+//		color: '#FFF'
 	}
 }
 
@@ -115,9 +115,21 @@ overrode the settings with other TSS, XML, or JS settings:
 }
 
 
+'.viewHorizontal' : {
+    layout : 'horizontal'
+}
+
 //ICONS
 '.infoIcon':{
     text: '\uf129',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
+'.heartIcon':{
+    text: '\uf08a',
     font: {
         fontFamily: 'FontAwesome',
         fontSize: 30
@@ -173,4 +185,13 @@ overrode the settings with other TSS, XML, or JS settings:
          fontFamily : "FontAwesome",
          fontSize: 30
      }
+ }
+
+
+ //Table Views
+ ".row": {
+   height:40,
+ },
+ ".row[platform=android formFactor=tablet]": {
+   height : 96
  }

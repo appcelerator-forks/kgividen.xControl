@@ -1,7 +1,18 @@
 var parameters = arguments[0] || {};
 
 Ti.API.debug("folders.js parameters:" + JSON.stringify(parameters));
-$.navWin = parameters.navWin;
+
+/**
+ * self-executing function to organize otherwise inline constructor code
+ * @param  {Object} args arguments passed to the controller
+ */
+(function constructor(args) {
+	$.foldersWin.title = parameters.viewName;
+	if(OS_IOS) {
+		$.navWin = parameters.navWin;
+	}
+})(parameters || {});
+
 
 /**
  * event listener added via view for the refreshControl (iOS) or button (Android)
@@ -56,9 +67,77 @@ function filter(collection) {
 	});
 }
 
+/**
+ * callback function that gets called after the addFolder view is closed so the folder is added.
+ * @param  {Object} e Event
+ */
+function addFolderCallback(event) {
+	if (event.success) {
+		addFolder(event.content);
+	} else {
+		Ti.API.debug("No Folder Added");
+	}
+}
 
 /**
- * event listener set via view for when the user selects a ListView item
+ *  function that adds a folder model.
+ * @param  {Object} e Event
+ */
+function addFolder(content) {
+	Ti.API.debug(content);
+	var guid = Ti.Platform.createUUID();
+	var model = {
+		"name" : content,
+		"displayName" : content,
+		"address" : guid,
+		"type" : "folder"
+	};
+	Alloy.createModel('Device', model).save({}, {
+		success : function(model, response) {
+			Ti.API.debug('success: ' + model.toJSON());
+		},
+		error : function(e) {
+			Ti.API.error('error: ' + e.message);
+			alert('Error saving new name ' + e.message);
+		}
+	});
+}
+
+/**
+ * Function to open a view to rename the folder.
+ * @param  {Object} e Event
+ */
+function editFolderClicked(e) {
+	Ti.API.debug("editFolderClicked function!!!");
+	var item = e.section.getItemAt(e.itemIndex);
+
+	var params = {
+		parentController: $,
+		item: item,
+		callback: function (event) {
+			win.close();
+		}
+	};
+
+	if (OS_IOS) {
+		params.navWin = $.navWin;
+	}
+
+	var win = Alloy.createController("settingsMenu/editFolder", params).getView();
+
+	if (OS_IOS) {
+		$.navWin.openWindow(win);
+	} else {
+		win.open(); //simply open the window on top for Android (and other platforms)
+	}
+}
+
+
+
+
+/**
+ * event listener set on view to open the devices view so devices can be added to the folder.
+ * On android if in edit mode this will open the editView so the folder can be renamed.
  * @param  {Object} e Event
  */
 function select(e) {
@@ -69,15 +148,28 @@ function select(e) {
 	// lookup the model
 	var model = Alloy.Collections.Device.get(e.itemId);
 
-	// trigger the select event on this controller, passing the model with it
-	// the index controller has an event listener for this event
-	//Setup the trigger for android if in edit mode.
+	// select event on this controller, passing the model with it
+	// Open the edit folder view for android if in edit mode to rename the view.
 	if(!OS_IOS && $.editMode) {
-		$.trigger('editFolderClicked', e); //Trigger is in index.xml
+		editFolderClicked(e);
 	} else {
-		$.trigger('select', {
+		var params = {
 			model: model
-		});
+		};
+
+		if (OS_IOS) {
+			params.navWin = $.navWin;
+		}
+
+		//create the devices controller with the model and get its view
+		var win = Alloy.createController('settingsMenu/devices', params).getView();
+
+		//open the window in the NavigationWindow for iOS
+		if (OS_IOS) {
+			$.navWin.openWindow(win);
+		} else {
+			win.open();   //simply open the window on top for Android (and other platforms)
+		}
 	}
 }
 
@@ -92,7 +184,7 @@ function onEditactionClick (e) {
 	$.addFolderFab.showMe();
 	if(e.action=="RENAME") {
 		//openRenameFolder(e)
-		$.trigger('editFolderClicked', e); //Trigger is in index.xml
+		editFolderClicked(e);
 
 	} else if (e.action=="DELETE") {
 		alert("You can't delete a folder yet");
@@ -100,26 +192,12 @@ function onEditactionClick (e) {
 }
 
 /**
- * event listener set via view for when the user clicks the close window button.
- * @param  {Object} e Event
- */
-
-function closeFolderBtnClicked(e) {
-	Ti.API.debug("Folder window close button clicked");
-	Alloy.createController("index").getView().open();
-	$.foldersWin.close();
-	$.destroy();
-	//$.trigger('folderWindowClose'); //Trigger is in index.xml
-
-
-}
-/**
- * event listener set via view for when the user clicks the edit button.
+ * event listener set via view for when the user clicks the edit button so they can move rename delete devices.
  * @param  {Object} e Event
  */
 
 function editFolderBtnClicked(e) {
-	Ti.API.debug("editFolderClicked!!!");
+	Ti.API.debug("editFolderBtnClicked!!!");
 	var btn = e.source;
 	if(btn.title == "Edit") {
 		btn.title = "Done";
@@ -149,18 +227,23 @@ function editFolderBtnClicked(e) {
 }
 
 /**
- * event listener set via index.xml view for when the user clicks the floating add button.
- */
-function addFolderClicked() {
-	Ti.API.debug("addFolderClicked!!!");
-    $.trigger('addFolderClicked', {}); //Trigger is in index.xml
-}
-
-/**
  * event listener set via view for when the user clicks the floating add button.
  */
 $.addFolderFab.onClick(function(e) {
-	addFolderClicked();
+	Ti.API.debug("addFolderClicked");
+	var win = Alloy.createController("settingsMenu/addFolder", {
+		parentController: $,
+		callback: function (event) {
+			win.close();
+			addFolderCallback(event);
+		}
+	}).getView();
+
+	if (OS_IOS) {
+		$.navWin.openWindow(win);
+	} else {
+		win.open(); //simply open the window on top for Android (and other platforms)
+	}
 });
 
 /**
