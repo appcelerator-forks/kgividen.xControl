@@ -25,7 +25,7 @@ function refreshDevicesInFolder(folderAddress) {
 		}
 	});
 
-	Ti.API.debug("refreshDevicesInFolder")
+	Ti.API.debug("refreshDevicesInFolder");
 
 }
 
