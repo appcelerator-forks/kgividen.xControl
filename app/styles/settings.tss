@@ -1,6 +1,7 @@
 "#win":{
     zIndex:2
 },
+
 ".tableview-form[platform=android]":{
     layout:'vertical'
 },
@@ -13,19 +14,24 @@
 "TableViewRow[platform=ios]":{
 	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE
 },
+
+".form-textField": {
+	color:'black',
+	hintTextColor:'gray',
+	height:Ti.UI.SIZE	
+}
+
 "Label":{
     color:'black'
 },
 ".label-title":{
-    color:"#eee",
-    shadowColor:'#000',
-    shadowOffset:{x:0.5, y:0.5},
-    font:{
-        fontFamily:Alloy.CFG.fontNormal,
-        fontSize:12
-    }
+	left:'5%',
+    color:'black',
+    width:"25%"
 }
 ".row-container" : {
     layout:'horizontal',
-    height:Ti.UI.SIZE,
+    height:Ti.UI.SIZE
 }
+
+

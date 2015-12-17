@@ -32,14 +32,13 @@ function saveConnectionInfo(){
     device.init();  //renews the connection information
 }
 
-
-//LISTENERS
-$.closeBtn.addEventListener('click', function () {
+function closeWin () {
     saveConnectionInfo();
     Alloy.createController("index").getView().open();
     $.settingsWin.close();
-});
+}
 
+//LISTENERS
 $.clearData.addEventListener('click', function () {
     Ti.API.info("DATA CLEARED!");
     var deviceCol = Alloy.Collections.device;

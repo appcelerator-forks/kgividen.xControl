@@ -1,5 +1,9 @@
 <Alloy>
     <Window id="settingsWin" class="vertical" title="Settings">
+		<Menu platform="android">
+			<MenuItem title="Save and Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+		
         <TableView class="tableview-form" platform="ios">
             <TableViewSection>
                 <TableViewRow><View class="view-row-separator"/></TableViewRow>
@@ -22,7 +26,7 @@
             <TableViewSection>
                 <TableViewRow><Button id="getListOfDevicesBtn">Update Devices</Button></TableViewRow>
                 <TableViewRow><Button id="clearData">Clear Data</Button></TableViewRow>
-                <TableViewRow><Button id="closeBtn">Save and Close</Button></TableViewRow>
+                <TableViewRow><Button id="closeBtn" onClick="closeWin">Save and Close</Button></TableViewRow>
             </TableViewSection>
         </TableView>
         <ScrollView class="tableview-form" platform="android">
@@ -31,28 +35,27 @@
             <Label class="label-tableviewsection-header" text="SETTINGS" />
             <View class="row-container">
                 <Label class="label-title">Server</Label>
-                <TextField id="server" inputType="text" title="" hintText="Server IP/DNS" />
+                <TextField id="server" class="form-textField" inputType="text" hintText="Server IP/DNS" />
             </View>
             <View class="row-container">
                 <Label class="label-title">Method</Label>
-                <TextField id="method" inputType="text" title="" hintText="HTTP or HTTPS" />
+                <TextField id="method" class="form-textField" inputType="text" hintText="HTTP or HTTPS" />
             </View>
             <View class="row-container">
                 <Label class="label-title">Port</Label>
-                <TextField id="port" inputType="text" title="" hintText="Port" />
+                <TextField id="port" class="form-textField" inputType="text" hintText="Port" />
             </View>
             <View class="row-container">
                 <Label class="label-title">Username</Label>
-                <TextField id="username" inputType="text" title="" hintText="Username" />
+                <TextField id="username" class="form-textField" inputType="text" hintText="Username" />
             </View>
             <View class="row-container">
                 <Label class="label-title">Password</Label>
-                <TextField id="password" inputType="text" title="" hintText="Password" passwordMask="true"/>
+                <TextField id="password" class="form-textField" inputType="text" hintText="Password" passwordMask="true"/>
             </View>
             <View class="view-row-separator"/>
             <Button id="getListOfDevicesBtn">Update Devices</Button>>
             <Button id="clearData">Clear Data</Button>
-            <Button id="closeBtn">Save and Close</Button>
         </ScrollView>
     </Window>
 </Alloy>
