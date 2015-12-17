@@ -1,13 +1,14 @@
 <Alloy>
-	<TableView class="tableview-form noScroll" onClick="loadFolders">
+	<TableView class="tableview-form noScroll bgroundColor" onClick="loadFolders">
 
 		<TableViewSection>
-			<TableViewRow height="70">
+			<TableViewRow class="bgroundColor" height="70">
 				<Label class="label-H5" textAlign="center">Choose a view to add lights, scenes, etc.</Label>
 			</TableViewRow>
 		</TableViewSection>
 
 		<TableViewSection>
+			
 			<TableViewRow class="row-option" viewName="Favorites" hasChild="true">
 				<View class="view-form-icon-title-row">
 					<Label class="heartIcon icon"></Label>

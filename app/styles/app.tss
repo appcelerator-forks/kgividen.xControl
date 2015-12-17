@@ -57,16 +57,17 @@ overrode the settings with other TSS, XML, or JS settings:
 	}
 }
 
-".searchField": {
+'.searchField': {
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	color: '#336699',
-	height: 40,
+	height: 50,
 	top:10,
 	bottom:10,
 	left:10,
 	right:10,
 	font:{fontSize:20,fontWeight:'bold'},
-	hintText: 'Search'
+	hintText: 'Search',
+	hintTextColor:'#9C9C9C'
 }
 
 ".textField": {
