@@ -1,5 +1,5 @@
 <Alloy>
-	<TableView backgroundColor="#eee" class="tableview-form noScroll" onClick="loadFolders">
+	<TableView class="tableview-form noScroll" onClick="loadFolders">
 
 		<TableViewSection>
 			<TableViewRow height="70">
@@ -8,12 +8,6 @@
 		</TableViewSection>
 
 		<TableViewSection>
-			<HeaderView>
-				<View class="view-headerview-form">
-					<Label class="label-tableviewsection-header" text="VIEWS"/>
-					<View class="view-row-separator" />
-				</View>
-			</HeaderView>
 			<TableViewRow class="row-option" viewName="Favorites" hasChild="true">
 				<View class="view-form-icon-title-row">
 					<Label class="heartIcon icon"></Label>
