@@ -28,7 +28,7 @@
 }
 
 ".view-form-icon-title-row": {
-    height:40
+    height:80
 }
 
 ".row-option": {
@@ -37,6 +37,10 @@
 
 "TableView[platform=ios]":{
 	separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
+},
+
+"TableView":{
+	width:'50%'
 },
 
 "TableViewRow":{

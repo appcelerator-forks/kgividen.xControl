@@ -4,15 +4,13 @@
     <name>xControl</name>
     <version>1.4.1</version>
     <publisher>kgividen</publisher>
-    <url>http://</url>
+    <url>http://www.netsmartcompany.com</url>
     <description>not specified</description>
     <copyright>2014 by kgividen</copyright>
     <icon>appicon.png</icon>
-    <fullscreen>true</fullscreen>
-    <navbar-hidden>true</navbar-hidden>
     <analytics>false</analytics>
     <guid>001fa5de-3290-4cd8-9444-a8af3282a918</guid>
-    <!--<property name="ti.ui.defaultunit" type="string">px</property>-->
+    <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
         <plist>
             <dict>
@@ -45,6 +43,7 @@
     <property name="ti.android.largeHeap">true</property>
     <!--<property name="ti.android.threadstacksize" type="int">32768</property>-->
     <android xmlns:android="http://schemas.android.com/apk/res/android">
+    	<tool-api-level>14</tool-api-level>
         <manifest android:versionCode="6" android:versionName="1.4.1">
             <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="23"/>
             <supports-screens android:anyDensity="false"/>
@@ -68,11 +67,9 @@
     </modules>
     <deployment-targets>
         <target device="android">true</target>
-        <target device="blackberry">false</target>
         <target device="ipad">true</target>
         <target device="iphone">true</target>
         <target device="mobileweb">false</target>
-        <target device="tizen">false</target>
     </deployment-targets>
     <sdk-version>5.1.1.GA</sdk-version>
     <plugins>

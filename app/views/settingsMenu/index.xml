@@ -11,7 +11,7 @@
 		</Window>
 	</NavigationWindow>
 
-	<Window platform="android" id="win">
+	<Window title="Views" navBarHidden="false" platform="android" id="win">
 		<Menu>
 			<MenuItem  title="Close" onClick="closeSettingsBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
