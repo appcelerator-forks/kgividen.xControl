@@ -70,7 +70,7 @@ function loadFoldersCallback(e) {
 
 //open the window in the NavigationWindow for iOS
     if (OS_IOS) {
-        $.navWin.openWindow(win);  //TODO we need to pass in the navWin as an Arg
+        $.navWin.openWindow(win);
     } else {
         win.open();   //simply open the window on top for Android (and other platforms)
     }
