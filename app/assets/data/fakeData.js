@@ -23,13 +23,6 @@ var createFakeData = function () {
         model.destroy({silent: true});
     }
 
-    Alloy.Collections.FolderInView.fetch();
-    var model;
-
-    while (model = Alloy.Collections.FolderInView.first()) {
-        model.destroy({silent: true});
-    }
-
     //*******START create fake data
 
     //Create a folder

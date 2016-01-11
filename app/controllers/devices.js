@@ -217,7 +217,7 @@ function sendSliderVal(e) {
     }
 }
 
-$.device.getDevicesInFolderView();
+// $.device.getDevicesInFolderView();
 updateStatus();
 
 
