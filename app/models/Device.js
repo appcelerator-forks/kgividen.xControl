@@ -38,47 +38,15 @@ exports.definition = {
 				//                Ti.API.info("In comparator! SortId: " + collection.get('SortId') + "collection: " + JSON.stringify(collection));
 				return collection.get('SortId');
 			},
-			// whereShowInView : function(viewId) {
-				// var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id WHERE ViewId=" + viewId;
+			// getDevicesInFolderView : function() {
+				// // var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id";
+				// var sql = "SELECT * FROM xControlDevices INNER JOIN xControlFolderInView ON xControlFolderInView.FolderAddress = xControlDevices.address";
+				// // var sql = "SELECT * FROM xControlDevices";
 				// Ti.API.info(sql);
 				// return this.fetch({
 					// query : sql
 				// });
 			// },
-			getDevicesInFolderView : function() {
-				// var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id";
-				var sql = "SELECT * FROM xControlDevices INNER JOIN xControlFolderInView ON xControlFolderInView.FolderAddress = xControlDevices.address";
-				// var sql = "SELECT * FROM xControlDevices";
-				Ti.API.info(sql);
-				return this.fetch({
-					query : sql
-				});
-			},
-			whereShow: function() {
-                //var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id";
-                var sql = "SELECT * FROM xControlDevices";
-                Ti.API.info(sql);
-                return this.fetch({
-                    query: sql
-                });
-            },
-			getSortedFoldersInView : function(viewId) {
-				// var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlFolderInView.FolderAddress, xControlFolderInView.ViewId, ifnull(xControlFolderInView.SortId,9999) as SortId FROM xControlDevices INNER JOIN xControlFolderInView ON xControlFolderInView.FolderAddress = xControlDevices.address WHERE xControlDevices.type='folder' AND ViewId=" + viewId;
-				var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlFolderInView.FolderAddress, xControlFolderInView.ViewId, ifnull(xControlFolderInView.SortId,9999) as SortId FROM xControlDevices INNER JOIN xControlFolderInView ON xControlFolderInView.FolderAddress = xControlDevices.address WHERE ViewId=" + viewId;
-				// var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlFolderInView.FolderAddress, xControlFolderInView.ViewId, ifnull(xControlFolderInView.SortId,9999) as SortId FROM xControlDevices INNER JOIN xControlFolderInView ON xControlFolderInView.FolderAddress = xControlDevices.address";
-
-				Ti.API.info("sql:" + sql);
-				return this.fetch({
-					query : sql
-				});
-			},
-			getDevicesByFolderAndViewAndSort : function(viewId) {
-				var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlDeviceInView.DeviceId, xControlDeviceInView.ViewId, xControlDeviceInFolder.ViewId as Blah, ifnull(xControlDeviceInView.SortId,9999) as SortId FROM xControlDevices LEFT JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id AND ViewId=" + viewId;
-				Ti.API.info(sql);
-				return this.fetch({
-					query : sql
-				});
-			},
 			sortById : function(viewId) {
 				var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlDeviceInView.DeviceId, xControlDeviceInView.ViewId, ifnull(xControlDeviceInView.SortId,9999) as SortId FROM xControlDevices LEFT JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id AND ViewId=" + viewId;
 

@@ -5,53 +5,67 @@ var _args = arguments[0] || {}, // Any passed in arguments will fall into this p
 /** 
  * Function to inialize the View, sets up the ListView
  */
-function init(){
-	// $.device.getSortedFoldersInView(VIEW_ID_FAVORITES);
-	$.device.getDevicesByFolderAndViewAndSort(VIEW_ID_FAVORITES);
-	// $.device.whereShow();
-	var folders = $.device.toJSON();
-	Ti.API.info("folders: " + JSON.stringify(folders));
+function init() {
+	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
+	var deviceInViewTable = Alloy.Collections.deviceInView.config.adapter.collection_name;
+	var deviceTable = Alloy.Collections.device.config.adapter.collection_name;
 	
-	/**
-	 * Group the data by first letter of last name to make it easier to create 
-	 * sections. (leverages the UndrescoreJS _.groupBy function)
-	 */
-	var folderGroups  = _.groupBy(folders, function(item){
+	
+	var sql = "SELECT " + deviceTable + ".id, " + deviceTable + ".name, " + deviceTable + ".displayName, " + deviceTable + ".address, " + deviceTable + ".type," +
+		" " + deviceTable + ".parent, " + deviceInViewTable + ".DeviceId, " + deviceInViewTable + ".ViewId, " + deviceInFolderTable + ".folderAddress," + 
+		" ifnull(" + deviceInViewTable + ".SortId,9999) as viewSortId" + 
+		" FROM " + deviceTable + " LEFT JOIN " + deviceInFolderTable +" ON " + deviceInFolderTable + ".deviceAddress = "+ deviceTable +".address" +
+		" LEFT JOIN " + deviceInViewTable + " ON " + deviceInViewTable + ".DeviceId = " + deviceTable + ".id AND ViewId=" + VIEW_ID_FAVORITES;
+	
+	Ti.API.debug("sql: " + sql);
+	$.device.fetch({
+		query:sql,
+		success: function (data) {
+			processDevicesInFolders(data.toJSON());
+		},
+		error: function () {
+			Ti.API.debug("refreshDevicesInFolder Failed!!!");
+		}
+	});
+}
+	
+function processDevicesInFolders(devicesAndFolders) {
+	//Filter the folders themselves out of the list before grouping.
+	var listOfFolders = [];
+	var folders = _.filter(devicesAndFolders, function (folder) {
+		if (folder.type == "folder") {
+			listOfFolders.push(folder);
+		} else {
+			return folder.type != "folder";	
+		}
+
+	});
+	
+	 // Group the data by folder to make it easier to createsections. 
+	folders  = _.groupBy(folders, function(item){
 	 	return item.FolderAddress;
 	});
-	Ti.API.info("folderGroups: " + JSON.stringify(folderGroups));
 	
-	
-	//TODO Iterate through the folders and add all the devices to the folders that are needed.
-	// folders[0].devices = [
-			// {
-				// displayName: "Device1"
-			// },
-			// {
-				// displayName: "Device2"
-			// }];
-			
-	// folders[1].devices = [
-			// {
-				// displayName: "Device3"
-			// },
-			// {
-				// displayName: "Device4"
-			// }];
-	
-	/**
-	 * Sorts the `folders` array by the SortId (leverages UnderscoreJS _.sortBy function)
-	 */
-	folders = _.sortBy(folders, function(folder){
-		Ti.API.info("folder: " + JSON.stringify(folder));
-		return folder.SortId
+	//folders are grouped by the folders address.  We need it to show the display name instead of the address so we'll replace it with that.
+	var tempObj = {};
+	_.each(folders, function(folder, i) {
+		tempObj[_.findWhere(listOfFolders, {address:i}).displayName] = folder; 
 	});
+	folders=tempObj;
+	Ti.API.info("folder after replacing names: " + JSON.stringify(folders));
+
+
+	// /**
+	 // * Sorts the `folders` array by the SortId (leverages UnderscoreJS _.sortBy function)
+	 // */
+	// folders = _.sortBy(folders, function(folder){
+		// Ti.API.info("folderInSort: " + JSON.stringify(folder));
+		// return folder.SortId
+	// });
 	
-	/**
-	 * IF the folders array exists
-	 */
+
+
 	if(folders) {
-		
 		/**
 		 * Setup our Indexes and Sections Array for building out the ListView components
 		 * 
@@ -59,57 +73,46 @@ function init(){
 		indexes = [];
 		var sections = [];
 		
-		/**
-		 * Group the data by first letter of last name to make it easier to create 
-		 * sections. (leverages the UndrescoreJS _.groupBy function)
-		 */
-		// var folderGroups  = _.groupBy(folders, function(item){
-		 	// return item.name.charAt(0);
-		// });
-        
-        // Ti.API.info("folderGroups: " + JSON.stringify(folderGroups));
-        /**
-         * Iterate through each folder and prepare the data for the ListView
-         * (Leverages the UnderscoreJS _.each function)
-         */
-		_.each(folders, function(folder){
+        // /**
+         // * Iterate through each folder and prepare the data for the ListView
+         // * (Leverages the UnderscoreJS _.each function)
+         // */
+		_.each(folders, function(folder, i){
         	Ti.API.info("folder: " + JSON.stringify(folder));
+        	Ti.API.info("i: " + JSON.stringify(i));
 			/**
 			 * Take the group data that is passed into the function, and parse/transform
 			 * it for use in the ListView templates as defined in the folders.xml file.
 			 */
-			var dataToAdd = preprocessForListView(folder.devices);
+			var dataToAdd = preprocessForListView(folder);
         	Ti.API.info("dataToAdd: " + JSON.stringify(dataToAdd));
 			/**
 			 * Check to make sure that there is data to add to the table,
 			 * if not lets exit
 			 */
 			if(dataToAdd.length < 1) return;
-			
-			
+
 			/**
 			 * Lets take the name of the Folder and push it onto the index
 			 * Array - this will be used to generate the indices for the ListView on IOS
 			 */
 			indexes.push({
 				index: indexes.length,
-				title: folder.name
+				title: i
 			});
 
 			/**
 			 * Create the ListViewSection header view
 			 */
 
-			 var sectionHeader = Ti.UI.createView({
-			 	// class:"groupLbl"
-			 });
+			 var sectionHeader = Ti.UI.createView();
 			
 
 			 /**
 			  * Create and Add the Label to the ListView Section header view
 			  */
 			 var sectionLabel = Ti.UI.createLabel({
-			 	text: folder.name
+			 	text: i
 			 });
 			 
 			 /**
@@ -146,7 +149,7 @@ function init(){
 		 */
 		$.favoritesListView.sections = sections;
 	}
-};
+}
 
 /**
  *	Convert an array of data from a JSON format into a format that can be added to the ListView

@@ -1,3 +1,4 @@
+//TODO DELETE THIS IF WE DON'T NEED IT
 exports.definition = {
     config : {
         "columns" : {

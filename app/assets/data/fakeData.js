@@ -63,7 +63,7 @@ var createFakeData = function () {
         "displayName" : "Dining Light",
         "address" : "12323234",
         "type" : "light",
-        "parent" : "123"
+        "parent" : ""
     };
 
     Alloy.createModel('Device', model).save({silent: true});
@@ -73,7 +73,7 @@ var createFakeData = function () {
         "displayName" : "Dining L2",
         "address" : "111111",
         "type" : "light",
-        "parent" : "123"
+        "parent" : ""
     };
     Alloy.createModel('Device', model).save({silent: true});
 
@@ -82,7 +82,7 @@ var createFakeData = function () {
         "displayName" : "Kitchen Light",
         "address" : "22222",
         "type" : "light",
-        "parent" : "29764"
+        "parent" : ""
     };
     Alloy.createModel('Device', model).save({silent: true});
 
@@ -91,7 +91,7 @@ var createFakeData = function () {
         "displayName" : "Kitchen Scene",
         "address" : "111",
         "type" : "scene",
-        "parent" : "29764"
+        "parent" : ""
     };
     Alloy.createModel('Device', model).save({silent: true});
 
@@ -105,6 +105,13 @@ var createFakeData = function () {
 
     var model = {
         "DeviceAddress" : "111111",
+        "FolderAddress" : "123",       //dining
+        "SortId" : 0
+    };
+    Alloy.createModel('DeviceInFolder', model).save({silent: true});
+    
+    var model = {
+        "DeviceAddress" : "1",
         "FolderAddress" : "123",       //dining
         "SortId" : 0
     };
@@ -126,29 +133,6 @@ var createFakeData = function () {
     };
 
     Alloy.createModel('DeviceInView', model).save({silent: true});
-    
-    
-    //Add a folder into a VIEW (i.e. Favorites)
-    model = {
-        "FolderAddress" : "123",
-        "ViewId" : "1",
-        "SortId" : 0
-    };
-    Alloy.createModel('FolderInView', model).save({silent: true});
-    
-    model = {
-        "FolderAddress" : "29764",
-        "ViewId" : "0",
-        "SortId" : 0
-    };
-    Alloy.createModel('FolderInView', model).save({silent: true});
-
-    model = {
-        "FolderAddress" : "222",
-        "ViewId" : "1",
-        "SortId" : 0
-    };
-    Alloy.createModel('FolderInView', model).save({silent: true});
 };
 
 exports.createFakeData = createFakeData;

@@ -30,6 +30,7 @@ function refresh(e) {
 	 * callback for fetch, both success and error
 	 * @param  {Object} e Event
 	 */
+	//TODO afterFetch isn't being used right now because we are using sortById...so the refreshControl isn't working right...we need to figure that out.
 	function afterFetch(col, res) {
         Ti.API.debug("Finished afterFetch in folders.js!!!!!");
 		// for iOS end the refreshing animation

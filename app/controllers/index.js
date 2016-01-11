@@ -233,9 +233,7 @@ function startUI(){
 
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
-    // $.ds.contentview.add(Alloy.createController("folders").getView());
-    // $.ds.contentview.add(Alloy.createController("settingsMenu/index.js").getView().open());
-     Alloy.createController('/settingsMenu/index').getView().open();
+    $.ds.contentview.add(Alloy.createController("folders").getView());
     // $.ds.contentview.add(Alloy.createController("devices").getView());
     // $.ds.contentview.add(Alloy.createController("debug").getView().open());
 

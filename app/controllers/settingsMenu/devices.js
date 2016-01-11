@@ -9,7 +9,7 @@ var preEditSectionAndItems = [];
  * @param {Object} String
  */
 function refreshDevicesInFolder(folderAddress) {
-	var deviceInFolderTable = Alloy.Collections.DeviceInFolder.config.adapter.collection_name;
+	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
 	var deviceTable = Alloy.Collections.Device.config.adapter.collection_name;
 	var sql = "SELECT * FROM xControlDevices INNER JOIN " + deviceInFolderTable +
 		" ON " + deviceInFolderTable + ".DeviceAddress =  "+ deviceTable + ".address " +
