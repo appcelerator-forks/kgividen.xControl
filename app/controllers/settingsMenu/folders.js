@@ -1,15 +1,16 @@
 var parameters = arguments[0] || {};
 
-Ti.API.debug("folders.js parameters:" + JSON.stringify(parameters));
+Ti.API.info("folders.js parameters:" + JSON.stringify(parameters));
 
 /**
  * self-executing function to organize otherwise inline constructor code
  * @param  {Object} args arguments passed to the controller
  */
 (function constructor(args) {
-	$.foldersWin.title = parameters.viewName;
+	$.foldersWin.title = args.viewName;
 	if(OS_IOS) {
-		$.navWin = parameters.navWin;
+		$.navWin = args.navWin;
+		Ti.API.info("$.navWin constructor: " + JSON.stringify($.navWin));
 	}
 })(parameters || {});
 
@@ -169,6 +170,7 @@ function select(e) {
 
 		//open the window in the NavigationWindow for iOS
 		if (OS_IOS) {
+			Ti.API.info("$.navWin: " + JSON.stringify($.navWin));
 			$.navWin.openWindow(win);
 		} else {
 			win.open();   //simply open the window on top for Android (and other platforms)

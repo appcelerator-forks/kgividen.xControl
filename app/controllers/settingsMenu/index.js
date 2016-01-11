@@ -63,7 +63,8 @@ function loadFoldersCallback(e) {
     Ti.API.debug("onLoadFolders e: " + JSON.stringify(e));
     var params= {
         "view": e.index,
-        "viewName" : e.row.viewName
+        "viewName" : e.row.viewName,
+        "navWin" : $.navWin
     };
     var win = Alloy.createController('settingsMenu/folders', params).getView();
 
