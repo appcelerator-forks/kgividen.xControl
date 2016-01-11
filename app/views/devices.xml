@@ -18,7 +18,7 @@
                         </View>
                     </ItemTemplate>
                     <ItemTemplate name="groupLbl">
-                            <Label bindId="groupLbl" class="groupLbl" />
+                        <Label bindId="groupLbl" class="groupLbl" />
                     </ItemTemplate>
                     <ItemTemplate name="scene">
                         <View class="container horizontal sceneContainer">

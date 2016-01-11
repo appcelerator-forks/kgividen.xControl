@@ -16,6 +16,20 @@ var createFakeData = function () {
         model.destroy({silent: true});
     }
 
+    Alloy.Collections.DeviceInView.fetch();
+    var model;
+
+    while (model = Alloy.Collections.DeviceInView.first()) {
+        model.destroy({silent: true});
+    }
+
+    Alloy.Collections.FolderInView.fetch();
+    var model;
+
+    while (model = Alloy.Collections.FolderInView.first()) {
+        model.destroy({silent: true});
+    }
+
     //*******START create fake data
 
     //Create a folder
@@ -31,6 +45,14 @@ var createFakeData = function () {
         "name" : "Dining Room Folder",
         "displayName" : "Dining Room Folder",
         "address" : "123",
+        "type" : "folder"
+    };
+    Alloy.createModel('Device', model).save({silent: true});
+    
+    var model = {
+        "name" : "Blah Folder",
+        "displayName" : "Blah Folder",
+        "address" : "222",
         "type" : "folder"
     };
     Alloy.createModel('Device', model).save({silent: true});
@@ -104,9 +126,29 @@ var createFakeData = function () {
     };
 
     Alloy.createModel('DeviceInView', model).save({silent: true});
+    
+    
+    //Add a folder into a VIEW (i.e. Favorites)
+    model = {
+        "FolderAddress" : "123",
+        "ViewId" : "1",
+        "SortId" : 0
+    };
+    Alloy.createModel('FolderInView', model).save({silent: true});
+    
+    model = {
+        "FolderAddress" : "29764",
+        "ViewId" : "0",
+        "SortId" : 0
+    };
+    Alloy.createModel('FolderInView', model).save({silent: true});
 
-    //alert("Fake Data created");
-    //******END Create FAKE DATA
+    model = {
+        "FolderAddress" : "222",
+        "ViewId" : "1",
+        "SortId" : 0
+    };
+    Alloy.createModel('FolderInView', model).save({silent: true});
 };
 
 exports.createFakeData = createFakeData;

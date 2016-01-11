@@ -1,7 +1,17 @@
+var fakeData = require("/data/fakeData");
+fakeData.createFakeData();
+
 $.printDeviceInViewBtn.addEventListener('click', function () {
     var blah = $.deviceInView;
     $.deviceInView.fetch();
     Ti.API.info("deviceInView: " + JSON.stringify(blah));
+    $.output.value = JSON.stringify(blah);
+});
+
+$.printFolderInViewBtn.addEventListener('click', function () {
+    var blah = $.folderInView;
+    $.folderInView.fetch();
+    Ti.API.info("folderInView: " + JSON.stringify(blah));
     $.output.value = JSON.stringify(blah);
 });
 
@@ -19,9 +29,17 @@ $.printViewBtn.addEventListener('click', function () {
     $.output.value = JSON.stringify(blah);
 });
 
+// $.printSortByIdBtn.addEventListener('click', function () {
+    // var blah = $.device;
+    // blah.sortById(1);
+    // Ti.API.info("printSortById: " + JSON.stringify(blah));
+    // $.output.value = JSON.stringify(blah);
+// });
+
 $.printSortByIdBtn.addEventListener('click', function () {
     var blah = $.device;
-    blah.sortById(1);
+    blah.getSortedFoldersInView(1);
+    // blah.sortById(1);
     Ti.API.info("printSortById: " + JSON.stringify(blah));
     $.output.value = JSON.stringify(blah);
 });

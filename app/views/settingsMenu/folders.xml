@@ -30,7 +30,7 @@
 				</ItemTemplate>
 			</Templates>
 
-			<HeaderView><TextField id="sf" class="searchField" clearOnEdit="Ti.UI.INPUT_BUTTONMODE_ALWAYS"></TextField></HeaderView>
+			<HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
 			<ListSection id="folderSection" dataFilter="filter"
 						 dataCollection="Device"
 						 dataTransform="transform"

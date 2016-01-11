@@ -44,7 +44,6 @@ function refreshDevices(){
         //Add all of the new records in the collection that came from the hardware device.
         var devicesInDB = $.deviceCollection;
         devicesInDB.sortById(viewId);
-//        devicesInDB.whereShow();
 
         _.each(data, function (item) {
             //We only want to add new devicesInDB.

@@ -20,10 +20,10 @@ Ti.API.debug("folders.js parameters:" + JSON.stringify(parameters));
  */
 function refresh(e) {
 	'use strict';
-
+	Ti.API.info("THIS IS IN THE REFRESH!!!");
 	// if we were called from the constructor programmatically show the refresh animation
 	if (OS_IOS && !e) {
-		$.refreshControl.beginRefreshing();
+		// $.refreshControl.beginRefreshing();
 	}
 
 	/**
@@ -34,15 +34,17 @@ function refresh(e) {
         Ti.API.debug("Finished afterFetch in folders.js!!!!!");
 		// for iOS end the refreshing animation
 		if (OS_IOS) {
-			$.refreshControl.endRefreshing();
+			// $.refreshControl.endRefreshing();
 		}
 	}
 
 	// let the collection fetch data from it's data source
-	Alloy.Collections.Device.fetch({
-		success: afterFetch,
-		error: afterFetch
-	});
+	// Alloy.Collections.Device.fetch({
+		// success: afterFetch,
+		// error: afterFetch
+	// });
+	
+	Alloy.Collections.Device.sortById("1");
 }
 
 /**

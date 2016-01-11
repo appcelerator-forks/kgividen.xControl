@@ -27,4 +27,4 @@ device.init();
 
 var Q = require('/q');
 
-var xDebug = false;
+var xDebug = true;

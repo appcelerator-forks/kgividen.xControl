@@ -9,9 +9,6 @@ var args = arguments[0] || {};
 (function constructor(args) {
     // execute constructor with optional arguments passed to controller
 
-    var fakeData = require("/data/fakeData");
-    fakeData.createFakeData();
-
     // use strict mode for this function scope
     'use strict';
 

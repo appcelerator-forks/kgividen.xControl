@@ -58,6 +58,11 @@ function rowSelect(e) {
             Alloy.createController("debug").getView().open();
             $.win.close();
             break;
+        case "folders":
+            $.destroy();
+            Alloy.createController("folders").getView().open();
+            $.win.close();
+            break;
         default:
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);
     }
@@ -80,6 +85,12 @@ var rightMenu = [
         icon: 'fa-lightbulb-o',
         iconColor: '#999',
         action: 'updateDevices'
+    },{
+        title: 'FoldersTemp',
+        type: 'menu',
+        icon: 'fa-lightbulb-o',
+        iconColor: '#999',
+        action: 'folders'
     }
 ];
 
@@ -222,7 +233,11 @@ function startUI(){
 
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("devices").getView());
+    // $.ds.contentview.add(Alloy.createController("folders").getView());
+    // $.ds.contentview.add(Alloy.createController("settingsMenu/index.js").getView().open());
+     Alloy.createController('/settingsMenu/index').getView().open();
+    // $.ds.contentview.add(Alloy.createController("devices").getView());
+    // $.ds.contentview.add(Alloy.createController("debug").getView().open());
 
     //tmp
     //Alloy.createController("camerasContainer").getView().open();

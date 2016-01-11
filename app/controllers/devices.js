@@ -1,3 +1,15 @@
+(function constructor(args) {
+    // execute constructor with optional arguments passed to controller
+
+    // use strict mode for this function scope
+    'use strict';
+
+})(arguments[0] || {});
+
+
+
+
+
 var updateStatus = function (){
     return device.getAllDevicesStatus().then(updateLightsStatus);
 };
@@ -32,7 +44,7 @@ function updateLightsStatus(nodesByAddressAndStatus){
 
 function favFilter(collection) {
     return collection.where({
-        //ViewId:VIEW_ID_FAVORITES
+        ViewId:VIEW_ID_FAVORITES
     });
 }
 
@@ -47,9 +59,6 @@ function sceneFilter(collection){
         ViewId:VIEW_ID_SCENES
     });
 }
-
-$.device.whereShow();
-updateStatus();
 
 //LISTENERS
 $.scrollableView.addEventListener("close", function(){
@@ -207,6 +216,10 @@ function sendSliderVal(e) {
         }
     }
 }
+
+$.device.getDevicesInFolderView();
+updateStatus();
+
 
 
 //$.device.map(function(d){

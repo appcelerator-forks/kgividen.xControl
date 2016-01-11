@@ -1,8 +1,17 @@
 <Alloy>
     <Collection id="deviceInView" src="DeviceInView" instance="true"/>
+    <Collection id="folderInView" src="FolderInView" instance="true"/>
     <Collection id="device" src="Device" instance="true"/>
+    
+	<Collection src="Device" />
+	<Collection src="DeviceInFolder" />
+	<Collection src="DeviceInView" />
+	<Collection src="FolderInView" />
+	
+	
     <Window id="win" backgroundColor="white" layout="vertical">
         <Button top="30" id="printDeviceInViewBtn">Print DeviceInView Table</Button>
+        <Button id="printFolderInViewBtn">Print FolderInView Table</Button>
         <Button id="printDeviceBtn">Print Device Table</Button>
         <Button id="printViewBtn">Print View Table</Button>
         <Button id="printSortByIdBtn">printSortById</Button>
