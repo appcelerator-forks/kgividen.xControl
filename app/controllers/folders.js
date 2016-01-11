@@ -3,9 +3,10 @@ var _args = arguments[0] || {}, // Any passed in arguments will fall into this p
 	indexes = [];  // Array placeholder for the ListView Index (used by iOS only);
 	
 /** 
- * Function to inialize the View, sets up the ListView
+ * Function to initialize the View, sets up the ListView
  */
 function init() {
+	//Get All of the devices and the folders they are in
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
 	var deviceInViewTable = Alloy.Collections.deviceInView.config.adapter.collection_name;
 	var deviceTable = Alloy.Collections.device.config.adapter.collection_name;
