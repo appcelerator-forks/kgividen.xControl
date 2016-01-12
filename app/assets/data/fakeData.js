@@ -1,5 +1,5 @@
-var createFakeData = function () {
-    //Reset the data
+var deleteFakeData = function () {
+	//Reset the data
     Ti.API.debug("Reset");
 
     Alloy.Collections.Device.fetch();
@@ -23,9 +23,28 @@ var createFakeData = function () {
         model.destroy({silent: true});
     }
 
-    //*******START create fake data
+};
 
-    //Create a folder
+var createFakeData = function () {
+    
+    //*******START create fake data
+    createFakeFolders();
+    createFakeDevices();
+	linkDevicesAndFolders();
+
+
+    //Add the device into a VIEW (i.e. Favorites)
+    model = {
+        "DeviceId" : "1",
+        "ViewId" : "1",
+        "SortId" : 0
+    };
+
+    Alloy.createModel('DeviceInView', model).save({silent: true});
+};
+
+var createFakeFolders = function () {
+	//Create a folder
     var model = {
         "name" : "Kitchen Folder",
         "displayName" : "Kitchen Folder",
@@ -49,8 +68,10 @@ var createFakeData = function () {
         "type" : "folder"
     };
     Alloy.createModel('Device', model).save({silent: true});
+};
 
-    //Create a device
+var createFakeDevices = function () {
+	//Create a device
     var model = {
         "name" : "Dining Light",
         "displayName" : "Dining Light",
@@ -87,8 +108,10 @@ var createFakeData = function () {
         "parent" : ""
     };
     Alloy.createModel('Device', model).save({silent: true});
+};
 
-    //Add a device into a Folder
+var linkDevicesAndFolders = function () {
+	    //Add a device into a Folder
     var model = {
         "DeviceAddress" : "12323234",
         "FolderAddress" : "123",         //dining
@@ -117,15 +140,10 @@ var createFakeData = function () {
         "SortId" : 0
     };
     Alloy.createModel('DeviceInFolder', model).save({silent: true});
-
-    //Add the device into a VIEW (i.e. Favorites)
-    model = {
-        "DeviceId" : "1",
-        "ViewId" : "1",
-        "SortId" : 0
-    };
-
-    Alloy.createModel('DeviceInView', model).save({silent: true});
 };
 
 exports.createFakeData = createFakeData;
+exports.deleteFakeData = deleteFakeData;
+exports.createFakeDevices = createFakeDevices;
+exports.createFakeFolders = createFakeFolders;
+exports.linkDevicesAndFolders = linkDevicesAndFolders;

@@ -12,6 +12,10 @@
         <Button id="printDeviceBtn">Print Device Table</Button>
         <Button id="printViewBtn">Print View Table</Button>
         <Button id="printSortByIdBtn">printSortById</Button>
+        <Button onClick="createFakeData">createFakeData</Button>
+        <Button onClick="deleteFakeData">deleteFakeData</Button>
+        <Button onClick="createFakeDevices">createFakeDevices</Button>
+        <Button onClick="createFakeFolders">createFakeFolders</Button>
         <Button id="closeBtn">Close</Button>
         <TextArea height="70%" id="output"></TextArea>
     </Window>

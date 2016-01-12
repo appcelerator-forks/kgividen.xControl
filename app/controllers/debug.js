@@ -1,5 +1,5 @@
 var fakeData = require("/data/fakeData");
-fakeData.createFakeData();
+
 
 $.printDeviceInViewBtn.addEventListener('click', function () {
     var blah = $.deviceInView;
@@ -26,3 +26,19 @@ $.closeBtn.addEventListener('click', function () {
     Alloy.createController("index").getView().open();
     $.win.close();
 });
+
+function createFakeData () {
+	fakeData.createFakeData();
+}
+
+function deleteFakeData () {
+	fakeData.deleteFakeData();
+}
+
+function createFakeDevices () {
+	fakeData.createFakeDevices();
+}
+
+function createFakeFolders () {
+	fakeData.createFakeFolders();
+}
