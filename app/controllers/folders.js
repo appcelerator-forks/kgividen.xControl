@@ -22,6 +22,7 @@ function init() {
 	$.device.fetch({
 		query:sql,
 		success: function (data) {
+			Ti.API.info("data: " + JSON.stringify(data));
 			processDevicesInFolders(data.toJSON());
 		},
 		error: function () {
@@ -47,10 +48,15 @@ function processDevicesInFolders(devicesAndFolders) {
 	 	return item.FolderAddress;
 	});
 	
+	Ti.API.info("listOfFolders: " + JSON.stringify(listOfFolders));
 	//folders are grouped by the folders address.  We need it to show the display name instead of the address so we'll replace it with that.
 	var tempObj = {};
 	_.each(folders, function(folder, i) {
-		tempObj[_.findWhere(listOfFolders, {address:i}).displayName] = folder; 
+		var f = _.findWhere(listOfFolders, {address:i});
+		//If it's not in a folder don't display it.
+		if(f) {
+			tempObj[f.displayName] = folder;
+		} 
 	});
 	folders=tempObj;
 	Ti.API.info("folder after replacing names: " + JSON.stringify(folders));
