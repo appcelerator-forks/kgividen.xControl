@@ -295,7 +295,7 @@ function updateFolderSortOrder(){
 			_.each(deviceList, function (device) {
 				var deviceAddress = device.properties.itemAddress;
 				if(deviceAddress) {
-					//if device is in the deviceInView set it's sort order to i.
+					//if device is in the deviceInFolder set it's sort order to i.
 					//Ti.API.debug("saved deviceAddress: " + deviceAddress + "to sortorder: " + i);
 					var modelInFolder = $.d.where({DeviceAddress: deviceAddress, FolderAddress: folderAddress});
 					//where returns an array but we just need the first one if it's there.

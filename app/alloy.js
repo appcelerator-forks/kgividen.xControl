@@ -15,6 +15,7 @@ var VIEW_ID_SCENES = 2;
 
 Alloy.Collections.device = Alloy.createCollection("Device");
 Alloy.Collections.deviceInView = Alloy.createCollection("DeviceInView");
+Alloy.Collections.folderInView = Alloy.createCollection("FolderInView");
 Alloy.Collections.deviceInFolder = Alloy.createCollection("DeviceInFolder");
 Alloy.Collections.view = Alloy.createCollection("View");
 

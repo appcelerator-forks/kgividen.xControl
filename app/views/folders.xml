@@ -32,7 +32,7 @@
 		<SearchBar id="searchBar" barColor="transparent" platform="ios" class="search" onFocus="onSearchFocus" onCancel="onSearchCancel"  onChange="onSearchChange" />
 		
 		<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
-		            <ListSection>
+            <ListSection>
             	<HeaderView>
                     <View backgroundColor="#DDD" height="Ti.UI.SIZE">
                         <Label>Fruits</Label>

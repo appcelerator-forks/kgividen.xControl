@@ -27,6 +27,20 @@ $.closeBtn.addEventListener('click', function () {
     $.win.close();
 });
 
+function printFolderInViewTable () {
+ 	var blah = Alloy.Collections.folderInView;
+    blah.fetch();
+    Ti.API.info("view: " + JSON.stringify(blah));
+    $.output.value = JSON.stringify(blah);		
+}
+
+function printDeviceInFolderTable () {
+ 	var blah = Alloy.Collections.deviceInFolder;
+    blah.fetch();
+    Ti.API.info("view: " + JSON.stringify(blah));
+    $.output.value = JSON.stringify(blah);		
+}
+
 function createFakeData () {
 	fakeData.createFakeData();
 }

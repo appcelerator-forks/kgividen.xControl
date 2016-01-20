@@ -6,20 +6,24 @@ var _args = arguments[0] || {}, // Any passed in arguments will fall into this p
  * Function to initialize the View, sets up the ListView
  */
 function init() {
+	
+
 	//Get All of the devices and the folders they are in
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
-	var deviceInViewTable = Alloy.Collections.deviceInView.config.adapter.collection_name;
+	var folderInViewTable = Alloy.Collections.folderInView.config.adapter.collection_name;
 	var deviceTable = Alloy.Collections.device.config.adapter.collection_name;
 	
-	
-	var sql = "SELECT " + deviceTable + ".id, " + deviceTable + ".name, " + deviceTable + ".displayName, " + deviceTable + ".address, " + deviceTable + ".type," +
-		" " + deviceTable + ".parent, " + deviceInViewTable + ".DeviceId, " + deviceInViewTable + ".ViewId, " + deviceInFolderTable + ".folderAddress," + 
-		" ifnull(" + deviceInViewTable + ".SortId,9999) as viewSortId" + 
-		" FROM " + deviceTable + " LEFT JOIN " + deviceInFolderTable +" ON " + deviceInFolderTable + ".deviceAddress = "+ deviceTable +".address" +
-		" LEFT JOIN " + deviceInViewTable + " ON " + deviceInViewTable + ".DeviceId = " + deviceTable + ".id AND ViewId=" + VIEW_ID_FAVORITES;
-	
-	Ti.API.debug("sql: " + sql);
-	$.device.fetch({
+	var sql = "SELECT " + deviceTable + ".id, " + deviceTable + ".name, " + deviceTable + ".displayName, " + deviceTable + ".address, " + deviceTable + ".type, " +
+		folderInViewTable + ".ViewId, " + 
+		deviceInFolderTable + ".folderAddress, " + 
+		// " ifnull(" + folderInViewTable + ".SortId,9999) as viewSortId " +
+		folderInViewTable + ".SortId as folderInViewSortId, " +
+		deviceInFolderTable + ".SortId as deviceInFolderSortId" +
+		" FROM " + deviceTable +
+		" LEFT JOIN " + deviceInFolderTable +" ON " + deviceInFolderTable + ".deviceAddress = "+ deviceTable +".address" +
+		" LEFT JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address"; 
+		
+	Alloy.Collections.device.fetch({
 		query:sql,
 		success: function (data) {
 			Ti.API.info("data: " + JSON.stringify(data));
@@ -42,36 +46,28 @@ function processDevicesInFolders(devicesAndFolders) {
 		}
 
 	});
+ 	
+	//Group all the devices that are in the same Folder
+	var devicesGrouped = _.groupBy(folders, 'FolderAddress');
 	
-	 // Group the data by folder to make it easier to createsections. 
-	folders  = _.groupBy(folders, function(item){
-	 	return item.FolderAddress;
+	//Find the folder where the devices should be located and add the devices to that folder
+	_.each(devicesGrouped, function(devices, i) {
+	    var f = _.findWhere(listOfFolders, {address:i});
+	    //If it's not in a folder don't display it.
+	    if(f) {
+	        f.devices = devices;
+	    }
 	});
 	
-	Ti.API.info("listOfFolders: " + JSON.stringify(listOfFolders));
-	//folders are grouped by the folders address.  We need it to show the display name instead of the address so we'll replace it with that.
-	var tempObj = {};
-	_.each(folders, function(folder, i) {
-		var f = _.findWhere(listOfFolders, {address:i});
-		//If it's not in a folder don't display it.
-		if(f) {
-			tempObj[f.displayName] = folder;
-		} 
-	});
-	folders=tempObj;
-	Ti.API.info("folder after replacing names: " + JSON.stringify(folders));
-
-
-	// /**
-	 // * Sorts the `folders` array by the SortId (leverages UnderscoreJS _.sortBy function)
-	 // */
-	// folders = _.sortBy(folders, function(folder){
-		// Ti.API.info("folderInSort: " + JSON.stringify(folder));
-		// return folder.SortId
-	// });
+	//sort all the folders
+	var folders = _.sortBy(listOfFolders, 'folderInViewSortId');
 	
-
-
+	//Sort the devices within the folder
+	_.each(folders, function(folder) {
+	    folder.devices = _.sortBy(folder.devices, 'deviceInFolderSortId');
+	});
+	
+	
 	if(folders) {
 		/**
 		 * Setup our Indexes and Sections Array for building out the ListView components
@@ -86,12 +82,11 @@ function processDevicesInFolders(devicesAndFolders) {
          // */
 		_.each(folders, function(folder, i){
         	Ti.API.info("folder: " + JSON.stringify(folder));
-        	Ti.API.info("i: " + JSON.stringify(i));
 			/**
 			 * Take the group data that is passed into the function, and parse/transform
 			 * it for use in the ListView templates as defined in the folders.xml file.
 			 */
-			var dataToAdd = preprocessForListView(folder);
+			var dataToAdd = preprocessForListView(folder.devices);
         	Ti.API.info("dataToAdd: " + JSON.stringify(dataToAdd));
 			/**
 			 * Check to make sure that there is data to add to the table,
@@ -105,7 +100,7 @@ function processDevicesInFolders(devicesAndFolders) {
 			 */
 			indexes.push({
 				index: indexes.length,
-				title: i
+				title: folder.displayName
 			});
 
 			/**
@@ -119,7 +114,7 @@ function processDevicesInFolders(devicesAndFolders) {
 			  * Create and Add the Label to the ListView Section header view
 			  */
 			 var sectionLabel = Ti.UI.createLabel({
-			 	text: i
+			 	text: folder.displayName
 			 });
 			 
 			 /**

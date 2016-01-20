@@ -35,25 +35,7 @@ exports.definition = {
 	extendCollection : function(Collection) {
 		_.extend(Collection.prototype, {
 			comparator : function(collection) {
-				//                Ti.API.info("In comparator! SortId: " + collection.get('SortId') + "collection: " + JSON.stringify(collection));
 				return collection.get('SortId');
-			},
-			// getDevicesInFolderView : function() {
-				// // var sql = "SELECT * FROM xControlDevices INNER JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id";
-				// var sql = "SELECT * FROM xControlDevices INNER JOIN xControlFolderInView ON xControlFolderInView.FolderAddress = xControlDevices.address";
-				// // var sql = "SELECT * FROM xControlDevices";
-				// Ti.API.info(sql);
-				// return this.fetch({
-					// query : sql
-				// });
-			// },
-			sortById : function(viewId) {
-				var sql = "SELECT xControlDevices.id, xControlDevices.name, xControlDevices.displayName, xControlDevices.address, xControlDevices.type, xControlDevices.parent, xControlDeviceInView.DeviceId, xControlDeviceInView.ViewId, ifnull(xControlDeviceInView.SortId,9999) as SortId FROM xControlDevices LEFT JOIN xControlDeviceInView ON xControlDeviceInView.DeviceId = xControlDevices.id AND ViewId=" + viewId;
-
-				Ti.API.info(sql);
-				return this.fetch({
-					query : sql
-				});
 			}
 		});
 		return Collection;

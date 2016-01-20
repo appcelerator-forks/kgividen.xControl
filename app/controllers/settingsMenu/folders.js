@@ -24,7 +24,7 @@ function refresh(e) {
 	Ti.API.info("THIS IS IN THE REFRESH!!!");
 	// if we were called from the constructor programmatically show the refresh animation
 	if (OS_IOS && !e) {
-		// $.refreshControl.beginRefreshing();
+		$.refreshControl.beginRefreshing();
 	}
 
 	/**
@@ -36,17 +36,31 @@ function refresh(e) {
         Ti.API.debug("Finished afterFetch in folders.js!!!!!");
 		// for iOS end the refreshing animation
 		if (OS_IOS) {
-			// $.refreshControl.endRefreshing();
+			$.refreshControl.endRefreshing();
 		}
 	}
-
-	// let the collection fetch data from it's data source
-	// Alloy.Collections.Device.fetch({
-		// success: afterFetch,
-		// error: afterFetch
-	// });
 	
-	Alloy.Collections.Device.sortById("1");
+	//Get All of the devices and the folders they are in
+	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
+	var folderInViewTable = Alloy.Collections.folderInView.config.adapter.collection_name;
+	var deviceTable = Alloy.Collections.device.config.adapter.collection_name;
+	
+	var sql = "SELECT " + deviceTable + ".id, " + deviceTable + ".name, " + deviceTable + ".displayName, " + deviceTable + ".address, " + deviceTable + ".type," + 
+			  deviceTable + ".parent, " + folderInViewTable + ".FolderAddress, " + folderInViewTable + ".ViewId, ifnull(" + folderInViewTable + ".SortId,9999) as SortId" +
+			  " FROM " + deviceTable + " LEFT JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address";
+
+	
+	Ti.API.info("sql: " + sql); 
+	Alloy.Collections.Device.fetch({
+		query:sql,
+		success: function (data) {
+			Ti.API.info("data: " + JSON.stringify(data));
+			afterFetch();
+		},
+		error: function () {
+			Ti.API.debug("refreshDevicesInFolder Failed!!!");
+		}
+	});
 }
 
 /**
@@ -67,7 +81,8 @@ function transform(model) {
  */
 function filter(collection) {
 	return collection.where({
-		type:"folder"
+		type:"folder",
+		ViewId:parameters.viewId
 	});
 }
 
@@ -98,7 +113,27 @@ function addFolder(content) {
 	};
 	Alloy.createModel('Device', model).save({}, {
 		success : function(model, response) {
-			Ti.API.debug('success: ' + model.toJSON());
+			Ti.API.debug('success adding folder: ' + model.toJSON());
+			linkFolderToView(model.toJSON());
+		},
+		error : function(e) {
+			Ti.API.error('error: ' + e.message);
+			alert('Error saving new name ' + e.message);
+		}
+	});
+
+}
+
+//TODO need to modify sort order of folders
+function linkFolderToView (folder) {
+	//link the folder to the view
+	var model = {
+		"FolderAddress" : folder.address,
+        "ViewId" : parameters.viewId
+	};
+	Alloy.createModel('FolderInView', model).save({}, {
+		success : function(model, response) {
+			Ti.API.debug('Link Folder to View success: ' + model.toJSON());
 		},
 		error : function(e) {
 			Ti.API.error('error: ' + e.message);
@@ -106,6 +141,36 @@ function addFolder(content) {
 		}
 	});
 }
+
+/**
+ * Update the sort order of all the objects in the folder so they are consistent and not duplicated in the order.
+ * @param
+ */
+function updateFolderSortOrder(){
+	Ti.API.info("updateFolderSortOrder!!!!");
+	Alloy.Collections.folderInView.fetch({
+		success: function () {
+			var viewId = parameters.viewId;
+			var folderList = $.folderSection.getItems();
+			var i = 0;
+			_.each(folderList, function (folder) {
+				Ti.API.info("foldeR: " + JSON.stringify(folder));
+				var folderAddress = folder.address.text;
+				if(folderAddress) {
+					//if folder is in the folderInView set it's sort order to i.
+					var modelInView = Alloy.Collections.folderInView.where({FolderAddress: folderAddress, ViewId: viewId});
+					//where returns an array but we just need the first one if it's there.
+					if (modelInView.length > 0) {
+						modelInView[0].save({"SortId": i}, {silent: true});
+					}
+					i++;
+				}
+			});
+		},
+		error: function () {}
+	});
+}
+
 
 /**
  * Function to open a view to rename the folder.

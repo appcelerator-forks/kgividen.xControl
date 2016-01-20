@@ -62,7 +62,7 @@ function loadFoldersCallback(e) {
 //create the devices controller with the model and get its view
     Ti.API.debug("onLoadFolders e: " + JSON.stringify(e));
     var params= {
-        "view": e.index,
+        "viewId": e.index,
         "viewName" : e.row.viewName,
         "navWin" : $.navWin
     };

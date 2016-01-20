@@ -1,4 +1,3 @@
-//TODO DELETE THIS IF WE DON'T NEED IT
 exports.definition = {
     config : {
         "columns" : {
@@ -10,7 +9,7 @@ exports.definition = {
         "defaults" : {
             "FolderAddress" : 0,
             "ViewId" : 0,
-            "SortId" : 0
+            "SortId" : 9999999
         },
         "adapter" : {
             "type" : "sql",

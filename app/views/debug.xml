@@ -5,10 +5,13 @@
 	<Collection src="Device" />
 	<Collection src="DeviceInFolder" />
 	<Collection src="DeviceInView" />
+	<Collection src="FolderInView" />
 	
 	
     <Window id="win" backgroundColor="white" layout="vertical">
         <Button top="30" id="printDeviceInViewBtn">Print DeviceInView Table</Button>
+        <Button onClick="printFolderInViewTable">Print folderInView Table</Button>
+        <Button onClick="printDeviceInFolderTable">Print deviceInFolder Table</Button>
         <Button id="printDeviceBtn">Print Device Table</Button>
         <Button id="printViewBtn">Print View Table</Button>
         <Button id="printSortByIdBtn">printSortById</Button>
