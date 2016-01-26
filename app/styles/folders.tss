@@ -121,4 +121,7 @@
     font: {
         fontSize:50
     }
+},
+'#favoritesListView' :{
+	top: 10
 }

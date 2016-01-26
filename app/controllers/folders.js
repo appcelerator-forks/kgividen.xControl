@@ -215,66 +215,21 @@ function onItemClick(e) {
 }
 
 /**
- * This code is only relevant to iOS - to make it cleaner, we are declaring variables, and
- * then assigning them to functions within an iOS Block. On Android, etc this code block will not
- * exist
+ * event listener set via view to provide a search of the ListView.
+ * @param  {Object} e Event
  */
-var onSearchChange,
-    onSearchFocus,
-    onSearchCancel;
+// $.sfFav.addEventListener('change',function(e){
+	// $.favoritesListView.searchText = e.value;
+// });
 
-/**
- * Handles the SearchBar OnChange event
- *
- * @description On iOS we want the search bar to always be on top, so we use the onchange event to tie it back
- * 				to the ListView
- *
- * @param {Object} Event data passed to the function
- */
-onSearchChange = function onChange(e) {
-	$.favoritesListView.searchText = e.source.value;
-};
+$.sfLights.addEventListener('change',function(e){
+	$.lightsListView.searchText = e.value;
+});
 
-if (OS_IOS) {
+$.sfScenes.addEventListener('change',function(e){
+	$.scenesListView.searchText = e.value;
+});
 
-	/**
-	 * Updates the UI when the SearchBar gains focus. Shows
-	 * the Cancel button.
-	 *
-	 * @description show the Cancel button
-	 *
-	 * @param {Object} Event data passed to the function
-	 */
-	onSearchFocus = function onFocus(e) {
-		$.searchBar.showCancel = true;
-	};
-
-	/**
-	 * Updates the UI when the Cancel button is clicked within the search bar. Hides the Cancel button.
-	 *
-	 * @param {Object} Event data passed to the function
-	 */
-	onSearchCancel = function onCancel(e) {
-		if (!_args.restrictToFavorites) {
-			$.searchBar.showCancel = false;
-		}
-		$.searchBar.blur();
-	};
-
-	/**
-	 * Updates user record favorite classification and the list elements
-	 *
-	 *  @param {Object} e  Event data passed to the function
-	 */
-	function onRowAction(e) {
-
-		var row = e.section.getItemAt(e.itemIndex);
-		var id = row.properties.user.id;
-
-		init();
-	}
-
-}
 
 /**
  * Hide Bookmark Icon (Android)
@@ -301,4 +256,3 @@ Ti.App.addEventListener("refresh-data", function(e) {
  * Initialize View
  */
 init();
-

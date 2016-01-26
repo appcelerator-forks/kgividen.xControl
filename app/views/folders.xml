@@ -8,21 +8,21 @@
 		<!-- 
 		Menu Item to open the bookmarks view
 		-->
-		<Menu id="menu" platform="android">
+		<!-- <Menu id="menu" platform="android"> -->
 			
 			<!-- 
 				Adding the SearchView to the ActionBar via the Menu feature. Leveraging the standard Android Resource for the search
 				icon. Uses shared onChange function with iOS to update listView search text.
 			-->
-			<MenuItem showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" title="Search" icon="Ti.Android.R.drawable.ic_menu_search">
+			<!-- <MenuItem showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" title="Search" icon="Ti.Android.R.drawable.ic_menu_search">
 				<ActionView>
                     <SearchView ns="Ti.UI.Android" id="searchBar" platform="android" onChange="onSearchChange" />
                 </ActionView>
             </MenuItem>
-            
+             -->
             <!-- Android Menu item for accessing the Bookmarks view-->
-            <MenuItem id="bookmarkBtn" title="Bookmarks" icon="/images/ic_action_action_bookmark.png"showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM"/>
-        </Menu>
+            <!-- <MenuItem id="bookmarkBtn" title="Bookmarks" icon="/images/ic_action_action_bookmark.png"showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM"/> -->
+        <!-- </Menu> -->
         
 		<!--
 		If you would like the searchbar to scroll up with the listView, you can move this line before the last
@@ -32,7 +32,8 @@
 		
 		<ScrollableView id="scrollableView" showPagingControl="true">
 			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
-				<SearchBar id="searchBar" barColor="transparent" platform="ios" class="search" onFocus="onSearchFocus" onCancel="onSearchCancel"  onChange="onSearchChange" />
+				<!-- <HeaderView><TextField id="sfFav" class="searchField"></TextField></HeaderView> -->
+				<!-- <SearchBar id="searchBar" barColor="transparent" platform="ios" class="search" /> -->
 				<Templates>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
                         <Label bindId="groupLbl" class="groupLbl" />
@@ -60,6 +61,7 @@
 				</Templates>
 			</ListView>
 			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
+				<HeaderView><TextField id="sfLights" class="searchField"></TextField></HeaderView>
 				<Templates>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
                         <Label bindId="groupLbl" class="groupLbl" />
@@ -88,7 +90,7 @@
                 <RefreshControl id="refreshControlLights" platform="ios" />
             </ListView>
             <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
-            	<!-- <ListSection></ListSection> -->
+            	<HeaderView><TextField id="sfScenes" class="searchField"></TextField></HeaderView>
 				<Templates>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
 	                        <Label bindId="groupLbl" class="groupLbl" />
