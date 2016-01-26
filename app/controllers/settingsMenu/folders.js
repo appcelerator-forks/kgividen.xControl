@@ -31,7 +31,6 @@ function refresh(e) {
 	 * callback for fetch, both success and error
 	 * @param  {Object} e Event
 	 */
-	//TODO afterFetch isn't being used right now because we are using sortById...so the refreshControl isn't working right...we need to figure that out.
 	function afterFetch(col, res) {
         Ti.API.debug("Finished afterFetch in folders.js!!!!!");
 		// for iOS end the refreshing animation
@@ -47,9 +46,10 @@ function refresh(e) {
 	
 	var sql = "SELECT " + deviceTable + ".id, " + deviceTable + ".name, " + deviceTable + ".displayName, " + deviceTable + ".address, " + deviceTable + ".type," + 
 			  deviceTable + ".parent, " + folderInViewTable + ".FolderAddress, " + folderInViewTable + ".ViewId, ifnull(" + folderInViewTable + ".SortId,9999) as SortId" +
-			  " FROM " + deviceTable + " LEFT JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address";
+			  " FROM " + deviceTable + 
+			  " INNER JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address WHERE ViewId='" + parameters.viewId + " '";
 
-	
+
 	Ti.API.info("sql: " + sql); 
 	Alloy.Collections.Device.fetch({
 		query:sql,
@@ -81,8 +81,7 @@ function transform(model) {
  */
 function filter(collection) {
 	return collection.where({
-		type:"folder",
-		ViewId:parameters.viewId
+		type:"folder"
 	});
 }
 
@@ -124,7 +123,6 @@ function addFolder(content) {
 
 }
 
-//TODO need to modify sort order of folders
 function linkFolderToView (folder) {
 	//link the folder to the view
 	var model = {
@@ -149,16 +147,16 @@ function linkFolderToView (folder) {
 function updateFolderSortOrder(){
 	Ti.API.info("updateFolderSortOrder!!!!");
 	Alloy.Collections.folderInView.fetch({
-		success: function () {
+		success: function (data) {
 			var viewId = parameters.viewId;
 			var folderList = $.folderSection.getItems();
 			var i = 0;
 			_.each(folderList, function (folder) {
-				Ti.API.info("foldeR: " + JSON.stringify(folder));
+				// Ti.API.info("foldeR: " + JSON.stringify(folder));
 				var folderAddress = folder.address.text;
 				if(folderAddress) {
 					//if folder is in the folderInView set it's sort order to i.
-					var modelInView = Alloy.Collections.folderInView.where({FolderAddress: folderAddress, ViewId: viewId});
+					var modelInView = data.where({FolderAddress: folderAddress, ViewId: viewId});
 					//where returns an array but we just need the first one if it's there.
 					if (modelInView.length > 0) {
 						modelInView[0].save({"SortId": i}, {silent: true});

@@ -60,7 +60,7 @@ function closeSettingsBtnClicked(e) {
 
 function loadFoldersCallback(e) {
 //create the devices controller with the model and get its view
-    Ti.API.debug("onLoadFolders e: " + JSON.stringify(e));
+    Ti.API.info("onLoadFolders e: " + JSON.stringify(e));
     var params= {
         "viewId": e.index,
         "viewName" : e.row.viewName,

@@ -20,6 +20,6 @@
         <Button onClick="createFakeDevices">createFakeDevices</Button>
         <Button onClick="createFakeFolders">createFakeFolders</Button>
         <Button id="closeBtn">Close</Button>
-        <TextArea height="70%" id="output"></TextArea>
+        <TextArea height="25%" id="output"></TextArea>
     </Window>
 </Alloy>

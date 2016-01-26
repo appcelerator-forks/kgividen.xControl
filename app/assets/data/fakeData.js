@@ -39,16 +39,7 @@ var createFakeData = function () {
     createFakeFolders();
     createFakeDevices();
 	linkDevicesAndFolders();
-
-
-    //Add the device into a VIEW (i.e. Favorites)
-    model = {
-        "DeviceId" : "1",
-        "ViewId" : "1",
-        "SortId" : 0
-    };
-
-    Alloy.createModel('DeviceInView', model).save({silent: true});
+	linkFoldersAndViews();
 };
 
 var createFakeFolders = function () {
@@ -119,7 +110,7 @@ var createFakeDevices = function () {
 };
 
 var linkDevicesAndFolders = function () {
-	    //Add a device into a Folder
+    //Add a device into a Folder
     var model = {
         "DeviceAddress" : "12323234",
         "FolderAddress" : "123",         //dining
@@ -150,8 +141,41 @@ var linkDevicesAndFolders = function () {
     Alloy.createModel('DeviceInFolder', model).save({silent: true});
 };
 
+var linkFoldersAndViews = function () {
+    //Add folder to favorites view
+    var model = {
+        "FolderAddress" : "123",         //dining
+        "ViewId" : 0,         //favorites
+        "SortId" : 0
+    };
+    Alloy.createModel('FolderInView', model).save({});
+    
+    var model = {
+        "FolderAddress" : "29764",	//Kitchen Folder
+        "ViewId" : 0,         	//favorites
+        "SortId" : 1
+    };
+    Alloy.createModel('FolderInView', model).save({});
+	
+	//Add Folders to lighting view
+	var model = {
+        "FolderAddress" : "123",         //dining
+        "ViewId" : 1,         //lighting view
+        "SortId" : 0
+    };
+    Alloy.createModel('FolderInView', model).save({});
+    
+	var model = {
+        "FolderAddress" : "222",         //dining
+        "ViewId" : 1,         //lighting view
+        "SortId" : 1
+    };
+    Alloy.createModel('FolderInView', model).save({});
+};
+
 exports.createFakeData = createFakeData;
 exports.deleteFakeData = deleteFakeData;
 exports.createFakeDevices = createFakeDevices;
 exports.createFakeFolders = createFakeFolders;
 exports.linkDevicesAndFolders = linkDevicesAndFolders;
+exports.linkFoldersAndViews = linkFoldersAndViews;

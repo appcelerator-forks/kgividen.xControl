@@ -29,43 +29,96 @@
 		</ListView> tag. However for our implementation, we want the searchBar to be present at all times so we have moved
 		it outside of the ListView tags.
 		-->
-		<SearchBar id="searchBar" barColor="transparent" platform="ios" class="search" onFocus="onSearchFocus" onCancel="onSearchCancel"  onChange="onSearchChange" />
 		
-		<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
-            <ListSection>
-            	<HeaderView>
-                    <View backgroundColor="#DDD" height="Ti.UI.SIZE">
-                        <Label>Fruits</Label>
-                    </View>>
-                </HeaderView>
-                <!-- <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" /> -->
-            </ListSection>	
-			<Templates>
-				<ItemTemplate class="deviceItem" name="groupLblTemplate">
+		<ScrollableView id="scrollableView" showPagingControl="true">
+			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
+				<SearchBar id="searchBar" barColor="transparent" platform="ios" class="search" onFocus="onSearchFocus" onCancel="onSearchCancel"  onChange="onSearchChange" />
+				<Templates>
+					<ItemTemplate class="deviceItem" name="groupLblTemplate">
                         <Label bindId="groupLbl" class="groupLbl" />
                     </ItemTemplate>
-            	<ItemTemplate class="deviceItem" name="sceneTemplate">
-                    <View class="horizontal sceneContainer">
-                        <Label bindId="sceneLbl" class="sceneLbl"/>
-                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
-                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
-                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
-                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
-                    </View>
-            	</ItemTemplate>
-				<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
-                    <View>
-                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
-                        <Button bindId="btn" class="btn" />
-                        <View>
-                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
-                            <Slider bindId="slider" class="slider"/>
-                            <Label bindId="sliderLbl" class="sliderLbl" />
-                        </View>
-                    </View>
-				</ItemTemplate>
-			</Templates>
-
-		</ListView>
+	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
+	                    <View class="horizontal sceneContainer">
+	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
+	                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
+	                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
+	                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
+	                    </View>
+	            	</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+	                    <View>
+	                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
+	                        <Button bindId="btn" class="btn" />
+	                        <View>
+	                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
+	                            <Slider bindId="slider" class="slider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
+	                    </View>
+					</ItemTemplate>
+				</Templates>
+			</ListView>
+			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
+				<Templates>
+					<ItemTemplate class="deviceItem" name="groupLblTemplate">
+                        <Label bindId="groupLbl" class="groupLbl" />
+                    </ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
+	                    <View class="horizontal sceneContainer">
+	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
+	                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
+	                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
+	                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
+	                    </View>
+	            	</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+	                    <View>
+	                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
+	                        <Button bindId="btn" class="btn" />
+	                        <View>
+	                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
+	                            <Slider bindId="slider" class="slider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
+	                    </View>
+					</ItemTemplate>
+				</Templates>
+                <RefreshControl id="refreshControlLights" platform="ios" />
+            </ListView>
+            <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+            	<!-- <ListSection></ListSection> -->
+				<Templates>
+					<ItemTemplate class="deviceItem" name="groupLblTemplate">
+	                        <Label bindId="groupLbl" class="groupLbl" />
+                    </ItemTemplate>
+					<ItemTemplate class="deviceItem" name="groupLblTemplate">
+	                        <Label bindId="groupLbl" class="groupLbl" />
+                    </ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
+	                    <View class="horizontal sceneContainer">
+	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
+	                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
+	                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
+	                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
+	                    </View>
+	            	</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+	                    <View>
+	                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
+	                        <Button bindId="btn" class="btn" />
+	                        <View>
+	                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
+	                            <Slider bindId="slider" class="slider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
+	                    </View>
+					</ItemTemplate>
+				</Templates>
+                <RefreshControl id="refreshControlScenes" platform="ios" />
+            </ListView>
+        </ScrollableView>
 	</View>
 </Alloy>

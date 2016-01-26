@@ -1,3 +1,4 @@
+//TODO Delete when new settings is fully working
 exports.definition = {
     config : {
         "columns" : {
