@@ -85,12 +85,6 @@ var rightMenu = [
         icon: 'fa-lightbulb-o',
         iconColor: '#999',
         action: 'updateDevices'
-    },{
-        title: 'FoldersTemp',
-        type: 'menu',
-        icon: 'fa-lightbulb-o',
-        iconColor: '#999',
-        action: 'folders'
     }
 ];
 
