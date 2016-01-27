@@ -142,30 +142,22 @@ function refreshDevices(){
 }
 
 function processData(dbData, liveData, devicesInFolder) {
-		Ti.API.info("dbData in processData: " + JSON.stringify(dbData));
 		//Get all the folders and add them first if they haven't already been added.
-		Ti.API.info("dbData in settings.js: " + JSON.stringify(dbData));
-		Ti.API.info("liveData in settings.js: " + JSON.stringify(liveData));
-		
 		//All of the folders we just got from the live system not the DB
 		var liveFolders = _.filter(liveData, function(device) {
 			return device.type == "folder";
 		});
-		Ti.API.info("liveFolders in processData: " + JSON.stringify(liveFolders));
 		
 		//All of the devices we just got from the live system not the DB
 		var liveDevices = _.filter(liveData, function(device) {
 			return device.type != "folder";
 		});
-		Ti.API.info("liveDevices in processData: " + JSON.stringify(liveDevices));
 		
 		//if there is a new device add it to the DB and link it to the correct folder.
 		_.each(liveDevices, function(device) {
 			//check to see if the device is in the db yet
 			var deviceExistsArray = dbData.where({address: device.address});	
-			Ti.API.info("deviceExistsArray: " + JSON.stringify(deviceExistsArray));
 			if(!deviceExistsArray[0]){
-				
 				//Add device to the DB
 				var device = {
 						"name" : device.name,
@@ -176,7 +168,6 @@ function processData(dbData, liveData, devicesInFolder) {
 					};
             	var model = Alloy.createModel('Device', device);
             	model.save();
-            	Ti.API.info("Device Created: " + JSON.stringify(device));
 			}
 		});	
 		
@@ -199,13 +190,11 @@ function processData(dbData, liveData, devicesInFolder) {
         		var thisFoldersScenes = _.filter(liveDevices, function(device) {
             		return device.type == "scene" && device.parent == folder.address;
             	}); 
-            	Ti.API.info("thisFoldersScenes: " + JSON.stringify(thisFoldersScenes));
             	
             	//For now we are assuming if it's not a scene it's a light
             	var thisFoldersOther = _.filter(liveDevices, function(device) {
             		return device.type != "scene" && device.type != "folder" && device.parent == folder.address;
             	});        	
-            	Ti.API.info("thisFoldersOther: " + JSON.stringify(thisFoldersOther));
             	
             	//Add others to lighting view for now so we assume if it's not a scene it's a light
             	//create a lighting version of the folder and link the devices to it
@@ -273,6 +262,17 @@ var fakeData = [
         "name": "Kitchen Folder",
         "address": "29764",
         "type": "folder"
+    },
+    {
+        "name": "Blah Folder",
+        "address": "123",
+        "type": "folder"
+    },
+    {
+        "name": "Blah Light Floods",
+        "parent": "123",
+        "type": "light",
+        "address": "20 88 444"
     },
     {
         "name": "Backyard Floods",
