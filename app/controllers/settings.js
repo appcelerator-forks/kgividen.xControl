@@ -144,7 +144,6 @@ function refreshDevices(){
 function processData(dbData, liveData, devicesInFolder) {
 		Ti.API.info("dbData in processData: " + JSON.stringify(dbData));
 		//Get all the folders and add them first if they haven't already been added.
-		// dbData = dbData.toJSON();
 		Ti.API.info("dbData in settings.js: " + JSON.stringify(dbData));
 		Ti.API.info("liveData in settings.js: " + JSON.stringify(liveData));
 		
@@ -163,7 +162,7 @@ function processData(dbData, liveData, devicesInFolder) {
 		//if there is a new device add it to the DB and link it to the correct folder.
 		_.each(liveDevices, function(device) {
 			//check to see if the device is in the db yet
-			var deviceExistsArray = dbData.where({DeviceAddress: device.address});	
+			var deviceExistsArray = dbData.where({address: device.address});	
 			Ti.API.info("deviceExistsArray: " + JSON.stringify(deviceExistsArray));
 			if(!deviceExistsArray[0]){
 				
@@ -233,6 +232,7 @@ function processData(dbData, liveData, devicesInFolder) {
 			 //TODO What about devices that don't have a parent specified?  Filter them here and add them to the other folder and then the lighting view
 			 
 		});
+		alert("Devices were refreshed.  You can now modify them under settings.");
 }
 
 function createFolder(folder) {
