@@ -61,10 +61,7 @@ $.clearData.addEventListener('click', function () {
 
 $.getListOfDevicesBtn.addEventListener('click', function () {
     saveConnectionInfo();
-    // $.settingsWin.close();
     refreshDevices();
-    // Alloy.createController('/settingsMenu/index').getView().open();
-    
 });
 
 $.changeNetworkBtn.addEventListener('click', function(e) {
@@ -86,26 +83,6 @@ $.settingsWin.addEventListener("close", function(){
 });
 getConnectionInfo();
 
-
-
-//Set Default Data
-if(!Ti.App.Properties.getBool('isDefaultDataSet')){
-    Ti.API.info("Setting Default Data!");
-    // var defaultViewData = [
-        // {"name" : "Favorites"},
-        // {"name" : "Lighting"},
-        // {"name" : "Scenes"}
-    // ];
-// //    Alloy.Collections.view.reset(defaultViewData);
-    // _.each(defaultViewData, function (item) {
-        // var model = Alloy.createModel('View', item);
-        // model.save({silent: true});
-    // });
-    // Alloy.Collections.view.fetch();
-    Ti.App.Properties.setBool('isDefaultDataSet', true);
-}
-
-
 function refreshDevices(){
 	
     //device is set in alloy.js
@@ -118,10 +95,7 @@ function refreshDevices(){
         });
 
         //Add all of the new records in the collection that came from the hardware device.
-        // var devicesInDB = $.deviceCollection;
-        // devicesInDB.sortById(viewId);
-		// var devicesInDB = Alloy.Collections.device.fetch();
-		Alloy.Collections.device.fetch({
+        Alloy.Collections.device.fetch({
 			success : function(dbData) {
 				
 				Alloy.Collections.deviceInFolder.fetch({
@@ -221,7 +195,9 @@ function processData(dbData, liveData, devicesInFolder) {
 			 //TODO What about devices that don't have a parent specified?  Filter them here and add them to the other folder and then the lighting view
 			 
 		});
-		alert("Devices were refreshed.  You can now modify them under settings.");
+		alert("Devices were refreshed.  You can now add/modify them here or by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
+	    $.settingsWin.close();
+    	Alloy.createController('/settingsMenu/index').getView().open();
 }
 
 function createFolder(folder) {

@@ -178,7 +178,6 @@ var preprocessForListView = function(rawData) {
 		/**
 		 * Create the new device object which is added to the Array that is returned by the _.map function.
 		 */
-		Ti.API.info("item in preprocess: " + JSON.stringify(item));
 		if(item.type == "scene") {
 			item.template = "sceneTemplate";	
 		} else {
