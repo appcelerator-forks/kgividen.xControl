@@ -29,7 +29,7 @@ function init() {
 			processDevicesInFolders(data.toJSON(), VIEW_ID_FAVORITES);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_LIGHTS);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_SCENES);
-			updateStatus();
+			refresh();
 		},
 		error : function() {
 			Ti.API.debug("refreshDevicesInFolder Failed!!!");
@@ -148,12 +148,10 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 			 * Push the newly created ListViewSection onto the `sections` array. This will be used to populate
 			 * the ListView
 			 */
-			Ti.API.info("sections: " + JSON.stringify(section));
 			sections.push(section);
 		});
 
 		//There is probably a better way to do this instead of hardcoding the views
-		Ti.API.info("sections: " + JSON.stringify(sections));
 		if(viewId===VIEW_ID_FAVORITES){
 			$.favoritesListView.sections = sections;	
 		} else if (viewId===VIEW_ID_LIGHTS){
@@ -246,27 +244,6 @@ $.sfScenes.addEventListener('change',function(e){
 });
 
 
-/**
- * Hide Bookmark Icon (Android)
- */
-$.wrapper.addEventListener("open", function onWindowOpen() {
-	if (OS_ANDROID && _args.restrictToFavorites) {
-
-		var activity = $.wrapper.getActivity();
-		activity.onCreateOptionsMenu = function(e) {
-			e.menu.clear();
-		};
-		activity.invalidateOptionsMenu();
-	}
-});
-
-/**
- * Listen for the refresh event, and re-initialize
- */
-// Ti.App.addEventListener("refresh-data", function(e) {
-	// init();
-// });
-
 //***************ON EVENTS CALLED FROM THE XML *********************
 function btnClick(e){
     Ti.API.info("Button Click!");
@@ -282,7 +259,7 @@ function btnClick(e){
     }
     if(itemType == "light"){
         device.toggle(address)
-            .then(updateStatus());
+            .then(refresh());
     }
 }
 
@@ -298,7 +275,7 @@ function sendSliderVal(e) {
     if(address && itemType == "slider") {
         var level = Math.round(e.source.value);
         device.setLevel(address, level)
-            .then(updateStatus());
+            .then(refresh());
 
         item.sliderLbl.text = level;  //Slider label
         item.slider.value = level;
@@ -310,16 +287,28 @@ function sendSliderVal(e) {
     }
 }
 
-var updateStatus = function (){
-    return device.getAllDevicesStatus().then(updateLightsStatus);
+var refresh = function (){
+	// if we were called from the constructor programmatically show the refresh animation
+	if (OS_IOS) {
+		//There should be a better way to do this rather than duplicate the control
+    	// but if the same one is added to multiple tableViews things crap out
+		$.refreshControlFav.beginRefreshing();
+		$.refreshControlLight.beginRefreshing();
+		$.refreshControlScene.beginRefreshing();
+	}
+
+    return device.getAllDevicesStatus().then(updateUI);
 };
 
-exports.updateStatus = updateStatus;
+Ti.App.addEventListener('refresh_ui', function(e){
+	refresh();
+});
 
-function updateLightsStatus(nodesByAddressAndStatus){
+function updateUI(nodesByAddressAndStatus){
 	Ti.API.info("nodesByAddressAndStatus: " + JSON.stringify(nodesByAddressAndStatus));
 	//Each view in the scrollableView i.e. favorites, lighting, etc.
     _.each($.scrollableView.getViews(), function(view){
+    	Ti.API.info("views: " + JSON.stringify(view));
         var viewSections = view.getSections();
         //We use viewSections[0] because we only have one section on each of the views.
         _.each(viewSections, function(section){
@@ -342,6 +331,14 @@ function updateLightsStatus(nodesByAddressAndStatus){
             	});
        	 	}
         	section.setItems(items);	
+			// for iOS end the refreshing animation
+			if (OS_IOS) {
+				//There should be a better way to do this rather than duplicate the control
+    			// but if the same one is added to multiple tableViews things crap out
+				$.refreshControlFav.endRefreshing();
+				$.refreshControlLight.endRefreshing();
+				$.refreshControlScene.endRefreshing();
+			}
         });
     });
 }

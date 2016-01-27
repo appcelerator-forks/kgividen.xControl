@@ -108,20 +108,4 @@
 },
 ".btnOff" : {
     backgroundImage : '/images/themes/default/btn.png'
-},
-"#refreshBtnView[platform=android]" : {
-  top:5,
-  height: 60
-},
-"#refreshBtn[platform=android]" : {
-    left:10,
-    height : 60,
-    width : 60,
-    backgroundColor:'transparent',
-    font: {
-        fontSize:50
-    }
-},
-'#favoritesListView' :{
-	top: 10
 }

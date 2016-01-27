@@ -1,6 +1,5 @@
 //TODO DEBUG
-//var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"xabler"};
-//var data = {"method":"https","server":"160.7.236.184","port":"3005","username":"kgividen","password":"xabler"};
+//var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"pass"};
 //Ti.API.info(data);
 //Ti.App.Properties.setObject('conn_current', data);
 //Ti.App.Properties.setObject('conn_Remote', data);
@@ -58,10 +57,8 @@ function rowSelect(e) {
             Alloy.createController("debug").getView().open();
             $.win.close();
             break;
-        case "folders":
-            $.destroy();
-            Alloy.createController("folders").getView().open();
-            $.win.close();
+        case "refresh":
+            Ti.App.fireEvent('refresh_ui');
             break;
         default:
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);
@@ -87,6 +84,17 @@ var rightMenu = [
         action: 'updateDevices'
     }
 ];
+
+//Add refresh button to menu if android
+if (!OS_IOS) {
+	rightMenu.push({
+        title: 'Refresh',
+        type: 'menu',
+        icon: 'fa-refresh',
+        iconColor: '#999',
+        action: 'refresh'
+   });
+}
 
 if(xDebug){
     rightMenu.push({

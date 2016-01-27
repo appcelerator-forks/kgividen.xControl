@@ -41,11 +41,24 @@ function closeWin () {
 //LISTENERS
 $.clearData.addEventListener('click', function () {
     Ti.API.info("DATA CLEARED!");
-    var deviceCol = Alloy.Collections.device;
-    deviceCol.fetch();
+    Alloy.Collections.device.fetch();
     var model;
 
-    while (model = deviceCol.first()) {
+    while (model = Alloy.Collections.device.first()) {
+        model.destroy({silent: true});
+    }
+
+    Alloy.Collections.deviceInFolder.fetch();
+    var model;
+
+    while (model = Alloy.Collections.deviceInFolder.first()) {
+        model.destroy({silent: true});
+    }
+
+    Alloy.Collections.folderInView.fetch();
+    var model;
+
+    while (model = Alloy.Collections.folderInView.first()) {
         model.destroy({silent: true});
     }
     Alloy.Collections.device.reset({silent: true});
@@ -57,6 +70,7 @@ $.clearData.addEventListener('click', function () {
     $.port.value = '';
     $.username.value = '';
     $.password.value = '';
+    alert("Data has been cleared.");
 });
 
 $.getListOfDevicesBtn.addEventListener('click', function () {
@@ -195,9 +209,9 @@ function processData(dbData, liveData, devicesInFolder) {
 			 //TODO What about devices that don't have a parent specified?  Filter them here and add them to the other folder and then the lighting view
 			 
 		});
-		alert("Devices were refreshed.  You can now add/modify them here or by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
-	    $.settingsWin.close();
     	Alloy.createController('/settingsMenu/index').getView().open();
+	    $.settingsWin.close();
+		alert("Devices were refreshed.  You can now add/modify them here or in the future by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
 }
 
 function createFolder(folder) {
