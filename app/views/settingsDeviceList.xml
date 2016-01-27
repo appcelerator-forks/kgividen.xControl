@@ -1,5 +1,5 @@
 <Alloy>
-    <Collection src="Device" instance="true" id="deviceCollection" />
+    <!-- <Collection src="Device" instance="true" id="deviceCollection" />
     <Collection src="DeviceInView" instance="true" id="deviceInViewCollection" />
     <Window id="win" tabBarHidden="true">
         <View class="container-view">
@@ -16,9 +16,9 @@
                     <Templates>
                         <ItemTemplate name="template">
                             <Label bindId="moveUp" class="moveUp" onClick="moveUp" />
-                            <Label bindId="moveDown" class="moveDown" onClick="moveDown" />
+                            <Label bindId="moveDown" class="moveDown" onClick="moveDown" / -->>
                             <!--<Label bindId="displayName" class="deviceRowLbl"/>-->
-                            <Label bindId="itemType" class="deviceRowTypeIcon" />
+                            <!-- <Label bindId="itemType" class="deviceRowTypeIcon" />
                             <TextField bindId="displayName" class="deviceRowLbl" onBlur="updateDisplayName"/>
                             <Switch bindId="deviceRowSwitch" class="deviceRowSwitch" onChange="deviceRowSwitchChanged"/>
                         </ItemTemplate>
@@ -31,5 +31,5 @@
             </View>
             <Button id="closeBtn">Save and Close</Button>
         </View>
-    </Window>
+    </Window> -->
 </Alloy>

@@ -24,7 +24,7 @@
                 <TableViewRow><View class="view-row-separator"/></TableViewRow>
             </TableViewSection>
             <TableViewSection>
-                <TableViewRow><Button id="getListOfDevicesBtn">Update Devices</Button></TableViewRow>
+                <TableViewRow><Button id="getListOfDevicesBtn">Query ISY for Devices</Button></TableViewRow>
                 <TableViewRow><Button id="clearData">Clear Data</Button></TableViewRow>
                 <TableViewRow><Button id="closeBtn" onClick="closeWin">Save and Close</Button></TableViewRow>
             </TableViewSection>
@@ -54,7 +54,7 @@
                 <TextField id="password" class="form-textField" inputType="text" hintText="Password" passwordMask="true"/>
             </View>
             <View class="view-row-separator"/>
-            <Button id="getListOfDevicesBtn">Update Devices</Button>>
+            <Button id="getListOfDevicesBtn">Query ISY for Devices</Button>>
             <Button id="clearData">Clear Data</Button>
         </ScrollView>
     </Window>

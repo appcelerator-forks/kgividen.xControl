@@ -1,25 +1,27 @@
 <Alloy>
-    <Collection id="deviceInView" src="DeviceInView" instance="true"/>
+    <!-- <Collection id="deviceInView" src="DeviceInView" instance="true"/> -->
     <Collection id="device" src="Device" instance="true"/>
     
 	<Collection src="Device" />
 	<Collection src="DeviceInFolder" />
-	<Collection src="DeviceInView" />
+	<!-- <Collection src="DeviceInView" /> -->
 	<Collection src="FolderInView" />
 	
 	
     <Window id="win" backgroundColor="white" layout="vertical">
-        <Button top="30" id="printDeviceInViewBtn">Print DeviceInView Table</Button>
-        <Button onClick="printFolderInViewTable">Print folderInView Table</Button>
-        <Button onClick="printDeviceInFolderTable">Print deviceInFolder Table</Button>
-        <Button id="printDeviceBtn">Print Device Table</Button>
-        <Button id="printViewBtn">Print View Table</Button>
-        <Button id="printSortByIdBtn">printSortById</Button>
-        <Button onClick="createFakeData">createFakeData</Button>
-        <Button onClick="deleteFakeData">deleteFakeData</Button>
-        <Button onClick="createFakeDevices">createFakeDevices</Button>
-        <Button onClick="createFakeFolders">createFakeFolders</Button>
-        <Button id="closeBtn">Close</Button>
-        <TextArea height="25%" id="output"></TextArea>
+    	<View layout="vertical" top="5" height="100%">
+	        <!-- <Button top="30" id="printDeviceInViewBtn">Print DeviceInView Table</Button> -->
+	        <Button onClick="printFolderInViewTable">Print folderInView Table</Button>
+	        <Button onClick="printDeviceInFolderTable">Print deviceInFolder Table</Button>
+	        <Button id="printDeviceBtn">Print Device Table</Button>
+	        <Button id="printViewBtn">Print View Table</Button>
+	        <Button id="printSortByIdBtn">printSortById</Button>
+	        <Button onClick="createFakeData">createFakeData</Button>
+	        <Button onClick="deleteFakeData">deleteFakeData</Button>
+	        <Button onClick="createFakeDevices">createFakeDevices</Button>
+	        <Button onClick="createFakeFolders">createFakeFolders</Button>
+	        <Button id="closeBtn">Close</Button>
+	        <TextArea height="25%" id="output"></TextArea>
+        </View>
     </Window>
 </Alloy>

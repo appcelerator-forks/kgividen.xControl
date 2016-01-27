@@ -61,10 +61,10 @@ $.clearData.addEventListener('click', function () {
 
 $.getListOfDevicesBtn.addEventListener('click', function () {
     saveConnectionInfo();
-    //Alloy.Collections.deviceInView.fetch();
-//    Alloy.Globals.deviceInViewJSON = Alloy.Collections.deviceInView.toJSON(); //So we can access it in the tableViewRow
-    $.settingsWin.close();
-    Alloy.createController('settingsDeviceList').getView().open();
+    // $.settingsWin.close();
+    refreshDevices();
+    // Alloy.createController('/settingsMenu/index').getView().open();
+    
 });
 
 $.changeNetworkBtn.addEventListener('click', function(e) {
@@ -91,16 +91,229 @@ getConnectionInfo();
 //Set Default Data
 if(!Ti.App.Properties.getBool('isDefaultDataSet')){
     Ti.API.info("Setting Default Data!");
-    var defaultViewData = [
-        {"name" : "Favorites"},
-        {"name" : "Lighting"},
-        {"name" : "Scenes"}
-    ];
-//    Alloy.Collections.view.reset(defaultViewData);
-    _.each(defaultViewData, function (item) {
-        var model = Alloy.createModel('View', item);
-        model.save({silent: true});
-    });
-    Alloy.Collections.view.fetch();
+    // var defaultViewData = [
+        // {"name" : "Favorites"},
+        // {"name" : "Lighting"},
+        // {"name" : "Scenes"}
+    // ];
+// //    Alloy.Collections.view.reset(defaultViewData);
+    // _.each(defaultViewData, function (item) {
+        // var model = Alloy.createModel('View', item);
+        // model.save({silent: true});
+    // });
+    // Alloy.Collections.view.fetch();
     Ti.App.Properties.setBool('isDefaultDataSet', true);
 }
+
+
+function refreshDevices(){
+	
+    //device is set in alloy.js
+    // device.getListOfDevices().then(function (liveData) {
+        //TODO Take out fake data line
+        liveData = fakeData;
+        _.each(data,function(item){
+            //add all of the defaults if they aren't there for the model
+            _.defaults(item,{displayName:item.name}, {parent:"unknown"}, {type:"unknown"});
+        });
+
+        //Add all of the new records in the collection that came from the hardware device.
+        // var devicesInDB = $.deviceCollection;
+        // devicesInDB.sortById(viewId);
+		// var devicesInDB = Alloy.Collections.device.fetch();
+		Alloy.Collections.device.fetch({
+			success : function(dbData) {
+				
+				Alloy.Collections.deviceInFolder.fetch({
+					success : function(devicesInFolder) {
+						Ti.API.info("dbData in success of deviceInFolder: " + JSON.stringify(dbData));
+						processData(dbData, liveData, devicesInFolder);		
+					},
+					error : function() {
+						Ti.API.debug("DeviceInFolder fetch Failed!!!");
+					}
+				});
+			},
+			error : function() {
+				Ti.API.debug("Device Fetch Failed!!!");
+			}
+		});
+	// });
+}
+
+function processData(dbData, liveData, devicesInFolder) {
+		Ti.API.info("dbData in processData: " + JSON.stringify(dbData));
+		//Get all the folders and add them first if they haven't already been added.
+		// dbData = dbData.toJSON();
+		Ti.API.info("dbData in settings.js: " + JSON.stringify(dbData));
+		Ti.API.info("liveData in settings.js: " + JSON.stringify(liveData));
+		
+		//All of the folders we just got from the live system not the DB
+		var liveFolders = _.filter(liveData, function(device) {
+			return device.type == "folder";
+		});
+		Ti.API.info("liveFolders in processData: " + JSON.stringify(liveFolders));
+		
+		//All of the devices we just got from the live system not the DB
+		var liveDevices = _.filter(liveData, function(device) {
+			return device.type != "folder";
+		});
+		Ti.API.info("liveDevices in processData: " + JSON.stringify(liveDevices));
+		
+		//if there is a new device add it to the DB and link it to the correct folder.
+		_.each(liveDevices, function(device) {
+			//check to see if the device is in the db yet
+			var deviceExistsArray = dbData.where({DeviceAddress: device.address});	
+			Ti.API.info("deviceExistsArray: " + JSON.stringify(deviceExistsArray));
+			if(!deviceExistsArray[0]){
+				
+				//Add device to the DB
+				var device = {
+						"name" : device.name,
+						"displayName" : device.name,
+						"address" : device.address,
+						"type" : device.type,
+						"parent" : device.parent
+					};
+            	var model = Alloy.createModel('Device', device);
+            	model.save();
+            	Ti.API.info("Device Created: " + JSON.stringify(device));
+			}
+		});	
+		
+		//add new liveFolders to the db if they aren't already there
+		_.each(liveFolders, function(folder){
+			 var folderArray = dbData.where({address: folder.address});	
+			 //If the folder hasn't been added before then add it.
+			 if (!folderArray[0]) {
+			 	//Create the folder even though we don't add it to a view so we have a record with the proper address
+				var folder = {
+					"name" : folder.name,
+					"displayName" : folder.name,
+					"address" : folder.address,
+					"type" : folder.type,
+  				};
+				var model = Alloy.createModel('Device', folder);
+				model.save();
+				
+				//Find all the scenes that should be added to the folder.
+        		var thisFoldersScenes = _.filter(liveDevices, function(device) {
+            		return device.type == "scene" && device.parent == folder.address;
+            	}); 
+            	Ti.API.info("thisFoldersScenes: " + JSON.stringify(thisFoldersScenes));
+            	
+            	//For now we are assuming if it's not a scene it's a light
+            	var thisFoldersOther = _.filter(liveDevices, function(device) {
+            		return device.type != "scene" && device.type != "folder" && device.parent == folder.address;
+            	});        	
+            	Ti.API.info("thisFoldersOther: " + JSON.stringify(thisFoldersOther));
+            	
+            	//Add others to lighting view for now so we assume if it's not a scene it's a light
+            	//create a lighting version of the folder and link the devices to it
+            	if(thisFoldersOther && thisFoldersOther.length > 0) {
+            		var newFolderAddress = createFolder(folder);
+            		//Link this new folder to the lighting view
+            		linkFolderToView(newFolderAddress, VIEW_ID_LIGHTS);	
+            		_.each(thisFoldersOther, function(device) {
+    					linkDeviceToFolder(device.address, newFolderAddress);	
+					});
+            	}
+				
+        		//create a scene version of the folder and link the devices to it
+        		if(thisFoldersScenes && thisFoldersScenes.length > 0) {
+					var newFolderAddress = createFolder(folder);
+					linkFolderToView(newFolderAddress, VIEW_ID_SCENES);	
+					_.each(thisFoldersScenes, function(device) {
+    					linkDeviceToFolder(device.address, newFolderAddress);	
+					});
+				}
+			 }
+			 
+			 
+			 //TODO What about devices that don't have a parent specified?  Filter them here and add them to the other folder and then the lighting view
+			 
+		});
+}
+
+function createFolder(folder) {
+	var guid = Ti.Platform.createUUID();
+	var folder = {
+					"name" : folder.name,
+					"displayName" : folder.name,
+					"address" : guid,
+					"type" : folder.type,
+					// "originalAddr" : blah
+				  };
+	var model = Alloy.createModel('Device', folder);
+	model.save();
+	return guid;
+}
+function linkDeviceToFolder(deviceAddress, folderAddress) {
+	var obj = {
+		"DeviceAddress" : deviceAddress,
+		"FolderAddress" : folderAddress,
+	};
+	var model = Alloy.createModel('DeviceInFolder', obj);
+	model.save();	
+}
+
+function linkFolderToView(folderAddress, viewId) {
+	var obj = {
+		"FolderAddress" : folderAddress,
+		"ViewId" : viewId,
+	};
+	var model = Alloy.createModel('FolderInView', obj);
+	model.save();	
+}
+
+//FAKE DATA
+
+var fakeData = [
+    {
+        "name": "Kitchen Folder",
+        "address": "29764",
+        "type": "folder"
+    },
+    {
+        "name": "Backyard Floods",
+        "parent": "29764",
+        "type": "light",
+        "address": "20 88 48 1"
+    },
+    {
+        "name": "Kitchen Scene",
+        "parent": "29764",
+        "type": "scene",
+        "address": "20 91 DD 1"
+    },
+    {
+        "name": "Kitchen Sink",
+        "parent": "29764",
+        "type": "light",
+        "address": "20 95 1D 1"
+    },
+    {
+        "name": "Patio",
+        "parent": "29764",
+        "type": "light",
+        "address": "20 A8 FC 1"
+    },
+    {
+        "name": "Dining Area",
+        "parent": "1111",
+        "type": "light",
+        "address": "20 AE 83 1"
+    },
+    {
+        "name": "Kitchen Under Cabinets",
+        "parent": "29763",
+        "type": "light",
+        "address": "20 B1 50 1"
+    },
+    {
+        "name": "Kitchen Light",
+        "parent": "29764",
+        "type": "light",
+        "address": "20 B2 AF 1"
+    }
+];

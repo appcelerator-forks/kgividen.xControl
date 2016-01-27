@@ -16,12 +16,12 @@ var deleteFakeData = function () {
         model.destroy({silent: true});
     }
 
-    Alloy.Collections.DeviceInView.fetch();
-    var model;
-
-    while (model = Alloy.Collections.DeviceInView.first()) {
-        model.destroy({silent: true});
-    }
+    // Alloy.Collections.DeviceInView.fetch();
+    // var model;
+// 
+    // while (model = Alloy.Collections.DeviceInView.first()) {
+        // model.destroy({silent: true});
+    // }
 
 
     Alloy.Collections.FolderInView.fetch();
