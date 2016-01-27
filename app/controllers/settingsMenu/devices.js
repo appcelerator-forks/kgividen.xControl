@@ -374,7 +374,13 @@ if (OS_IOS) {
 		if(e.action=="RENAME") {
 			renameItemBtnClick(e);
 		} else if (e.action=="DELETE") {
-			var item = preEditSectionAndItems[e.sectionIndex].items[e.itemIndex]; //This should be the same assuming the maps are correct in the preEditSectionItems
+			Ti.API.info("preEditSectionAndItems: " + JSON.stringify(preEditSectionAndItems));
+			Ti.API.info("e: " + JSON.stringify(e));
+			if(preEditSectionAndItems.length > 0){
+				var item = preEditSectionAndItems[e.sectionIndex].items[e.itemIndex]; //This should be the same assuming the maps are correct in the preEditSectionItems
+			} else {
+				var item = e.section.getItemAt(e.itemIndex);
+			}
 			deleteItem(item);
 		}
 	}
