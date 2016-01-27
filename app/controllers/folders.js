@@ -329,7 +329,7 @@ function updateLightsStatus(nodesByAddressAndStatus){
 	                if (item.btn.type == 'light') {
 	                    var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
 	                    if(current.level > 0){
-	                        //todo: Get this hardcoded image out of here some how
+	                        //todo: Get this hardcoded image out of here probably with an applyProperties and setting the class that way.
 	                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
 	                    } else {
 	                        //todo: Get this hardcoded image out of here some how
