@@ -29,6 +29,7 @@ function init() {
 			processDevicesInFolders(data.toJSON(), VIEW_ID_FAVORITES);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_LIGHTS);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_SCENES);
+			updateStatus();
 		},
 		error : function() {
 			Ti.API.debug("refreshDevicesInFolder Failed!!!");
@@ -214,19 +215,19 @@ var preprocessForListView = function(rawData) {
 	});
 };
 
-/**
- * This function handles the click events for the rows in the ListView.
- *
- * @param {Object} Event data passed to the function
- */
-function onItemClick(e) {
-	/**
-	 * Get the Item that was clicked
-	 */
-	var item = $.favoritesListView.sections[e.sectionIndex].items[e.itemIndex];
-
-	// Alloy.Globals.Navigator.open("profile", item.properties.user);
-}
+// /**
+ // * This function handles the click events for the rows in the ListView.
+ // *
+ // * @param {Object} Event data passed to the function
+ // */
+// function onItemClick(e) {
+	// /**
+	 // * Get the Item that was clicked
+	 // */
+	// var item = $.favoritesListView.sections[e.sectionIndex].items[e.itemIndex];
+// 
+	// // Alloy.Globals.Navigator.open("profile", item.properties.user);
+// }
 
 /**
  * event listener set via view to provide a search of the ListView.
@@ -262,9 +263,89 @@ $.wrapper.addEventListener("open", function onWindowOpen() {
 /**
  * Listen for the refresh event, and re-initialize
  */
-Ti.App.addEventListener("refresh-data", function(e) {
-	init();
-});
+// Ti.App.addEventListener("refresh-data", function(e) {
+	// init();
+// });
+
+//***************ON EVENTS CALLED FROM THE XML *********************
+function btnClick(e){
+    Ti.API.info("Button Click!");
+    var item = e.section.items[e.itemIndex];
+    var itemType = item.btn.type;
+    var address = item.btn.address;
+
+
+    Ti.API.info("item.btn.address: " + item.btn.address + " type: " + itemType);
+    Ti.API.info("item: " + JSON.stringify(item));
+    if(!address){
+        return;
+    }
+    if(itemType == "light"){
+        device.toggle(address)
+            .then(updateStatus());
+    }
+}
+
+function sendSliderVal(e) {
+    Ti.API.debug("sendSliderVal");
+    var item = e.section.getItemAt(e.itemIndex);
+    Ti.API.debug("e: " + JSON.stringify(e));
+    Ti.API.debug("address: " + JSON.stringify(item.btn.address));
+    var itemType = e.bindId;
+    var address = item.btn.address;
+
+
+    if(address && itemType == "slider") {
+        var level = Math.round(e.source.value);
+        device.setLevel(address, level)
+            .then(updateStatus());
+
+        item.sliderLbl.text = level;  //Slider label
+        item.slider.value = level;
+
+        //TODO Android makes the slider jerky if you update it
+        if(osname == "ios") {
+            e.section.updateItemAt(e.itemIndex, item);  //update the GUI
+        }
+    }
+}
+
+var updateStatus = function (){
+    return device.getAllDevicesStatus().then(updateLightsStatus);
+};
+
+exports.updateStatus = updateStatus;
+
+function updateLightsStatus(nodesByAddressAndStatus){
+	Ti.API.info("nodesByAddressAndStatus: " + JSON.stringify(nodesByAddressAndStatus));
+	//Each view in the scrollableView i.e. favorites, lighting, etc.
+    _.each($.scrollableView.getViews(), function(view){
+        var viewSections = view.getSections();
+        //We use viewSections[0] because we only have one section on each of the views.
+        _.each(viewSections, function(section){
+        	var items = (section) ? section.getItems() : null;
+	        if (section && items){
+	            _.each(items, function(item, index){
+	                if (item.btn.type == 'light') {
+	                    var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
+	                    if(current.level > 0){
+	                        //todo: Get this hardcoded image out of here some how
+	                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
+	                    } else {
+	                        //todo: Get this hardcoded image out of here some how
+	                        item.btn.backgroundImage = '/images/themes/default/btn.png';
+	                    }
+	
+	                    item.slider.value = item.sliderLbl.text = current.level;
+	//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
+                	}
+            	});
+       	 	}
+        	section.setItems(items);	
+        });
+    });
+}
+
 
 /**
  * Initialize View

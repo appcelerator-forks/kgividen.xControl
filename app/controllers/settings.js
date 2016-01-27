@@ -86,9 +86,9 @@ getConnectionInfo();
 function refreshDevices(){
 	
     //device is set in alloy.js
-    // device.getListOfDevices().then(function (liveData) {
+    device.getListOfDevices().then(function (liveData) {
         //TODO Take out fake data line
-        liveData = fakeData;
+        // liveData = fakeData;
         _.each(data,function(item){
             //add all of the defaults if they aren't there for the model
             _.defaults(item,{displayName:item.name}, {parent:"unknown"}, {type:"unknown"});
@@ -112,7 +112,7 @@ function refreshDevices(){
 				Ti.API.debug("Device Fetch Failed!!!");
 			}
 		});
-	// });
+	});
 }
 
 function processData(dbData, liveData, devicesInFolder) {

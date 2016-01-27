@@ -31,9 +31,7 @@
 		-->
 		
 		<ScrollableView id="scrollableView" showPagingControl="true">
-			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
-				<!-- <HeaderView><TextField id="sfFav" class="searchField"></TextField></HeaderView> -->
-				<!-- <SearchBar id="searchBar" barColor="transparent" platform="ios" class="search" /> -->
+			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
 				<Templates>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
                         <Label bindId="groupLbl" class="groupLbl" />
@@ -49,18 +47,16 @@
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
 	                    <View>
-	                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
-	                        <Button bindId="btn" class="btn" />
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
 	                        <View>
-	                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
-	                            <Slider bindId="slider" class="slider"/>
+	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
 	                            <Label bindId="sliderLbl" class="sliderLbl" />
 	                        </View>
 	                    </View>
 					</ItemTemplate>
 				</Templates>
 			</ListView>
-			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="lightTemplate" onItemclick="onItemClick">
+			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="lightTemplate">
 				<HeaderView><TextField id="sfLights" class="searchField"></TextField></HeaderView>
 				<Templates>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
@@ -77,11 +73,9 @@
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
 	                    <View>
-	                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
-	                        <Button bindId="btn" class="btn" />
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
 	                        <View>
-	                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
-	                            <Slider bindId="slider" class="slider"/>
+	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
 	                            <Label bindId="sliderLbl" class="sliderLbl" />
 	                        </View>
 	                    </View>
@@ -106,10 +100,10 @@
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
 	                    <View>
-	                        <!-- <Button bindId="btn" class="btn" onClick="btnClick" /> -->
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
 	                        <Button bindId="btn" class="btn" />
 	                        <View>
-	                            <!-- <Slider bindId="slider" class="slider" onStop="sendSliderVal"/> -->
+	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
 	                            <Slider bindId="slider" class="slider"/>
 	                            <Label bindId="sliderLbl" class="sliderLbl" />
 	                        </View>
