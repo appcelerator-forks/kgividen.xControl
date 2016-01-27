@@ -95,9 +95,6 @@
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
 	                        <Label bindId="groupLbl" class="groupLbl" />
                     </ItemTemplate>
-					<ItemTemplate class="deviceItem" name="groupLblTemplate">
-	                        <Label bindId="groupLbl" class="groupLbl" />
-                    </ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
 	                        <Label bindId="sceneLbl" class="sceneLbl"/>

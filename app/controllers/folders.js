@@ -178,8 +178,14 @@ var preprocessForListView = function(rawData) {
 		/**
 		 * Create the new device object which is added to the Array that is returned by the _.map function.
 		 */
+		Ti.API.info("item in preprocess: " + JSON.stringify(item));
+		if(item.type == "scene") {
+			item.template = "sceneTemplate";	
+		} else {
+			item.template = "lightTemplate";
+		}
 		return {
-			template : "lightTemplate",
+			template : item.template,
 			properties : {
 				searchableText : item.displayName,
 				modelId : item.id,
@@ -196,6 +202,15 @@ var preprocessForListView = function(rawData) {
 			sliderLbl : {
 				text : item.sliderVal
 			},
+			sceneLbl: {
+				text: item.displayName
+			},
+			sceneBtnOn: {
+				title:"On"
+			},
+			sceneBtnOff: {
+				title:"Off"
+			}
 		};
 	});
 };
