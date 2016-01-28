@@ -38,7 +38,6 @@ function init() {
 }
 
 function processDevicesInFolders(devicesAndFolders, viewId) {
-	Ti.API.info("viewId: " + viewId);
 	/** Filter the folders themselves out of the list before grouping.
 	 *filter out the ones that aren't for this viewId.
 	 */
@@ -73,8 +72,10 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 	_.each(folders, function(folder) {
 		folder.devices = _.sortBy(folder.devices, 'deviceInFolderSortId');
 	});
-
-	if (folders) {
+	
+	
+	Ti.API.info("folders: " + JSON.stringify(folders));
+	if (folders && folders.length > 0) {
 		/**
 		 * Setup our Indexes and Sections Array for building out the ListView components
 		 *
@@ -161,6 +162,29 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 			$.scenesListView.sections = sections;
 		}
 		
+	} else {
+			Ti.API.info("No Folders found");
+			var sectionHeader = Ti.UI.createView();
+
+			/**
+			 * Create and Add the Label to the ListView Section header view
+			 */
+			var sectionLabel = Ti.UI.createLabel({
+				text : "Add something to favorites by going to Update/Edit Devices."
+			});	
+			
+			var rowGroupStyle = $.createStyle({
+				classes : 'groupLbl'
+			});
+			
+			sectionLabel.applyProperties(rowGroupStyle);
+			sectionHeader.add(sectionLabel);
+			
+			var section = Ti.UI.createListSection({
+				headerView : sectionHeader
+			});
+			
+			$.favoritesListView.sections[0] = section; 
 	}
 }
 
@@ -288,7 +312,44 @@ function sendSliderVal(e) {
     }
 }
 
+function sceneOnBtn(e){
+    var item = e.section.items[e.itemIndex];
+    var address = item.btn.address;
 
+    Ti.API.debug("scene on!");
+    Ti.API.debug("item.btn.address: " + item.btn.address);
+    if(!address){
+        return;
+    }
+    device.sceneOn(address);
+}
+
+function sceneOffBtn(e){
+    var item = e.section.items[e.itemIndex];
+    var address = item.btn.address;
+
+    Ti.API.debug("scene off!");
+    Ti.API.debug("item.btn.address: " + item.btn.address);
+    if(!address){
+        return;
+    }
+    device.sceneOff(address);
+}
+
+// function updateSliderLbl(e) {
+// //    Ti.API.debug("updateSliderLbl");
+    // var level = Math.round(e.source.value);
+    // var item = e.section.getItemAt(e.itemIndex);
+// //    Ti.API.debug("level: " + level);
+// 
+    // item.sliderLbl.text = level;  //Slider label
+    // //This needs to be done to update the sliderLBL but for now it doesn't work right because this conflicts with the update status
+    // //TODO Android makes the slider jerky if you update it
+    // if(osname == "ios") {
+        // e.section.updateItemAt(e.itemIndex, item);  //update the GUI
+    // }
+// 
+// }
 //
 var refresh = function (){
     return device.getAllDevicesStatus().then(updateUI);

@@ -6,6 +6,9 @@
 	<View id="wrapper" class="deviceContainerView">
 		<ScrollableView id="scrollableView" showPagingControl="true">
 			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+		       	<ListSection>
+    				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Favorites"></ListItem>
+        		</ListSection>
 				<RefreshControl id="refreshControlFav" platform="ios" onRefreshstart="refresh" />
 				<Templates>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
@@ -14,10 +17,8 @@
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
 	                        <Label bindId="sceneLbl" class="sceneLbl"/>
-	                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
-	                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
-	                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
-	                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
+	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
@@ -32,6 +33,9 @@
 				</Templates>
 			</ListView>
 			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+				<ListSection>
+    				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Lights"></ListItem>
+        		</ListSection>
 				<RefreshControl id="refreshControlLight" platform="ios" onRefreshstart="refresh" />
 				<HeaderView>
 					<TextField id="sfLights" class="searchField"></TextField>
@@ -43,10 +47,8 @@
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
 	                        <Label bindId="sceneLbl" class="sceneLbl"/>
-	                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
-	                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
-	                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
-	                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
+	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
@@ -61,6 +63,9 @@
 				</Templates>
             </ListView>
             <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+            	<ListSection>
+    				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Scenes"></ListItem>
+        		</ListSection>
             	<RefreshControl id="refreshControlScene" platform="ios" onRefreshstart="refresh" />
             	<HeaderView><TextField id="sfScenes" class="searchField"></TextField></HeaderView>
 				<Templates>
@@ -70,10 +75,8 @@
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
 	                        <Label bindId="sceneLbl" class="sceneLbl"/>
-	                        <!-- <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/> -->
-	                        <Button bindId="sceneBtnOn" class="sceneBtn"/>
-	                        <!-- <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/> -->
-	                        <Button bindId="sceneBtnOff" class="sceneBtn"/>
+	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
