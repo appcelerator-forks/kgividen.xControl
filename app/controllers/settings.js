@@ -100,7 +100,7 @@ $.settingsWin.addEventListener("close", function(){
 getConnectionInfo();
 
 function refreshDevices(){
-	
+	Alloy.Globals.PW.showIndicator("Updating Devices");
     //device is set in alloy.js
     device.getListOfDevices().then(function (liveData) {
         //TODO Take out fake data line
@@ -173,7 +173,7 @@ function processData(dbData, liveData, devicesInFolder) {
 					"address" : DEFAULT_LIGHT_FOLDER_ADDRESS,
 					"type" : "folder"
 			});
-        	linkFolderToView(DEFAULT_LIGHT_FOLDER_ADDRESS, VIEW_ID_LIGHTS);	
+        	linkFolderToView(DEFAULT_LIGHT_FOLDER_ADDRESS, VIEW_ID_LIGHTS, 1);	
 		}
 		
 		var defaultSceneFolderFound = dbData.where({address: DEFAULT_SCENE_FOLDER_ADDRESS});	
@@ -185,7 +185,7 @@ function processData(dbData, liveData, devicesInFolder) {
 					"address" : DEFAULT_SCENE_FOLDER_ADDRESS,
 					"type" : "folder"
 			});
-        	linkFolderToView(DEFAULT_SCENE_FOLDER_ADDRESS, VIEW_ID_SCENES);	
+        	linkFolderToView(DEFAULT_SCENE_FOLDER_ADDRESS, VIEW_ID_SCENES, 1);	
 		}
 		
 		//All of the devices we just got from the live system not the DB
@@ -203,9 +203,9 @@ function processData(dbData, liveData, devicesInFolder) {
 				return;
 			}
 			if(device.type == "scene") {
-				linkDeviceToFolder(device.address, DEFAULT_SCENE_FOLDER_ADDRESS);	
+				linkDeviceToFolder(device.address, DEFAULT_SCENE_FOLDER_ADDRESS, 1);	
 			} else {
-				linkDeviceToFolder(device.address, DEFAULT_LIGHT_FOLDER_ADDRESS);
+				linkDeviceToFolder(device.address, DEFAULT_LIGHT_FOLDER_ADDRESS, 1);
 			}	
 		});
 		
@@ -255,15 +255,12 @@ function processData(dbData, liveData, devicesInFolder) {
 					});
 				}
 			 }
-			 
-			 
-			 //TODO What about devices that don't have a parent specified?  Filter them here and add them to the other folder and then the lighting view
-			 
 		});
 		saveConnectionInfo();
     	Alloy.createController('/settingsMenu/index').getView().open();
 	    $.settingsWin.close();
 		alert("Devices were refreshed.  You can now add/modify them here or in the future by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
+		Alloy.Globals.PW.hideIndicator();
 }
 
 function createFolder(folder) {
@@ -276,20 +273,26 @@ function createFolder(folder) {
 	var model = Alloy.createModel('Device', folder);
 	model.save();
 }
-function linkDeviceToFolder(deviceAddress, folderAddress) {
+function linkDeviceToFolder(deviceAddress, folderAddress, sortId) {
 	var obj = {
 		"DeviceAddress" : deviceAddress,
-		"FolderAddress" : folderAddress,
+		"FolderAddress" : folderAddress
 	};
+	if (sortId){
+		obj.SortId = sortId;
+	}
 	var model = Alloy.createModel('DeviceInFolder', obj);
 	model.save();	
 }
 
-function linkFolderToView(folderAddress, viewId) {
+function linkFolderToView(folderAddress, viewId, sortId) {
 	var obj = {
 		"FolderAddress" : folderAddress,
 		"ViewId" : viewId,
 	};
+	if (sortId){
+		obj.SortId = sortId;
+	}
 	var model = Alloy.createModel('FolderInView', obj);
 	model.save();	
 }

@@ -9,7 +9,7 @@ exports.definition = {
         "defaults" : {
             "DeviceAddress" : '0',
             "FolderAddress" : '0',
-            "SortId" : 0
+            "SortId" : 99999
         },
         "adapter" : {
             "type" : "sql",
