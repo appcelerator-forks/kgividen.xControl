@@ -38,9 +38,13 @@ function rowSelect(e) {
             dsScrollView.scrollToView(VIEW_ID_SCENES);
             break;
         case "cameras":
-            $.destroy();
-            Alloy.createController("camerasContainer").getView().open();
-            $.win.close();
+        	alert("Coming Soon!");
+            // $.destroy();
+            // Alloy.createController("camerasContainer").getView().open();
+            // $.win.close();
+            break;
+        case "thermostats":
+        	alert("Coming Soon!");
             break;
         case "settings":
             $.destroy();
@@ -142,6 +146,12 @@ var leftMenu = [
         icon: 'fa-camera',
         iconColor: '#999',
         action: 'cameras'
+    },{
+        title: 'Thermostats',
+        type: 'menu',
+        icon: 'fa-certificate',
+        iconColor: '#999',
+        action: 'thermostats'
     }
 ];
 
