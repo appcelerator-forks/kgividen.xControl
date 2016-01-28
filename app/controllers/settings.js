@@ -260,6 +260,7 @@ function processData(dbData, liveData, devicesInFolder) {
 			 //TODO What about devices that don't have a parent specified?  Filter them here and add them to the other folder and then the lighting view
 			 
 		});
+		saveConnectionInfo();
     	Alloy.createController('/settingsMenu/index').getView().open();
 	    $.settingsWin.close();
 		alert("Devices were refreshed.  You can now add/modify them here or in the future by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
