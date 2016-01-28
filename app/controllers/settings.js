@@ -2,6 +2,8 @@ var CONN_REMOTE = 'Remote';
 var CONN_LOCAL = 'Local';
 var NETWORK_BTN_REMOTE_TITLE = "Remote Connection Enabled";
 var NETWORK_BTN_LOCAL_TITLE = "Local Connection Enabled";
+var DEFAULT_SCENE_FOLDER_ADDRESS = "22222";
+var DEFAULT_LIGHT_FOLDER_ADDRESS = "11111";
 
 var currentNetworkType = Titanium.App.Properties.getString('currentNetworkType') || CONN_LOCAL;
 
@@ -159,20 +161,67 @@ function processData(dbData, liveData, devicesInFolder) {
 			}
 		});	
 		
+		Ti.API.info("liveDevices: " + JSON.stringify(liveDevices));
+		
+		//If dbData doesn't contain a default 111 Folder then we should add them for lighting and scenes
+		var defaultLightFolderFound = dbData.where({address: DEFAULT_LIGHT_FOLDER_ADDRESS});	
+		if (!defaultLightFolderFound[0]) {
+			//Add default folder to the DB
+			createFolder({
+					"name" : "Lighting Not In Folder",
+					"displayName" : "Lighting Not In Folder",
+					"address" : DEFAULT_LIGHT_FOLDER_ADDRESS,
+					"type" : "folder"
+			});
+        	linkFolderToView(DEFAULT_LIGHT_FOLDER_ADDRESS, VIEW_ID_LIGHTS);	
+		}
+		
+		var defaultSceneFolderFound = dbData.where({address: DEFAULT_SCENE_FOLDER_ADDRESS});	
+		if (!defaultSceneFolderFound[0]) {
+			//Add default folder to the DB
+			createFolder({
+					"name" : "Scenes",
+					"displayName" : "Scenes",
+					"address" : DEFAULT_SCENE_FOLDER_ADDRESS,
+					"type" : "folder"
+			});
+        	linkFolderToView(DEFAULT_SCENE_FOLDER_ADDRESS, VIEW_ID_SCENES);	
+		}
+		
+		//All of the devices we just got from the live system not the DB
+		var devicesInDefaultFolder = _.filter(liveData, function(device) {
+			return device.parent == "111";
+		});
+		
+		
+		Ti.API.info("devicesInFolder: " + JSON.stringify(devicesInFolder));
+		_.each(devicesInDefaultFolder, function(device) {
+			//If the device has already been added to the default folder then skip it.
+			var deviceInFolder = devicesInFolder.where({"DeviceAddress":device.address});
+			if(deviceInFolder[0]){
+				Ti.API.info("device skipped: " + device.name);
+				return;
+			}
+			if(device.type == "scene") {
+				linkDeviceToFolder(device.address, DEFAULT_SCENE_FOLDER_ADDRESS);	
+			} else {
+				linkDeviceToFolder(device.address, DEFAULT_LIGHT_FOLDER_ADDRESS);
+			}	
+		});
+		
+		
 		//add new liveFolders to the db if they aren't already there
 		_.each(liveFolders, function(folder){
 			 var folderArray = dbData.where({address: folder.address});	
 			 //If the folder hasn't been added before then add it.
 			 if (!folderArray[0]) {
 			 	//Create the folder even though we don't add it to a view so we have a record with the proper address
-				var folder = {
+				createFolder({
 					"name" : folder.name,
 					"displayName" : folder.name,
 					"address" : folder.address,
 					"type" : folder.type,
-  				};
-				var model = Alloy.createModel('Device', folder);
-				model.save();
+  				});
 				
 				//Find all the scenes that should be added to the folder.
         		var thisFoldersScenes = _.filter(liveDevices, function(device) {
@@ -187,20 +236,22 @@ function processData(dbData, liveData, devicesInFolder) {
             	//Add others to lighting view for now so we assume if it's not a scene it's a light
             	//create a lighting version of the folder and link the devices to it
             	if(thisFoldersOther && thisFoldersOther.length > 0) {
-            		var newFolderAddress = createFolder(folder);
+            		folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
+            		createFolder(folder);
             		//Link this new folder to the lighting view
-            		linkFolderToView(newFolderAddress, VIEW_ID_LIGHTS);	
+            		linkFolderToView(folder.address, VIEW_ID_LIGHTS);	
             		_.each(thisFoldersOther, function(device) {
-    					linkDeviceToFolder(device.address, newFolderAddress);	
+    					linkDeviceToFolder(device.address, folder.address);	
 					});
             	}
 				
         		//create a scene version of the folder and link the devices to it
         		if(thisFoldersScenes && thisFoldersScenes.length > 0) {
-					var newFolderAddress = createFolder(folder);
-					linkFolderToView(newFolderAddress, VIEW_ID_SCENES);	
+        			folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
+					createFolder(folder);
+					linkFolderToView(folder.address, VIEW_ID_SCENES);	
 					_.each(thisFoldersScenes, function(device) {
-    					linkDeviceToFolder(device.address, newFolderAddress);	
+    					linkDeviceToFolder(device.address, folder.address);	
 					});
 				}
 			 }
@@ -215,17 +266,14 @@ function processData(dbData, liveData, devicesInFolder) {
 }
 
 function createFolder(folder) {
-	var guid = Ti.Platform.createUUID();
 	var folder = {
 					"name" : folder.name,
 					"displayName" : folder.name,
-					"address" : guid,
-					"type" : folder.type,
-					// "originalAddr" : blah
+					"address" : folder.address,
+					"type" : folder.type
 				  };
 	var model = Alloy.createModel('Device', folder);
 	model.save();
-	return guid;
 }
 function linkDeviceToFolder(deviceAddress, folderAddress) {
 	var obj = {

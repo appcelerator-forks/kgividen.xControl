@@ -39,8 +39,9 @@ function init() {
 
 function processDevicesInFolders(devicesAndFolders, viewId) {
 	Ti.API.info("viewId: " + viewId);
-	//Filter the folders themselves out of the list before grouping.
-	//filter out the ones that aren't for this viewId.
+	/** Filter the folders themselves out of the list before grouping.
+	 *filter out the ones that aren't for this viewId.
+	 */
 	var listOfFolders = [];
 	var devices = _.filter(devicesAndFolders, function(folder) {
 		if (folder.type == "folder" && folder.ViewId == viewId) {
@@ -83,10 +84,10 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 
 
 
-		// /**
-		// * Iterate through each folder and prepare the data for the ListView
-		// * (Leverages the UnderscoreJS _.each function)
-		// */
+		/**
+		 * Iterate through each folder and prepare the data for the ListView
+		 * (Leverages the UnderscoreJS _.each function)
+		 */
 		_.each(folders, function(folder, i) {
 			/**
 			 * Take the group data that is passed into the function, and parse/transform
@@ -287,16 +288,9 @@ function sendSliderVal(e) {
     }
 }
 
-var refresh = function (){
-	// if we were called from the constructor programmatically show the refresh animation
-	if (OS_IOS) {
-		//There should be a better way to do this rather than duplicate the control
-    	// but if the same one is added to multiple tableViews things crap out
-		$.refreshControlFav.beginRefreshing();
-		$.refreshControlLight.beginRefreshing();
-		$.refreshControlScene.beginRefreshing();
-	}
 
+//
+var refresh = function (){
     return device.getAllDevicesStatus().then(updateUI);
 };
 
