@@ -23,16 +23,19 @@
     scrollable:false
 },
 ".view-form-icon-title-row": {
-    height:80
+	left : '5%',
+	width: Ti.UI.FILL,
+    height:100
 },
 ".row-option": {
-	backgroundColor:"white"
+	backgroundColor:"white",
+	width: Ti.UI.FILL
 },
 ".bgroundColor": {
 	backgroundColor:'white'
 },
 "TableView":{
-	width:'50%'
+	width:'75%'
 },
 "TableViewRow":{
 	height:Ti.UI.SIZE

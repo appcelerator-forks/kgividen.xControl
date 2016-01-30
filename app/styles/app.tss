@@ -48,12 +48,12 @@ overrode the settings with other TSS, XML, or JS settings:
 
 '.title': {
 	left: 10,
-	width: '75%',
+	width: '90%',
 	ellipsize: Ti.UI.TEXT_ELLIPSIZE_TRUNCATE_END,
 	height: Ti.UI.SIZE,
 	wordWrap: false,
 	font: {
-		fontSize: 18
+		fontSize: 30
 	}
 }
 
@@ -112,6 +112,7 @@ overrode the settings with other TSS, XML, or JS settings:
 	left : '5%',
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
+	horizontalWrap: false,
 	layout : 'horizontal'
 }
 
@@ -141,7 +142,7 @@ overrode the settings with other TSS, XML, or JS settings:
     text: '\uf114',
     font: {
         fontFamily: 'FontAwesome',
-        fontSize: 30
+        fontSize: 45
     }
 }
 
