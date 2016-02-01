@@ -1,7 +1,6 @@
 var parameters = arguments[0] || {};
-var parentController = parameters.parentController || {};
 var callbackFunction = parameters.callback || null;
-
+Ti.API.info("parameters: " + JSON.stringify(parameters));
 // EVENT HANDLERS
 /**
  * function called when save button clicked that executes the callback from the folders.js

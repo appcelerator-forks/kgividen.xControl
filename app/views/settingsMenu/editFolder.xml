@@ -1,7 +1,7 @@
 <Alloy>
-    <Window id="mainWindow" navBarHidden="false" onOpen="doOpen">
+    <Window id="mainWindow" navBarHidden="false" onFocus="doOpen">
         <RightNavButton platform="ios">
-            <Button onClick="saveButtonClicked">Save</Button>
+            <Button onClick="saveButtonClicked">Close</Button>
         </RightNavButton>
         <Menu platform="android">
             <MenuItem id="closeBtn" title="Close" onClick="saveButtonClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />

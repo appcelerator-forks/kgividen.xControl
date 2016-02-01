@@ -1,9 +1,8 @@
 <Alloy>
-	<Window id="foldersWin" title="Folders" navBarHidden="false" onBlur="updateFolderSortOrder" onFocus="refresh">
+	<Window id="foldersWin" title="Folders" navBarHidden="false" onFocus="refresh">
 		<RightNavButton platform='ios'>
 			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
 		</RightNavButton>
-
 		<Widget id="addFolderFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
 
 		<Menu platform="android">

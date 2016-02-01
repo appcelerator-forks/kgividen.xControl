@@ -57,10 +57,10 @@ function transform(model) {
 	var transform = model.toJSON();
 	var type = model.get("type");
 	//lightTemplate is the default
-	if($.editMode == true && !OS_IOS) { //Only need to show new icons for Android
+	if($.editModeDevices == true && !OS_IOS) { //Only need to show new icons for Android
 		transform.t = "editTemplate";
 		return transform;
-	}
+	} 
 
 	if(type == "folder") {
 		transform.t = "folderTemplate";
@@ -91,7 +91,9 @@ function addDevicesClicked() {
 		folderModel: $.folderModel,
 		callback: function (event) {
 			win.close();
-			updateFolderSortOrder();
+			if(OS_IOS) {
+				updateDeviceSortOrder();
+			}
 			refreshDevicesInFolder($.folderModel.get("address"));
 		}
 	}).getView();
@@ -284,7 +286,7 @@ function reportMove(e) {
  * Update the sort order of all the objects in the folder so they are consistent and not duplicated in the order.
  * @param
  */
-function updateFolderSortOrder(){
+function updateDeviceSortOrder(){
 	Ti.API.info("updateFolderSortOrder!!!!");
 	Alloy.Collections.deviceInFolder.fetch({
 		success: function (data) {
@@ -332,15 +334,16 @@ var setPreEditSectionAndItems = function () {
  * @param  {Object} e Event
  */
 function editDevicesBtnClicked(e) {
-	Ti.API.debug("editDevicesBtnClicked!!!");
+	Ti.API.info("editDevicesBtnClicked!!!");
+	Ti.API.info("$.editModeDevices!!! " + $.editModeDevices);
 	if (OS_IOS) {
 		setPreEditSectionAndItems();
 	}
 
 	var btn = e.source;
-	if (btn.title == "Edit") {
+	if (!$.editModeDevices) {
 		btn.title = "Done";
-		$.editMode = true;
+		$.editModeDevices = true;
 		if (OS_IOS) {
 			$.devicesListView.setEditing(true);
 		} else {
@@ -349,14 +352,14 @@ function editDevicesBtnClicked(e) {
 		$.addDevicesFab.hideMe();
 	} else {
 		btn.title = "Edit";
-		$.editMode = false;
+		$.editModeDevices = false;
 		if (OS_IOS) {
 			$.devicesListView.setEditing(false);
+			updateDeviceSortOrder(); //This is so all of them are numbered correctly because the default is 0
 		} else {
 			updateUI();
 		}
 		$.addDevicesFab.showMe();
-		updateFolderSortOrder(); //This is so all of them are numbered correctly because the default is 0
 	}
 }
 

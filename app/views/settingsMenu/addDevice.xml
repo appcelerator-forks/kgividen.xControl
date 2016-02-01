@@ -2,7 +2,7 @@
     <Collection src="Device" id="deviceCollection"/>
     <Collection src="DeviceInFolder" instance="true" id="d"/>
 
-    <Window id="addDeviceWindow" navBarHidden="false" onBlur="exit" title="Add Devices" onOpen="refresh">
+    <Window id="addDeviceWindow" navBarHidden="false" title="Add Devices" onBlur="exit" onFocus="refresh">
         <RightNavButton platform="ios">
             <Button onClick="exit">Close</Button>
         </RightNavButton>

@@ -2,11 +2,9 @@ var parameters = arguments[0] || {};
 var parentController = parameters.parentController || {};
 var callbackFunction = parameters.callback || null;
 var item = parameters.item || null;
-Ti.API.debug("item: " + JSON.stringify(item));
 
-// EVENT HANDLERS
+// // EVENT HANDLERS
 function saveButtonClicked(event) {
-    Ti.API.debug("address: " + JSON.stringify(item.address.text));
 
     var content = {
         address: item.address.text,
@@ -18,12 +16,7 @@ function saveButtonClicked(event) {
 function doOpen() {
     $.folderName.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ALWAYS;
     $.folderName.value = item.title.text;
-
-    // set focus to the text input field, but
-    // use set time out to give window time to draw
-    setTimeout(function() {
-        $.folderName.focus();
-    }, 400);
+    $.folderName.focus();
 
 }
 

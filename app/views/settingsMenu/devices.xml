@@ -1,10 +1,11 @@
 <Alloy>
-	<Window id="devicesWin" title="Devices" navBarHidden="false" onBlur="updateFolderSortOrder" onFocus="doOpen">
+	<Window id="devicesWin" title="Devices" navBarHidden="false" onFocus="doOpen">
 		<Widget id="addDevicesFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
 
 		<RightNavButton platform='ios'>
 			<Button id="editDevicesBtn" onClick="editDevicesBtnClicked">Edit</Button>
 		</RightNavButton>
+		
 		<Menu platform="android">
 			<MenuItem id="editBtn" title="Edit" onClick="editDevicesBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 			<MenuItem id="closeBtn" title="Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />

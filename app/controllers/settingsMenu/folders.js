@@ -67,7 +67,6 @@ function transform(model) {
 	} else {
 		o.template = "template";
 	}
-	Ti.API.info("o.template: " + JSON.stringify(o.template));
 	return o;
 }
 
@@ -79,18 +78,6 @@ function filter(collection) {
 	return collection.where({
 		type:"folder"
 	});
-}
-
-/**
- * callback function that gets called after the addFolder view is closed so the folder is added.
- * @param  {Object} e Event
- */
-function addFolderCallback(event) {
-	if (event.success) {
-		addFolder(event.content);
-	} else {
-		Ti.API.debug("No Folder Added");
-	}
 }
 
 /**
@@ -173,8 +160,6 @@ function updateFolderSortOrder(){
 function editFolderClicked(e) {
 	Ti.API.debug("editFolderClicked function!!!");
 	var item = e.section.getItemAt(e.itemIndex);
-	var win = Alloy.createController("settingsMenu/editFolder", params).getView();
-	
 	var params = {
 		parentController: $,
 		item: item,
@@ -182,6 +167,7 @@ function editFolderClicked(e) {
 			win.close();
 		}
 	};
+	var win = Alloy.createController("settingsMenu/editFolder", params).getView();
 
 	if (OS_IOS) {
 		params.navWin = $.navWin;
@@ -203,8 +189,6 @@ function editFolderClicked(e) {
  * @param  {Object} e Event
  */
 function select(e) {
-	Ti.API.debug("Select!!!");
-	Ti.API.debug("e: " + JSON.stringify(e));
 	'use strict';
 
 	// lookup the model
@@ -212,7 +196,7 @@ function select(e) {
 
 	// select event on this controller, passing the model with it
 	// Open the edit folder view for android if in edit mode to rename the view.
-	if(!OS_IOS && $.editMode) {
+	if(!OS_IOS && $.isInEditingMode) {
 		return;
 	} 
 
@@ -388,7 +372,6 @@ function editFolderBtnClicked(e) {
 		if(OS_IOS){
 			$.folderListView.setEditing(true);
 		} else {
-			Ti.API.info("updateUI");
 			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
 		}
 		$.addFolderFab.hideMe();
@@ -397,8 +380,8 @@ function editFolderBtnClicked(e) {
 		$.isInEditingMode = false;
 		if(OS_IOS) {
 			$.folderListView.setEditing(false);
+			updateFolderSortOrder();
 		} else {
-			Ti.API.info("updateUI");
 			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
 		}
 		$.addFolderFab.showMe();
@@ -411,10 +394,13 @@ function editFolderBtnClicked(e) {
 $.addFolderFab.onClick(function(e) {
 	Ti.API.debug("addFolderClicked");
 	var win = Alloy.createController("settingsMenu/addFolder", {
-		parentController: $,
 		callback: function (event) {
 			win.close();
-			addFolderCallback(event);
+			if (event.success) {
+				addFolder(event.content);
+			} else {
+				Ti.API.debug("No Folder Added");
+			}
 		}
 	}).getView();
 
