@@ -127,7 +127,8 @@ overrode the settings with other TSS, XML, or JS settings:
     font: {
         fontFamily: 'FontAwesome',
         fontSize: 30
-    }
+    },
+    left: '82%'
 }
 
 '.heartIcon':{
@@ -148,7 +149,7 @@ overrode the settings with other TSS, XML, or JS settings:
 
 '.trashIcon':{
     text: '\uf014',
-    left: '85%',
+    left: '90%',
     font: {
         fontFamily: 'FontAwesome',
         fontSize: 30
@@ -188,7 +189,6 @@ overrode the settings with other TSS, XML, or JS settings:
          fontSize: 30
      }
  }
-
 
  //Table Views
  ".row": {

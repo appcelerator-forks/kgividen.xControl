@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="foldersWin" title="Folders" onBlur="updateFolderSortOrder" onFocus="refresh">
+	<Window id="foldersWin" title="Folders" navBarHidden="false" onBlur="updateFolderSortOrder" onFocus="refresh">
 		<RightNavButton platform='ios'>
 			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
 		</RightNavButton>
@@ -8,10 +8,10 @@
 
 		<Menu platform="android">
 			<MenuItem id="editFolderBtn" title="Edit" onClick="editFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+			<MenuItem id="closeBtn" title="Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
 		<ListView id="folderListView" platform="ios,android" defaultItemTemplate="template" onEditaction="onEditactionClick" onItemclick="select">
 
-			<!-- iOS RefreshControl -->
 			<RefreshControl platform="ios" id="refreshControl" onRefreshstart="refresh" />
 
 			<Templates>
@@ -21,12 +21,19 @@
 						<Label bindId="title" class="title" />
 					</View>
 				</ItemTemplate>
-				<ItemTemplate name="editTemplate">
+				<ItemTemplate name="editTemplate" platform="ios">
 					<View class="listViewIconLabelRow">
 						<Label class="folderIcon" />
 						<Label bindId="title" class="title" />
 					</View>
-					<Label class="infoIcon" platform="android" />
+				</ItemTemplate>
+				
+				<ItemTemplate name="editTemplate" class="item" platform="android">
+					<Label bindId="title" class="title"/>
+					<Label class="trashIcon" onClick="deleteBtnClick"/>
+					<Label class="infoIcon" onClick="editFolderClicked"/>
+					<Label class="upIcon" onClick="moveUp"/>
+					<Label class="downIcon" onClick="moveDown"/>
 				</ItemTemplate>
 			</Templates>
 
@@ -40,6 +47,5 @@
 			</ListSection>
 
 		</ListView>
-
 	</Window>
 </Alloy>

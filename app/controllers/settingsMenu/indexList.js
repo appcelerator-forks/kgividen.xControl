@@ -7,7 +7,7 @@ var loadFoldersCallback = function(){};
  * @param  {Object} args Event
  */
 $.init = function(args){
-    Ti.API.debug("init function args: " + JSON.stringify(args));
+    Ti.API.info("init function args: " + JSON.stringify(args));
     loadFoldersCallback = args.loadFoldersCallback;
 };
 /**

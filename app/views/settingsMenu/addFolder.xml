@@ -1,10 +1,10 @@
 <Alloy>
-    <Window id="mainWindow" onOpen="doOpen">
+    <Window id="mainWindow" navBarHidden="false" onOpen="doOpen">
         <RightNavButton platform="ios">
             <Button onClick="saveButtonClicked">Save</Button>
         </RightNavButton>
         <Menu platform="android">
-            <MenuItem title="Save" onClick="saveButtonClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+            <MenuItem id="closeBtn" title="Close" onClick="saveButtonClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
         </Menu>
         <Label>New Folder Name</Label>
         <TextField id="folderName" class="textField"/>

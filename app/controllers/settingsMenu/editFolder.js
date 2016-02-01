@@ -29,9 +29,9 @@ function doOpen() {
 
 function updateFolder(content) {
     Ti.API.debug("updateFolder content: " + JSON.stringify(content));
-    $.dd.fetch({
-        success: function () {
-            var model = $.dd.where({"address":content.address});
+    Alloy.Collections.device.fetch({
+        success: function (data) {
+            var model = data.where({"address":content.address});
             Ti.API.debug("model before save: " + JSON.stringify(model));
 
             if(model.length > 0) {
@@ -45,7 +45,7 @@ function updateFolder(content) {
                 content : content
             };
 
-            // return to comment.js controller to add new comment
+            // return to folder.js controller 
             callbackFunction && callbackFunction(returnParams);
         },
         error: function () {

@@ -32,11 +32,11 @@ function refreshDevicesInFolder(folderAddress) {
 /**
  * Event listener set via view to be called on when the user taps the home-icon (Android)
  */
-function close() {
+function closeWin() {
 	'use strict';
 
 	// close the window, showing the folders window behind it
-	$.win.close();
+	$.devicesWin.close();
 }
 
 /**
@@ -183,13 +183,13 @@ function moveUp(e){
 	var address = item.properties.itemAddress;
 	var addressAbove = itemAbove.properties.itemAddress;
 	Ti.API.debug("address : " + address + "addressAbove: " + addressAbove);
-	$.d.fetch({
-		success: function () {
-			Ti.API.debug("d: " + JSON.stringify($.d));
-			var modelInFolder = $.d.where({DeviceAddress: address, FolderAddress: folderAddress});
+	Alloy.Collections.deviceInFolder.fetch({
+		success: function (data) {
+			Ti.API.debug("data: " + JSON.stringify(data));
+			var modelInFolder = data.where({DeviceAddress: address, FolderAddress: folderAddress});
 			Ti.API.debug("modelInFolder : " + JSON.stringify(modelInFolder));
 
-			var modelInFolderAbove = $.d.where({DeviceAddress: addressAbove, FolderAddress: folderAddress});
+			var modelInFolderAbove = data.where({DeviceAddress: addressAbove, FolderAddress: folderAddress});
 			Ti.API.debug("modelInFolderAbove : " + JSON.stringify(modelInFolderAbove));
 
 			//where returns an array but we just need the first one if it's there.
@@ -224,12 +224,12 @@ function moveDown(e){
 	var address = item.properties.itemAddress;
 	var addressBelow = itemBelow.properties.itemAddress;
 
-	$.d.fetch({
-		success: function () {
-			Ti.API.debug("d: " + JSON.stringify($.d));
+	Alloy.Collections.deviceInFolder.fetch({
+		success: function (data) {
+			Ti.API.debug("data: " + JSON.stringify(data));
 
-			var modelInFolder = $.d.where({DeviceAddress: address, FolderAddress: folderAddress});
-			var modelInFolderBelow = $.d.where({DeviceAddress: addressBelow, FolderAddress: folderAddress});
+			var modelInFolder = data.where({DeviceAddress: address, FolderAddress: folderAddress});
+			var modelInFolderBelow = data.where({DeviceAddress: addressBelow, FolderAddress: folderAddress});
 
 			//where returns an array but we just need the first one if it's there.
 			if (modelInFolder.length > 0) {
@@ -267,9 +267,9 @@ function reportMove(e) {
 
 	Ti.API.debug("folderAddress: " + folderAddress + " deviceAddress: " + deviceAddress);
 
-	$.d.fetch({
-		success: function () {
-			var modelInFolder = $.d.where({DeviceAddress: deviceAddress, FolderAddress: folderAddress});
+	Alloy.Collections.deviceInFolder.fetch({
+		success: function (data) {
+			var modelInFolder = data.where({DeviceAddress: deviceAddress, FolderAddress: folderAddress});
 			Ti.API.debug("modelInFolder: " + JSON.stringify(modelInFolder));
 			//where returns an array but we just need the first one if it's there.
 			if (modelInFolder.length > 0) {
@@ -286,8 +286,8 @@ function reportMove(e) {
  */
 function updateFolderSortOrder(){
 	Ti.API.info("updateFolderSortOrder!!!!");
-	$.d.fetch({
-		success: function () {
+	Alloy.Collections.deviceInFolder.fetch({
+		success: function (data) {
 			var folderAddress = $.folderModel.get("address");
 			var deviceList = $.devicesListSection.getItems();
 			//Ti.API.debug("deviceList: " + JSON.stringify(deviceList));
@@ -297,7 +297,7 @@ function updateFolderSortOrder(){
 				if(deviceAddress) {
 					//if device is in the deviceInFolder set it's sort order to i.
 					//Ti.API.debug("saved deviceAddress: " + deviceAddress + "to sortorder: " + i);
-					var modelInFolder = $.d.where({DeviceAddress: deviceAddress, FolderAddress: folderAddress});
+					var modelInFolder = data.where({DeviceAddress: deviceAddress, FolderAddress: folderAddress});
 					//where returns an array but we just need the first one if it's there.
 					if (modelInFolder.length > 0) {
 						modelInFolder[0].save({"SortId": i}, {silent: true});

@@ -2,8 +2,16 @@
     <Collection src="Device" id="deviceCollection"/>
     <Collection src="DeviceInFolder" instance="true" id="d"/>
 
-    <Window id="addDeviceWindow" title="Add Devices" onBlur="exit" onOpen="refresh">
-        <ListView id="addDeviceListView" platform="ios,android" defaultItemTemplate="lightTemplate">
+    <Window id="addDeviceWindow" navBarHidden="false" onBlur="exit" title="Add Devices" onOpen="refresh">
+        <RightNavButton platform="ios">
+            <Button onClick="exit">Close</Button>
+        </RightNavButton>
+		
+		<Menu platform="android">
+			<MenuItem id="closeBtn" title="Close" onClick="exit" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+		
+		<ListView id="addDeviceListView" platform="ios,android" defaultItemTemplate="lightTemplate">
 
             <Templates>
                 <ItemTemplate name="lightTemplate" class="item">

@@ -2,7 +2,6 @@
 	<!-- create global instance of collection we'll bind -->
 	<Collection id="d" src="Device" />
 	<Collection src="DeviceInFolder" />
-	<!-- <Collection src="DeviceInView" /> -->
 	<NavigationWindow platform="ios" id="navWin">
 		<Window>
 			<LeftNavButton>

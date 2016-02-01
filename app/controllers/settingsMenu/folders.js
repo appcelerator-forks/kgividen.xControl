@@ -27,18 +27,6 @@ function refresh(e) {
 		$.refreshControl.beginRefreshing();
 	}
 
-	/**
-	 * callback for fetch, both success and error
-	 * @param  {Object} e Event
-	 */
-	function afterFetch(col, res) {
-        Ti.API.debug("Finished afterFetch in folders.js!!!!!");
-		// for iOS end the refreshing animation
-		if (OS_IOS) {
-			$.refreshControl.endRefreshing();
-		}
-	}
-	
 	//Get All of the devices and the folders they are in
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
 	var folderInViewTable = Alloy.Collections.folderInView.config.adapter.collection_name;
@@ -47,7 +35,7 @@ function refresh(e) {
 	var sql = "SELECT " + deviceTable + ".id, " + deviceTable + ".name, " + deviceTable + ".displayName, " + deviceTable + ".address, " + deviceTable + ".type," + 
 			  deviceTable + ".parent, " + folderInViewTable + ".FolderAddress, " + folderInViewTable + ".ViewId, ifnull(" + folderInViewTable + ".SortId,9999) as SortId" +
 			  " FROM " + deviceTable + 
-			  " INNER JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address WHERE ViewId='" + parameters.viewId + " '";
+			  " INNER JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address WHERE ViewId='" + parameters.viewId + "' ORDER BY SortId";
 
 
 	Ti.API.info("sql: " + sql); 
@@ -55,7 +43,11 @@ function refresh(e) {
 		query:sql,
 		success: function (data) {
 			Ti.API.info("data: " + JSON.stringify(data));
-			afterFetch();
+			// for iOS end the refreshing animation
+			if (OS_IOS) {
+				$.refreshControl.endRefreshing();
+			}
+			
 		},
 		error: function () {
 			Ti.API.debug("refreshDevicesInFolder Failed!!!");
@@ -69,9 +61,13 @@ function refresh(e) {
  */
 function transform(model) {
 	var o = model.toJSON();
-	if($.editMode){
+	if($.isInEditingMode){
+		Ti.API.info("Tansforming");
 		o.template = "editTemplate";
+	} else {
+		o.template = "template";
 	}
+	Ti.API.info("o.template: " + JSON.stringify(o.template));
 	return o;
 }
 
@@ -177,7 +173,8 @@ function updateFolderSortOrder(){
 function editFolderClicked(e) {
 	Ti.API.debug("editFolderClicked function!!!");
 	var item = e.section.getItemAt(e.itemIndex);
-
+	var win = Alloy.createController("settingsMenu/editFolder", params).getView();
+	
 	var params = {
 		parentController: $,
 		item: item,
@@ -189,8 +186,6 @@ function editFolderClicked(e) {
 	if (OS_IOS) {
 		params.navWin = $.navWin;
 	}
-
-	var win = Alloy.createController("settingsMenu/editFolder", params).getView();
 
 	if (OS_IOS) {
 		$.navWin.openWindow(win);
@@ -218,46 +213,164 @@ function select(e) {
 	// select event on this controller, passing the model with it
 	// Open the edit folder view for android if in edit mode to rename the view.
 	if(!OS_IOS && $.editMode) {
-		editFolderClicked(e);
+		return;
+	} 
+
+	var params = {
+		model: model,
+		callback: function (event) {
+			win.close();
+		}
+	};
+
+	//create the devices controller with the model and get its view
+	var win = Alloy.createController('settingsMenu/devices', params).getView();
+
+	if (OS_IOS) {
+		params.navWin = $.navWin;
+	}
+
+	//open the window in the NavigationWindow for iOS
+	if (OS_IOS) {
+		Ti.API.info("$.navWin: " + JSON.stringify($.navWin));
+		$.navWin.openWindow(win);
 	} else {
-		var params = {
-			model: model
-		};
-
-		if (OS_IOS) {
-			params.navWin = $.navWin;
-		}
-
-		//create the devices controller with the model and get its view
-		var win = Alloy.createController('settingsMenu/devices', params).getView();
-
-		//open the window in the NavigationWindow for iOS
-		if (OS_IOS) {
-			Ti.API.info("$.navWin: " + JSON.stringify($.navWin));
-			$.navWin.openWindow(win);
-		} else {
-			win.open();   //simply open the window on top for Android (and other platforms)
-		}
+		win.open();   //simply open the window on top for Android (and other platforms)
 	}
 }
 
 /**
- * event listener set via view for when the user clicks the delete or rename edit action buttons. iOS only.
+ * event listener set via view for when the user clicks the edit button.
+ * It then reacts to the RENAME or DELETE.  IOS only
  * @param  {Object} e Event
  */
-function onEditactionClick (e) {
-	Ti.API.debug("onEditactionClick e: " + JSON.stringify(e));
-	$.editFolderBtn.title = "Edit";
-	$.folderListView.setEditing(false);
-	$.addFolderFab.showMe();
-	if(e.action=="RENAME") {
-		//openRenameFolder(e)
-		editFolderClicked(e);
-
-	} else if (e.action=="DELETE") {
+if (OS_IOS) {
+	function onEditactionClick (e) {
+		Ti.API.debug("onEditactionClick e: " + JSON.stringify(e));
+		$.editFolderBtn.title = "Edit";
+		$.folderListView.setEditing(false);
+		$.addFolderFab.showMe();
+		if(e.action=="RENAME") {
+			//openRenameFolder(e)
+			editFolderClicked(e);
+	
+		} else if (e.action=="DELETE") {
+			alert("You can't delete a folder yet");
+		}
+	}
+} else {
+	/**
+	 * event listener set via view for when the user clicks the delete button.  AndroidOnly
+	 * @param  {Object} e Event
+	 */
+	//ios can swipe to delete so we don't need to do this
+	function deleteBtnClick(e){
 		alert("You can't delete a folder yet");
+		// Ti.API.debug("e" + JSON.stringify(e));
+		// var item = e.section.getItemAt(e.itemIndex);
+		// var dialog = Ti.UI.createAlertDialog({
+			// title: 'Do you want to remove this device from the folder?',
+			// buttonNames: ['Yes', 'No']
+		// });
+// 
+		// dialog.addEventListener('click', function (e) {
+			// if (e.index == 0) {
+				// deleteItem(item);
+			// }
+		// });
+		// dialog.show();
 	}
 }
+
+function closeWin(){
+	$.foldersWin.close();
+}
+
+/**
+ * event listener set via view for when the user clicks the move up button.   Android Only
+ * @param  {Object} e Event
+ */
+function moveUp(e){
+	Ti.API.info("IN moveUp!");
+	//Get the item we clicked on.
+	var item = e.section.getItemAt(e.itemIndex);
+	Ti.API.info("item : " + JSON.stringify(item));
+
+	//Get the item above the item we clicked on
+	var itemAbove = e.section.getItemAt(e.itemIndex - 1);
+	Ti.API.info("itemAbove : " + JSON.stringify(itemAbove));
+	if(!itemAbove){  //first one in the list
+		return;
+	}
+
+	var folderAddress = item.address.text;
+	var addressAbove = itemAbove.address.text;
+	Ti.API.info("folderAddress : " + folderAddress + "addressAbove: " + addressAbove);
+	Alloy.Collections.folderInView.fetch({
+		success: function (data) {
+			Ti.API.info("folderInView data: " + JSON.stringify(data));
+			var folderInView = data.where({ViewId: parameters.viewId, FolderAddress: folderAddress});
+			Ti.API.info("folderInView : " + JSON.stringify(folderInView));
+
+			var folderInViewAbove = data.where({ViewId: parameters.viewId, FolderAddress: addressAbove});
+			Ti.API.info("modelInFolderAbove : " + JSON.stringify(folderInViewAbove));
+
+			//where returns an array but we just need the first one if it's there.
+			if (folderInView.length > 0) {
+				var newIndex = e.itemIndex - 1;
+				folderInView[0].save({"SortId": newIndex}, {silent: true});
+				folderInViewAbove[0].save({"SortId": e.itemIndex}, {silent: true});
+			}
+			refresh();
+		},
+		error: function () {
+		}
+	});
+}
+
+
+/**
+ * event listener set via view for when the user clicks the move down button.   Android Only
+ * @param  {Object} e Event
+ */
+function moveDown(e){
+	Ti.API.info("IN moveDown!");
+	var item = e.section.getItemAt(e.itemIndex);
+	Ti.API.info("item: " + JSON.stringify(item));
+	//Get the item below the item we clicked on
+
+	var itemBelow = e.section.getItemAt(e.itemIndex + 1);
+	if(!itemBelow){  //last one in the list
+		return;
+	}
+
+	var folderAddress = item.address.text;
+	Ti.API.info("folderAddress: " + folderAddress);
+	var addressBelow = itemBelow.address.text;
+	Ti.API.info("addressBelow: " + addressBelow);
+	Alloy.Collections.folderInView.fetch({
+		success: function (data) {
+			Ti.API.info("folderInView data: " + JSON.stringify(data));
+
+			var folderInView = data.where({ViewId: parameters.viewId, FolderAddress: folderAddress});
+			var folderInViewBelow = data.where({ViewId: parameters.viewId, FolderAddress: addressBelow});
+			Ti.API.info("folderInView: " + JSON.stringify(folderInView));
+			Ti.API.info("folderInViewBelow: " + JSON.stringify(folderInViewBelow));
+			
+			//where returns an array but we just need the first one if it's there.
+			if (folderInView.length > 0) {
+				var newIndex = e.itemIndex + 1;
+				folderInView[0].save({"SortId": newIndex}, {silent: true});
+				folderInViewBelow[0].save({"SortId": e.itemIndex}, {silent: true});
+			}
+
+			refresh();
+		},
+		error: function () {
+		}
+	});
+}
+
 
 /**
  * event listener set via view for when the user clicks the edit button so they can move rename delete devices.
@@ -265,29 +378,27 @@ function onEditactionClick (e) {
  */
 
 function editFolderBtnClicked(e) {
-	Ti.API.debug("editFolderBtnClicked!!!");
+	Ti.API.info("editFolderBtnClicked!!!");
 	var btn = e.source;
-	if(btn.title == "Edit") {
+	Ti.API.info("e source: " + JSON.stringify(btn));
+	Ti.API.info("btn title: " + JSON.stringify(btn.title));
+	if(!$.isInEditingMode) {
 		btn.title = "Done";
-		$.editMode = true;
+		$.isInEditingMode = true;
 		if(OS_IOS){
-			Ti.API.debug("$.folderListView.setEditing(true);");
-
 			$.folderListView.setEditing(true);
 		} else {
-			Ti.API.debug("updateUI");
+			Ti.API.info("updateUI");
 			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
 		}
 		$.addFolderFab.hideMe();
 	} else {
 		btn.title = "Edit";
-		$.editMode = false;
+		$.isInEditingMode = false;
 		if(OS_IOS) {
-			Ti.API.debug("$.folderListView.setEditing(false);");
-
 			$.folderListView.setEditing(false);
 		} else {
-			Ti.API.debug("updateUI");
+			Ti.API.info("updateUI");
 			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
 		}
 		$.addFolderFab.showMe();
