@@ -239,7 +239,7 @@ if (OS_IOS) {
 			editFolderClicked(e);
 	
 		} else if (e.action=="DELETE") {
-			alert("You can't delete a folder yet");
+			deleteFolder(e);
 		}
 	}
 } else {
@@ -249,20 +249,8 @@ if (OS_IOS) {
 	 */
 	//ios can swipe to delete so we don't need to do this
 	function deleteBtnClick(e){
-		alert("You can't delete a folder yet");
-		// Ti.API.debug("e" + JSON.stringify(e));
-		// var item = e.section.getItemAt(e.itemIndex);
-		// var dialog = Ti.UI.createAlertDialog({
-			// title: 'Do you want to remove this device from the folder?',
-			// buttonNames: ['Yes', 'No']
-		// });
-// 
-		// dialog.addEventListener('click', function (e) {
-			// if (e.index == 0) {
-				// deleteItem(item);
-			// }
-		// });
-		// dialog.show();
+		deleteFolder(e);
+
 	}
 }
 
@@ -270,6 +258,46 @@ function closeWin(){
 	$.foldersWin.close();
 }
 
+function deleteFolder(e) {
+	// alert("You can't delete a folder yet");	
+	Ti.API.info("e" + JSON.stringify(e));
+	var item = e.section.getItemAt(e.itemIndex);
+	var dialog = Ti.UI.createAlertDialog({
+		title: 'Are you sure you want to remove this folder?',
+		buttonNames: ['Yes', 'No']
+	});
+
+	dialog.addEventListener('click', function (e) {
+		if (e.index == 0) {
+			deleteItem(item);
+		}
+	});
+	dialog.show();
+}
+
+/**
+ * Delete function to delete the model from the collection.
+ * @param  {Object} item
+ */
+function deleteItem(item){
+	var viewId = parameters.viewId;
+	var folderAddress = item.address.text;
+
+	Alloy.Collections.folderInView.fetch({
+		success: function (data) {
+			var foldersToDelete = data.where({"FolderAddress":folderAddress, "ViewId":viewId});
+			_.each(foldersToDelete, function(folder ){
+				folder.destroy();	
+			}); 
+			if(!OS_IOS){ //android isn't refreshing on it's own.
+				refresh();
+			}			
+		},
+		error: function () {
+			Ti.API.debug("delete Failed!!!");
+		}
+	});
+}
 /**
  * event listener set via view for when the user clicks the move up button.   Android Only
  * @param  {Object} e Event
