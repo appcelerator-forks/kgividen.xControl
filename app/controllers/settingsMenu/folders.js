@@ -206,13 +206,13 @@ function select(e) {
 			win.close();
 		}
 	};
-
-	//create the devices controller with the model and get its view
-	var win = Alloy.createController('settingsMenu/devices', params).getView();
-
+	
 	if (OS_IOS) {
 		params.navWin = $.navWin;
 	}
+
+	//create the devices controller with the model and get its view
+	var win = Alloy.createController('settingsMenu/devices', params).getView();
 
 	//open the window in the NavigationWindow for iOS
 	if (OS_IOS) {
