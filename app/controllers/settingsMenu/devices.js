@@ -112,23 +112,21 @@ function addDevicesClicked() {
  */
 function deleteItem(item){
 	var folderAddress = $.folderModel.get("address");
-	Ti.API.debug("deleteItem item: " + JSON.stringify(item));
+	Ti.API.info("deleteItem item: " + JSON.stringify(item));
 
 	var deviceAddress = item.properties.itemAddress;
 	Ti.API.debug("Device address: " + deviceAddress + " FolderAddress: " + folderAddress);
 
-	//There should be more of a backbone way to do this instead of doing a direct sql query.
-	var deviceInFolderTable = Alloy.Collections.DeviceInFolder.config.adapter.collection_name;
-	var sql = "SELECT * FROM " + deviceInFolderTable +
-		" WHERE FolderAddress = '" + folderAddress + "' AND DeviceAddress = '" + deviceAddress + "'";
-
-	Alloy.Collections.DeviceInFolder.fetch({
-		query:sql,
-		success: function (devices) {
-			while(devices.length) {
-				devices.at(0).destroy();
+	Alloy.Collections.deviceInFolder.fetch({
+		// query:sql,
+		success: function (data) {
+			var devicesToDelete = data.where({"FolderAddress":folderAddress,"DeviceAddress":deviceAddress});
+			_.each(devicesToDelete, function(device){
+				device.destroy();
+			});
+			if(!OS_IOS){
+				refreshDevicesInFolder($.folderModel.get("address")); //Otherwise android isn't refreshing.	
 			}
-			refreshDevicesInFolder($.folderModel.get("address")); //Otherwise android isn't refreshing.
 		},
 		error: function () {
 			Ti.API.debug("delete Failed!!!");
