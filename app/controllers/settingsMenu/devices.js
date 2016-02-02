@@ -118,7 +118,6 @@ function deleteItem(item){
 	Ti.API.debug("Device address: " + deviceAddress + " FolderAddress: " + folderAddress);
 
 	Alloy.Collections.deviceInFolder.fetch({
-		// query:sql,
 		success: function (data) {
 			var devicesToDelete = data.where({"FolderAddress":folderAddress,"DeviceAddress":deviceAddress});
 			_.each(devicesToDelete, function(device){
