@@ -2,27 +2,19 @@ var deleteFakeData = function () {
 	//Reset the data
     Ti.API.debug("Reset");
 
-    Alloy.Collections.Device.fetch();
+    Alloy.Collections.device.fetch();
     var model;
 
-    while (model = Alloy.Collections.Device.first()) {
+    while (model = Alloy.Collections.device.first()) {
         model.destroy({silent: true});
     }
 
-    Alloy.Collections.DeviceInFolder.fetch();
+    Alloy.Collections.deviceInFolder.fetch();
     var model;
 
-    while (model = Alloy.Collections.DeviceInFolder.first()) {
+    while (model = Alloy.Collections.deviceInFolder.first()) {
         model.destroy({silent: true});
     }
-
-    // Alloy.Collections.DeviceInView.fetch();
-    // var model;
-// 
-    // while (model = Alloy.Collections.DeviceInView.first()) {
-        // model.destroy({silent: true});
-    // }
-
 
     Alloy.Collections.FolderInView.fetch();
     var model;
