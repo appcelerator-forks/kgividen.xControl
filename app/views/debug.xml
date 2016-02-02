@@ -1,15 +1,12 @@
 <Alloy>
-    <!-- <Collection id="deviceInView" src="DeviceInView" instance="true"/> -->
     <Collection id="device" src="Device" instance="true"/>
     
 	<Collection src="Device" />
 	<Collection src="DeviceInFolder" />
-	<!-- <Collection src="DeviceInView" /> -->
 	<Collection src="FolderInView" />
 	
     <Window id="win" backgroundColor="white" layout="vertical">
     	<View layout="vertical" top="5" height="100%">
-	        <!-- <Button top="30" id="printDeviceInViewBtn">Print DeviceInView Table</Button> -->
 	        <Button onClick="printFolderInViewTable">Print folderInView Table</Button>
 	        <Button onClick="printDeviceInFolderTable">Print deviceInFolder Table</Button>
 	        <Button id="printDeviceBtn">Print Device Table</Button>
