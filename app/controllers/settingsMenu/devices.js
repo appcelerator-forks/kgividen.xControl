@@ -123,9 +123,7 @@ function deleteItem(item){
 			_.each(devicesToDelete, function(device){
 				device.destroy();
 			});
-			if(!OS_IOS){
-				refreshDevicesInFolder($.folderModel.get("address")); //Otherwise android isn't refreshing.	
-			}
+			refreshDevicesInFolder($.folderModel.get("address")); 
 		},
 		error: function () {
 			Ti.API.debug("delete Failed!!!");
