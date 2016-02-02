@@ -32,7 +32,11 @@
                 <ListSection dataFilter="favFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
-                    <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
+                    <ListItem template="{template}" class="deviceItem" 
+                   			  btn:address="{address}" btn:title="{displayName}" btn:type="{type}" 
+                    		  slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" 
+                    		  groupLbl:text="{displayName}" 
+                    		  sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
                 </ListSection>
             </ListView>
             <ListView id="lightsListView" class="deviceListView" defaultItemTemplate="light">
@@ -61,7 +65,11 @@
                 <ListSection dataFilter="lightFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
-                    <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
+                    <ListItem template="{template}" class="deviceItem" 
+								btn:address="{address}" btn:title="{displayName}" btn:type="{type}" 
+                    		  	slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" 
+                    		  	groupLbl:text="{displayName}" 
+                    		  	sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
                 </ListSection>
             </ListView>
             <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="light">
@@ -90,7 +98,11 @@
                 <ListSection dataFilter="sceneFilter"
                              dataTransform="transformFunction"
                              dataCollection="$.device">
-                    <ListItem template="{template}" class="deviceItem" btn:address="{address}" btn:title="{displayName}" btn:type="{type}" slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" groupLbl:text="{displayName}" sceneLbl:text="{displayName}" sceneBtnOn:title="On" sceneBtnOff:title="Off" />
+                    <ListItem template="{template}" class="deviceItem" 
+                    			btn:address="{address}" btn:title="{displayName}" btn:type="{type}" 
+        					    slider:value="{sliderVal}" sliderLbl:text="{sliderVal}" 
+        					    groupLbl:text="{displayName}" sceneLbl:text="{displayName}" 
+        					    sceneBtnOn:title="On" sceneBtnOff:title="Off" />
                 </ListSection>
             </ListView>
         </ScrollableView>

@@ -142,9 +142,6 @@ function btnClick(e){
     var itemType = item.btn.type;
     var address = item.btn.address;
 
-    Ti.API.debug("Button Click!");
-    Ti.API.debug("item.btn.address: " + item.btn.address + " type: " + itemType);
-    Ti.API.debug("item: " + JSON.stringify(item));
     if(!address){
         return;
     }
