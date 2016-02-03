@@ -9,8 +9,11 @@
 			<MenuItem id="editFolderBtn" title="Edit" onClick="editFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 			<MenuItem id="closeBtn" title="Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
+		
+		<Label id="helpMsg" visible="false">Press the + icon to add a folder and devices</Label>
+		<Label left="5%" top="10">Choose a folder to Add/Remove Devices</Label>
+		
 		<ListView id="folderListView" platform="ios,android" defaultItemTemplate="template" onEditaction="onEditactionClick" onItemclick="select">
-
 			<RefreshControl platform="ios" id="refreshControl" onRefreshstart="refresh" />
 
 			<Templates>

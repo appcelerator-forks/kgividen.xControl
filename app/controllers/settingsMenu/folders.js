@@ -1,7 +1,5 @@
 var parameters = arguments[0] || {};
 
-Ti.API.info("folders.js parameters:" + JSON.stringify(parameters));
-
 /**
  * self-executing function to organize otherwise inline constructor code
  * @param  {Object} args arguments passed to the controller
@@ -10,18 +8,25 @@ Ti.API.info("folders.js parameters:" + JSON.stringify(parameters));
 	$.foldersWin.title = args.viewName;
 	if(OS_IOS) {
 		$.navWin = args.navWin;
-		Ti.API.info("$.navWin constructor: " + JSON.stringify($.navWin));
 	}
 })(parameters || {});
 
 
+function checkAndDisplayHelp(){
+	Ti.API.info("items count: " + $.folderListView.getSections()[0].getItems().length);
+	var itemsCount = 0;
+	if($.folderListView.getSections()[0]) {
+		itemsCount = $.folderListView.getSections()[0].getItems().length;
+	}
+	(itemsCount < 1) ? $.helpMsg.show() : $.helpMsg.hide();
+}
 /**
  * event listener added via view for the refreshControl (iOS) or button (Android)
  * @param  {Object} e Event, unless it was called from the constructor
  */
 function refresh(e) {
+
 	'use strict';
-	Ti.API.info("THIS IS IN THE REFRESH!!!");
 	// if we were called from the constructor programmatically show the refresh animation
 	if (OS_IOS && !e) {
 		$.refreshControl.beginRefreshing();
@@ -42,11 +47,12 @@ function refresh(e) {
 	Alloy.Collections.Device.fetch({
 		query:sql,
 		success: function (data) {
-			Ti.API.info("data: " + JSON.stringify(data));
+			Ti.API.info("data in settings folders: " + JSON.stringify(data) );
 			// for iOS end the refreshing animation
 			if (OS_IOS) {
 				$.refreshControl.endRefreshing();
 			}
+			checkAndDisplayHelp();
 			
 		},
 		error: function () {
@@ -303,7 +309,6 @@ function deleteItem(item){
  * @param  {Object} e Event
  */
 function moveUp(e){
-	Ti.API.info("IN moveUp!");
 	//Get the item we clicked on.
 	var item = e.section.getItemAt(e.itemIndex);
 	Ti.API.info("item : " + JSON.stringify(item));
@@ -346,7 +351,6 @@ function moveUp(e){
  * @param  {Object} e Event
  */
 function moveDown(e){
-	Ti.API.info("IN moveDown!");
 	var item = e.section.getItemAt(e.itemIndex);
 	Ti.API.info("item: " + JSON.stringify(item));
 	//Get the item below the item we clicked on

@@ -50,6 +50,10 @@
 ".groupItem" : {
     backgroundColor: "transparent"
 },
+'.infoLbl': {
+	left:'5%',
+	color:'white'
+}
 ".groupLbl" : {
     color : 'white',
     font : {

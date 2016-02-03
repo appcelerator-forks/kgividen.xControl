@@ -7,10 +7,14 @@
 		<ScrollableView id="scrollableView" showPagingControl="true">
 			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
 		       	<ListSection>
-    				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Favorites"></ListItem>
+    				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
+    				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
         		</ListSection>
 				<RefreshControl id="refreshControlFav" platform="ios" onRefreshstart="refresh" />
 				<Templates>
+					<ItemTemplate class="deviceItem" name="infoLblTemplate">
+	                    <Label bindId="infoLbl" class="infoLbl" />
+	                </ItemTemplate>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
 	                    <Label bindId="groupLbl" class="groupLbl" />
 	                </ItemTemplate>

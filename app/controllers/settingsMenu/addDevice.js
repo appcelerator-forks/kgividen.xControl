@@ -54,9 +54,9 @@ function exit (){
 
 function getListOfDevicesInFolder(callback) {
     //See if the device is already in the view
-    $.d.fetch({
-        success: function () {
-            var modelsInFolder = $.d.where({FolderAddress: folderAddress});
+    Alloy.Collections.Device.fetch({
+        success: function (data) {
+            var modelsInFolder = data.where({FolderAddress: folderAddress});
             var e = {
                 status:"success",
                 devices:modelsInFolder

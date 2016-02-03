@@ -11,4 +11,11 @@
         }
     ]
 }
+"#folderListView" : {
+	top: '5%'
+}
+
+"#folderListView[platform=ios]" : {
+	top: '10%'
+}
 
