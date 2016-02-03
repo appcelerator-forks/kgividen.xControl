@@ -2,8 +2,8 @@
 	<!-- create global instance of collection we'll bind -->
 	<Collection id="d" src="Device" />
 	<Collection src="DeviceInFolder" />
-	<NavigationWindow platform="ios" id="navWin">
-		<Window>
+	<NavigationWindow id="navWin" platform="ios" >
+		<Window title="Edit Mode">
 			<LeftNavButton>
 				<Button onClick="closeSettingsBtnClicked">Close</Button>
 			</LeftNavButton>
@@ -11,11 +11,14 @@
 		</Window>
 	</NavigationWindow>
 
-	<Window title="Views" navBarHidden="false" platform="android" id="win">
+	<Window id="win" class="vertical" title="Edit Mode" navBarHidden="false" platform="android" >
 		<Menu>
 			<MenuItem  title="Close" onClick="closeSettingsBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
-		<Label class="label-H5" textAlign="center">Choose a view to add lights, scenes, etc.</Label>
+
+		<Label top="2%" class="label-paragraph" textAlign="left">- Adding and removing items here will change how things appear in the user interface.</Label> 
+		<Label class="label-paragraph" textAlign="left">- If you chose to query for devices they were automatically loaded into some of the views.</Label>
+		<Label class="label-paragraph" textAlign="left">- Changes are local and will not update the server.</Label>
 		<Require id="indexList" src="settingsMenu/indexList" />
 	</Window>
 </Alloy>
