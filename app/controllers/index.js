@@ -22,11 +22,8 @@ function createSideMenu(sections, controller) {
 
 //This is what happens when a menu row is selected.
 function rowSelect(e) {
-    if(osname =="android") {
-        var dsScrollView = $.ds.contentview.getChildren()[0].getChildren()[0];
-
-    }
-    var dsScrollView = (osname === "android") ? $.ds.contentview.getChildren()[0].getChildren()[1] : $.ds.contentview.getChildren()[0].getChildren()[0];
+    var dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
+    
     switch(e.row.action) {
         case "favorites":
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);
@@ -81,7 +78,7 @@ var rightMenu = [
         iconColor: '#999',
         action: 'settings'
     },{
-        title: 'Update/Edit Devices',
+        title: 'Edit Mode',
         type: 'menu',
         icon: 'fa-lightbulb-o',
         iconColor: '#999',
@@ -227,10 +224,13 @@ function startUI(){
             exitMsg.show(); // show the leaving dialog
             return false;
         });
-
-        $.win.addEventListener('open', function () {
-            $.win.activity.actionBar.hide();
-        });
+		
+		//Hide the action bar on android since we use a different menu system
+		if (!OS_IOS) { 
+			$.win.addEventListener('focus', function () {
+            	$.win.activity.actionBar.hide();
+          });
+        }
 
         $.win.open();
     }
