@@ -36,11 +36,6 @@ var args = arguments[0] || {};
     }
 })(arguments[0] || {});
 
-
-
-
-
-
 /**
  * event listener set via view for when the user clicks the close window button.
  * @param  {Object} e Event
@@ -56,7 +51,6 @@ function closeSettingsBtnClicked(e) {
     }
     $.destroy();
 }
-
 
 function loadFoldersCallback(e) {
 //create the devices controller with the model and get its view
