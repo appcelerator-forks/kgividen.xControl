@@ -83,10 +83,10 @@ exports.showIndicator = function(_messageString, _progressBar) {
   showingIndicator = true;
 
   // safety catch all to ensure the screen eventually clears
-  // after 10 seconds
+  // after 15 seconds
   progressTimeout = setTimeout(function() {
     exports.hideIndicator();
-  }, 10000);
+  }, 15000);
 };
 
 exports.setProgressValue = function(_value) {
