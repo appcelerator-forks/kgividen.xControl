@@ -170,7 +170,7 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 			 * Create and Add the Label to the ListView Section header view
 			 */
 			var sectionLabel = Ti.UI.createLabel({
-				text : "Add something to favorites by going to Update/Edit Devices."
+				text : "Add something to favorites by choosing Edit Mode in the right menu."
 			});	
 			
 			var rowGroupStyle = $.createStyle({
