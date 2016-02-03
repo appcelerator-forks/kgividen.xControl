@@ -18,7 +18,7 @@ function getConnectionInfo(){
 }
 
 
-function saveConnectionInfo(){
+function saveConnectionInfo(callback){
     //todo: validate form
     data = {
         'server' : $.server.value || '',
@@ -32,6 +32,9 @@ function saveConnectionInfo(){
     Ti.App.Properties.setObject('conn_current', data);
     Ti.App.Properties.setString('currentNetworkType',currentNetworkType);
     device.init();  //renews the connection information
+    if (callback) {
+    	callback();
+    }
 }
 
 function closeWin () {
@@ -76,8 +79,8 @@ $.clearData.addEventListener('click', function () {
 });
 
 $.getListOfDevicesBtn.addEventListener('click', function () {
-    saveConnectionInfo();
-    refreshDevices();
+	Alloy.Globals.PW.showIndicator("Updating Devices");
+    saveConnectionInfo(refreshDevices);
 });
 
 $.changeNetworkBtn.addEventListener('click', function(e) {
@@ -100,7 +103,6 @@ $.settingsWin.addEventListener("close", function(){
 getConnectionInfo();
 
 function refreshDevices(){
-	Alloy.Globals.PW.showIndicator("Updating Devices");
     //device is set in alloy.js
     device.getListOfDevices().then(function (liveData) {
         //TODO Take out fake data line
@@ -113,19 +115,19 @@ function refreshDevices(){
         //Add all of the new records in the collection that came from the hardware device.
         Alloy.Collections.device.fetch({
 			success : function(dbData) {
-				
 				Alloy.Collections.deviceInFolder.fetch({
 					success : function(devicesInFolder) {
-						Ti.API.info("dbData in success of deviceInFolder: " + JSON.stringify(dbData));
 						processData(dbData, liveData, devicesInFolder);		
 					},
 					error : function() {
-						Ti.API.debug("DeviceInFolder fetch Failed!!!");
+						alert("An error 11 occurred!");
+						Alloy.Globals.PW.hideIndicator();
 					}
 				});
 			},
 			error : function() {
-				Ti.API.debug("Device Fetch Failed!!!");
+				alert("An error 12 occurred!");
+				Alloy.Globals.PW.hideIndicator();
 			}
 		});
 	});
@@ -256,11 +258,14 @@ function processData(dbData, liveData, devicesInFolder) {
 				}
 			 }
 		});
-		saveConnectionInfo();
-    	Alloy.createController('/settingsMenu/index').getView().open();
-	    $.settingsWin.close();
-		alert("Devices were refreshed.  You can now add/modify them here or in the future by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
-		Alloy.Globals.PW.hideIndicator();
+		saveConnectionInfo(openSettingsMenuCallback);
+}
+
+function openSettingsMenuCallback(){
+	Alloy.Globals.PW.hideIndicator();
+	Alloy.createController('/settingsMenu/index').getView().open();
+	alert("Devices were refreshed.  You can now add/modify them here or in the future by going to Update/Edit Devices.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
+	$.settingsWin.close();
 }
 
 function createFolder(folder) {
