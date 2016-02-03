@@ -43,7 +43,6 @@ exports.setLevel = function (address, l){
 
 exports.toggle = function (address){
     return deviceGetStatus(address).then(function (data){
-        Ti.API.info(data);
         var deviceStatus = processDeviceStatusXML(data);
         Ti.API.info('status is ToggleDevice: ' + deviceStatus + ' Address of device: ' + address);
         if (deviceStatus != 'Off') {
@@ -155,7 +154,6 @@ function getListOfDevices(){
 //ISY hardware Calls
 
 var getFoldersAndNodes = function() {
-    Ti.API.info("baseURL: " + baseURL);
     connection.url = baseURL + 'nodes/';
     return xhr.loadUrl(connection);
 };
@@ -167,7 +165,6 @@ var deviceOff = function(address) {
 };
 
 var deviceOn = function(address,level) {
-    Ti.API.info('Fire Address: ' + address);
     var encodedAddress = Ti.Network.encodeURIComponent(address);
     connection.url = baseURL + 'nodes/' + encodedAddress + '/cmd/DON/' + level;
     return xhr.loadUrl(connection);

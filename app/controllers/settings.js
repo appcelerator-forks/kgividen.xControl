@@ -27,7 +27,6 @@ function saveConnectionInfo(callback){
         'username' : $.username.value || '',
         'password' : $.password.value || ''
     };
-    Ti.API.info("conn_info: " + JSON.stringify(data));
     Ti.App.Properties.setObject('conn_' + currentNetworkType, data);
     Ti.App.Properties.setObject('conn_current', data);
     Ti.App.Properties.setString('currentNetworkType',currentNetworkType);
@@ -163,8 +162,6 @@ function processData(dbData, liveData, devicesInFolder) {
 			}
 		});	
 		
-		Ti.API.info("liveDevices: " + JSON.stringify(liveDevices));
-		
 		//If dbData doesn't contain a default 111 Folder then we should add them for lighting and scenes
 		var defaultLightFolderFound = dbData.where({address: DEFAULT_LIGHT_FOLDER_ADDRESS});	
 		if (!defaultLightFolderFound[0]) {
@@ -196,12 +193,10 @@ function processData(dbData, liveData, devicesInFolder) {
 		});
 		
 		
-		Ti.API.info("devicesInFolder: " + JSON.stringify(devicesInFolder));
 		_.each(devicesInDefaultFolder, function(device) {
 			//If the device has already been added to the default folder then skip it.
 			var deviceInFolder = devicesInFolder.where({"DeviceAddress":device.address});
 			if(deviceInFolder[0]){
-				Ti.API.info("device skipped: " + device.name);
 				return;
 			}
 			if(device.type == "scene") {
@@ -301,66 +296,3 @@ function linkFolderToView(folderAddress, viewId, sortId) {
 	var model = Alloy.createModel('FolderInView', obj);
 	model.save();	
 }
-
-//FAKE DATA
-
-var fakeData = [
-    {
-        "name": "Kitchen Folder",
-        "address": "29764",
-        "type": "folder"
-    },
-    {
-        "name": "Blah Folder",
-        "address": "123",
-        "type": "folder"
-    },
-    {
-        "name": "Blah Light Floods",
-        "parent": "123",
-        "type": "light",
-        "address": "20 88 444"
-    },
-    {
-        "name": "Backyard Floods",
-        "parent": "29764",
-        "type": "light",
-        "address": "20 88 48 1"
-    },
-    {
-        "name": "Kitchen Scene",
-        "parent": "29764",
-        "type": "scene",
-        "address": "20 91 DD 1"
-    },
-    {
-        "name": "Kitchen Sink",
-        "parent": "29764",
-        "type": "light",
-        "address": "20 95 1D 1"
-    },
-    {
-        "name": "Patio",
-        "parent": "29764",
-        "type": "light",
-        "address": "20 A8 FC 1"
-    },
-    {
-        "name": "Dining Area",
-        "parent": "1111",
-        "type": "light",
-        "address": "20 AE 83 1"
-    },
-    {
-        "name": "Kitchen Under Cabinets",
-        "parent": "29763",
-        "type": "light",
-        "address": "20 B1 50 1"
-    },
-    {
-        "name": "Kitchen Light",
-        "parent": "29764",
-        "type": "light",
-        "address": "20 B2 AF 1"
-    }
-];

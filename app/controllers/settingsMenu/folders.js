@@ -13,7 +13,6 @@ var parameters = arguments[0] || {};
 
 
 function checkAndDisplayHelp(){
-	Ti.API.info("items count: " + $.folderListView.getSections()[0].getItems().length);
 	var itemsCount = 0;
 	if($.folderListView.getSections()[0]) {
 		itemsCount = $.folderListView.getSections()[0].getItems().length;
@@ -43,11 +42,9 @@ function refresh(e) {
 			  " INNER JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address WHERE ViewId='" + parameters.viewId + "' ORDER BY SortId";
 
 
-	Ti.API.info("sql: " + sql); 
 	Alloy.Collections.Device.fetch({
 		query:sql,
 		success: function (data) {
-			Ti.API.info("data in settings folders: " + JSON.stringify(data) );
 			// for iOS end the refreshing animation
 			if (OS_IOS) {
 				$.refreshControl.endRefreshing();
@@ -68,7 +65,6 @@ function refresh(e) {
 function transform(model) {
 	var o = model.toJSON();
 	if($.isInEditingMode){
-		Ti.API.info("Tansforming");
 		o.template = "editTemplate";
 	} else {
 		o.template = "template";
@@ -134,14 +130,12 @@ function linkFolderToView (folder) {
  * @param
  */
 function updateFolderSortOrder(){
-	Ti.API.info("updateFolderSortOrder!!!!");
 	Alloy.Collections.folderInView.fetch({
 		success: function (data) {
 			var viewId = parameters.viewId;
 			var folderList = $.folderSection.getItems();
 			var i = 0;
 			_.each(folderList, function (folder) {
-				// Ti.API.info("foldeR: " + JSON.stringify(folder));
 				var folderAddress = folder.address.text;
 				if(folderAddress) {
 					//if folder is in the folderInView set it's sort order to i.
@@ -222,7 +216,6 @@ function select(e) {
 
 	//open the window in the NavigationWindow for iOS
 	if (OS_IOS) {
-		Ti.API.info("$.navWin: " + JSON.stringify($.navWin));
 		$.navWin.openWindow(win);
 	} else {
 		win.open();   //simply open the window on top for Android (and other platforms)
@@ -265,8 +258,6 @@ function closeWin(){
 }
 
 function deleteFolder(e) {
-	// alert("You can't delete a folder yet");	
-	Ti.API.info("e" + JSON.stringify(e));
 	var item = e.section.getItemAt(e.itemIndex);
 	var dialog = Ti.UI.createAlertDialog({
 		title: 'Are you sure you want to remove this folder?',
@@ -311,26 +302,20 @@ function deleteItem(item){
 function moveUp(e){
 	//Get the item we clicked on.
 	var item = e.section.getItemAt(e.itemIndex);
-	Ti.API.info("item : " + JSON.stringify(item));
 
 	//Get the item above the item we clicked on
 	var itemAbove = e.section.getItemAt(e.itemIndex - 1);
-	Ti.API.info("itemAbove : " + JSON.stringify(itemAbove));
 	if(!itemAbove){  //first one in the list
 		return;
 	}
 
 	var folderAddress = item.address.text;
 	var addressAbove = itemAbove.address.text;
-	Ti.API.info("folderAddress : " + folderAddress + "addressAbove: " + addressAbove);
 	Alloy.Collections.folderInView.fetch({
 		success: function (data) {
-			Ti.API.info("folderInView data: " + JSON.stringify(data));
 			var folderInView = data.where({ViewId: parameters.viewId, FolderAddress: folderAddress});
-			Ti.API.info("folderInView : " + JSON.stringify(folderInView));
 
 			var folderInViewAbove = data.where({ViewId: parameters.viewId, FolderAddress: addressAbove});
-			Ti.API.info("modelInFolderAbove : " + JSON.stringify(folderInViewAbove));
 
 			//where returns an array but we just need the first one if it's there.
 			if (folderInView.length > 0) {
@@ -352,7 +337,6 @@ function moveUp(e){
  */
 function moveDown(e){
 	var item = e.section.getItemAt(e.itemIndex);
-	Ti.API.info("item: " + JSON.stringify(item));
 	//Get the item below the item we clicked on
 
 	var itemBelow = e.section.getItemAt(e.itemIndex + 1);
@@ -361,17 +345,12 @@ function moveDown(e){
 	}
 
 	var folderAddress = item.address.text;
-	Ti.API.info("folderAddress: " + folderAddress);
 	var addressBelow = itemBelow.address.text;
-	Ti.API.info("addressBelow: " + addressBelow);
 	Alloy.Collections.folderInView.fetch({
 		success: function (data) {
-			Ti.API.info("folderInView data: " + JSON.stringify(data));
 
 			var folderInView = data.where({ViewId: parameters.viewId, FolderAddress: folderAddress});
 			var folderInViewBelow = data.where({ViewId: parameters.viewId, FolderAddress: addressBelow});
-			Ti.API.info("folderInView: " + JSON.stringify(folderInView));
-			Ti.API.info("folderInViewBelow: " + JSON.stringify(folderInViewBelow));
 			
 			//where returns an array but we just need the first one if it's there.
 			if (folderInView.length > 0) {
@@ -394,10 +373,7 @@ function moveDown(e){
  */
 
 function editFolderBtnClicked(e) {
-	Ti.API.info("editFolderBtnClicked!!!");
 	var btn = e.source;
-	Ti.API.info("e source: " + JSON.stringify(btn));
-	Ti.API.info("btn title: " + JSON.stringify(btn.title));
 	if(!$.isInEditingMode) {
 		btn.title = "Done";
 		$.isInEditingMode = true;
@@ -456,6 +432,5 @@ $.foldersWin.addEventListener("close", function(){
  * @param  {Object} e Event
  */
 $.sf.addEventListener('change',function(e){
-	Ti.API.info("search change");
 	$.folderListView.searchText = e.value;
 });

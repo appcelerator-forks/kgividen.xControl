@@ -112,7 +112,6 @@ function addDevicesClicked() {
  */
 function deleteItem(item){
 	var folderAddress = $.folderModel.get("address");
-	Ti.API.info("deleteItem item: " + JSON.stringify(item));
 
 	var deviceAddress = item.properties.itemAddress;
 	Ti.API.debug("Device address: " + deviceAddress + " FolderAddress: " + folderAddress);
@@ -282,7 +281,6 @@ function reportMove(e) {
  * @param
  */
 function updateDeviceSortOrder(){
-	Ti.API.info("updateFolderSortOrder!!!!");
 	Alloy.Collections.deviceInFolder.fetch({
 		success: function (data) {
 			var folderAddress = $.folderModel.get("address");
@@ -329,8 +327,6 @@ var setPreEditSectionAndItems = function () {
  * @param  {Object} e Event
  */
 function editDevicesBtnClicked(e) {
-	Ti.API.info("editDevicesBtnClicked!!!");
-	Ti.API.info("$.editModeDevices!!! " + $.editModeDevices);
 	if (OS_IOS) {
 		setPreEditSectionAndItems();
 	}
@@ -372,8 +368,6 @@ if (OS_IOS) {
 		if(e.action=="RENAME") {
 			renameItemBtnClick(e);
 		} else if (e.action=="DELETE") {
-			Ti.API.info("preEditSectionAndItems: " + JSON.stringify(preEditSectionAndItems));
-			Ti.API.info("e: " + JSON.stringify(e));
 			if(preEditSectionAndItems.length > 0){
 				var item = preEditSectionAndItems[e.sectionIndex].items[e.itemIndex]; //This should be the same assuming the maps are correct in the preEditSectionItems
 			} else {
