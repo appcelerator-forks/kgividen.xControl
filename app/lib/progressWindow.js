@@ -96,7 +96,7 @@ exports.setProgressValue = function(_value) {
 /**
  *
  */
-exports.hideIndicator = function() {
+exports.hideIndicator = function(callback) {
 
   if (progressTimeout) {
     clearTimeout(progressTimeout);
@@ -124,5 +124,9 @@ exports.hideIndicator = function() {
   // clean up variables
   showingIndicator = false;
   activityIndicator = null;
+  
+  if (callback) {
+  	callback();
+  }
 };
 
