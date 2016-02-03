@@ -25,7 +25,6 @@ function init() {
 	Alloy.Collections.device.fetch({
 		query : sql,
 		success : function(data) {
-			Ti.API.info("data: " + JSON.stringify(data));
 			processDevicesInFolders(data.toJSON(), VIEW_ID_FAVORITES);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_LIGHTS);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_SCENES);
@@ -74,7 +73,6 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 	});
 	
 	
-	Ti.API.info("folders: " + JSON.stringify(folders));
 	if (folders && folders.length > 0) {
 		/**
 		 * Setup our Indexes and Sections Array for building out the ListView components
@@ -163,7 +161,6 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 		}
 		
 	} else {
-			Ti.API.info("No Folders found");
 			var sectionHeader = Ti.UI.createView();
 
 			/**
@@ -271,14 +268,11 @@ $.sfScenes.addEventListener('change',function(e){
 
 //***************ON EVENTS CALLED FROM THE XML *********************
 function btnClick(e){
-    Ti.API.info("Button Click!");
     var item = e.section.items[e.itemIndex];
     var itemType = item.btn.type;
     var address = item.btn.address;
 
 
-    Ti.API.info("item.btn.address: " + item.btn.address + " type: " + itemType);
-    Ti.API.info("item: " + JSON.stringify(item));
     if(!address){
         return;
     }
@@ -360,18 +354,22 @@ Ti.App.addEventListener('refresh_ui', function(e){
 });
 
 function updateUI(nodesByAddressAndStatus){
-	Ti.API.info("nodesByAddressAndStatus: " + JSON.stringify(nodesByAddressAndStatus));
 	//Each view in the scrollableView i.e. favorites, lighting, etc.
     _.each($.scrollableView.getViews(), function(view){
-    	Ti.API.info("views: " + JSON.stringify(view));
         var viewSections = view.getSections();
         //We use viewSections[0] because we only have one section on each of the views.
         _.each(viewSections, function(section){
         	var items = (section) ? section.getItems() : null;
 	        if (section && items){
 	            _.each(items, function(item, index){
+	            	if(!item.btn) {
+	            		return;
+	            	}
 	                if (item.btn.type == 'light') {
 	                    var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
+	                    if(!current) {
+	                    	return;
+	                    }
 	                    if(current.level > 0){
 	                        //todo: Get this hardcoded image out of here probably with an applyProperties and setting the class that way.
 	                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
@@ -386,16 +384,16 @@ function updateUI(nodesByAddressAndStatus){
             	});
        	 	}
         	section.setItems(items);	
-			// for iOS end the refreshing animation
-			if (OS_IOS) {
-				//There should be a better way to do this rather than duplicate the control
-    			// but if the same one is added to multiple tableViews things crap out
-				$.refreshControlFav.endRefreshing();
-				$.refreshControlLight.endRefreshing();
-				$.refreshControlScene.endRefreshing();
-			}
         });
     });
+	// for iOS end the refreshing animation
+	if (OS_IOS) {
+		//There should be a better way to do this rather than duplicate the control
+		// but if the same one is added to multiple tableViews things crap out
+		$.refreshControlFav.endRefreshing();
+		$.refreshControlLight.endRefreshing();
+		$.refreshControlScene.endRefreshing();
+	}
 }
 
 
