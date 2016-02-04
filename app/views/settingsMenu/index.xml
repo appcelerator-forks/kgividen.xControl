@@ -1,12 +1,15 @@
 <Alloy>
 	<!-- create global instance of collection we'll bind -->
-	<Collection id="d" src="Device" />
+	<Collection src="Device" />
 	<Collection src="DeviceInFolder" />
 	<NavigationWindow id="navWin" platform="ios" >
-		<Window title="Edit Mode">
+		<Window title="Edit Mode" class="vertical">
 			<LeftNavButton>
 				<Button onClick="closeSettingsBtnClicked">Close</Button>
 			</LeftNavButton>
+			<Label top="2%" class="label-paragraph" textAlign="left">- Adding and removing items here will change how things appear in the user interface.</Label> 
+			<Label class="label-paragraph" textAlign="left">- If you chose to query for devices they were automatically loaded into some of the views.</Label>
+			<Label class="label-paragraph" textAlign="left">- Changes are local and will not update the server.</Label>
 			<Require id="indexList" src="settingsMenu/indexList"/>
 		</Window>
 	</NavigationWindow>
