@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=xControl
+iosLaunchConfigurationAttributes/ATTR_UPLOAD_DEBUG_SYMBOLS=false
+iosLaunchConfigurationAttributes/appid=com.netsmartcompany.xControl
+iosLaunchConfigurationAttributes/certificate=NetSmart LLC (CKBRKJ257J)
+iosLaunchConfigurationAttributes/distribute_path=/Users/kgividen/Downloads
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/output_format=ipa
+iosLaunchConfigurationAttributes/sdk_version=9.0
+iosLaunchConfigurationAttributes/uuid=2e6e1f5e-7e5c-42c2-93de-a29ff7c91e29
