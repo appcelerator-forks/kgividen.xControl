@@ -258,7 +258,7 @@ function processData(dbData, liveData, devicesInFolder) {
 
 function openSettingsMenuCallback(){
 	Alloy.Globals.PW.hideIndicator();
-	Alloy.createController('/settingsMenu/index').getView().open();
+	Alloy.createController('settingsMenu/index').getView().open();
 	alert("Devices were refreshed.  You can now add/modify them here or in the future by going to Edit Mode using the right menu from the home screen.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
 	$.settingsWin.close();
 }

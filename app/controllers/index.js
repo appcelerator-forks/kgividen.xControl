@@ -50,7 +50,7 @@ function rowSelect(e) {
             break;
         case "updateDevices":
             $.destroy();
-            Alloy.createController('/settingsMenu/index').getView().open();
+            Alloy.createController('settingsMenu/index').getView().open();
             $.win.close();
             break;
         case "debug":
