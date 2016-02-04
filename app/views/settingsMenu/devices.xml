@@ -10,6 +10,8 @@
 			<MenuItem id="editBtn" title="Edit" onClick="editDevicesBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 			<MenuItem id="closeBtn" title="Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
+		
+		<Label left="5%" top="10">Click the + icon to add devices or Edit to rename/remove devices</Label>
 
 		<ListView id="devicesListView" platform="ios,android" defaultItemTemplate="lightTemplate" onEditaction="onEditactionClick">
 			<Templates>

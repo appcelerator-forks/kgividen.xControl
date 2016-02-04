@@ -11,3 +11,10 @@
         }
     ]
 }
+"#devicesListView" : {
+	top: '5%'
+}
+
+"#devicesListView[platform=ios]" : {
+	top: '10%'
+}
