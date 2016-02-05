@@ -29,4 +29,10 @@ device.init();
 
 var Q = require('/q');
 
+
+// Helpers
 var xDebug = false;
+
+var tiInfo = function(label, input){
+	Ti.API.info(label + ": " + JSON.stringify(input));		
+};
