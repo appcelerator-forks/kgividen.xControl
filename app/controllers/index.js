@@ -25,6 +25,9 @@ function rowSelect(e) {
     var dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
     
     switch(e.row.action) {
+        case "about":
+			alert(Ti.App.name + ' ' + Ti.App.version);
+            break;
         case "favorites":
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);
             break;
@@ -68,6 +71,13 @@ function rowSelect(e) {
 
 //**************** RIGHT MENU ****************
 var rightMenu = [
+	{
+        title: 'About',
+        type: 'menu',
+        icon: 'fa-info',
+        iconColor: '#999',
+        action: 'about'
+   	},
     {
         title: 'Menu',
         header: true
@@ -246,8 +256,6 @@ function startUI(){
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("folders").getView());
-    // $.ds.contentview.add(Alloy.createController("devices").getView());
-    // $.ds.contentview.add(Alloy.createController("debug").getView().open());
 
     //tmp
     //Alloy.createController("camerasContainer").getView().open();
