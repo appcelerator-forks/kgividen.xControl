@@ -34,5 +34,7 @@ var Q = require('/q');
 var xDebug = false;
 
 var tiInfo = function(label, input){
-	Ti.API.info(label + ": " + JSON.stringify(input));		
+	if(xDebug == true){
+		Ti.API.info(label + ": " + JSON.stringify(input));		
+	}
 };
