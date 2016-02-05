@@ -71,17 +71,16 @@ function rowSelect(e) {
 
 //**************** RIGHT MENU ****************
 var rightMenu = [
-	{
-        title: 'About',
-        type: 'menu',
-        icon: 'fa-info',
-        iconColor: '#999',
-        action: 'about'
-   	},
     {
         title: 'Menu',
         header: true
     },{
+        title: 'About',
+        type: 'menu',
+        icon: 'fa-info-circle',
+        iconColor: '#999',
+        action: 'about'
+   	},{
         title: 'Network Settings',
         type: 'menu',
         icon: 'fa-gear',
