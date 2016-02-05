@@ -6,9 +6,21 @@ var DEFAULT_SCENE_FOLDER_ADDRESS = "22222";
 var DEFAULT_LIGHT_FOLDER_ADDRESS = "11111";
 
 var currentNetworkType = Titanium.App.Properties.getString('currentNetworkType') || CONN_LOCAL;
+var defaultRemoteConnectionInfo = {
+        'server' : 'my.isy.io',
+        'method' : 'https',
+        'port' : '443',
+        'username' : $.username.value || '',
+        'password' : $.password.value || ''
+    };
 
 function getConnectionInfo(){
     var connectionInfo = Titanium.App.Properties.getObject('conn_' + currentNetworkType) || {};
+    if(currentNetworkType == "Remote") {
+    	if(!connectionInfo.server || connectionInfo.server == ""){
+    		connectionInfo = defaultRemoteConnectionInfo;
+    	}
+    }
     $.changeNetworkBtn.title = (currentNetworkType == CONN_REMOTE) ? NETWORK_BTN_REMOTE_TITLE : NETWORK_BTN_LOCAL_TITLE;;
     $.server.value = connectionInfo.server || '';
     $.method.value = connectionInfo.method || '';
@@ -44,7 +56,6 @@ function closeWin () {
 
 //LISTENERS
 $.clearData.addEventListener('click', function () {
-    Ti.API.info("DATA CLEARED!");
     Alloy.Collections.device.fetch();
     var model;
 
