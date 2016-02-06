@@ -7,7 +7,15 @@
         <TableView class="tableview-form" platform="ios">
             <TableViewSection>
                 <TableViewRow><View class="view-row-separator"/></TableViewRow>
-                <TableViewRow><Button id="changeNetworkBtn"></Button></TableViewRow>
+                <TableViewRow layout="vertical">
+	                	<TabbedBar id="switchConnectionBar" platform="ios" backgroundColor="#369">
+				            <Labels>
+				                <Label>Local</Label>
+				                <Label>Remote</Label>
+				            </Labels>
+				        </TabbedBar>
+				        <Label id="currentConnectionLbl"></Label>
+        		</TableViewRow>
             </TableViewSection>
             <TableViewSection>
                 <HeaderView>
@@ -17,8 +25,15 @@
                     </View>
                 </HeaderView>
                 <TableViewRow><TextField id="server" inputType="text" title="" hintText="Server IP/DNS" /></TableViewRow>
-                <TableViewRow><TextField id="method" inputType="text" title="" hintText="HTTP or HTTPS" /></TableViewRow>
-                <TableViewRow><TextField id="port" inputType="text" title="" hintText="Port" /></TableViewRow>
+                <TableViewRow>
+                		<TabbedBar left="10" top="2" id="switchHttpBar" platform="ios" backgroundColor="#369">
+				            <Labels>
+				                <Label>HTTP</Label>
+				                <Label>HTTPS</Label>
+				            </Labels>
+				        </TabbedBar>
+		        </TableViewRow>
+                <TableViewRow><TextField id="port"  top="2" inputType="text" title="" hintText="Port" /></TableViewRow>
                 <TableViewRow><TextField id="username" inputType="text" title="" hintText="Username" /></TableViewRow>
                 <TableViewRow><TextField id="password" inputType="text" title="" hintText="Password" passwordMask="true"/></TableViewRow>
                 <TableViewRow><View class="view-row-separator"/></TableViewRow>
@@ -30,7 +45,13 @@
             </TableViewSection>
         </TableView>
         <ScrollView class="tableview-form" platform="android">
-            <Button id="changeNetworkBtn"></Button>
+        	        	
+        	<View layout="horizontal" top="10" left="25%" height="50" width="Ti.App.SIZE">
+	            <Button id="localConnectionBtn" onClick="changeNetwork">Local</Button>
+            	<Button id="remoteConnectionBtn" onClick="changeNetwork">Remote</Button>
+        	</View>
+
+        	<Label id="currentConnectionLbl"></Label>
             <View class="view-row-separator"/>
             <Label class="label-tableviewsection-header" text="SETTINGS" />
             <View class="row-container">
@@ -38,8 +59,10 @@
                 <TextField id="server" class="form-textField" inputType="text" hintText="Server IP/DNS" />
             </View>
             <View class="row-container">
-                <Label class="label-title">Method</Label>
-                <TextField id="method" class="form-textField" inputType="text" hintText="HTTP or HTTPS" />
+				<View layout="horizontal" left="10" height="50" width="Ti.App.SIZE">
+		            <Button id="httpBtn" onClick="changeHttp">http</Button>
+	            	<Button id="httpsBtn" onClick="changeHttp">https</Button>
+	        	</View>
             </View>
             <View class="row-container">
                 <Label class="label-title">Port</Label>

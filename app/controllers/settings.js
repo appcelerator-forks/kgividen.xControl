@@ -4,6 +4,9 @@ var NETWORK_BTN_REMOTE_TITLE = "Remote Connection Enabled";
 var NETWORK_BTN_LOCAL_TITLE = "Local Connection Enabled";
 var DEFAULT_SCENE_FOLDER_ADDRESS = "22222";
 var DEFAULT_LIGHT_FOLDER_ADDRESS = "11111";
+var btnOnColor="black";
+var btnOffColor="gray";
+var method="http";
 
 var currentNetworkType = Titanium.App.Properties.getString('currentNetworkType') || CONN_LOCAL;
 var defaultRemoteConnectionInfo = {
@@ -17,13 +20,49 @@ var defaultRemoteConnectionInfo = {
 function getConnectionInfo(){
     var connectionInfo = Titanium.App.Properties.getObject('conn_' + currentNetworkType) || {};
     if(currentNetworkType == "Remote") {
+    	//Set the remote default connection info
     	if(!connectionInfo.server || connectionInfo.server == ""){
     		connectionInfo = defaultRemoteConnectionInfo;
     	}
+    	
+    	//set button colors for android and tabbedbar for ios
+    	if(OS_IOS){
+    		$.switchConnectionBar.setIndex(1);
+    	} else {
+			$.localConnectionBtn.setBackgroundColor(btnOffColor);
+			$.remoteConnectionBtn.setBackgroundColor(btnOnColor);
+		}
+		$.currentConnectionLbl.setText("Remote Connection Enabled");
+    } else {
+    	if(OS_IOS){
+    		$.switchConnectionBar.setIndex(0);
+		} else {
+			$.localConnectionBtn.setBackgroundColor(btnOnColor);
+			$.remoteConnectionBtn.setBackgroundColor(btnOffColor);
+		}
+		$.currentConnectionLbl.setText("Local Connection Enabled");	
     }
-    $.changeNetworkBtn.title = (currentNetworkType == CONN_REMOTE) ? NETWORK_BTN_REMOTE_TITLE : NETWORK_BTN_LOCAL_TITLE;;
+    
+    method = connectionInfo.method || '';
+    
+    if(method == "http") {
+    	if(OS_IOS) {
+    		$.switchHttpBar.setIndex(0);	
+    	} else {
+    		$.httpBtn.setBackgroundColor(btnOnColor);
+    		$.httpsBtn.setBackgroundColor(btnOffColor);
+    	}
+    } else {
+    	
+       	if(OS_IOS) {
+    		$.switchHttpBar.setIndex(1);	
+    	} else {
+    		$.httpBtn.setBackgroundColor(btnOffColor);
+    		$.httpsBtn.setBackgroundColor(btnOnColor);
+    	}
+    }
+    
     $.server.value = connectionInfo.server || '';
-    $.method.value = connectionInfo.method || '';
     $.port.value = connectionInfo.port || '';
     $.username.value = connectionInfo.username || '';
     $.password.value = connectionInfo.password || '';
@@ -34,7 +73,7 @@ function saveConnectionInfo(callback){
     //todo: validate form
     data = {
         'server' : $.server.value || '',
-        'method' :$.method.value || 'http',
+        'method' :method || 'http',
         'port' : $.port.value || '80',
         'username' : $.username.value || '',
         'password' : $.password.value || ''
@@ -81,7 +120,7 @@ $.clearData.addEventListener('click', function () {
     Ti.App.Properties.setObject('conn_' + CONN_LOCAL, {});
     Ti.App.Properties.setObject('conn_current', {});
     $.server.value = '';
-    $.method.value = '';
+    method = '';
     $.port.value = '';
     $.username.value = '';
     $.password.value = '';
@@ -93,18 +132,64 @@ $.getListOfDevicesBtn.addEventListener('click', function () {
     saveConnectionInfo(refreshDevices);
 });
 
-$.changeNetworkBtn.addEventListener('click', function(e) {
-    saveConnectionInfo(); //save before we switch.
-    //Toggle the network Type
-    if(currentNetworkType == "Remote"){
-        currentNetworkType = CONN_LOCAL;
-        $.changeNetworkBtn.title = NETWORK_BTN_LOCAL_TITLE;
-    }else{
-        currentNetworkType = CONN_REMOTE;
-        $.changeNetworkBtn.title = NETWORK_BTN_REMOTE_TITLE;
-    }
-    getConnectionInfo();
-});
+if(OS_IOS) {
+	$.switchConnectionBar.addEventListener('click',function(e) {
+		saveConnectionInfo(); //save before we switch.
+		switch(e.index) {
+			case 0: 
+				$.currentConnectionLbl.setText("Local Connection Enabled");
+				currentNetworkType = CONN_LOCAL;
+				break;
+			case 1: 
+				$.currentConnectionLbl.setText("Remote Connection Enabled");
+				currentNetworkType = CONN_REMOTE;
+				break;	
+		}
+		getConnectionInfo();
+	});
+	
+	$.switchHttpBar.addEventListener('click',function(e) {
+		switch(e.index) {
+			case 0: 
+				method = "http";
+				break;
+			case 1: 
+				method = "https";
+				break;	
+		}
+	});
+}
+
+//setup the button for android
+if (!OS_IOS) {
+	function changeNetwork(e){
+		saveConnectionInfo(); //save before we switch.
+		if(e.source.id == "localConnectionBtn"){
+			$.localConnectionBtn.setBackgroundColor(btnOnColor);
+			$.remoteConnectionBtn.setBackgroundColor(btnOffColor);
+			$.currentConnectionLbl.setText("Local Connection Enabled");
+			currentNetworkType = CONN_LOCAL;
+		} else {
+			$.localConnectionBtn.setBackgroundColor(btnOffColor);
+			$.remoteConnectionBtn.setBackgroundColor(btnOnColor);
+			$.currentConnectionLbl.setText("Remote Connection Enabled");
+			currentNetworkType = CONN_REMOTE;
+		}  
+	    getConnectionInfo();	
+	}	
+	
+	function changeHttp(e){
+		if(e.source.id == "httpBtn"){
+			$.httpBtn.setBackgroundColor(btnOnColor);
+			$.httpsBtn.setBackgroundColor(btnOffColor);
+			method = "http";
+		} else {
+			$.httpBtn.setBackgroundColor(btnOffColor);
+			$.httpsBtn.setBackgroundColor(btnOnColor);
+			method = "https";
+		}  
+	}	
+}
 
 
 $.settingsWin.addEventListener("close", function(){
