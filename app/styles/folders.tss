@@ -74,6 +74,7 @@
 },
 ".sceneBtn" : {
     backgroundImage : '/images/themes/default/btn.png',
+    backgroundSelectedImage : '/images/themes/default/btn-active.png',
     color: '#fff',
     width : '20%',
     height : '80%',
