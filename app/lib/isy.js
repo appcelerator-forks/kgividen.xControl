@@ -45,10 +45,10 @@ exports.toggle = function (address){
     return deviceGetStatus(address).then(function (data){
         var deviceStatus = processDeviceStatusXML(data);
         Ti.API.info('status is ToggleDevice: ' + deviceStatus + ' Address of device: ' + address);
-        if (deviceStatus != 'Off') {
-            deviceFastOff(address);
+        if (deviceStatus == 'Off' || deviceStatus == "0%") {
+            deviceFastOn(address); 
         } else {
-            deviceFastOn(address);
+            deviceFastOff(address);
         }
     });
 };
