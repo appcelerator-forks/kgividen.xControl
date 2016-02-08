@@ -10,3 +10,7 @@ Version 1.5
 - ISY portal is the default remote connection
 - Added About page with version 
 - Fixed issue where button tracking wasn't working for some ISY devices.
+- Changed the add icon to green.  Isn't it pretty?
+- You can now add new folders or existing folders to a view.
+- When adding devices you can now click on them to add/remove them from the same page.
+- When clicking to add devices it will no longer add duplicates.

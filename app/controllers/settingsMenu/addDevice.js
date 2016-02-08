@@ -1,31 +1,21 @@
 var parameters = arguments[0] || {};
 var folderAddress = parameters.folderModel.get("address");
 var callbackFunction = parameters.callback || null;
-
 /**
  * event listener added via view for the refreshControl (iOS) or button (Android)
  * @param  {Object} e Event, unless it was called from the constructor
  */
 function refresh(e) {
-    Ti.API.info("In refresh");
     'use strict';
     getListOfDevicesInFolder(function(e){
         // Get all the devics in the folder and check them if they already have been added.
         Alloy.Collections.Device.fetch({
-            success: function (col) {
-                var devicesInFolder = e.devices;
+            success: function (data) {
+                var devicesInFolder = _.pluck(e.devices,"DeviceAddress");
                 if (e.status === "success") {
-                    col.each(function(item) {
-                        var address = item.get("address");
-                        // Either turn it into a JSON object or figure out why where doesn't work.
-                        Ti.API.debug("devices InFolder: " + JSON.stringify(devicesInFolder));
-                        Ti.API.debug("address: " + JSON.stringify(address));
-
-                        //We have to put the array of models back into a temporary collection so we can do a where
-                        var tempCol = Alloy.Collections.instance("DeviceInFolder").reset(devicesInFolder);
-                        var found = tempCol.where({"FolderAddress":folderAddress,"DeviceAddress":address});
-
-                        if (found.length > 0) {
+                	//Check of any of the devices are already in the folder and if so then check them.
+                    data.each(function(item) {
+                        if (_.contains(devicesInFolder, item.get("address"))) {
                             //adds a checkmark if it's in the folder
                             //This is so we know it's in the folder and won't repeat add it if it's clicked
                             item.set(
@@ -54,12 +44,13 @@ function exit (){
 
 function getListOfDevicesInFolder(callback) {
     //See if the device is already in the view
-    Alloy.Collections.Device.fetch({
+    Alloy.Collections.DeviceInFolder.fetch({
         success: function (data) {
-            var modelsInFolder = data.where({FolderAddress: folderAddress});
+            var devicesInFolder = _.where(data.toJSON(),{FolderAddress: folderAddress});
+           
             var e = {
                 status:"success",
-                devices:modelsInFolder
+                devices:devicesInFolder
             };
             callback && callback(e);
         },
@@ -99,7 +90,7 @@ $.addDeviceListView.addEventListener('itemclick',function(e) {
 
 function addDeviceRowClicked(event) {
     var item = event.section.getItemAt(event.itemIndex);
-    //Add a device into a Folder if it's not already there.
+    //Add a device into a Folder if it's not already there.  Remove it if it is there.
     if (!item.properties.inFolder) {
         var model = {
             "DeviceAddress" : item.properties.address,
@@ -110,15 +101,30 @@ function addDeviceRowClicked(event) {
         Alloy.createModel('DeviceInFolder', model).save({},{
             success: function(resp){
                 item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
+                item.properties.inFolder = true;
                 event.section.updateItemAt(event.itemIndex,item);
-
             },
             error: function(resp) {
                 Ti.API.debug("error!!!!!");
             }
         });
+    } else {
+		Alloy.Collections.deviceInFolder.fetch({
+			success: function (data) {
+				var devicesToDelete = data.where({"FolderAddress":folderAddress,"DeviceAddress":item.properties.address});
+				
+				_.each(devicesToDelete, function(device){
+					device.destroy();
+				});
+				item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
+                item.properties.inFolder = false;
+                event.section.updateItemAt(event.itemIndex,item);
+			},
+			error: function () {
+				Ti.API.debug("delete Failed!!!");
+			}
+		});
     }
-
 }
 
 /**

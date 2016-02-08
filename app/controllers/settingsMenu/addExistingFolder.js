@@ -1,7 +1,5 @@
 var parameters = arguments[0] || {};
 var callbackFunction = parameters.callback || null;
-Ti.API.info("parameters in addExistingFoler.js: " + JSON.stringify(parameters));
-
 
 Alloy.Collections.Device.fetch({
 	success: function (data) {

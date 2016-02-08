@@ -10,7 +10,7 @@
 		<Menu platform="android">
 			<MenuItem id="closeBtn" title="Close" onClick="exit" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
-		
+		<Label left="5%" top="10">Press on a device to add it to the view</Label>
 		<ListView id="addDeviceListView" platform="ios,android" defaultItemTemplate="lightTemplate">
 
             <Templates>

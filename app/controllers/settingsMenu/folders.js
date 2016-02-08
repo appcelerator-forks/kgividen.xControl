@@ -105,7 +105,6 @@ function addFolder(content) {
 	
 	Alloy.createModel('Device', model).save({}, {
 		success : function(model, response) {
-			Ti.API.debug('success adding folder: ' + model.toJSON());
 			linkFolderToView(model.toJSON());
 		},
 		error : function(e) {
@@ -456,7 +455,6 @@ $.addFolderFab.onClick(function(e) {
  * event listener set via view for when the user clicks the floating add existing folder button.
  */
 $.addExistingFolderFab.onClick(function(){
-	Ti.API.info("addExistingFolderFab");
 	var win = Alloy.createController("settingsMenu/addExistingFolder", {
 		callback: function (event) {
 			win.close();
