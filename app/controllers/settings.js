@@ -263,8 +263,8 @@ function processData(dbData, liveData, devicesInFolder) {
 		if (!defaultLightFolderFound[0]) {
 			//Add default folder to the DB
 			createFolder({
-					"name" : "Default Folder",
-					"displayName" : "Default Folder",
+					"name" : "Lights",
+					"displayName" : "Lights",
 					"address" : DEFAULT_LIGHT_FOLDER_ADDRESS,
 					"type" : "folder"
 			});
