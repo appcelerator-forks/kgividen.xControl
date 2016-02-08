@@ -1,5 +1,5 @@
 var parameters = arguments[0] || {};
-
+var folderFabsAreShown = false;
 /**
  * self-executing function to organize otherwise inline constructor code
  * @param  {Object} args arguments passed to the controller
@@ -24,7 +24,7 @@ function checkAndDisplayHelp(){
  * @param  {Object} e Event, unless it was called from the constructor
  */
 function refresh(e) {
-
+	hideFolderFabs();
 	'use strict';
 	// if we were called from the constructor programmatically show the refresh animation
 	if (OS_IOS && !e) {
@@ -239,7 +239,7 @@ if (OS_IOS) {
 		Ti.API.debug("onEditactionClick e: " + JSON.stringify(e));
 		$.editFolderBtn.title = "Edit";
 		$.folderListView.setEditing(false);
-		$.addFolderFab.showMe();
+		$.toggleFolderFabs.showMe();
 		if(e.action=="RENAME") {
 			//openRenameFolder(e)
 			editFolderClicked(e);
@@ -389,7 +389,8 @@ function editFolderBtnClicked(e) {
 		} else {
 			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
 		}
-		$.addFolderFab.hideMe();
+		$.toggleFolderFabs.hideMe();
+		hideFolderFabs();
 	} else {
 		btn.title = "Edit";
 		$.isInEditingMode = false;
@@ -399,9 +400,35 @@ function editFolderBtnClicked(e) {
 		} else {
 			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
 		}
-		$.addFolderFab.showMe();
+		$.toggleFolderFabs.showMe();
 	}
 }
+
+function showFolderFabs() {
+	$.addFolderFab.showMe();
+	$.addExistingFolderFab.showMe();
+	$.toggleFolderFabs.applyProperties({left: "25%"});
+	folderFabsAreShown = true;
+}
+
+function hideFolderFabs() {
+	$.addFolderFab.hideMe();
+	$.addExistingFolderFab.hideMe();
+	$.toggleFolderFabs.applyProperties({left: "45%"});
+	folderFabsAreShown = false;
+}
+
+/**
+ * event listener set via view for when the user clicks the floating add button.
+ */
+$.toggleFolderFabs.onClick(function(e) {
+	if(folderFabsAreShown){
+		hideFolderFabs();
+	} else {
+		showFolderFabs();
+	}
+	
+});
 
 /**
  * event listener set via view for when the user clicks the floating add button.
@@ -428,7 +455,7 @@ $.addFolderFab.onClick(function(e) {
 /**
  * event listener set via view for when the user clicks the floating add existing folder button.
  */
-$.addExistingFolderFab.addEventListener("click", function(){
+$.addExistingFolderFab.onClick(function(){
 	Ti.API.info("addExistingFolderFab");
 	var win = Alloy.createController("settingsMenu/addExistingFolder", {
 		callback: function (event) {

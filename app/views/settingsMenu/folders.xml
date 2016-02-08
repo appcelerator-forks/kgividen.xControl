@@ -3,7 +3,9 @@
 		<RightNavButton platform='ios'>
 			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
 		</RightNavButton>
-		<Widget id="addFolderFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
+		<Widget id="toggleFolderFabs" class="toggleFolderFabs" src="com.netsmartcompany.floatingActionButton" />
+		<Widget id="addFolderFab" class="addFolderFab" src="com.netsmartcompany.floatingActionButton" />
+		<Widget id="addExistingFolderFab" class="addExistingFolderFab" src="com.netsmartcompany.floatingActionButton" />
 
 		<Menu platform="android">
 			<MenuItem id="editFolderBtn" title="Edit" onClick="editFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
@@ -12,7 +14,6 @@
 		
 		<Label id="helpMsg" visible="false">Press the + icon to add a folder and devices or Edit to rename/remove folders</Label>
 		<Label left="5%" top="10">Choose a folder to Add/Remove Devices</Label>
-        <Button top ="5" id="addExistingFolderFab">Add an Existing Folder</Button>
 		
 		<ListView id="folderListView" platform="ios,android" defaultItemTemplate="template" onEditaction="onEditactionClick" onItemclick="select">
 			<RefreshControl platform="ios" id="refreshControl" onRefreshstart="refresh" />

@@ -19,3 +19,53 @@
 	top: '10%'
 }
 
+'.toggleFolderFabs': {
+    zIndex: 1000,
+    top: '75%',
+    left: '45%',
+    width: 40,
+    height: 40,
+    backgroundColor: '#cc2ecc40',
+    borderWidth: 1,
+    borderColor: '#ececec',
+    title: '\uf067',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    },
+    color: '#ffffff'
+}
+
+'.addFolderFab': {
+    zIndex: 1000,
+    hidden:true,
+    top: '75%',
+    left: '40%',
+    width: 70,
+    height: 70,
+    backgroundColor: '#cc2ecc40',
+    borderWidth: 1,
+    borderColor: '#ececec',
+    title: 'Add New',
+    font: {
+        fontSize: 18
+    },
+    color: '#ffffff'
+}
+
+'.addExistingFolderFab': {
+    zIndex: 1000,
+    hidden:true,
+    top: '75%',
+    left: '65%',
+    width: 70,
+    height: 70,
+    backgroundColor: '#cc2ecc40',
+    borderWidth: 1,
+    borderColor: '#ececec',
+    title: 'Add Existing',
+    font: {
+        fontSize: 18
+    },
+    color: '#ffffff'
+}

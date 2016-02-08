@@ -97,9 +97,9 @@ overrode the settings with other TSS, XML, or JS settings:
     left: '45%',
     width: 40,
     height: 40,
-    backgroundColor: '#9C9C9C',
+    backgroundColor: '#cc2ecc40',
     borderWidth: 1,
-    borderColor: '#9C9C9C',
+    borderColor: '#ff3d9970',
     title: '\uf067',
     font: {
         fontFamily: 'FontAwesome',
