@@ -1,0 +1,32 @@
+<Alloy>
+	<Window id="foldersWin" title="Folders" navBarHidden="false">
+		<RightNavButton platform='ios'>
+			<Button id="closeBtn" onClick="closeWin">Cancel</Button>
+		</RightNavButton>
+		<Menu platform="android">
+			<MenuItem id="closeBtn" title="Cancel" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+		<Label left="5%" top="10">Choose a folder to Add</Label>
+		
+		<ListView id="folderListView" platform="ios,android" defaultItemTemplate="template" onItemclick="select">
+			<Templates>
+				<ItemTemplate name="template">
+					<View class="listViewIconLabelRow">
+						<Label class="folderIcon" />
+						<Label bindId="title" class="title" />
+					</View>
+				</ItemTemplate>
+			</Templates>
+
+			<HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
+			<ListSection id="folderSection" dataFilter="filter"
+						 dataCollection="Device"
+						 dataTransform="transform"
+					     dataFunction="updateUI">
+
+				<ListItem template="template" class="" itemId="{id}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" address:text="{address}" />
+			</ListSection>
+
+		</ListView>
+	</Window>
+</Alloy>

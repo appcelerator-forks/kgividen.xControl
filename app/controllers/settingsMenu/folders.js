@@ -87,14 +87,22 @@ function filter(collection) {
  * @param  {Object} e Event
  */
 function addFolder(content) {
-	Ti.API.debug(content);
-	var guid = Ti.Platform.createUUID();
+	
+	if(!content){
+		return;
+	}
+
+	if(!content.address) {
+		content.address = Ti.Platform.createUUID();	
+	}
+	
 	var model = {
-		"name" : content,
-		"displayName" : content,
-		"address" : guid,
+		"name" : content.name,
+		"displayName" : content.name,
+		"address" : content.address,
 		"type" : "folder"
 	};
+	
 	Alloy.createModel('Device', model).save({}, {
 		success : function(model, response) {
 			Ti.API.debug('success adding folder: ' + model.toJSON());
@@ -116,7 +124,6 @@ function linkFolderToView (folder) {
 	};
 	Alloy.createModel('FolderInView', model).save({}, {
 		success : function(model, response) {
-			Ti.API.debug('Link Folder to View success: ' + model.toJSON());
 		},
 		error : function(e) {
 			Ti.API.error('error: ' + e.message);
@@ -400,7 +407,6 @@ function editFolderBtnClicked(e) {
  * event listener set via view for when the user clicks the floating add button.
  */
 $.addFolderFab.onClick(function(e) {
-	Ti.API.debug("addFolderClicked");
 	var win = Alloy.createController("settingsMenu/addFolder", {
 		callback: function (event) {
 			win.close();
@@ -418,6 +424,30 @@ $.addFolderFab.onClick(function(e) {
 		win.open(); //simply open the window on top for Android (and other platforms)
 	}
 });
+
+/**
+ * event listener set via view for when the user clicks the floating add existing folder button.
+ */
+$.addExistingFolderFab.addEventListener("click", function(){
+	Ti.API.info("addExistingFolderFab");
+	var win = Alloy.createController("settingsMenu/addExistingFolder", {
+		callback: function (event) {
+			win.close();
+			if (event.success) {
+				linkFolderToView(event.content);
+			} else {
+				Ti.API.debug("No Folder Added");
+			}
+		}
+	}).getView();
+
+	if (OS_IOS) {
+		$.navWin.openWindow(win);
+	} else {
+		win.open(); //simply open the window on top for Android (and other platforms)
+	}
+});
+
 
 /**
  * event listener to destroy all event listeners setup by Alloy.

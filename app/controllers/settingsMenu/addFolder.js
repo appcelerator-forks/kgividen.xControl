@@ -7,12 +7,16 @@ Ti.API.info("parameters: " + JSON.stringify(parameters));
  * @param  {Object} event
  */
 function saveButtonClicked(event) {
+	var content = {
+		name: $.folderName.value
+	};
+	
     var returnParams = {
         success : true,
-        content : $.folderName.value
+        content : content
     };
 
-    // return to comment.js controller to add new comment
+    // return to folders.js controller to add new folder
     callbackFunction && callbackFunction(returnParams);
 }
 /**
