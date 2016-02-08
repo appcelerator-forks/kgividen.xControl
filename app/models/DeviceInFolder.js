@@ -28,14 +28,6 @@ exports.definition = {
 
     extendCollection : function(Collection) {
         _.extend(Collection.prototype, {
-//            whereInView : function(viewId) {
-////                var sql = "SELECT * FROM " + this.config.adapter.collection_name + " WHERE " + view_name + " ORDER BY " + sortBy + " ASC";
-//                var sql = "SELECT * FROM xControlDeviceInView WHERE ViewId=" + viewId;
-//                Ti.API.info(sql);
-//                return this.fetch({
-//                    query: sql
-//                });
-//            }
 
         });
         return Collection;
