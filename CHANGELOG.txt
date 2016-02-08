@@ -9,3 +9,4 @@ Version 1.5
 - Changed name of default folder
 - ISY portal is the default remote connection
 - Added About page with version 
+- Fixed issue where button tracking wasn't working for some ISY devices.
