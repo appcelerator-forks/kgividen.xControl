@@ -14,3 +14,4 @@ Version 1.5
 - You can now add new folders or existing folders to a view.
 - When adding devices you can now click on them to add/remove them from the same page.
 - When clicking to add devices it will no longer add duplicates.
+- Now when you choose a device you can rename it you don't have to go to edit mode.
