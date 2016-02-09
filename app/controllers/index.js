@@ -22,7 +22,13 @@ function createSideMenu(sections, controller) {
 
 //This is what happens when a menu row is selected.
 function rowSelect(e) {
-    var dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
+	var dsScrollView = "";
+    if(e.row.action != "programs") {
+    	$.ds.contentview.removeAllChildren();
+    	$.ds.contentview.add(Alloy.createController("folders").getView());
+ 	   	dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
+    }
+    
     
     switch(e.row.action) {
         case "about":
@@ -39,8 +45,8 @@ function rowSelect(e) {
             break;
         case "programs":
             $.destroy();
-            Alloy.createController("programs").getView().open();
-            $.win.close();
+            $.ds.contentview.removeAllChildren();
+   			$.ds.contentview.add(Alloy.createController("programs").getView());
             break;
         case "cameras":
         	alert("Coming Soon!");
