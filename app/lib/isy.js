@@ -1,6 +1,5 @@
 var xhr = require('/qxhr');
-var XMLTools = require("XMLTools");
-var baseURL;
+// var XMLTools = require("XMLTools");
 var connection = {};
 //TODO INIT connection so it loads it for ever instance.
 exports.init = function() {
@@ -10,10 +9,9 @@ exports.init = function() {
         alert('Connection Error! Please check the connection information. No connection info set.');
         Alloy.createController("settings").getView().open();
     } else {
-        baseURL = conn.method + '://' + conn.server + ':' + conn.port + '/rest/';
+        connection.baseURL = conn.method + '://' + conn.server + ':' + conn.port + '/rest/';
         var authString = conn.username + ':' + conn.password;
         var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());
-
         //This is the connection we'll send to xhr
         connection.headers = [
             {
@@ -31,51 +29,8 @@ exports.init = function() {
     }
 };
 
-exports.loadPrograms = function (callback) {
-	loadProgramsIntoCollection();
-	callback && callback();
-};
-
-function clearProgramsCollection(callback) { //turn into promise since everything else is?
-	Ti.API.info("In clearProgramsCollection!!!");
-	Alloy.Collections.programs.fetch();
-    var model;
-
-    while (model = Alloy.Collections.programs.first()) {
-        model.destroy({silent: true});
-    }
-    
-    callback && callback();
-}
-
-function loadProgramsIntoCollection() {
-	Ti.API.info("In loadProgramsIntoCollection!!!");
-    getPrograms().then(function(data){
-        var deferred = Q.defer();
-		var parser = new XMLTools(data);
-		var programs = parser.toJSON();
-		programs = JSON.parse(programs);
-		Ti.API.info("programs: " + JSON.stringify(programs));
-		var newPrograms = [];
-		_.each(programs.program, function(program) {
-			var model = {
-				"name": program.name,
-				"lastRunTime": _.isEmpty(program.lastRunTime) ? "" : program.lastRunTime,
-				"lastFinishTime": _.isEmpty(program.lastFinishTime) ? "" : program.lastFinishTime,
-				"nextScheduledRunTime": _.isEmpty(program.nextScheduledRunTime) ? "" : program.nextScheduledRunTime,
-				"parentId": _.isEmpty(program.parentId) ? "" : program.parentId,
-				"status": _.isEmpty(program.status) ? "" : program.status,
-				"folder": _.isEmpty(program.folder) ? "" : program.folder,
-				"enabled": _.isEmpty(program.enabled) ? "" : program.enabled,
-				"runAtStartup": _.isEmpty(program.runAtStartup) ? "" : program.runAtStartup,
-				"running": _.isEmpty(program.running) ? "" : program.running
-			};
-		    newPrograms.push(model);
-		});
-		Alloy.Collections.programs.reset(newPrograms);
-        deferred.resolve(parser.toJSON());
-        return deferred.promise;
-    });
+exports.getConnection = function () {
+	return connection;		
 }
 
 // "INTERFACE" calls.  These are calls that all hardware devices will have.
@@ -200,48 +155,48 @@ function getListOfDevices(){
 
 //ISY hardware Calls
 var getFoldersAndNodes = function() {
-    connection.url = baseURL + 'nodes/';
+    connection.url = connection.baseURL + 'nodes/';
     return xhr.loadUrl(connection);
 };
 
 var getPrograms = function() {
-    connection.url = baseURL + 'programs/';
+    connection.url = connection.baseURL + 'programs/';
     return xhr.loadUrl(connection);
 };
 
 var deviceOff = function(address) {
     var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = baseURL + 'nodes/' + encodedAddress + '/cmd/DOF/';
+    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DOF/';
     return xhr.loadUrl(connection);
 };
 
 var deviceOn = function(address,level) {
     var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = baseURL + 'nodes/' + encodedAddress + '/cmd/DON/' + level;
+    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DON/' + level;
     return xhr.loadUrl(connection);
 };
 
 var deviceFastOn = function(address, level) {
     var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = baseURL + 'nodes/' + encodedAddress + '/cmd/DFON/' + level;
+    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DFON/' + level;
     return xhr.loadUrl(connection);
 };
 
 var deviceFastOff = function(address) {
     var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = baseURL + 'nodes/' + encodedAddress + '/cmd/DFOF/';
+    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DFOF/';
     return xhr.loadUrl(connection);
 };
 
 var deviceGetStatus = function(address) {
     var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = baseURL + 'status/' + encodedAddress;
+    connection.url = connection.baseURL + 'status/' + encodedAddress;
 
     return xhr.loadUrl(connection);
 };
 
 var devicesGetStatus = function() {
-    connection.url = baseURL + 'status';
+    connection.url = connection.baseURL + 'status';
     return xhr.loadUrl(connection);
 };
 

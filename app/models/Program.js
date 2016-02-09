@@ -1,53 +1,33 @@
+//Get the connection information for the REST service.
+var d = require('isy');
+d.init();
+var connection = d.getConnection();
+
+//Convert headers from array to obj
+var headers = {};
+_.each(connection.headers, function(header){
+	headers[header.name] = header.value;
+});
+
 exports.definition = {
-	config : {
-		//todo The different views and SortIds should be moved into their own model.
-		"columns" : {
-			"id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
-			"name": "TEXT",
-			"lastRunTime": "TEXT",
-			"lastFinishTime": "TEXT",
-			"nextScheduledRunTime": "TEXT",
-			"parentId": "TEXT",
-			"status": "TEXT",
-			"folder": "TEXT",
-			"enabled": "TEXT",
-			"runAtStartup": "TEXT",
-			"running": "TEXT"
-		},
-		"defaults" : {
-			"name": "",
-			"lastRunTime": "",
-			"lastFinishTime": "",
-			"nextScheduledRunTime": "",
-			"parentId": "",
-			"status": "",
-			"folder": "",
-			"enabled": "",
-			"runAtStartup": "",
-			"running": ""
-		},
-		"adapter" : {
-			"type" : "sql",
-			"collection_name" : "xControlPrograms",
-			"idAttribute" : "id"
-		}
-	},
-
-	extendModel : function(Model) {
-		_.extend(Model.prototype, {
-
-		});
-		// end extend
-
-		return Model;
-	},
-
-	extendCollection : function(Collection) {
-		_.extend(Collection.prototype, {
-			comparator : function(collection) {
-				return collection.get('name');
-			}
-		});
-		return Collection;
-	}
-}; 
+    config: {
+        "URL": connection.baseURL + "/programs",
+        // "debug": 1,
+        "adapter": {
+            "type": "restapi",
+            "collection_name": "xControlPrograms",
+            "idAttribute": "id"
+        },
+        "headers": headers,
+        "parentNode": "program" //your root node
+    },      
+    extendModel: function(Model) { 
+        _.extend(Model.prototype, {});
+        return Model;
+    },
+    extendCollection: function(Collection) {  
+        _.extend(Collection.prototype, {});
+        Ti.API.info("Collection after prototype: " + Collection); 
+        return Collection;
+    }       
+};

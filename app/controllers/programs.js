@@ -1,27 +1,31 @@
 var args = arguments[0] || {};
 
 function doOpen(){
-	Ti.API.info("program refresh!!!");
-	device.loadPrograms();
+	Ti.API.info("program doOpen!!!");
+	refresh();
 }	
 
 function refresh(){
 	Ti.API.info("program refresh!!!");
-	device.loadPrograms(function() {
-		Alloy.Collections.programs.fetch({
-			success : function(data) {
-				Ti.API.info("data programs: " + JSON.stringify(data));
-				if (OS_IOS) {
-					$.refreshControl.endRefreshing();
-				}
-			},
-			error : function() {
-				Ti.API.debug("fetch programs Failed!!!");
-				if (OS_IOS) {
-					$.refreshControl.endRefreshing();
-				}
+	Alloy.Collections.programs.fetch({
+		success : function(data) {
+			Ti.API.info("data programs: " + JSON.stringify(data));
+			Ti.API.info("Alloy.Collections.programs.models: " + JSON.stringify(Alloy.Collections.programs.models));
+	        _.each(Alloy.Collections.programs.models, function(element, index, list){
+	        	// Ti.API.info("element: " + element + " index: " + index + " list: " + list);
+	            // We are looping through the returned models from the remote REST API
+	            // Implement your custom logic here
+	        });
+			if (OS_IOS) {
+				$.refreshControl.endRefreshing();
 			}
-		});
+		},
+		error : function() {
+			Ti.API.debug("fetch programs Failed!!!");
+			if (OS_IOS) {
+				$.refreshControl.endRefreshing();
+			}
+		}
 	});
 }	
 /**
