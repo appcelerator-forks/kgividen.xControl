@@ -2,7 +2,6 @@
 var d = require('isy');
 d.init();
 var connection = d.getConnection();
-
 //Convert headers from array to obj
 var headers = {};
 _.each(connection.headers, function(header){
@@ -27,7 +26,6 @@ exports.definition = {
     },
     extendCollection: function(Collection) {  
         _.extend(Collection.prototype, {});
-        Ti.API.info("Collection after prototype: " + Collection); 
         return Collection;
     }       
 };

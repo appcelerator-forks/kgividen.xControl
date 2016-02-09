@@ -30,8 +30,10 @@ exports.init = function() {
 };
 
 exports.getConnection = function () {
-	return connection;		
-}
+	if(connection){
+		return connection;		
+	}
+};
 
 // "INTERFACE" calls.  These are calls that all hardware devices will have.
 exports.setLevel = function (address, l){

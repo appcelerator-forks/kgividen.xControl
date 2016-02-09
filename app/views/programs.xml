@@ -1,30 +1,41 @@
 <Alloy>
-	<Window onOpen="doOpen">
-		<View id="wrapper" class="programsContainerView">
-			<ListView id="programsListView" class="programsListView" defaultItemTemplate="template">
-		       	<ListSection>
-	    		</ListSection>
-				<RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" />
-				<Templates>
-	            	<ItemTemplate class="deviceItem" name="template">
-	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="programName" class="sceneLbl"/>
-	                        <Label bindId="programLastRunTime" class="sceneLbl"/>
-	                        <Label bindId="programLastFinishTime" class="sceneBtn" />
-	                        <Label bindId="programNextScheduledRunTime" class="sceneBtn" />
-	                        <Button bindId="programEnabled" class="sceneBtn" />
-	                        <Label bindId="programStatus" class="sceneBtn" />
-	                        <!-- <Label bindId="programStatus" class="sceneBtn" onClick="sceneOnBtn"/> -->
-	                    </View>
-	            	</ItemTemplate>
-				</Templates>
-	            <ListSection dataTransform="transform"
-	                     	 dataCollection="Alloy.Collections.programs">
-	            <ListItem template="template" class="deviceItem" 
-	            		  programName:text="{name}" programLastRunTime:text="{programLastRunTime}" programLastFinishTime:text="{programLastFinishTime}"
-	            		  programNextScheduledRunTime:text="{programNextScheduledRunTime}" programEnabled:title="{programEnabled}" programStatus:text="{programStatus}" />
-	        	</ListSection>
-			</ListView>
-		</View>
-	</Window>
+	<View id="wrapper" class="horizontal programContainerView">
+		<Label class="infoLbl">Press the button to Run a program, or use the switch to enable/disable</Label>
+		<TextField id="sf" left="5%" width="90%" class="searchField"></TextField>
+		<ListView id="programsListView" class="programsListView" defaultItemTemplate="template">
+			<RefreshControl id="refreshControlLight" platform="ios" onRefreshstart="refresh" />
+			<HeaderView>
+				
+			</HeaderView>
+			<!-- <RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" /> -->
+			<Templates>
+            	<ItemTemplate class="programItem" name="template">
+                    <View class="horizontal">
+                        <Button bindId="name" class="programBtn" onClick="runProgram"/>
+                        <!-- <Switch bindId="switchEnabled" class="programSwitch" onChange="deviceRowSwitchChanged"/> -->
+                        <View width="Ti.UI.SIZE" class="vertical">
+                        	<Switch top="25%" left="5%" bindId="switch" />
+                        	<Label left="20%" bindId="switchEnabled" class="programSubLbl" />	
+                        </View>
+                    	<Label class="programSubLbl">Status:</Label>
+                        <Label bindId="status" class="programSubVal" />
+                   </View>
+                    <View top="80%" class="horizontal">
+                        <Label class="programSubLbl">Last Run:</Label>
+                        <Label bindId="lastRunTime" class="programSubVal"/>
+                        <Label class="programSubLbl">Next Run:</Label>
+                        <Label bindId="nextScheduledRunTime" class="programSubVal" />
+                    </View>
+            	</ItemTemplate>
+			</Templates>
+            <ListSection dataTransform="transform"
+                     	 dataCollection="Alloy.Collections.programs">
+            <ListItem template="template" class="programItem" 
+            		  name:title="{name}" switchEnabled:text="{enabled}" switch:value="{switchValue}"
+            		  lastRunTime:text="{lastRunTime}" lastFinishTime:text="{lastFinishTime}"
+            		  nextScheduledRunTime:text="{nextScheduledRunTime}"  status:text="{status}"
+            		  searchableText="{name}" id="{id}"/>
+        	</ListSection>
+		</ListView>
+	</View>
 </Alloy>
