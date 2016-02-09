@@ -37,6 +37,11 @@ function rowSelect(e) {
         case "scenes":
             dsScrollView.scrollToView(VIEW_ID_SCENES);
             break;
+        case "programs":
+            $.destroy();
+            Alloy.createController("programs").getView().open();
+            $.win.close();
+            break;
         case "cameras":
         	alert("Coming Soon!");
             // $.destroy();
@@ -146,6 +151,12 @@ var leftMenu = [
         icon: 'fa-adjust',
         iconColor: '#999',
         action: 'scenes'
+    },{
+        title: 'Programs',
+        type: 'menu',
+        icon: 'fa-play-circle',
+        iconColor: '#999',
+        action: 'programs'
     },{
         title: 'Cameras',
         type: 'menu',

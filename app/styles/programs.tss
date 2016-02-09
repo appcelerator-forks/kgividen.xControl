@@ -1,0 +1,36 @@
+"#programsContainerView" : {
+    zIndex:2,
+    backgroundImage: '/images/themes/default/background.png',
+},
+".container" : {
+      backgroundColor: 'transparent',
+}
+".sceneLbl" : {
+    width: '50%',
+    color : 'black',
+    font : {
+        fontSize : '20%'
+    },
+    left : 5,
+    textAlign : 'left'
+},
+".sceneBtn" : {
+    backgroundImage : '/images/themes/default/btn.png',
+    color: '#fff',
+    width : '20%',
+    height : '80%',
+    left : '3%',
+    font : {
+        fontSize : '20%',
+        fontWeight : 'bold',
+        fontFamily : 'Helvetica Neue'
+    },
+    zIndex : 5
+},
+".sceneContainer":{
+    backgroundColor: 'transparent',
+    height : 50
+},
+".sceneContainer[formFactor=tablet]":{
+    height : 80
+}

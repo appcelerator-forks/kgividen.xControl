@@ -1,4 +1,5 @@
 var xhr = require('/qxhr');
+var XMLTools = require("XMLTools");
 var baseURL;
 var connection = {};
 //TODO INIT connection so it loads it for ever instance.
@@ -30,6 +31,52 @@ exports.init = function() {
     }
 };
 
+exports.loadPrograms = function (callback) {
+	loadProgramsIntoCollection();
+	callback && callback();
+};
+
+function clearProgramsCollection(callback) { //turn into promise since everything else is?
+	Ti.API.info("In clearProgramsCollection!!!");
+	Alloy.Collections.programs.fetch();
+    var model;
+
+    while (model = Alloy.Collections.programs.first()) {
+        model.destroy({silent: true});
+    }
+    
+    callback && callback();
+}
+
+function loadProgramsIntoCollection() {
+	Ti.API.info("In loadProgramsIntoCollection!!!");
+    getPrograms().then(function(data){
+        var deferred = Q.defer();
+		var parser = new XMLTools(data);
+		var programs = parser.toJSON();
+		programs = JSON.parse(programs);
+		Ti.API.info("programs: " + JSON.stringify(programs));
+		var newPrograms = [];
+		_.each(programs.program, function(program) {
+			var model = {
+				"name": program.name,
+				"lastRunTime": _.isEmpty(program.lastRunTime) ? "" : program.lastRunTime,
+				"lastFinishTime": _.isEmpty(program.lastFinishTime) ? "" : program.lastFinishTime,
+				"nextScheduledRunTime": _.isEmpty(program.nextScheduledRunTime) ? "" : program.nextScheduledRunTime,
+				"parentId": _.isEmpty(program.parentId) ? "" : program.parentId,
+				"status": _.isEmpty(program.status) ? "" : program.status,
+				"folder": _.isEmpty(program.folder) ? "" : program.folder,
+				"enabled": _.isEmpty(program.enabled) ? "" : program.enabled,
+				"runAtStartup": _.isEmpty(program.runAtStartup) ? "" : program.runAtStartup,
+				"running": _.isEmpty(program.running) ? "" : program.running
+			};
+		    newPrograms.push(model);
+		});
+		Alloy.Collections.programs.reset(newPrograms);
+        deferred.resolve(parser.toJSON());
+        return deferred.promise;
+    });
+}
 
 // "INTERFACE" calls.  These are calls that all hardware devices will have.
 exports.setLevel = function (address, l){
@@ -152,9 +199,13 @@ function getListOfDevices(){
 }
 
 //ISY hardware Calls
-
 var getFoldersAndNodes = function() {
     connection.url = baseURL + 'nodes/';
+    return xhr.loadUrl(connection);
+};
+
+var getPrograms = function() {
+    connection.url = baseURL + 'programs/';
     return xhr.loadUrl(connection);
 };
 

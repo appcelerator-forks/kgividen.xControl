@@ -1,0 +1,30 @@
+<Alloy>
+	<Window onOpen="doOpen">
+		<View id="wrapper" class="programsContainerView">
+			<ListView id="programsListView" class="programsListView" defaultItemTemplate="template">
+		       	<ListSection>
+	    		</ListSection>
+				<RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" />
+				<Templates>
+	            	<ItemTemplate class="deviceItem" name="template">
+	                    <View class="horizontal sceneContainer">
+	                        <Label bindId="programName" class="sceneLbl"/>
+	                        <Label bindId="programLastRunTime" class="sceneLbl"/>
+	                        <Label bindId="programLastFinishTime" class="sceneBtn" />
+	                        <Label bindId="programNextScheduledRunTime" class="sceneBtn" />
+	                        <Button bindId="programEnabled" class="sceneBtn" />
+	                        <Label bindId="programStatus" class="sceneBtn" />
+	                        <!-- <Label bindId="programStatus" class="sceneBtn" onClick="sceneOnBtn"/> -->
+	                    </View>
+	            	</ItemTemplate>
+				</Templates>
+	            <ListSection dataTransform="transform"
+	                     	 dataCollection="Alloy.Collections.programs">
+	            <ListItem template="template" class="deviceItem" 
+	            		  programName:text="{name}" programLastRunTime:text="{programLastRunTime}" programLastFinishTime:text="{programLastFinishTime}"
+	            		  programNextScheduledRunTime:text="{programNextScheduledRunTime}" programEnabled:title="{programEnabled}" programStatus:text="{programStatus}" />
+	        	</ListSection>
+			</ListView>
+		</View>
+	</Window>
+</Alloy>

@@ -18,6 +18,7 @@ var VIEW_ID_SCENES = 2;
 Alloy.Collections.device = Alloy.createCollection("Device");
 Alloy.Collections.folderInView = Alloy.createCollection("FolderInView");
 Alloy.Collections.deviceInFolder = Alloy.createCollection("DeviceInFolder");
+Alloy.Collections.programs = Alloy.createCollection("Program");
 
 var osname = "android";
 if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
