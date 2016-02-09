@@ -57,6 +57,19 @@ exports.toggle = function (address){
     });
 };
 
+exports.runProgram = function(id){
+    runProgram(id);
+};
+
+exports.enableProgram = function(id){
+    enableProgram(id);
+};
+
+exports.disableProgram = function(id){
+    disableProgram(id);
+};
+
+
 exports.sceneOn = function(address){
     Ti.API.debug("Scene On!");
     var level = 255;
@@ -202,6 +215,23 @@ var devicesGetStatus = function() {
     return xhr.loadUrl(connection);
 };
 
+var runProgram = function(id) {
+    var encodedId = Ti.Network.encodeURIComponent(id);
+    connection.url = connection.baseURL + 'programs/' + encodedId + '/run';
+    return xhr.loadUrl(connection);
+};
+
+var enableProgram = function(id) {
+    var encodedId = Ti.Network.encodeURIComponent(id);
+    connection.url = connection.baseURL + 'programs/' + encodedId + '/enable';
+    return xhr.loadUrl(connection);
+};
+
+var disableProgram = function(id) {
+    var encodedId = Ti.Network.encodeURIComponent(id);
+    connection.url = connection.baseURL + 'programs/' + encodedId + '/disable';
+    return xhr.loadUrl(connection);
+};
 //*************************************HELPER METHODS*************************************
 var processDeviceStatusXML = function(xmlData) {
     var doc = Ti.XML.parseString(xmlData);

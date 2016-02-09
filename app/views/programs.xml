@@ -7,14 +7,13 @@
 			<HeaderView>
 				
 			</HeaderView>
-			<!-- <RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" /> -->
+			<RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" />
 			<Templates>
             	<ItemTemplate class="programItem" name="template">
                     <View class="horizontal">
-                        <Button bindId="name" class="programBtn" onClick="runProgram"/>
-                        <!-- <Switch bindId="switchEnabled" class="programSwitch" onChange="deviceRowSwitchChanged"/> -->
+                        <Button bindId="btn" class="programBtn" onClick="runProgram"/>
                         <View width="Ti.UI.SIZE" class="vertical">
-                        	<Switch top="25%" left="5%" bindId="switch" />
+                        	<Switch top="25%" left="5%" bindId="switch" onChange="programSwitchChanged" />
                         	<Label left="20%" bindId="switchEnabled" class="programSubLbl" />	
                         </View>
                     	<Label class="programSubLbl">Status:</Label>
@@ -29,12 +28,13 @@
             	</ItemTemplate>
 			</Templates>
             <ListSection dataTransform="transform"
-                     	 dataCollection="Alloy.Collections.programs">
+                     	 dataCollection="Alloy.Collections.programs"
+                     	 dataFunction="updateUI">
             <ListItem template="template" class="programItem" 
-            		  name:title="{name}" switchEnabled:text="{enabled}" switch:value="{switchValue}"
+            		  btn:title="{name}" btn:id="{id}" switchEnabled:text="{enabled}" switch:value="{switchValue}"
             		  lastRunTime:text="{lastRunTime}" lastFinishTime:text="{lastFinishTime}"
             		  nextScheduledRunTime:text="{nextScheduledRunTime}"  status:text="{status}"
-            		  searchableText="{name}" id="{id}"/>
+            		  searchableText="{name}"/>
         	</ListSection>
 		</ListView>
 	</View>

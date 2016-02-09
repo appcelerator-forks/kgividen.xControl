@@ -9,21 +9,16 @@ function refresh(){
 	Ti.API.info("program refresh!!!");
 	Alloy.Collections.programs.fetch({
 		success : function(data) {
-			// Ti.API.info("data programs: " + JSON.stringify(data));
-			// Ti.API.info("Alloy.Collections.programs.models: " + JSON.stringify(Alloy.Collections.programs.models));
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
-	        	// Ti.API.info("element: " + element + " index: " + index + " list: " + list);
-	            // We are looping through the returned models from the remote REST API
-	            // Implement your custom logic here
 	        // });
 			if (OS_IOS) {
-				// $.refreshControl.endRefreshing();
+				$.refreshControl.endRefreshing();
 			}
 		},
 		error : function() {
 			Ti.API.debug("fetch programs Failed!!!");
 			if (OS_IOS) {
-				// $.refreshControl.endRefreshing();
+				$.refreshControl.endRefreshing();
 			}
 		}
 	});
@@ -67,13 +62,13 @@ function transform(model) {
 			transform.enabled = "enabled";
 			transform.switchValue = true;
 		} else if (transform.enabled =="false"){
-			transform.enabled = "enabled";
+			transform.enabled = "disabled";
 			transform.switchValue = false;
 		} else {
+			transform.enabled = "disabled";
 			transform.switchValue = false;
 		}
 
-	Ti.API.info("transform: " + JSON.stringify(transform));
 	return transform;
 }
 
@@ -89,8 +84,28 @@ function filter(collection) {
 	});
 }
 
+function runProgram(e){
+	Ti.API.info("run Program e: " + JSON.stringify(e));
+    var item = e.section.items[e.itemIndex];
+    Ti.API.info("run Program item: " + JSON.stringify(item));
+    if(!item.btn.id){
+        return;
+    }
+    device.runProgram(item.btn.id);
+	refresh();
+}
 
-
-function runProgram(){
-	alert("blah");
+function programSwitchChanged(e) {
+	var item = e.section.items[e.itemIndex];
+	Ti.API.info("item: " + JSON.stringify(item));
+    if (e.value) {
+    	Ti.API.info("program enabled!");
+    	item.switchEnabled.text = "enabled";
+    	device.enableProgram(item.btn.id);  
+    } else {
+    	Ti.API.info("program disabled!");
+    	item.switchEnabled.text = "disabled";
+      	device.disableProgram(item.btn.id);
+    }
+    refresh();
 }
