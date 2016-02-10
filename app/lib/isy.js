@@ -13,6 +13,7 @@ exports.init = function() {
         var authString = conn.username + ':' + conn.password;
         var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());
         //This is the connection we'll send to xhr
+        Ti.API.info("connection.baseURL: " + connection.baseURL);
         connection.headers = [
             {
                 name: 'Accept',
@@ -32,7 +33,9 @@ exports.init = function() {
 exports.getConnection = function () {
 	if(connection){
 		return connection;		
-	}
+	} 
+	
+	return;
 };
 
 // "INTERFACE" calls.  These are calls that all hardware devices will have.

@@ -1,13 +1,10 @@
 var args = arguments[0] || {};
 
-// function doOpen(){
-	// Ti.API.info("program doOpen!!!");
-	refresh();
-// }	
-
-function refresh(){
+function getPrograms(connection){
 	Ti.API.info("program refresh!!!");
 	Alloy.Collections.programs.fetch({
+		"url": connection.baseURL + "programs",
+		headers: connection.headers,
 		success : function(data) {
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
 	        // });
@@ -17,12 +14,33 @@ function refresh(){
 		},
 		error : function() {
 			Ti.API.debug("fetch programs Failed!!!");
+			alert("Getting programs failed.  Please check the network settings.");
 			if (OS_IOS) {
 				$.refreshControl.endRefreshing();
 			}
 		}
 	});
+}
+
+function refresh(connection){
+	var connection = require('isy').getConnection();
+	//Convert headers from array to obj
+	if(connection && connection.baseURL){
+		var headers = {};
+		_.each(connection.headers, function(header){
+			headers[header.name] = header.value;
+		});
+		connection.headers = headers;
+		getPrograms(connection);
+	} else {
+		if (OS_IOS) {
+			$.refreshControl.endRefreshing();
+			Ti.API.info("error refreshing no connection");
+		}
+	}	
 }	
+
+refresh();
 
 $.sf.addEventListener('change',function(e){
 	$.programsListView.searchText = e.value;
