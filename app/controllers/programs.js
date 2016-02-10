@@ -113,7 +113,11 @@ function runProgram(e){
         return;
     }
     device.runProgram(item.btn.id);
-	refresh();
+    //TODO Get either callbacks or promises working again here instead of causing an artificial delay
+    setTimeout(function() {
+    	refresh();
+    }, 400);
+
 }
 
 function programSwitchChanged(e) {
@@ -128,5 +132,8 @@ function programSwitchChanged(e) {
     	item.switchEnabled.text = "disabled";
       	device.disableProgram(item.btn.id);
     }
-    refresh();
+    //TODO Get either callbacks or promises working again here instead of causing an artificial delay
+    setTimeout(function() {
+    	refresh();
+    }, 400);
 }
