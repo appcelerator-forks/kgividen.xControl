@@ -4,7 +4,7 @@ function getPrograms(connection){
 	Ti.API.info("program refresh!!!");
 	Alloy.Collections.programs.fetch({
 		"url": connection.baseURL + "programs",
-		headers: connection.headers,
+		headers: connection.restHeaders,
 		success : function(data) {
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
 	        // });
@@ -23,14 +23,17 @@ function getPrograms(connection){
 }
 
 function refresh(connection){
-	var connection = require('isy').getConnection();
+	// var d = require('isy');
+	device.init();
+	var connection = device.getConnection();
 	//Convert headers from array to obj
+	var restHeaders = {};
 	if(connection && connection.baseURL){
 		var headers = {};
 		_.each(connection.headers, function(header){
-			headers[header.name] = header.value;
+			restHeaders[header.name] = header.value;
 		});
-		connection.headers = headers;
+		connection.restHeaders = restHeaders;
 		getPrograms(connection);
 	} else {
 		if (OS_IOS) {
