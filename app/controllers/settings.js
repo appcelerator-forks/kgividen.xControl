@@ -45,21 +45,21 @@ function getConnectionInfo(){
     
     method = connectionInfo.method || '';
     
-    if(method == "http") {
+    if(method == "https") {
+    	if(OS_IOS) {
+    		$.switchHttpBar.setIndex(1);	
+    	} else {
+    		$.httpBtn.setBackgroundColor(btnOffColor);
+    		$.httpsBtn.setBackgroundColor(btnOnColor);
+    	}
+    } else {
     	if(OS_IOS) {
     		$.switchHttpBar.setIndex(0);	
     	} else {
     		$.httpBtn.setBackgroundColor(btnOnColor);
     		$.httpsBtn.setBackgroundColor(btnOffColor);
     	}
-    } else {
-    	
-       	if(OS_IOS) {
-    		$.switchHttpBar.setIndex(1);	
-    	} else {
-    		$.httpBtn.setBackgroundColor(btnOffColor);
-    		$.httpsBtn.setBackgroundColor(btnOnColor);
-    	}
+       	
     }
     
     $.server.value = connectionInfo.server || '';
