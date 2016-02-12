@@ -1,5 +1,5 @@
 var xhr = require('/qxhr');
-// var XMLTools = require("XMLTools");
+var deviceTypes = require('deviceTypes').types;
 var connection = {};
 //TODO INIT connection so it loads it for ever instance.
 exports.init = function() {
@@ -13,7 +13,6 @@ exports.init = function() {
         var authString = conn.username + ':' + conn.password;
         var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());
         //This is the connection we'll send to xhr
-        Ti.API.info("connection.baseURL: " + connection.baseURL);
         connection.headers = [
             {
                 name: 'Accept',
@@ -24,6 +23,7 @@ exports.init = function() {
             }
 
         ];
+
 
         connection.connectiontype = 'GET';
         connection.username = conn.username; //This is so we can throw an error and let them know what the user was.
@@ -51,7 +51,6 @@ exports.setLevel = function (address, l){
 exports.toggle = function (address){
     return deviceGetStatus(address).then(function (data){
         var deviceStatus = processDeviceStatusXML(data);
-        Ti.API.info('status is ToggleDevice: ' + deviceStatus + ' Address of device: ' + address);
         if (deviceStatus == 'Off' || deviceStatus == "0%") {
             deviceFastOn(address); 
         } else {
@@ -265,25 +264,46 @@ function convertNodesListToJSON(xml) {
     var nodesJSON = [];
 
     //Add Nodes
-    parseXMLNodes(xml.documentElement.getElementsByTagName('node'), "light");
+    parseXMLNodes(xml.documentElement.getElementsByTagName('node'), "node");
 
     //Add Scenes
     parseXMLNodes(xml.documentElement.getElementsByTagName('group'), "scene");
 
 
     function parseXMLNodes(xml, type){
+    	//TODO Make some list somewhere of the various types so we know whether to choose "light" or "sensor" or whatever
+    	//TODO Check to see what the <type><type> is and depending on that set it to a "light" or a "sensor"
+    	
         for (var i = 0; i < xml.length; i++) {
             var address = xml.item(i).getElementsByTagName('address').item(0).text;
             var name = xml.item(i).getElementsByTagName('name').item(0).text;
+
             var parent = '111'; //This is hardcoded as the MISC folder.
             if (xml.item(i).getElementsByTagName('parent').item(0) != null) {
                 parent = xml.item(i).getElementsByTagName('parent').item(0).text;
             }
+            
+            //if it is nodes then let's find out what kind of node it is.  Scenes don't have a type and are all the same.
+            if(type == "node") {
+            	//Get the first character of the type in the XML sunce that's what determines if it's a dimmer, switch or whatever.
+	            var currentNodeType = xml.item(i).getElementsByTagName('type').item(0).text;
+	            var nodeType = currentNodeType.substr(0, currentNodeType.indexOf('.'));
+	            
+		        //If type is supported then set it to the type from the deviceTypes
+		        if (deviceTypes[nodeType].supported) {
+		        	deviceType = deviceTypes[nodeType].type;
+		        } else {
+		        	continue; //skip it if it's not supported	
+		        }	
+           } else if(type == "scene") {
+           		deviceType = "scene";
+           }
+           
             nodesJSON.push({
                 id: address,
                 name: name,
                 parent: parent,
-                type: type
+                type: deviceType
             });
         }
     }
