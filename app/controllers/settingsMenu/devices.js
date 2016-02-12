@@ -56,7 +56,6 @@ function doOpen() {
 function transform(model) {
 	var transform = model.toJSON();
 	var type = model.get("type");
-	//lightTemplate is the default
 	if($.editModeDevices == true && !OS_IOS) { //Only need to show new icons for Android
 		transform.t = "editTemplate";
 		return transform;
@@ -66,6 +65,8 @@ function transform(model) {
 		transform.t = "folderTemplate";
 	} else if(type == "scene"){
 		transform.t = "sceneTemplate";
+	} else if(type == "sensor"){
+		transform.t = "sensorTemplate";
 	}
 
 	return transform;

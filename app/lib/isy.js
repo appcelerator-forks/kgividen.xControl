@@ -50,7 +50,7 @@ exports.setLevel = function (address, l){
 exports.toggle = function (address){
     return deviceGetStatus(address).then(function (data){
         var deviceStatus = processDeviceStatusXML(data);
-        if (deviceStatus == 'Off' || deviceStatus == "0%") {
+        if (deviceStatus == 'Off' || deviceStatus == "0%" || deviceStatus == "0" || deviceStatus == "unlocked") {
             deviceFastOn(address); 
         } else {
             deviceFastOff(address);
@@ -108,6 +108,7 @@ function getAllDevicesStatus(){
                 var itemTmp = {};
                 itemTmp.address = item.id;
                 itemTmp.level = Math.round(item.level / 255 * 100);
+                itemTmp.formatted = item.formatted;
                 nodesByAddressAndStatus.push(itemTmp);
             });
             deferred.resolve(nodesByAddressAndStatus);
@@ -246,10 +247,12 @@ function convertNodesStatusToJson(xml) {
     for (var i = 0; i < xml.length; i++) {
         var address = xml.item(i).getAttribute('id');
         var level = xml.item(i).getElementsByTagName('property').item(0).getAttribute('value');
+        var formatted = xml.item(i).getElementsByTagName('property').item(0).getAttribute('formatted');
 
         nodesJSON.push({
             id: address,
-            level: level
+            level: level,
+            formatted:formatted 
         });
     }
 

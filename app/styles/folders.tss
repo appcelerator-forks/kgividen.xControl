@@ -59,11 +59,11 @@
     font : {
         fontSize : '30%'
     },
-    width : Ti.UI.Fill,
+    width : Ti.UI.FILL,
     left : 5,
     textAlign : 'left',
 },
-".sceneLbl" : {
+".deviceItemLbl" : {
     width: '50%',
     color : 'white',
     font : {

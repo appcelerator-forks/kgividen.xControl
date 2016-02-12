@@ -67,7 +67,7 @@ function getListOfDevicesInFolder(callback) {
 function transform(model) {
     var transform = model.toJSON();
     var type = model.get("type");
-    //lightTemplate is the default
+    //dimmerTemplate is the default
     if(type == "folder") {
         transform.t = 'folderTemplate';
     } else if(type == "scene"){

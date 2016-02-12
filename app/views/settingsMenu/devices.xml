@@ -13,9 +13,9 @@
 		
 		<Label left="5%" top="10">Click the + icon to add devices or Edit to rename/remove devices</Label>
 
-		<ListView id="devicesListView" platform="ios,android" defaultItemTemplate="lightTemplate" onEditaction="onEditactionClick" onItemclick="renameItemBtnClick">
+		<ListView id="devicesListView" platform="ios,android" defaultItemTemplate="dimmerTemplate" onEditaction="onEditactionClick">
 			<Templates>
-				<ItemTemplate name="lightTemplate" class="item">
+				<ItemTemplate name="dimmerTemplate" class="item">
 					<View class="listViewIconLabelRow">
 						<Label class="lightIcon"/>
 						<Label bindId="title" class="title" />
@@ -24,6 +24,12 @@
 				<ItemTemplate name="sceneTemplate" class="item">
 					<View class="listViewIconLabelRow">
 						<Label class="sceneIcon"/>
+						<Label bindId="title" class="title" />
+					</View>
+				</ItemTemplate>
+				<ItemTemplate name="sensorTemplate" class="item">
+					<View class="listViewIconLabelRow">
+						<Label class="sensorIcon"/>
 						<Label bindId="title" class="title" />
 					</View>
 				</ItemTemplate>

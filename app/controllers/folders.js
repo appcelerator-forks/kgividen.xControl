@@ -207,8 +207,12 @@ var preprocessForListView = function(rawData) {
 			item.template = "sceneTemplate";	
 		} else if (item.type == "sensor") {
 			item.template = "sensorTemplate";
+		} else if (item.type == "dimmer"){
+			item.template = "dimmerTemplate";
+		} else if (item.type == "switch"){
+			item.template = "switchTemplate";
 		} else {
-			item.template = "lightTemplate";
+			item.template = "dimmerTemplate";
 		}
 		return {
 			template : item.template,
@@ -240,11 +244,11 @@ var preprocessForListView = function(rawData) {
 			sensorLbl: {
 				text: item.displayName
 			},
-			sensorLblOn: {
-				text:"unknown"
+			sensorLblStatus: {
+				text:"checking..."
 			},
-			sensorLblOff: {
-				text:"unknown"
+			sensorSwitch: {
+				value:"off"
 			}
 		};
 	});
@@ -291,7 +295,11 @@ function btnClick(e){
     if(!address){
         return;
     }
-    if(itemType == "light"){
+    Ti.API.info("address: " + address);
+    if(itemType == "dimmer"){
+        device.toggle(address)
+            .then(refresh());
+    } else if(itemType == "switch"){
         device.toggle(address)
             .then(refresh());
     }
@@ -380,11 +388,15 @@ function updateUI(nodesByAddressAndStatus){
 	            	if(!item.btn) {
 	            		return;
 	            	}
-	                if (item.btn.type == 'light') {
-	                    var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
-	                    if(!current) {
-	                    	return;
-	                    }
+	            	
+	            	var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
+                    if(!current) {
+                    	return;
+                    }
+	                if (item.btn.type == "sensor") {
+	                	item.sensorLblStatus.text = (current.formatted && current.formatted != " ") ? current.formatted : "unknown";
+	                	item.sensorSwitch.value = (current.value > 0) ? true : false;
+                	} else { // else if item.btn.type == "dimmer" || item.btn.type == "switch" or anything else
 	                    if(current.level > 0){
 	                        //todo: Get this hardcoded image out of here probably with an applyProperties and setting the class that way.
 	                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
@@ -392,10 +404,11 @@ function updateUI(nodesByAddressAndStatus){
 	                        //todo: Get this hardcoded image out of here some how
 	                        item.btn.backgroundImage = '/images/themes/default/btn.png';
 	                    }
-	
-	                    item.slider.value = item.sliderLbl.text = current.level;
-	//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
-                	}
+						if (item.btn.type == "dimmer") {
+		                    item.slider.value = item.sliderLbl.text = current.level;
+		//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
+						}
+					}
             	});
        	 	}
         	section.setItems(items);	

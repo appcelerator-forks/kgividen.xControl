@@ -172,6 +172,14 @@ overrode the settings with other TSS, XML, or JS settings:
     }
 }
 
+'.sensorIcon':{
+    text: '\uf13e',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
  ".upIcon[platform=android]": {
     text : '\uf0aa',  //unicode character for font-awesome
     left:'60%',

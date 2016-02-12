@@ -5,7 +5,7 @@
 	-->
 	<View id="wrapper" class="deviceContainerView">
 		<ScrollableView id="scrollableView" showPagingControl="true">
-			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="dimmerTemplate">
 		       	<ListSection>
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
@@ -20,12 +20,12 @@
 	                </ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <Label bindId="sceneLbl" class="deviceItemLbl"/>
 	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
 	                        <View>
@@ -34,9 +34,24 @@
 	                        </View>
 	                    </View>
 					</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                    </View>
+					</ItemTemplate>
+            		<ItemTemplate class="deviceItem" name="sensorTemplate">
+	                    <View class="horizontal sensorContainer">
+	                        <Label bindId="sensorLbl" class="deviceItemLbl"/>
+	                        <Label bindId="sensorLblStatus" />
+                            <View top="20%" width="Ti.UI.SIZE" class="horizontal">
+	                        	<Switch left="5%" bindId="sensorSwitch" />
+	                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
+                       	 	</View>
+	                    </View>
+	            	</ItemTemplate>
 				</Templates>
 			</ListView>
-			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="dimmerTemplate">
 				<ListSection>
     				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Lights"></ListItem>
         		</ListSection>
@@ -45,17 +60,20 @@
 					<TextField id="sfLights" class="searchField"></TextField>
 				</HeaderView>
 				<Templates>
+					<ItemTemplate class="deviceItem" name="infoLblTemplate">
+	                    <Label bindId="infoLbl" class="infoLbl" />
+	                </ItemTemplate>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
-                        <Label bindId="groupLbl" class="groupLbl" />
-                    </ItemTemplate>
+	                    <Label bindId="groupLbl" class="groupLbl" />
+	                </ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <Label bindId="sceneLbl" class="deviceItemLbl"/>
 	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
 	                        <View>
@@ -64,36 +82,67 @@
 	                        </View>
 	                    </View>
 					</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                    </View>
+					</ItemTemplate>
+            		<ItemTemplate class="deviceItem" name="sensorTemplate">
+	                    <View class="horizontal sensorContainer">
+	                        <Label bindId="sensorLbl" class="deviceItemLbl"/>
+	                        <Label bindId="sensorLblStatus" />
+                            <View top="20%" width="Ti.UI.SIZE" class="horizontal">
+	                        	<Switch left="5%" bindId="sensorSwitch" />
+	                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
+                       	 	</View>
+	                    </View>
+	            	</ItemTemplate>
 				</Templates>
             </ListView>
-            <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="lightTemplate">
+            <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="dimmerTemplate">
             	<ListSection>
     				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Scenes"></ListItem>
         		</ListSection>
             	<RefreshControl id="refreshControlScene" platform="ios" onRefreshstart="refresh" />
             	<HeaderView><TextField id="sfScenes" class="searchField"></TextField></HeaderView>
 				<Templates>
+					<ItemTemplate class="deviceItem" name="infoLblTemplate">
+	                    <Label bindId="infoLbl" class="infoLbl" />
+	                </ItemTemplate>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
-	                        <Label bindId="groupLbl" class="groupLbl" />
-                    </ItemTemplate>
+	                    <Label bindId="groupLbl" class="groupLbl" />
+	                </ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <Label bindId="sceneLbl" class="deviceItemLbl"/>
 	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
-	                        <Button bindId="btn" class="btn" />
 	                        <View>
 	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
-	                            <Slider bindId="slider" class="slider"/>
 	                            <Label bindId="sliderLbl" class="sliderLbl" />
 	                        </View>
 	                    </View>
 					</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                    </View>
+					</ItemTemplate>
+            		<ItemTemplate class="deviceItem" name="sensorTemplate">
+	                    <View class="horizontal sensorContainer">
+	                        <Label bindId="sensorLbl" class="deviceItemLbl"/>
+	                        <Label bindId="sensorLblStatus" />
+                            <View top="20%" width="Ti.UI.SIZE" class="horizontal">
+	                        	<Switch left="5%" bindId="sensorSwitch" />
+	                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
+                       	 	</View>
+	                    </View>
+	            	</ItemTemplate>
 				</Templates>
             </ListView>
             <ListView id="sensorsListView" class="deviceListView" defaultItemTemplate="sensorTemplate">
@@ -103,32 +152,41 @@
             	<RefreshControl id="refreshControlSensor" platform="ios" onRefreshstart="refresh" />
             	<HeaderView><TextField id="sfSensors" class="searchField"></TextField></HeaderView>
 				<Templates>
+					<ItemTemplate class="deviceItem" name="infoLblTemplate">
+	                    <Label bindId="infoLbl" class="infoLbl" />
+	                </ItemTemplate>
 					<ItemTemplate class="deviceItem" name="groupLblTemplate">
-	                        <Label bindId="groupLbl" class="groupLbl" />
-                    </ItemTemplate>
+	                    <Label bindId="groupLbl" class="groupLbl" />
+	                </ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <Label bindId="sceneLbl" class="deviceItemLbl"/>
 	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
-	                        <Button bindId="btn" class="btn" />
 	                        <View>
 	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
-	                            <Slider bindId="slider" class="slider"/>
 	                            <Label bindId="sliderLbl" class="sliderLbl" />
 	                        </View>
 	                    </View>
 					</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                    </View>
+					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
 	                    <View class="horizontal sensorContainer">
-	                        <Label bindId="sensorLbl" class="sceneLbl"/>
-	                        <Label bindId="sensorLblOn" />
-	                        <Label bindId="sensorLblOff" />
+	                        <Label bindId="sensorLbl" class="deviceItemLbl"/>
+	                        <Label bindId="sensorLblStatus" />
+                            <View top="20%" width="Ti.UI.SIZE" class="horizontal">
+	                        	<Switch left="5%" bindId="sensorSwitch" />
+	                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
+                       	 	</View>
 	                    </View>
 	            	</ItemTemplate>
 				</Templates>

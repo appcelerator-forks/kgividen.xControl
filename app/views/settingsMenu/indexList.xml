@@ -19,6 +19,12 @@
 					<Label class="title">Scenes</Label>
 				</View>
 			</TableViewRow>
+			<TableViewRow class="row-option" viewName="Sensors" hasChild="true">
+				<View class="view-form-icon-title-row">
+					<Label class="sensorIcon icon"></Label>
+					<Label class="title">Sensors</Label>
+				</View>
+			</TableViewRow>
 		</TableViewSection>
 	</TableView>
 </Alloy>

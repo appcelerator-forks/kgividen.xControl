@@ -11,10 +11,10 @@
 			<MenuItem id="closeBtn" title="Close" onClick="exit" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
 		<Label left="5%" top="10">Press on a device to add it to the folder</Label>
-		<ListView id="addDeviceListView" platform="ios,android" defaultItemTemplate="lightTemplate">
+		<ListView id="addDeviceListView" platform="ios,android" defaultItemTemplate="dimmerTemplate">
 
             <Templates>
-                <ItemTemplate name="lightTemplate" class="item">
+                <ItemTemplate name="dimmerTemplate" class="item">
                     <View class="listViewIconLabelRow">
                         <Label class="lightIcon"/>
                         <Label bindId="title" class="title" />

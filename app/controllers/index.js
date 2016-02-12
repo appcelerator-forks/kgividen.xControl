@@ -51,12 +51,12 @@ function rowSelect(e) {
             $.ds.contentview.removeAllChildren();
    			$.ds.contentview.add(Alloy.createController("programs").getView());
             break;
-        case "cameras":
-        	alert("Coming Soon!");
-            // $.destroy();
-            // Alloy.createController("camerasContainer").getView().open();
-            // $.win.close();
-            break;
+        // case "cameras":
+        	// alert("Coming Soon!");
+            // // $.destroy();
+            // // Alloy.createController("camerasContainer").getView().open();
+            // // $.win.close();
+            // break;
         case "thermostats":
         	alert("Coming Soon!");
             break;
@@ -161,17 +161,23 @@ var leftMenu = [
         iconColor: '#999',
         action: 'scenes'
     },{
+        title: 'Sensors',
+        type: 'menu',
+        icon: 'fa-unlock-alt',
+        iconColor: '#999',
+        action: 'sensors'
+    },{
         title: 'Programs',
         type: 'menu',
         icon: 'fa-play-circle',
         iconColor: '#999',
         action: 'programs'
-    },{
-        title: 'Cameras',
-        type: 'menu',
-        icon: 'fa-camera',
-        iconColor: '#999',
-        action: 'cameras'
+    // },{
+        // title: 'Cameras',
+        // type: 'menu',
+        // icon: 'fa-camera',
+        // iconColor: '#999',
+        // action: 'cameras'
     },{
         title: 'Thermostats',
         type: 'menu',
@@ -276,11 +282,6 @@ function startUI(){
     //$.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("folders").getView());
     
-    //TODO temp...
-    dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
-	dsScrollView.scrollToView(VIEW_ID_SENSORS);
-	
-	
     //tmp
     //Alloy.createController("camerasContainer").getView().open();
     //$.win.close();
