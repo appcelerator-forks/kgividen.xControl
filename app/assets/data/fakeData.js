@@ -37,6 +37,14 @@ var createFakeData = function () {
 var createFakeFolders = function () {
 	//Create a folder
     var model = {
+        "name" : "Sensors",
+        "displayName" : "Sensors",
+        "address" : "3333",
+        "type" : "folder"
+    };
+    Alloy.createModel('Device', model).save({silent: true});
+    
+    var model = {
         "name" : "Kitchen Folder",
         "displayName" : "Kitchen Folder",
         "address" : "29764",
@@ -83,10 +91,10 @@ var createFakeDevices = function () {
     Alloy.createModel('Device', model).save({silent: true});
 
     var model = {
-        "name" : "Kitchen Light",
-        "displayName" : "Kitchen Light",
+        "name" : "Kitchen Motion Sensor",
+        "displayName" : "Kitchen Motion Sensor",
         "address" : "22222",
-        "type" : "light",
+        "type" : "sensor",
         "parent" : ""
     };
     Alloy.createModel('Device', model).save({silent: true});
@@ -124,10 +132,10 @@ var linkDevicesAndFolders = function () {
     };
     Alloy.createModel('DeviceInFolder', model).save({silent: true});
 
-    //Add kitchen light
+    //Add Kitchen Motion Sensor
     var model = {
         "DeviceAddress" : "22222",
-        "FolderAddress" : "29764",
+        "FolderAddress" : "3333",
         "SortId" : 0
     };
     Alloy.createModel('DeviceInFolder', model).save({silent: true});
@@ -160,6 +168,13 @@ var linkFoldersAndViews = function () {
 	var model = {
         "FolderAddress" : "222",         //dining
         "ViewId" : 1,         //lighting view
+        "SortId" : 1
+    };
+    Alloy.createModel('FolderInView', model).save({});
+    
+	var model = {
+        "FolderAddress" : "3333",	//sensor folder
+        "ViewId" : 3,         //sensor view
         "SortId" : 1
     };
     Alloy.createModel('FolderInView', model).save({});

@@ -24,7 +24,6 @@ exports.init = function() {
 
         ];
 
-
         connection.connectiontype = 'GET';
         connection.username = conn.username; //This is so we can throw an error and let them know what the user was.
     }
@@ -71,7 +70,6 @@ exports.disableProgram = function(id){
     disableProgram(id);
 };
 
-
 exports.sceneOn = function(address){
     Ti.API.debug("Scene On!");
     var level = 255;
@@ -88,7 +86,6 @@ exports.sceneOff = function(address){
 exports.getAllDevicesStatus = function(){
     return getAllDevicesStatus();
 };
-
 
 exports.getListOfDevices = function(){
     return getListOfDevices();
@@ -271,9 +268,6 @@ function convertNodesListToJSON(xml) {
 
 
     function parseXMLNodes(xml, type){
-    	//TODO Make some list somewhere of the various types so we know whether to choose "light" or "sensor" or whatever
-    	//TODO Check to see what the <type><type> is and depending on that set it to a "light" or a "sensor"
-    	
         for (var i = 0; i < xml.length; i++) {
             var address = xml.item(i).getElementsByTagName('address').item(0).text;
             var name = xml.item(i).getElementsByTagName('name').item(0).text;

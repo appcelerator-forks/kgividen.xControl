@@ -96,6 +96,43 @@
 					</ItemTemplate>
 				</Templates>
             </ListView>
+            <ListView id="sensorsListView" class="deviceListView" defaultItemTemplate="sensorTemplate">
+            	<ListSection>
+    				<ListItem template="groupLblTemplate" groupLbl:text="Add Some Sensors"></ListItem>
+        		</ListSection>
+            	<RefreshControl id="refreshControlSensor" platform="ios" onRefreshstart="refresh" />
+            	<HeaderView><TextField id="sfSensors" class="searchField"></TextField></HeaderView>
+				<Templates>
+					<ItemTemplate class="deviceItem" name="groupLblTemplate">
+	                        <Label bindId="groupLbl" class="groupLbl" />
+                    </ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
+	                    <View class="horizontal sceneContainer">
+	                        <Label bindId="sceneLbl" class="sceneLbl"/>
+	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
+	                    </View>
+	            	</ItemTemplate>
+					<ItemTemplate class="deviceItem" id="light" name="lightTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                        <Button bindId="btn" class="btn" />
+	                        <View>
+	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
+	                            <Slider bindId="slider" class="slider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
+	                    </View>
+					</ItemTemplate>
+            		<ItemTemplate class="deviceItem" name="sensorTemplate">
+	                    <View class="horizontal sensorContainer">
+	                        <Label bindId="sensorLbl" class="sceneLbl"/>
+	                        <Label bindId="sensorLblOn" />
+	                        <Label bindId="sensorLblOff" />
+	                    </View>
+	            	</ItemTemplate>
+				</Templates>
+            </ListView>
         </ScrollableView>
 	</View>
 </Alloy>

@@ -14,6 +14,7 @@ Alloy.Globals.PW = require('progressWindow');
 var VIEW_ID_FAVORITES = 0;
 var VIEW_ID_LIGHTS = 1;
 var VIEW_ID_SCENES = 2;
+var VIEW_ID_SENSORS = 3;
 
 Alloy.Collections.device = Alloy.createCollection("Device");
 Alloy.Collections.folderInView = Alloy.createCollection("FolderInView");
@@ -32,7 +33,7 @@ var Q = require('/q');
 
 
 // Helpers
-var xDebug = false;
+var xDebug = true;
 
 var tiInfo = function(label, input){
 	if(xDebug == true){

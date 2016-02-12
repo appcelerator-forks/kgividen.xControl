@@ -28,6 +28,7 @@ function init() {
 			processDevicesInFolders(data.toJSON(), VIEW_ID_FAVORITES);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_LIGHTS);
 			processDevicesInFolders(data.toJSON(), VIEW_ID_SCENES);
+			processDevicesInFolders(data.toJSON(), VIEW_ID_SENSORS);
 			refresh();
 		},
 		error : function() {
@@ -151,6 +152,7 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 			sections.push(section);
 		});
 
+		Ti.API.info(" processDevicesInFolders viewId: " + viewId);
 		//There is probably a better way to do this instead of hardcoding the views
 		if(viewId===VIEW_ID_FAVORITES){
 			$.favoritesListView.sections = sections;	
@@ -158,6 +160,8 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 			$.lightsListView.sections = sections;	
 		} else if (viewId==VIEW_ID_SCENES) {
 			$.scenesListView.sections = sections;
+		} else if (viewId==VIEW_ID_SENSORS) {
+			$.sensorsListView.sections = sections;
 		}
 		
 	} else {
@@ -201,6 +205,8 @@ var preprocessForListView = function(rawData) {
 		 */
 		if(item.type == "scene") {
 			item.template = "sceneTemplate";	
+		} else if (item.type == "sensor") {
+			item.template = "sensorTemplate";
 		} else {
 			item.template = "lightTemplate";
 		}
@@ -230,6 +236,15 @@ var preprocessForListView = function(rawData) {
 			},
 			sceneBtnOff: {
 				title:"Off"
+			},
+			sensorLbl: {
+				text: item.displayName
+			},
+			sensorLblOn: {
+				text:"unknown"
+			},
+			sensorLblOff: {
+				text:"unknown"
 			}
 		};
 	});

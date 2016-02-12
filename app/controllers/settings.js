@@ -2,8 +2,9 @@ var CONN_REMOTE = 'Remote';
 var CONN_LOCAL = 'Local';
 var NETWORK_BTN_REMOTE_TITLE = "Remote Connection Enabled";
 var NETWORK_BTN_LOCAL_TITLE = "Local Connection Enabled";
-var DEFAULT_SCENE_FOLDER_ADDRESS = "22222";
 var DEFAULT_LIGHT_FOLDER_ADDRESS = "11111";
+var DEFAULT_SCENE_FOLDER_ADDRESS = "22222";
+var DEFAULT_SENSOR_FOLDER_ADDRESS = "33333";
 var btnOnColor="black";
 var btnOffColor="gray";
 var method="http";
@@ -282,7 +283,20 @@ function processData(dbData, liveData, devicesInFolder) {
 			});
         	linkFolderToView(DEFAULT_SCENE_FOLDER_ADDRESS, VIEW_ID_SCENES, 1);	
 		}
+
+		var defaultSensorFolderFound = dbData.where({address: DEFAULT_SENSOR_FOLDER_ADDRESS});	
+		if (!defaultSensorFolderFound[0]) {
+			//Add default folder to the DB
+			createFolder({
+					"name" : "Sensors",
+					"displayName" : "Sensors",
+					"address" : DEFAULT_SENSOR_FOLDER_ADDRESS,
+					"type" : "folder"
+			});
+        	linkFolderToView(DEFAULT_SENSOR_FOLDER_ADDRESS, VIEW_ID_SENSORS, 1);	
+		}
 		
+				
 		//All of the devices we just got from the live system not the DB
 		var devicesInDefaultFolder = _.filter(liveData, function(device) {
 			return device.parent == "111";
@@ -297,6 +311,8 @@ function processData(dbData, liveData, devicesInFolder) {
 			}
 			if(device.type == "scene") {
 				linkDeviceToFolder(device.address, DEFAULT_SCENE_FOLDER_ADDRESS, 1);	
+			} else if(device.type == "sensor") {
+				linkDeviceToFolder(device.address, DEFAULT_SENSOR_FOLDER_ADDRESS, 1);	
 			} else {
 				linkDeviceToFolder(device.address, DEFAULT_LIGHT_FOLDER_ADDRESS, 1);
 			}	
@@ -321,12 +337,17 @@ function processData(dbData, liveData, devicesInFolder) {
             		return device.type == "scene" && device.parent == folder.address;
             	}); 
             	
-            	//For now we are assuming if it's not a scene it's a light
+				//Find all the sensors that should be added to the folder.
+        		var thisFoldersSensors = _.filter(liveDevices, function(device) {
+            		return device.type == "sensor" && device.parent == folder.address;
+            	}); 
+            	
+            	//For now we are assuming if it's not a scene or a sensor it's a light
             	var thisFoldersOther = _.filter(liveDevices, function(device) {
-            		return device.type != "scene" && device.type != "folder" && device.parent == folder.address;
+            		return device.type != "scene" && device.type != "sensor" && device.type != "folder" && device.parent == folder.address;
             	});        	
             	
-            	//Add others to lighting view for now so we assume if it's not a scene it's a light
+            	//Add others to lighting view for now so we assume if it's not a scene or a seonsorit's a light
             	//create a lighting version of the folder and link the devices to it
             	if(thisFoldersOther && thisFoldersOther.length > 0) {
             		folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
@@ -344,6 +365,16 @@ function processData(dbData, liveData, devicesInFolder) {
 					createFolder(folder);
 					linkFolderToView(folder.address, VIEW_ID_SCENES);	
 					_.each(thisFoldersScenes, function(device) {
+    					linkDeviceToFolder(device.address, folder.address);	
+					});
+				}
+				
+        		//create a sensor version of the folder and link the devices to it
+        		if(thisFoldersSensors && thisFoldersSensors.length > 0) {
+        			folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
+					createFolder(folder);
+					linkFolderToView(folder.address, VIEW_ID_SENSORS);	
+					_.each(thisFoldersSensors, function(device) {
     					linkDeviceToFolder(device.address, folder.address);	
 					});
 				}
@@ -369,6 +400,7 @@ function createFolder(folder) {
 	var model = Alloy.createModel('Device', folder);
 	model.save();
 }
+
 function linkDeviceToFolder(deviceAddress, folderAddress, sortId) {
 	var obj = {
 		"DeviceAddress" : deviceAddress,

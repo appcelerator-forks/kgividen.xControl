@@ -43,6 +43,9 @@ function rowSelect(e) {
         case "scenes":
             dsScrollView.scrollToView(VIEW_ID_SCENES);
             break;
+        case "sensors":
+            dsScrollView.scrollToView(VIEW_ID_SENSORS);
+            break;
         case "programs":
             $.destroy();
             $.ds.contentview.removeAllChildren();
@@ -272,7 +275,12 @@ function startUI(){
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("folders").getView());
-
+    
+    //TODO temp...
+    dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
+	dsScrollView.scrollToView(VIEW_ID_SENSORS);
+	
+	
     //tmp
     //Alloy.createController("camerasContainer").getView().open();
     //$.win.close();
