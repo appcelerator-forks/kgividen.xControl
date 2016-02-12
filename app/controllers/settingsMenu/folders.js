@@ -289,7 +289,7 @@ function deleteItem(item){
 	Alloy.Collections.folderInView.fetch({
 		success: function (data) {
 			var foldersToDelete = data.where({"FolderAddress":folderAddress, "ViewId":viewId});
-			_.each(foldersToDelete, function(folder ){
+			_.each(foldersToDelete, function(folder){
 				folder.destroy();	
 			}); 
 			if(!OS_IOS){ //android isn't refreshing on it's own.

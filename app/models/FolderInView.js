@@ -2,12 +2,12 @@ exports.definition = {
     config : {
         "columns" : {
             "id" : "INTEGER PRIMARY KEY AUTOINCREMENT",
-            "FolderAddress" : "INTEGER",
+            "FolderAddress" : "TEXT",
             "ViewId" : "INTEGER",
             "SortId" : "INTEGER"
         },
         "defaults" : {
-            "FolderAddress" : 0,
+            "FolderAddress" : "0",
             "ViewId" : 0,
             "SortId" : 9999999
         },

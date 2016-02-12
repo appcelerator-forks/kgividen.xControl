@@ -5,7 +5,8 @@ Version 1.5.1
 -----------
 Added a sensor view 
 Added devices that are sensors to the sensor view when querying an ISY
-
+Dimmers, switches and sensors have their own templates
+Fixed issue when existing folders could not be removed after being added (Might require a remove of the app and re-install)
 
 
 Version 1.5
