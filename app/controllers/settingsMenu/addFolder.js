@@ -8,7 +8,8 @@ Ti.API.info("parameters: " + JSON.stringify(parameters));
  */
 function saveButtonClicked(event) {
 	var content = {
-		name: $.folderName.value
+		name: $.folderName.value,
+		displayName: $.folderName.value
 	};
 	
     var returnParams = {

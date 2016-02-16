@@ -53,7 +53,23 @@ overrode the settings with other TSS, XML, or JS settings:
 	height: Ti.UI.SIZE,
 	wordWrap: false,
 	font: {
-		fontSize: 30
+		fontSize: 20
+	}
+}
+
+'.subTitle': {
+	ellipsize: Ti.UI.TEXT_ELLIPSIZE_TRUNCATE_END,
+	height: Ti.UI.SIZE,
+	wordWrap: false,
+	font: {
+		fontSize: 8
+	}
+}
+
+'.subTitleLbl': {
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: 8
 	}
 }
 

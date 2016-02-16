@@ -6,7 +6,7 @@
         <Menu platform="android">
             <MenuItem id="closeBtn" title="Close" onClick="saveButtonClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
         </Menu>
-        <Label>Edit Folder Name</Label>
+        <Label>Edit Folder Display Name</Label>
         <TextField id="folderName" class="textField"/>
     </Window>
 </Alloy>

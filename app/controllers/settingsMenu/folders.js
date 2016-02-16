@@ -98,7 +98,7 @@ function addFolder(content) {
 	
 	var model = {
 		"name" : content.name,
-		"displayName" : content.name,
+		"displayName" : content.displayName,
 		"address" : content.address,
 		"type" : "folder"
 	};
@@ -142,15 +142,17 @@ function updateFolderSortOrder(){
 			var folderList = $.folderSection.getItems();
 			var i = 0;
 			_.each(folderList, function (folder) {
-				var folderAddress = folder.address.text;
-				if(folderAddress) {
-					//if folder is in the folderInView set it's sort order to i.
-					var modelInView = data.where({FolderAddress: folderAddress, ViewId: viewId});
-					//where returns an array but we just need the first one if it's there.
-					if (modelInView.length > 0) {
-						modelInView[0].save({"SortId": i}, {silent: true});
+				if(folder.address){
+					var folderAddress = folder.address.text;
+					if(folderAddress) {
+						//if folder is in the folderInView set it's sort order to i.
+						var modelInView = data.where({FolderAddress: folderAddress, ViewId: viewId});
+						//where returns an array but we just need the first one if it's there.
+						if (modelInView.length > 0) {
+							modelInView[0].save({"SortId": i}, {silent: true});
+						}
+						i++;
 					}
-					i++;
 				}
 			});
 		},
@@ -458,7 +460,7 @@ $.addExistingFolderFab.onClick(function(){
 	var win = Alloy.createController("settingsMenu/addExistingFolder", {
 		callback: function (event) {
 			win.close();
-			if (event.success) {
+			if (event.success && event.content) {
 				linkFolderToView(event.content);
 			} else {
 				Ti.API.debug("No Folder Added");
