@@ -49,7 +49,7 @@
 	                        <Label bindId="label" class="deviceItemLbl"/>
 	                        <Label bindId="sensorLblStatus" />
                             <View top="20%" width="Ti.UI.SIZE" class="horizontal">
-	                        	<Switch left="5%" bindId="sensorSwitch" />
+	                        	<Switch touchEnabled="false" left="5%" bindId="sensorSwitch" />
 	                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
                        	 	</View>
 	                    </View>
