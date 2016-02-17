@@ -196,6 +196,14 @@ overrode the settings with other TSS, XML, or JS settings:
     }
 }
 
+'.programIcon':{
+    text: '\uf144',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    }
+}
+
  ".upIcon[platform=android]": {
     text : '\uf0aa',  //unicode character for font-awesome
     left:'60%',
@@ -221,3 +229,54 @@ overrode the settings with other TSS, XML, or JS settings:
  ".row[platform=android formFactor=tablet]": {
    height : 96
  }
+ 
+//FABs
+
+'.toggleFab': {
+    zIndex: 1000,
+    top: '75%',
+    left: '45%',
+    width: 40,
+    height: 40,
+    backgroundColor: '#cc2ecc40',
+    borderWidth: 1,
+    borderColor: '#ececec',
+    title: '\uf067',
+    font: {
+        fontFamily: 'FontAwesome',
+        fontSize: 30
+    },
+    color: '#ffffff'
+}
+
+'.addFab': {
+    zIndex: 1000,
+    hidden:true,
+    top: '75%',
+    left: '40%',
+    width: 70,
+    height: 70,
+    backgroundColor: '#cc2ecc40',
+    borderWidth: 1,
+    borderColor: '#ececec',
+    font: {
+        fontSize: 18
+    },
+    color: '#ffffff'
+}
+
+'.addFabSecond': {
+    zIndex: 1000,
+    hidden:true,
+    top: '75%',
+    left: '65%',
+    width: 70,
+    height: 70,
+    backgroundColor: '#cc2ecc40',
+    borderWidth: 1,
+    borderColor: '#ececec',
+    font: {
+        fontSize: 18
+    },
+    color: '#ffffff'
+}

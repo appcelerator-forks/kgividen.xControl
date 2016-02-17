@@ -72,6 +72,10 @@ function transform(model) {
         transform.t = 'folderTemplate';
     } else if(type == "scene"){
         transform.t = 'sceneTemplate';
+    } else if(type == "sensor"){
+        transform.t = 'sensorTemplate';
+    } else if(type == "program"){
+        transform.t = 'programTemplate';
     }
 
     return transform;

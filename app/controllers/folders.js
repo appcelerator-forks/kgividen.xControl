@@ -211,6 +211,8 @@ var preprocessForListView = function(rawData) {
 			item.template = "dimmerTemplate";
 		} else if (item.type == "switch"){
 			item.template = "switchTemplate";
+		} else if (item.type == "program"){
+			item.template = "programTemplate";
 		} else {
 			item.template = "dimmerTemplate";
 		}
@@ -327,6 +329,18 @@ function sendSliderVal(e) {
             e.section.updateItemAt(e.itemIndex, item);  //update the GUI
         }
     }
+}
+
+function programBtnClick(e){
+    var item = e.section.items[e.itemIndex];
+    var itemType = item.btn.type;
+    var address = item.btn.address;
+
+
+    if(!address){
+        return;
+    }
+    device.runProgram(address, "");
 }
 
 function sceneOnBtn(e){

@@ -33,6 +33,12 @@
 						<Label bindId="title" class="title" />
 					</View>
 				</ItemTemplate>
+				<ItemTemplate name="programTemplate" class="item">
+					<View class="listViewIconLabelRow">
+						<Label class="programIcon"/>
+						<Label bindId="title" class="title" />
+					</View>
+				</ItemTemplate>
 				<ItemTemplate name="editTemplate" class="item" platform="android">
 					<Label bindId="title" class="title"/>
 					<Label class="trashIcon" onClick="deleteBtnClick"/>

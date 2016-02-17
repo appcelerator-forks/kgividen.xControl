@@ -25,6 +25,11 @@
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="programTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="programBtnClick" />
+	                    </View>
+	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
@@ -73,6 +78,11 @@
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="programTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="programBtnClick" />
+	                    </View>
+	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
@@ -119,6 +129,11 @@
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="programTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="programBtnClick" />
+	                    </View>
+	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
@@ -163,6 +178,11 @@
 	                        <Label bindId="sceneLbl" class="deviceItemLbl"/>
 	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
+	                    </View>
+	            	</ItemTemplate>
+	            	<ItemTemplate class="deviceItem" name="programTemplate">
+	                    <View>
+	                        <Button bindId="btn" class="btn" onClick="programBtnClick" />
 	                    </View>
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="dimmerTemplate">

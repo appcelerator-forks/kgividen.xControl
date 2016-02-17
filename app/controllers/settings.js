@@ -213,7 +213,8 @@ function refreshDevices(){
 			success : function(dbData) {
 				Alloy.Collections.deviceInFolder.fetch({
 					success : function(devicesInFolder) {
-						processData(dbData, liveData, devicesInFolder);		
+						processData(dbData, liveData, devicesInFolder);	
+						getPrograms(dbData, devicesInFolder);	
 					},
 					error : function() {
 						alert("An error 11 occurred!");
@@ -227,6 +228,74 @@ function refreshDevices(){
 			}
 		});
 	});
+}
+
+function getPrograms(dbData, devicesInFolder) {
+	device.init();
+	var connection = device.getConnection();
+	//Convert headers from array to obj
+	var restHeaders = {};
+	if(connection && connection.baseURL){
+		var headers = {};
+		_.each(connection.headers, function(header){
+			restHeaders[header.name] = header.value;
+		});
+		connection.restHeaders = restHeaders;
+		getProgramsLive(connection, dbData);
+	} 
+}
+
+function getProgramsLive(connection, dbData) {
+	Alloy.Collections.programs.fetch({
+		"url": connection.baseURL + "programs",
+		headers: connection.restHeaders,
+		success : function(liveData) {
+	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
+	        // });
+	        processProgramData(dbData, liveData.toJSON());	
+			if (OS_IOS) {
+				$.refreshControl.endRefreshing();
+			}
+			Alloy.Globals.PW.hideIndicator();
+		},
+		error : function() {
+			alert("Getting programs failed.  Please check the network settings.");
+			Alloy.Globals.PW.hideIndicator();
+			if (OS_IOS) {
+				$.refreshControl.endRefreshing();
+			}
+		}
+	});
+}
+
+function processProgramData(dbData, liveData) {
+	//All of the devices we just got from the live system not the DB
+	var livePrograms = _.filter(liveData, function(program) {
+		return program.folder != "true";
+	});
+	
+	if (livePrograms.length > 0) {
+		Ti.API.info("We have livePrograms");
+		//if there is a new device add it to the DB and link it to the correct folder.
+		_.each(livePrograms, function(program) {
+			//check to see if the device is in the db yet
+			var programExistsArray = dbData.where({address: program.id});	
+			if(!programExistsArray[0]){
+				//Add device to the DB
+				var program = {
+						"name" : program.name,
+						"displayName" : program.name,
+						"address" : program.id,
+						"type" : "program",
+						"parent" : "program"
+					};
+	        	var model = Alloy.createModel('Device', program);
+	        	model.save();
+			}
+		});	
+	}
+
+	saveConnectionInfo(openSettingsMenuCallback);
 }
 
 function processData(dbData, liveData, devicesInFolder) {
@@ -397,13 +466,12 @@ function processData(dbData, liveData, devicesInFolder) {
 
 			 }
 		});
-		saveConnectionInfo(openSettingsMenuCallback);
 }
 
 function openSettingsMenuCallback(){
 	Alloy.Globals.PW.hideIndicator();
 	Alloy.createController('settingsMenu/index').getView().open();
-	alert("Devices were refreshed.  All devices that were not in a folder have been added to the Default Folder.  You can now add/modify them here or in the future by going to Edit Mode using the right menu from the home screen.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
+	alert("Devices and programs were refreshed.  All devices that were not in a folder have been added to the Default Folder.  You can now add/modify them here or in the future by going to Edit Mode using the right menu from the home screen.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
 	$.settingsWin.close();
 }
 

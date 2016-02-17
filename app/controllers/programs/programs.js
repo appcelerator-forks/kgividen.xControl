@@ -22,8 +22,7 @@ function getPrograms(connection){
 	});
 }
 
-function refresh(connection){
-	// var d = require('isy');
+function refresh(){
 	device.init();
 	var connection = device.getConnection();
 	//Convert headers from array to obj

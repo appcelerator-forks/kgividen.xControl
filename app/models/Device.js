@@ -7,6 +7,7 @@ exports.definition = {
 			"displayName" : "TEXT",
 			"address" : "TEXT",
 			"type" : "TEXT",
+			"data" : "TEXT",
 			"parent" : "TEXT"
 		},
 		"defaults" : {
@@ -14,7 +15,8 @@ exports.definition = {
 			"displayName" : "",
 			"address" : "",
 			"type" : "unknown",
-			"parent" : "unknown"
+			"parent" : "unknown",
+			"data" : ""
 		},
 		"adapter" : {
 			"type" : "sql",

@@ -67,6 +67,8 @@ function transform(model) {
 		transform.t = "sceneTemplate";
 	} else if(type == "sensor"){
 		transform.t = "sensorTemplate";
+	} else if(type == "program"){
+		transform.t = "programTemplate";
 	}
 
 	return transform;
@@ -81,30 +83,6 @@ function filter(collection) {
 	return collection.filter(function (device) {
 		return device.get("type") !== 'folder';
 	});
-}
-
-/**
- * Function for when the user clicks the add devices FAB button.  Opens the addDevice controller.
- * @param
- */
-function addDevicesClicked() {
-	var win = Alloy.createController("settingsMenu/addDevice", {
-		folderModel: $.folderModel,
-		callback: function (event) {
-			win.close();
-			if(OS_IOS) {
-				updateDeviceSortOrder();
-			}
-			refreshDevicesInFolder($.folderModel.get("address"));
-		}
-	}).getView();
-
-	//open the window in the NavigationWindow for iOS
-	if (OS_IOS) {
-		$.navWin.openWindow(win);
-	} else {
-		win.open();   //simply open the window on top for Android (and other platforms)
-	}
 }
 
 /**
@@ -403,13 +381,29 @@ if (OS_IOS) {
 	}
 }
 
+
 /**
  * event listener set via view for when the user clicks the floating add button.
  */
 $.addDevicesFab.onClick(function (e) {
-	addDevicesClicked();
-});
+	var win = Alloy.createController("settingsMenu/addDevice", {
+		folderModel: $.folderModel,
+		callback: function (event) {
+			win.close();
+			if(OS_IOS) {
+				updateDeviceSortOrder();
+			}
+			refreshDevicesInFolder($.folderModel.get("address"));
+		}
+	}).getView();
 
+	//open the window in the NavigationWindow for iOS
+	if (OS_IOS) {
+		$.navWin.openWindow(win);
+	} else {
+		win.open();   //simply open the window on top for Android (and other platforms)
+	}
+});
 
 /**
  * event listener set via view to provide a search of the ListView.

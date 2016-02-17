@@ -32,6 +32,18 @@
                         <Label bindId="title" class="title" />
                     </View>
                 </ItemTemplate>
+                <ItemTemplate name="sensorTemplate" class="item">
+                    <View class="listViewIconLabelRow">
+                        <Label class="sensorIcon"/>
+                        <Label bindId="title" class="title" />
+                    </View>
+                </ItemTemplate>
+                <ItemTemplate name="programTemplate" class="item">
+                    <View class="listViewIconLabelRow">
+                        <Label class="programIcon"/>
+                        <Label bindId="title" class="title" />
+                    </View>
+                </ItemTemplate>
             </Templates>
 
             <HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>

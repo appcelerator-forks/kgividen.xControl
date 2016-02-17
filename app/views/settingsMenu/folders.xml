@@ -3,9 +3,9 @@
 		<RightNavButton platform='ios'>
 			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
 		</RightNavButton>
-		<Widget id="toggleFolderFabs" class="toggleFolderFabs" src="com.netsmartcompany.floatingActionButton" />
-		<Widget id="addFolderFab" class="addFolderFab" src="com.netsmartcompany.floatingActionButton" />
-		<Widget id="addExistingFolderFab" class="addExistingFolderFab" src="com.netsmartcompany.floatingActionButton" />
+		<Widget id="toggleFolderFabs" class="toggleFab" src="com.netsmartcompany.floatingActionButton" />
+		<Widget id="addFolderFab" class="addFab" src="com.netsmartcompany.floatingActionButton" />
+		<Widget id="addExistingFolderFab" class="addFabSecond" src="com.netsmartcompany.floatingActionButton" />
 
 		<Menu platform="android">
 			<MenuItem id="editFolderBtn" title="Edit" onClick="editFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
