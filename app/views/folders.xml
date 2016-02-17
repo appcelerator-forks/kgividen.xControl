@@ -20,7 +20,7 @@
 	                </ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="sceneLbl" class="deviceItemLbl"/>
+	                        <Label bindId="label" class="deviceItemLbl"/>
 	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
@@ -46,7 +46,7 @@
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
 	                    <View class="horizontal">
-	                        <Label bindId="sensorLbl" class="deviceItemLbl"/>
+	                        <Label bindId="label" class="deviceItemLbl"/>
 	                        <Label bindId="sensorLblStatus" />
                             <View top="20%" width="Ti.UI.SIZE" class="horizontal">
 	                        	<Switch left="5%" bindId="sensorSwitch" />

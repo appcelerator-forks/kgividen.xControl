@@ -234,7 +234,7 @@ var preprocessForListView = function(rawData) {
 			sliderLbl : {
 				text : item.sliderVal
 			},
-			sceneLbl: {
+			label: {
 				text: item.displayName
 			},
 			sceneBtnOn: {
@@ -242,9 +242,6 @@ var preprocessForListView = function(rawData) {
 			},
 			sceneBtnOff: {
 				title:"Off"
-			},
-			sensorLbl: {
-				text: item.displayName
 			},
 			sensorLblStatus: {
 				text:"checking..."

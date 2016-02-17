@@ -269,7 +269,6 @@ function processProgramData(dbData, liveData) {
 	});
 	
 	if (livePrograms.length > 0) {
-		Ti.API.info("We have livePrograms");
 		//if there is a new device add it to the DB and link it to the correct folder.
 		_.each(livePrograms, function(program) {
 			//check to see if the device is in the db yet
