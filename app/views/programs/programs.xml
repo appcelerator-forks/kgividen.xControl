@@ -1,0 +1,51 @@
+<Alloy>
+	<Window id="programsWin" title="Programs" navBarHidden="false">
+		<Menu>
+			<MenuItem  title="Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+		<View id="wrapper" layout="horizontal" class="programContainerView">
+			<Label class="infoLbl">Press the button to Run a program, or use the switch to enable/disable</Label>
+			<TextField id="sf" left="5%" width="90%" class="searchField"></TextField>
+			<ListView id="programsListView" class="programsListView" defaultItemTemplate="programTemplate">
+				<RefreshControl id="refreshControlLight" platform="ios" onRefreshstart="refresh" />
+				<HeaderView>
+					
+				</HeaderView>
+				<RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" />
+				<Templates>
+	            	<ItemTemplate class="programItem" name="programTemplate">
+	                    <View class="horizontal">
+	                    	<Label bindId="programLbl" class="programLbl"></Label>
+	                        <Button bindId="btnRun" class="programBtn" onClick="runProgram"/>
+	                        <Button bindId="btnRunThen" class="programBtn" onClick="runProgram"/>
+	                        <Button bindId="btnRunElse" class="programBtn" onClick="runProgram"/>
+	                        <View width="Ti.UI.SIZE" class="vertical">
+	                        	<Switch top="25%" left="5%" bindId="switch" onChange="programSwitchChanged" />
+	                        	<Label left="20%" bindId="switchEnabled" class="programSubLbl" />	
+	                        </View>
+	                   </View>
+	                    <View top="80%" class="horizontal">
+	                        <Label class="programSubLbl">Last Run:</Label>
+	                        <Label bindId="lastRunTime" class="programSubVal"/>
+	                        <Label class="programSubLbl">Next Run:</Label>
+	                        <Label bindId="nextScheduledRunTime" class="programSubVal" />
+	                    </View>
+	            	</ItemTemplate>
+				</Templates>
+	            <ListSection dataTransform="transform"
+	                     	 dataCollection="Alloy.Collections.programs"
+	                     	 dataFilter="filter">
+	            <ListItem class="programItem" 
+	            		  programLbl:text="{name}" programId="{id}"
+	            		  btnRun:title="Run" btnRun:runType="run"
+	            		  btnRunThen:title="Then" btnRunThen:runType="then" 
+	            		  btnRunElse:title="Else" btnRunElse:runType="else"
+	            		  switchEnabled:text="{enabled}" switch:value="{switchValue}"
+	            		  lastRunTime:text="{lastRunTime}" lastFinishTime:text="{lastFinishTime}"
+	            		  nextScheduledRunTime:text="{nextScheduledRunTime}" status:text="{status}"
+	            		  searchableText="{name}" folderLbl:text="{name}"/>
+	        	</ListSection>
+			</ListView>
+		</View>
+	</Window>
+</Alloy>

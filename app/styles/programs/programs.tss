@@ -1,34 +1,39 @@
 ".programContainerView" : {
     zIndex:2,
-    backgroundImage: '/images/themes/default/background.png',
-},
-".container" : {
-      backgroundColor: 'transparent',
 },
 ".programsListView" : {
 	  left:'5%',
       width:'90%',
-      // separatorColor: 'transparent',
       separatorColor: 'gray',
-      backgroundColor: 'transparent',
+      // backgroundColor: 'transparent',
       borderWidth:0
 },
-".programBtn" : {
-	backgroundImage : '/images/themes/default/btn.png',
-    backgroundSelectedImage : '/images/themes/default/btn-active.png',
-    color: '#fff',
-    width : '50%',
-    height : '75%',
-    left : '3%',
+
+".programLbl" : {
+    width: '30%',
+    height: '80%',
+    color: 'black',
     font : {
-        fontSize : '15%',
+        fontSize : '15%'
+    },
+    left : 5,
+    textAlign : 'left'
+}
+
+".programBtn" : {
+    backgroundImage : '/images/themes/default/btn.png',
+    color: '#fff',
+    width : '12%',
+    height : '50%',
+    left : '1%',
+    font : {
+        fontSize : '8%',
         fontWeight : 'bold',
         fontFamily : 'Helvetica Neue'
     },
     zIndex : 5
 },
 ".programSubLbl" : {
-    color : 'gray',
     font : {
         fontSize : '7%'
     },
@@ -37,7 +42,6 @@
 ".programSubVal" : {
 	width:Ti.UI.SIZE,
 	left:'2',
-    color : 'gray',
     font : {
         fontSize : '7%'
     },
@@ -51,21 +55,27 @@
     zIndex : 5
 },
 ".programContainer":{
-    backgroundColor: 'transparent',
     height : Ti.UI.SIZE,
     width : Ti.UI.SIZE
 },
 
 ".programItem" : {
-  backgroundColor: "transparent",
   height:70
 },
 
 '.infoLbl': {
 	top:'5',
 	left:'5%',
-	color:'white',
     font : {
         fontSize : '8%'
     }
+}
+
+".groupLbl" : {
+    font : {
+        fontSize : '30%'
+    },
+    width : Ti.UI.Fill,
+    left : 5,
+    textAlign : 'left',
 }

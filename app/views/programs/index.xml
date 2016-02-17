@@ -1,0 +1,18 @@
+<Alloy>
+	<!-- create global instance of collection we'll bind -->
+	<NavigationWindow id="navWin" platform="ios" >
+		<Window title="Programs" class="vertical">
+			<LeftNavButton>
+				<Button onClick="closeProgramsBtnClicked">Close</Button>
+			</LeftNavButton>
+			<Require id="programFolders" src="programs/programFolders"/>
+		</Window>
+	</NavigationWindow>
+
+	<Window id="win" class="vertical" title="Programs" navBarHidden="false" platform="android" >
+		<Menu>
+			<MenuItem  title="Close" onClick="closeProgramsBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+		<Require id="programFolders" src="programs/programFolders" />
+	</Window>
+</Alloy>

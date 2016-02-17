@@ -1,0 +1,24 @@
+<Alloy>
+		<TextField id="sf" left="5%" width="90%" class="searchField"></TextField>
+		<ListView id="programsListView" class="programsListView" defaultItemTemplate="folderTemplate" onItemclick="select">
+			
+			<RefreshControl id="refreshControlLight" platform="ios" onRefreshstart="refresh" />
+			<HeaderView>
+				
+			</HeaderView>
+			<RefreshControl id="refreshControl" platform="ios" onRefreshstart="refresh" />
+			<Templates>
+                <ItemTemplate name="folderTemplate">
+					<View class="listViewIconLabelRow">
+						<Label class="folderIcon" />
+						<Label bindId="title" class="title" />
+					</View>
+                </ItemTemplate>
+			</Templates>
+            <ListSection dataCollection="Alloy.Collections.programs"
+                     	 dataFilter="filter">
+            <ListItem template="{template}" class="programItem" 
+            		  searchableText="{name}" title:text="{name}" folderId="{id}"/>
+        	</ListSection>
+		</ListView>
+</Alloy>

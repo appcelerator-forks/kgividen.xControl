@@ -23,13 +23,10 @@ function createSideMenu(sections, controller) {
 //This is what happens when a menu row is selected.
 function rowSelect(e) {
 	var dsScrollView = "";
-    if(e.row.action != "programs") {
-    	$.ds.contentview.removeAllChildren();
-    	$.ds.contentview.add(Alloy.createController("folders").getView());
- 	   	dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
-    }
-    
-    
+	$.ds.contentview.removeAllChildren();
+	$.ds.contentview.add(Alloy.createController("folders").getView());
+   	dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
+
     switch(e.row.action) {
         case "about":
 			alert(Ti.App.name + ' ' + Ti.App.version);
@@ -48,8 +45,8 @@ function rowSelect(e) {
             break;
         case "programs":
             $.destroy();
-            $.ds.contentview.removeAllChildren();
-   			$.ds.contentview.add(Alloy.createController("programs").getView());
+            Alloy.createController('programs/index').getView().open();
+            $.win.close();
             break;
         // case "cameras":
         	// alert("Coming Soon!");
@@ -100,6 +97,12 @@ var rightMenu = [
         icon: 'fa-gear',
         iconColor: '#999',
         action: 'settings'
+    },{
+        title: 'Programs',
+        type: 'menu',
+        icon: 'fa-play-circle',
+        iconColor: '#999',
+        action: 'programs'
     },{
         title: 'Edit Mode',
         type: 'menu',
@@ -167,18 +170,12 @@ var leftMenu = [
         iconColor: '#999',
         action: 'sensors'
     },{
-        title: 'Programs',
-        type: 'menu',
-        icon: 'fa-play-circle',
-        iconColor: '#999',
-        action: 'programs'
-    // },{
         // title: 'Cameras',
         // type: 'menu',
         // icon: 'fa-camera',
         // iconColor: '#999',
         // action: 'cameras'
-    },{
+    // },{
         title: 'Thermostats',
         type: 'menu',
         icon: 'fa-certificate',

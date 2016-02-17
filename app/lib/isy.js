@@ -58,8 +58,8 @@ exports.toggle = function (address){
     });
 };
 
-exports.runProgram = function(id){
-    runProgram(id);
+exports.runProgram = function(id, runType){
+    runProgram(id, runType);
 };
 
 exports.enableProgram = function(id){
@@ -215,9 +215,9 @@ var devicesGetStatus = function() {
     return xhr.loadUrl(connection);
 };
 
-var runProgram = function(id) {
+var runProgram = function(id, runType) {
     var encodedId = Ti.Network.encodeURIComponent(id);
-    connection.url = connection.baseURL + 'programs/' + encodedId + '/run';
+    connection.url = connection.baseURL + 'programs/' + encodedId + '/run' + runType;
     return xhr.loadUrl(connection);
 };
 
@@ -348,4 +348,3 @@ function convertFoldersJSON(xml) {
 // var encodedAddress = Ti.Network.encodeURIComponent(address);
 // restCall.doRestCall('nodes/' + encodedAddress + '/cmd/SMAN');
 // }
-

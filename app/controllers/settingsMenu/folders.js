@@ -262,6 +262,7 @@ if (OS_IOS) {
 }
 
 function closeWin(){
+	$.destroy();
 	$.foldersWin.close();
 }
 
