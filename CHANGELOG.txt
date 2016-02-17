@@ -7,6 +7,8 @@ Added a sensor view
 Added devices that are sensors to the sensor view when querying an ISY
 Dimmers, switches and sensors have their own templates
 Fixed issue when existing folders could not be removed after being added (Might require a remove of the app and re-install)
+Moved programs onto the right menu and made them generic for more of a setup look
+Added runThen and runElse buttons for programs.
 
 
 Version 1.5
