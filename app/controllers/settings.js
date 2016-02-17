@@ -253,17 +253,11 @@ function getProgramsLive(connection, dbData) {
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
 	        // });
 	        processProgramData(dbData, liveData.toJSON());	
-			if (OS_IOS) {
-				$.refreshControl.endRefreshing();
-			}
 			Alloy.Globals.PW.hideIndicator();
 		},
 		error : function() {
 			alert("Getting programs failed.  Please check the network settings.");
 			Alloy.Globals.PW.hideIndicator();
-			if (OS_IOS) {
-				$.refreshControl.endRefreshing();
-			}
 		}
 	});
 }
