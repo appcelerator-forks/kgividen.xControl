@@ -1,5 +1,6 @@
 <Alloy>
 	<Window id="devicesWin" title="Devices" navBarHidden="false" onFocus="doOpen">
+		<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
 		<Widget id="addDevicesFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
 
 		<RightNavButton platform='ios'>

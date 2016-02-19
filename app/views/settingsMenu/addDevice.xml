@@ -3,6 +3,7 @@
     <Collection src="DeviceInFolder"/>
 
     <Window id="addDeviceWindow" navBarHidden="false" title="Add Devices" onBlur="exit" onFocus="refresh">
+    	<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
         <RightNavButton platform="ios">
             <Button onClick="exit">Close</Button>
         </RightNavButton>

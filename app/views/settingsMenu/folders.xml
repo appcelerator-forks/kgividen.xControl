@@ -1,5 +1,6 @@
 <Alloy>
 	<Window id="foldersWin" title="Folders" navBarHidden="false" onFocus="refresh">
+		<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
 		<RightNavButton platform='ios'>
 			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
 		</RightNavButton>
