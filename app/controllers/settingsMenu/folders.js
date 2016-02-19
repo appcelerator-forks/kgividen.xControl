@@ -237,7 +237,6 @@ function select(e) {
  */
 if (OS_IOS) {
 	function onEditactionClick (e) {
-		Ti.API.debug("onEditactionClick e: " + JSON.stringify(e));
 		$.editFolderBtn.title = "Edit";
 		$.folderListView.setEditing(false);
 		$.toggleFolderFabs.showMe();
