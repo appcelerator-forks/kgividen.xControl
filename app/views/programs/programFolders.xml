@@ -1,4 +1,5 @@
 <Alloy>
+		<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
 		<TextField id="sf" left="5%" width="90%" class="searchField"></TextField>
 		<ListView id="programsListView" class="programsListView" defaultItemTemplate="folderTemplate" onItemclick="select">
 			
