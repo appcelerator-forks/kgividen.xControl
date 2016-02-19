@@ -20,7 +20,7 @@
 	                        <Button bindId="btnRun" class="programBtn" onClick="runProgram"/>
 	                        <Button bindId="btnRunThen" class="programBtn" onClick="runProgram"/>
 	                        <Button bindId="btnRunElse" class="programBtn" onClick="runProgram"/>
-	                        <View width="Ti.UI.SIZE" class="vertical">
+	                        <View class="vertical">
 	                        	<Switch top="25%" left="5%" bindId="switch" onChange="programSwitchChanged" />
 	                        	<Label left="20%" bindId="switchEnabled" class="programSubLbl" />	
 	                        </View>

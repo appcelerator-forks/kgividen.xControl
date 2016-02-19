@@ -15,7 +15,11 @@ exports.definition = {
         return Model;
     },
     extendCollection: function(Collection) {  
-        _.extend(Collection.prototype, {});
+		_.extend(Collection.prototype, {
+			comparator : function(collection) {
+				return collection.get('name');
+			}
+		});
         return Collection;
     }       
 };

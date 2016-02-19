@@ -4,8 +4,8 @@
 ".programsListView" : {
 	  left:'5%',
       width:'90%',
+      height:'80%',
       separatorColor: 'gray',
-      // backgroundColor: 'transparent',
       borderWidth:0
 },
 
@@ -34,13 +34,14 @@
     zIndex : 5
 },
 ".programSubLbl" : {
+	width:Ti.UI.SIZE,
+	left : '4%',
     font : {
         fontSize : '7%'
-    },
-    left : '4%'
+    }
 },
 ".programSubVal" : {
-	width:Ti.UI.SIZE,
+	width:'31%',
 	left:'2',
     font : {
         fontSize : '7%'
