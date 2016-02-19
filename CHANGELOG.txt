@@ -14,6 +14,7 @@ Added runThen and runElse buttons for programs.
 Programs can now be added like any other device into any folder (run is assumed for now).
 Android won't auto focus now and bring up the keyboard to search each time on the Edit Mode views.
 Android Exit button is now fixed.
+Fixed a few crashing issues when going between menus.
 
 
 Version 1.5
