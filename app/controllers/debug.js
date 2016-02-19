@@ -8,7 +8,6 @@ $.printDeviceBtn.addEventListener('click', function () {
 });
 
 $.closeBtn.addEventListener('click', function () {
-    Alloy.createController("index").getView().open();
     $.win.close();
 });
 

@@ -18,14 +18,6 @@ var args = arguments[0] || {};
         $.win.open();
     }
 
-    //If the back button is hit it will go back to the index view.
-    if (!OS_IOS) {
-        $.win.addEventListener('android:back',function(e) {
-            Alloy.createController("index").getView().open();
-            $.destroy();
-            return false;
-        });
-    }
 })(arguments[0] || {});
 
 /**
@@ -34,7 +26,6 @@ var args = arguments[0] || {};
  */
 
 function closeProgramsBtnClicked(e) {
-    Alloy.createController("index").getView().open();
     if (OS_IOS) {
         $.navWin.close();
     } else {

@@ -90,7 +90,6 @@ function saveConnectionInfo(callback){
 
 function closeWin () {
     saveConnectionInfo();
-    Alloy.createController("index").getView().open();
     $.settingsWin.close();
 }
 

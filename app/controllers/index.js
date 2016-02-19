@@ -44,9 +44,7 @@ function rowSelect(e) {
             dsScrollView.scrollToView(VIEW_ID_SENSORS);
             break;
         case "programs":
-            $.destroy();
             Alloy.createController('programs/index').getView().open();
-            $.win.close();
             break;
         // case "cameras":
         	// alert("Coming Soon!");
@@ -58,19 +56,13 @@ function rowSelect(e) {
         	alert("Coming Soon!");
             break;
         case "settings":
-            $.destroy();
             Alloy.createController("settings").getView().open();
-            $.win.close();
             break;
         case "updateDevices":
-            $.destroy();
             Alloy.createController('settingsMenu/index').getView().open();
-            $.win.close();
             break;
         case "debug":
-            $.destroy();
             Alloy.createController("debug").getView().open();
-            $.win.close();
             break;
         case "refresh":
             Ti.App.fireEvent('refresh_ui');
@@ -232,7 +224,7 @@ $.ds.rightTableView.addEventListener('click', function selectRow(e) {
 // ***************************END MENU STUFF***************************
 
 function startUI(){
-    if (osname == "ios") {
+    if (OS_IOS) {
         $.win.open({
             transition : Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
         });

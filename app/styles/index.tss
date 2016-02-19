@@ -1,4 +1,5 @@
 "#win": {
+	exitOnClose: true,
 	backgroundImage: '/images/themes/default/background.png',
 	backgroundRepeat : true,
 	layout : 'vertical'
