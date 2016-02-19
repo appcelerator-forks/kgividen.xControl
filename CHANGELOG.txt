@@ -3,14 +3,17 @@ Change Log
 ---------------------------------
 Version 1.5.1
 -----------
+IMPORTANT: Please remove the app and re-install.  There were some deeper changes that had to be made for some of the following fixes.
+
 Added a sensor view 
 Added devices that are sensors to the sensor view when querying an ISY
 Dimmers, switches and sensors have their own templates
 Fixed issue when existing folders could not be removed after being added (Might require a remove of the app and re-install)
 Moved programs onto the right menu and made them generic for more of a setup look
 Added runThen and runElse buttons for programs.
-Programs can now be added like any other device into any folder (run is assumed).
+Programs can now be added like any other device into any folder (run is assumed for now).
 Android won't auto focus now and bring up the keyboard to search each time on the Edit Mode views.
+Android Exit button is now fixed.
 
 
 Version 1.5
