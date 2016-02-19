@@ -39,6 +39,15 @@ function closeWin() {
     // return to folders.js controller to add new folder
     callbackFunction && callbackFunction(returnParams);
 }
+
+/**
+ * event listener set via view to provide a search of the ListView.
+ * @param  {Object} e Event
+ */
+$.sf.addEventListener('change',function(e){
+	$.folderListView.searchText = e.value;
+});
+
 /**
  * event listener to destroy all event listeners setup by Alloy.
  */
