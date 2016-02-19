@@ -47,6 +47,14 @@
     rightTrackImage : '/images/themes/default/metal-slider-channel.png',
     thumbImage : '/images/themes/default/metal-slider-handle.png',
 },
+".switchSlider[platform=ios]" : {
+    leftTrackImage : '/images/themes/default/metal-slider-progress.png',
+    rightTrackImage : '/images/themes/default/metal-slider-channel.png',
+    thumbImage : '/images/themes/default/null.png',
+},
+".switchSlider" : {
+    thumbImage : '/images/themes/default/null.png',
+},
 ".groupItem" : {
     backgroundColor: "transparent"
 },

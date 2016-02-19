@@ -42,6 +42,10 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                        <View>
+	                            <Slider bindId="slider" class="slider switchSlider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
@@ -95,6 +99,10 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                        <View>
+	                            <Slider bindId="slider" class="slider switchSlider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
@@ -146,6 +154,10 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                        <View>
+	                            <Slider bindId="slider" class="slider switchSlider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
@@ -197,6 +209,10 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
+	                        <View>
+	                            <Slider bindId="slider" class="slider switchSlider"/>
+	                            <Label bindId="sliderLbl" class="sliderLbl" />
+	                        </View>
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">

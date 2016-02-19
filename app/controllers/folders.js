@@ -415,7 +415,7 @@ function updateUI(nodesByAddressAndStatus){
 	                        //todo: Get this hardcoded image out of here some how
 	                        item.btn.backgroundImage = '/images/themes/default/btn.png';
 	                    }
-						if (item.btn.type == "dimmer") {
+						if (item.slider) {
 		                    item.slider.value = item.sliderLbl.text = current.level;
 		//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
 						}
