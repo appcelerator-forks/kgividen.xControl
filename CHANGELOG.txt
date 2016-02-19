@@ -10,6 +10,7 @@ Fixed issue when existing folders could not be removed after being added (Might 
 Moved programs onto the right menu and made them generic for more of a setup look
 Added runThen and runElse buttons for programs.
 Programs can now be added like any other device into any folder (run is assumed).
+Android won't auto focus now and bring up the keyboard to search each time on the Edit Mode views.
 
 
 Version 1.5
