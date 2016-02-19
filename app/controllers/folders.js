@@ -1,4 +1,4 @@
-var _args = arguments[0] || {}, // Any passed in arguments will fall into this property
+var args = arguments[0] || {}, // Any passed in arguments will fall into this property
     folders = null, // Array placeholder for all folders
     indexes = [];
 // Array placeholder for the ListView Index (used by iOS only);
@@ -6,8 +6,21 @@ var _args = arguments[0] || {}, // Any passed in arguments will fall into this p
 /**
  * Function to initialize the View, sets up the ListView
  */
-function init() {
+var init = function () {
+	//If we don't have a connection setup send them to the settings page.  When done then come back and run init again.
+	if(device.init()){
+		loadData();
+	} else {
+		//Device is not initialized because of a connection error.  Let's send them to the network settings page and then come back again
+		var params = {
+			"callback": init
+		};
+		Alloy.createController("settings", params).getView().open();	
+		alert('Connection Error! Please check the connection information. No connection info set.');
+	}
+};
 
+function loadData() {
 	//Get All of the devices and the folders they are in
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
 	var folderInViewTable = Alloy.Collections.folderInView.config.adapter.collection_name;
@@ -72,15 +85,15 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 	_.each(folders, function(folder) {
 		folder.devices = _.sortBy(folder.devices, 'deviceInFolderSortId');
 	});
-	
-	
+
+	var sections = [];
 	if (folders && folders.length > 0) {
 		/**
 		 * Setup our Indexes and Sections Array for building out the ListView components
 		 *
 		 */
 		indexes = [];
-		var sections = [];
+		
 
 
 
@@ -152,30 +165,28 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 			sections.push(section);
 		});
 
-		Ti.API.info(" processDevicesInFolders viewId: " + viewId);
-		//There is probably a better way to do this instead of hardcoding the views
-		if(viewId===VIEW_ID_FAVORITES){
-			$.favoritesListView.sections = sections;	
-		} else if (viewId===VIEW_ID_LIGHTS){
-			$.lightsListView.sections = sections;	
-		} else if (viewId==VIEW_ID_SCENES) {
-			$.scenesListView.sections = sections;
-		} else if (viewId==VIEW_ID_SENSORS) {
-			$.sensorsListView.sections = sections;
-		}
-		
 	} else {
 			var sectionHeader = Ti.UI.createView();
-
+			
+			//There's gotta be a better place for this.
+			if(viewId===VIEW_ID_FAVORITES){
+				viewName = "Favorites";	
+			} else if (viewId===VIEW_ID_LIGHTS){
+				viewName = "Lights";	
+			} else if (viewId==VIEW_ID_SCENES) {
+				viewName = "Scenes";	
+			} else if (viewId==VIEW_ID_SENSORS) {
+				viewName = "Sensors";	
+			}
 			/**
 			 * Create and Add the Label to the ListView Section header view
 			 */
 			var sectionLabel = Ti.UI.createLabel({
-				text : "Add something to favorites by choosing Edit Mode in the right menu."
+				text : "Add something to this " + viewName +" view by choosing Edit Mode in the right menu."
 			});	
 			
 			var rowGroupStyle = $.createStyle({
-				classes : 'groupLbl'
+				classes : 'infoLbl'
 			});
 			
 			sectionLabel.applyProperties(rowGroupStyle);
@@ -185,7 +196,18 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 				headerView : sectionHeader
 			});
 			
-			$.favoritesListView.sections[0] = section; 
+			sections.push(section);
+	}
+	
+		//There is probably a better way to do this instead of hardcoding the views
+	if(viewId===VIEW_ID_FAVORITES){
+		$.favoritesListView.sections = sections;	
+	} else if (viewId===VIEW_ID_LIGHTS){
+		$.lightsListView.sections = sections;	
+	} else if (viewId==VIEW_ID_SCENES) {
+		$.scenesListView.sections = sections;
+	} else if (viewId==VIEW_ID_SENSORS) {
+		$.sensorsListView.sections = sections;
 	}
 }
 
@@ -197,7 +219,7 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 var preprocessForListView = function(rawData) {
 	/**
 	 * Using the rawData collection, we map data properties of the folders in this array to an array that maps an array to properly
-	 * display the data in the ListView based on the templates defined in directory.xml (levearges the _.map Function of UnderscoreJS)
+	 * display the data in the ListView based on the templates defined (levearges the _.map Function of UnderscoreJS)
 	 */
 	return _.map(rawData, function(item) {
 		/**
@@ -253,27 +275,10 @@ var preprocessForListView = function(rawData) {
 	});
 };
 
-// /**
- // * This function handles the click events for the rows in the ListView.
- // *
- // * @param {Object} Event data passed to the function
- // */
-// function onItemClick(e) {
-	// /**
-	 // * Get the Item that was clicked
-	 // */
-	// var item = $.favoritesListView.sections[e.sectionIndex].items[e.itemIndex];
-// 
-	// // Alloy.Globals.Navigator.open("profile", item.properties.user);
-// }
-
 /**
  * event listener set via view to provide a search of the ListView.
  * @param  {Object} e Event
  */
-// $.sfFav.addEventListener('change',function(e){
-	// $.favoritesListView.searchText = e.value;
-// });
 
 $.sfLights.addEventListener('change',function(e){
 	$.lightsListView.searchText = e.value;
@@ -384,7 +389,7 @@ var refresh = function (){
 };
 
 Ti.App.addEventListener('refresh_ui', function(e){
-	refresh();
+	loadData();
 });
 
 function updateUI(nodesByAddressAndStatus){

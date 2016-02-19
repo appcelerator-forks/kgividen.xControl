@@ -39,6 +39,7 @@ function closeSettingsBtnClicked(e) {
     } else {
         $.win.close();
     }
+    Ti.App.fireEvent('refresh_ui');
     $.destroy();
 }
 

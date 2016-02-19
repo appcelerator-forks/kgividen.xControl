@@ -27,7 +27,6 @@ if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {
 }
 
 var device = require('isy');
-device.init();
 
 var Q = require('/q');
 

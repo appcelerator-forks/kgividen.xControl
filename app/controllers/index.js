@@ -22,11 +22,9 @@ function createSideMenu(sections, controller) {
 
 //This is what happens when a menu row is selected.
 function rowSelect(e) {
-	var dsScrollView = "";
-	$.ds.contentview.removeAllChildren();
-	$.ds.contentview.add(Alloy.createController("folders").getView());
-   	dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
-
+	// $.ds.contentview.removeAllChildren();
+	// $.ds.contentview.add(Alloy.createController("folders").getView());
+   	var dsScrollView = (OS_IOS) ? $.ds.contentview.getChildren()[0].getChildren()[0] : $.ds.contentview.getChildren()[0].getChildren()[0];
     switch(e.row.action) {
         case "about":
 			alert(Ti.App.name + ' ' + Ti.App.version);
@@ -259,10 +257,6 @@ function startUI(){
         $.win.open();
     }
 
-    $.win.addEventListener('close', function(){
-        $.destroy();
-    });
-
     Ti.Gesture.addEventListener('orientationchange', function() {
         $.ds.handleRotation();
     });
@@ -276,7 +270,7 @@ function startUI(){
     //$.win.close();
 }
 
-if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here
-
+// if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here
+startUI();
 
 

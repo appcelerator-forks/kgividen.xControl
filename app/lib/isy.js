@@ -6,8 +6,7 @@ exports.init = function() {
     //This is the saved connection object set by the user
     var conn = Ti.App.Properties.getObject('conn_current');
     if (!conn) {
-        alert('Connection Error! Please check the connection information. No connection info set.');
-        Alloy.createController("settings").getView().open();
+        return false;
     } else {
         connection.baseURL = conn.method + '://' + conn.server + ':' + conn.port + '/rest/';
         var authString = conn.username + ':' + conn.password;
@@ -26,6 +25,7 @@ exports.init = function() {
 
         connection.connectiontype = 'GET';
         connection.username = conn.username; //This is so we can throw an error and let them know what the user was.
+        return true;
     }
 };
 

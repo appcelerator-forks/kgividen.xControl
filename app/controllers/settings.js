@@ -1,3 +1,7 @@
+var args = arguments[0] || {};
+
+var callbackFunction = args.callback;
+
 var CONN_REMOTE = 'Remote';
 var CONN_LOCAL = 'Local';
 var NETWORK_BTN_REMOTE_TITLE = "Remote Connection Enabled";
@@ -83,13 +87,17 @@ function saveConnectionInfo(callback){
     Ti.App.Properties.setObject('conn_current', data);
     Ti.App.Properties.setString('currentNetworkType',currentNetworkType);
     device.init();  //renews the connection information
-    if (callback) {
-    	callback();
-    }
+   	callback && callback();
 }
 
 function closeWin () {
-    saveConnectionInfo();
+	saveConnectionInfo();
+    if(callbackFunction) {
+    	callbackFunction(); //this will refresh because the callback comes from folder.js	
+    } else {
+    	Ti.App.fireEvent('refresh_ui'); //refresh all the other times until we get the callbacks setup correctly.	
+    }
+    
     $.settingsWin.close();
 }
 
@@ -464,7 +472,7 @@ function openSettingsMenuCallback(){
 	Alloy.Globals.PW.hideIndicator();
 	Alloy.createController('settingsMenu/index').getView().open();
 	alert("Devices and programs were refreshed.  All devices that were not in a folder have been added to the Default Folder.  You can now add/modify them here or in the future by going to Edit Mode using the right menu from the home screen.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
-	$.settingsWin.close();
+	closeWin();
 }
 
 function createFolder(folder) {
