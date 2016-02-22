@@ -59,7 +59,7 @@ exports.toggle = function (address){
 };
 
 exports.runProgram = function(id, runType){
-    runProgram(id, runType);
+    return runProgram(id, runType);
 };
 
 exports.enableProgram = function(id){
@@ -73,11 +73,11 @@ exports.disableProgram = function(id){
 exports.sceneOn = function(address){
     Ti.API.debug("Scene On!");
     var level = 255;
-    deviceOn(address, level);
+    return deviceOn(address, level);
 };
 
 exports.sceneOff = function(address){
-    deviceOff(address);
+    return deviceOff(address);
 };
 
 //Should be in the format of

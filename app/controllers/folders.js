@@ -342,7 +342,7 @@ function programBtnClick(e){
     if(!address){
         return;
     }
-    device.runProgram(address, "");
+    device.runProgram(address, "").then(refresh());;
 }
 
 function sceneOnBtn(e){
@@ -354,7 +354,7 @@ function sceneOnBtn(e){
     if(!address){
         return;
     }
-    device.sceneOn(address);
+    device.sceneOn(address).then(refresh());;
 }
 
 function sceneOffBtn(e){
@@ -366,7 +366,7 @@ function sceneOffBtn(e){
     if(!address){
         return;
     }
-    device.sceneOff(address);
+    device.sceneOff(address).then(refresh());;
 }
 
 // function updateSliderLbl(e) {
