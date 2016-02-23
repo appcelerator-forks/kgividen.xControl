@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 
 function getPrograms(connection){
 	Alloy.Collections.programs.fetch({
-		"url": connection.baseURL + "programs",
+		"url": connection.baseURL + "programs?subfolders=true",
 		headers: connection.restHeaders,
 		success : function(data) {
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
@@ -96,7 +96,7 @@ function transform(model) {
 function filter(collection) {
 	//return everything but folders.
 	return collection.filter(function (program) {
-		return program.get("folder") != "true";
+		return program.get("folder") != "true" && program.get("parentId") == args.model.id;
 	});
 }
 
