@@ -6,7 +6,7 @@
 	<Collection src="FolderInView" />
 	
     <Window id="win" backgroundColor="white" layout="vertical">
-    	<ScrollView layout="vertical" top="5" height="100%">
+    	<ScrollView id="scrollView" layout="vertical" top="5" height="100%">
 	        <Button onClick="printFolderInViewTable">Print folderInView Table</Button>
 	        <Button onClick="printDeviceInFolderTable">Print deviceInFolder Table</Button>
 	        <Button id="printDeviceBtn">Print Device Table</Button>
@@ -16,6 +16,7 @@
 	        <Button onClick="createFakeFolders">createFakeFolders</Button>
 	        <Button id="closeBtn">Close</Button>
 	        <TextArea height="25%" id="output"></TextArea>
+	        <Widget id="btn" src="TiCircularSliderBtnWidget"/>
         </ScrollView>
     </Window>
     

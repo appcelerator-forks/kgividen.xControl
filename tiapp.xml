@@ -63,9 +63,11 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="commonjs">ti.cloud</module>
-        <module platform="android">de.marcelpociot.autofocus</module>
-    </modules>
+    <module platform="commonjs">ti.cloud</module>
+    <module platform="android">de.marcelpociot.autofocus</module>
+    <module platform="android">de.marcelpociot.circularslider</module>
+    <module platform="iphone">de.marcelpociot.circularslider</module>
+  </modules>
     <deployment-targets>
         <target device="android">true</target>
         <target device="ipad">true</target>

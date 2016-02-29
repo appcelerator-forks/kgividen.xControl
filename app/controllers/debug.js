@@ -40,3 +40,16 @@ function createFakeDevices () {
 function createFakeFolders () {
 	fakeData.createFakeFolders();
 }
+
+
+$.btn.onClick(function (e) {
+	Ti.API.info("onClick btn1 E: " + JSON.stringify(e));
+});
+
+$.btn.onTouchEnd(function (e) {
+	Ti.API.info("touchend E: " + JSON.stringify(e));
+});
+
+$.win.addEventListener("open", function() {
+    $.btn.setBtnValue(10);
+});

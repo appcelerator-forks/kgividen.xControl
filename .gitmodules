@@ -1,3 +1,9 @@
 [submodule "app/widgets/com.netsmartcompany.floatingActionButton"]
 	path = app/widgets/com.netsmartcompany.floatingActionButton
 	url = https://github.com/kgividen/com.netsmartcompany.floatingActionButton
+[submodule "app/lib/TiCircularSliderBtn"]
+	path = app/lib/TiCircularSliderBtn
+	url = ../TiCircularSliderBtn
+[submodule "app/widgets/TiCircularSliderBtnWidget"]
+	path = app/widgets/TiCircularSliderBtnWidget
+	url = ../TiCircularSliderBtnWidget
