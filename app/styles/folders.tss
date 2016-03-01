@@ -1,20 +1,24 @@
-"#scrollableView" : {
+".deviceContainerView[if=Alloy.Globals.defaultTheme]" : {
     zIndex:2,
-    backgroundImage: '/images/themes/default/background.png',
+    backgroundImage: "/images/themes/default/background.png",
+    layout:"vertical",
 },
-".horizontal" : {
-    layout:'horizontal'
-},
-".deviceContainerView" : {
+".deviceContainerView[if=Alloy.Globals.blueTheme]" : {
     zIndex:2,
-    backgroundImage: '/images/themes/default/background.png',
-    layout:'vertical',
-
+    backgroundImage: "/images/themes/blue/background.png",
+    layout:"vertical",
 },
-".deviceListView" : {
+".deviceListView[if=Alloy.Globals.defaultTheme]" : {
       width:Ti.UI.Fill,
-      separatorColor: 'transparent',
-      backgroundColor: 'transparent',
+      separatorColor: "transparent",
+      backgroundColor: "transparent",
+      borderWidth:0
+},
+".deviceListView[if=Alloy.Globals.blueTheme]" : {
+      width:Ti.UI.Fill,
+      separatorColor: "#D0E0E0",
+      seperatorHeight: "10",
+      backgroundColor: "transparent",
       borderWidth:0
 },
 ".deviceItem" : {
@@ -24,101 +28,174 @@
 ".deviceItem[platform=ios]" : {
   selectionStyle: Ti.UI.iPhone.ListViewCellSelectionStyle.NONE //No style
 },
-".sliderLbl" : {
-    text : '0',
-    color : '#999',
+
+//Slider Styles
+".sliderLbl[if=Alloy.Globals.defaultTheme]" : {
+    text : "0",
+    color : "#999",
     font : {
-        fontFamily : 'Helvetica Neue',
+        fontFamily : "Helvetica Neue",
         fontSize : 14
     },
-    textAlign : 'left',
+    textAlign : "left",
     width : 30,
-    left : '94%'
+    left : "92%"
+},
+".sliderLbl[if=Alloy.Globals.blueTheme]" : {
+    text : "0",
+    color : "#6CC5CF",
+    font : {
+        fontFamily : "Helvetica Neue",
+        fontSize : 14
+    },
+    textAlign : "left",
+    width : 30,
+    left : "92%"
 },
 ".slider" : {
     min : 0,
     max : 100,
     value : 0,
-    width : '42%',
-    left : '49%'
+    width : "42%",
+    left : "49%"
 },
-".slider[platform=ios]" : {
-    leftTrackImage : '/images/themes/default/metal-slider-progress.png',
-    rightTrackImage : '/images/themes/default/metal-slider-channel.png',
-    thumbImage : '/images/themes/default/metal-slider-handle.png',
+".slider[platform=ios][if=Alloy.Globals.defaultTheme]" : {
+    leftTrackImage : "/images/themes/default/metal-slider-progress.png",
+    rightTrackImage : "/images/themes/default/metal-slider-channel.png",
+    thumbImage : "/images/themes/default/metal-slider-handle.png",
 },
-".switchSlider[platform=ios]" : {
-    leftTrackImage : '/images/themes/default/metal-slider-progress.png',
-    rightTrackImage : '/images/themes/default/metal-slider-channel.png',
-    thumbImage : '/images/themes/default/null.png',
+".switchSlider[platform=ios][if=Alloy.Globals.defaultTheme]" : {
+    leftTrackImage : "/images/themes/default/metal-slider-progress.png",
+    rightTrackImage : "/images/themes/default/metal-slider-channel.png",
+    thumbImage : "/images/themes/default/null.png",
+},
+".slider[platform=ios][if=Alloy.Globals.blueTheme]" : {
+	height:"10",
+    leftTrackImage : "/images/themes/blue/slider_progress.png",
+    rightTrackImage : "/images/themes/blue/slider_channel.png",
+    thumbImage : "/images/themes/blue/slider_handle.png",
+},
+".switchSlider[platform=ios][if=Alloy.Globals.blueTheme]" : {
+    leftTrackImage : "/images/themes/blue/slider_progress.png",
+    rightTrackImage : "/images/themes/blue/slider_channel.png",
+    thumbImage : "/images/themes/default/null.png",
 },
 ".switchSlider" : {
-    thumbImage : '/images/themes/default/null.png',
+    thumbImage : "/images/themes/default/null.png",
 },
-".groupItem" : {
-    backgroundColor: "transparent"
+".infoLbl[if=Alloy.Globals.defaultTheme]": {
+	left:"5%",
+	color:"white"
 },
-'.infoLbl': {
-	left:'5%',
-	color:'white'
-}
-".groupLbl" : {
-    color : 'white',
+".infoLbl[if=Alloy.Globals.blueTheme]": {
+	left:"5%",
+	color:"#6CC5CF"
+},
+".groupLbl[if=Alloy.Globals.defaultTheme]" : {
+    color : "white",
     font : {
-        fontSize : '30%'
+        fontSize : "30%"
     },
     width : Ti.UI.FILL,
     left : 5,
-    textAlign : 'left',
+    textAlign : "left",
 },
-".deviceItemLbl" : {
-    width: '50%',
-    color : 'white',
+".groupLbl[if=Alloy.Globals.blueTheme]" : {
+    color : "#898989",
     font : {
-        fontSize : '20%'
+        fontSize : "30%"
+    },
+    width : Ti.UI.FILL,
+    left : 5,
+    textAlign : "left",
+},
+".deviceItemLbl[if=Alloy.Globals.defaultTheme]" : {
+    width: "50%",
+    color : "white",
+    font : {
+        fontSize : "20%"
     },
     left : 5,
-    textAlign : 'left'
+    textAlign : "left"
 },
-".sceneBtn" : {
-    backgroundImage : '/images/themes/default/btn.png',
-    backgroundSelectedImage : '/images/themes/default/btn-active.png',
-    color: '#fff',
-    width : '20%',
-    height : '80%',
-    left : '3%',
+".deviceItemLbl[if=Alloy.Globals.blueTheme]" : {
+    width: "50%",
+    color : "#898989",
     font : {
-        fontSize : '20%',
-        fontWeight : 'bold',
-        fontFamily : 'Helvetica Neue'
+        fontSize : "20%"
+    },
+    left : 5,
+    textAlign : "left"
+},
+
+//Scene Button Styles
+".sceneBtn[if=Alloy.Globals.defaultTheme]" : {
+    backgroundImage : "/images/themes/default/btn.png",
+    backgroundSelectedImage : "/images/themes/default/btn-active.png",
+    color: "#fff",
+    width : "20%",
+    height : "80%",
+    left : "3%",
+    font : {
+        fontSize : "20%",
+        fontWeight : "bold",
+        fontFamily : "Helvetica Neue"
+    },
+    zIndex : 5
+},
+".sceneBtn[if=Alloy.Globals.blueTheme]" : {
+    backgroundColor : "#6CC5CF",
+    backgroundSelectedColor : "#31B3E7",
+    backgroundDisabledColor : "#D7EEF2",
+    color: "#fff",
+    width : "20%",
+    height : "80%",
+    left : "3%",
+    font : {
+        fontSize : "20%",
+        fontWeight : "bold",
+        fontFamily : "Helvetica Neue"
     },
     zIndex : 5
 },
 ".sceneContainer":{
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     height : 50
 },
 ".sceneContainer[formFactor=tablet]":{
     height : 80
 },
-".btn" : {
-    backgroundImage : '/images/themes/default/btn.png',
-    backgroundSelectedImage : '/images/themes/default/btn-active.png',
-    color: '#fff',
-    width : '45%',
-    height : '80%',
-    left : '2%',
+
+// Button Styles
+".btn[if=Alloy.Globals.defaultTheme]" : {
+    backgroundImage : "/images/themes/default/btn.png",
+    backgroundSelectedImage : "/images/themes/default/btn-active.png",
+    color: "#fff",
+    width : "45%",
+    height : "80%",
+    left : "2%",
     font : {
-        fontSize : '20%',
-        fontWeight : 'bold',
-        fontFamily : 'Helvetica Neue'
+        fontSize : "20%",
+        fontWeight : "bold",
+        fontFamily : "Helvetica Neue"
     },
     horizontalWrap : false,
     zIndex : 5
 },
-".btnOn" : {
-    backgroundImage : '/images/themes/default/btn-active.png'
-},
-".btnOff" : {
-    backgroundImage : '/images/themes/default/btn.png'
+
+".btn[if=Alloy.Globals.blueTheme]" : {
+    backgroundColor : "#6CC5CF",
+    backgroundSelectedColor : "#31B3E7",
+    borderRadius: 10,
+    color: "#fff",
+    width : "45%",
+    height : "80%",
+    left : "2%",
+    font : {
+        fontSize : "20%",
+        fontWeight : "bold",
+        fontFamily : "Helvetica Neue"
+    },
+    horizontalWrap : false,
+    zIndex : 5
 }

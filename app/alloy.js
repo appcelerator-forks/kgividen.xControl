@@ -11,6 +11,9 @@
 // Alloy.Globals.someGlobalFunction = function(){};
 Alloy.Globals.PW = require('progressWindow');
 
+Alloy.Globals.defaultTheme = true;
+Alloy.Globals.blueTheme = false;
+
 var VIEW_ID_FAVORITES = 0;
 var VIEW_ID_LIGHTS = 1;
 var VIEW_ID_SCENES = 2;
