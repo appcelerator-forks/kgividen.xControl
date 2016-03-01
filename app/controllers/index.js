@@ -264,6 +264,8 @@ function startUI(){
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
     $.ds.contentview.add(Alloy.createController("folders").getView());
+    // var theme = "blah";
+    // $.ds.contentview.add(Alloy.createController("folders", {theme: true}).getView());
     
     //tmp
     //Alloy.createController("camerasContainer").getView().open();

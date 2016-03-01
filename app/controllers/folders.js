@@ -414,11 +414,19 @@ function updateUI(nodesByAddressAndStatus){
 	                	item.sensorSwitch.value = (current.value > 0) ? true : false;
                 	} else { // else if item.btn.type == "dimmer" || item.btn.type == "switch" or anything else
 	                    if(current.level > 0){
-	                        //todo: Get this hardcoded image out of here probably with an applyProperties and setting the class that way.
-	                        item.btn.backgroundImage = '/images/themes/default/btn-active.png';
+	                        //todo: Get this hardcoded image out of here tried applyProperties but that doesn't work here...
+   	                    	if(Alloy.Globals.blueTheme){
+	                    		item.btn.backgroundColor='#31B3E7';	
+	                    	}else {
+	                    		item.btn.backgroundImage = '/images/themes/default/btn-active.png';
+	                    	}
+							
 	                    } else {
-	                        //todo: Get this hardcoded image out of here some how
-	                        item.btn.backgroundImage = '/images/themes/default/btn.png';
+	                    	if(Alloy.Globals.blueTheme){
+	                    		item.btn.backgroundColor='#6CC5CF';
+	                    	}else {
+	                    		item.btn.backgroundImage = '/images/themes/default/btn.png';	
+	                    	}
 	                    }
 						if (item.slider) {
 		                    item.slider.value = item.sliderLbl.text = current.level;
