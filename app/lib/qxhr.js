@@ -20,9 +20,17 @@ exports.loadUrl = function(conn, data) {
     };
 
     var onerror = function() {
-        var errorString = 'Connection Error! Please check the connection information. URL: ' + conn.url;
+        var errorString = 'Please check the connection information. URL: ' + conn.url;
         if(conn.username) errorString += " User: " + conn.username;
-        alert(errorString);
+		  var dialog = Ti.UI.createAlertDialog({
+		    message: errorString,
+		    ok: 'OK',
+		    title: 'Network Error'
+		  });
+		  dialog.show();
+		  dialog.addEventListener('click', function(e){
+		  	Alloy.Globals.PW.hideIndicator();
+		  });
         deferred.reject(new Error({
             code : "Status: " + xhr.status,
             message : xhr.responseText
