@@ -42,10 +42,7 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
-	                        <View>
-	                            <Slider bindId="slider" class="slider switchSlider"/>
-	                            <Label bindId="sliderLbl" class="sliderLbl" />
-	                        </View>
+                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
@@ -78,7 +75,9 @@
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
 	                        <Label bindId="label" class="deviceItemLbl"/>
-	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+	                        <View>
+	                        	<Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
+	                        </View>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
@@ -99,10 +98,7 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
-	                        <View>
-	                            <Slider bindId="slider" class="slider switchSlider"/>
-	                            <Label bindId="sliderLbl" class="sliderLbl" />
-	                        </View>
+                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
@@ -154,10 +150,7 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
-	                        <View>
-	                            <Slider bindId="slider" class="slider switchSlider"/>
-	                            <Label bindId="sliderLbl" class="sliderLbl" />
-	                        </View>
+                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">
@@ -209,10 +202,7 @@
 					<ItemTemplate class="deviceItem" id="light" name="switchTemplate">
 	                    <View>
 	                        <Button bindId="btn" class="btn" onClick="btnClick" />
-	                        <View>
-	                            <Slider bindId="slider" class="slider switchSlider"/>
-	                            <Label bindId="sliderLbl" class="sliderLbl" />
-	                        </View>
+                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
 	                    </View>
 					</ItemTemplate>
             		<ItemTemplate class="deviceItem" name="sensorTemplate">

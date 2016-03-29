@@ -1,7 +1,13 @@
 ---------------------------------
 Change Log
 ---------------------------------
-Version 1.5.1
+Version 1.5.3
+-----------
+Performance Improvements
+Switches now show the message associated with them and not the dimmer.  i.e. locked, on, off, etc
+Added a yellow border for on to make them look more distinguished.
+
+Version 1.5.2
 -----------
 Other UI elements now refresh after scenes are turned on/off or programs are run.
 Programs in right menu now shows all folders and the programs underneath them even if they're nested folders(it does flatten the structure).

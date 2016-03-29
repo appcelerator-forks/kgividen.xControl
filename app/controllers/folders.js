@@ -259,6 +259,9 @@ var preprocessForListView = function(rawData) {
 			label: {
 				text: item.displayName
 			},
+			switchLblStatus: {
+				text:"checking..."
+			},
 			sceneBtnOn: {
 				title:"On"
 			},
@@ -345,24 +348,45 @@ function programBtnClick(e){
     device.runProgram(address, "").then(refresh());;
 }
 
+function flashBtn(btn) {
+	btn.setBackgroundGradient({});
+	var animation = Titanium.UI.createAnimation();
+	animation.backgroundColor = 'yellow';
+	animation.duration = 500;
+	var animationHandler = function() {
+		animation.removeEventListener('complete', animationHandler);
+		animation.backgroundColor = "transparent";
+	 	btn.animate(animation, function(){
+	 		btn.setBackgroundColor="#272b2c";
+		  	btn.setBackgroundGradient({
+		  		type: 'linear',	
+		    	colors: [ { color: '#3b4b55', offset: 0.0 }, { color: '#2a353c', offset: 0.50}, { color: '#3b4b55', offset: 1.0 } ]
+	 		});	
+	 	});
+	};
+	animation.addEventListener('complete', animationHandler);
+	btn.animate(animation);
+}
+
 function sceneOnBtn(e){
+	Ti.API.info("SceneOnBtn!!");
+	var btn = e.source;
     var item = e.section.items[e.itemIndex];
     var address = item.btn.address;
-
-    Ti.API.debug("scene on!");
-    Ti.API.debug("item.btn.address: " + item.btn.address);
+    Ti.API.info("address: " + address);
+    Ti.API.info("btn: " + JSON.stringify(btn));
+	flashBtn(btn);
     if(!address){
         return;
     }
-    device.sceneOn(address).then(refresh());;
+    // device.sceneOn(address).then(refresh());
+    // e.section.updateItemAt(e.itemIndex, item);
 }
 
 function sceneOffBtn(e){
     var item = e.section.items[e.itemIndex];
     var address = item.btn.address;
 
-    Ti.API.debug("scene off!");
-    Ti.API.debug("item.btn.address: " + item.btn.address);
     if(!address){
         return;
     }
@@ -392,6 +416,41 @@ Ti.App.addEventListener('refresh_ui', function(e){
 	loadData();
 });
 
+function turnBtnOn(item) {
+	// Ti.API.info("turnOnBtn item: " + JSON.stringify(item));
+	//todo: Get this hardcoded styling out of here tried applyProperties but that doesn't work here...
+	if(Alloy.Globals.blueTheme){
+		item.btn.backgroundColor='#31B3E7';	
+	}else {
+	    item.btn.backgroundColor="#272b2c";
+	    item.btn.backgroundGradient = {};   
+	    // item.btn.borderColor="#2b3032";
+	    item.btn.borderColor="yellow";
+	    item.btn.borderRadius="5";
+		item.btn.borderWidth="1"; 
+	}	
+	
+	return item;
+}
+
+function turnBtnOff(item) {
+	if(Alloy.Globals.blueTheme){
+		item.btn.backgroundColor='#6CC5CF';
+	}else {
+		item.btn.backgroundColor = null;	
+		item.btn.backgroundImage = '';	
+	    item.btn.backgroundGradient = {
+		    type: 'linear',
+		    colors: [ { color: '#3b4b55', offset: 0.0 }, { color: '#2a353c', offset: 0.50}, { color: '#3b4b55', offset: 1.0 } ]
+	    };
+	    item.btn.borderRadius="5";
+		item.btn.borderWidth="1"; 
+	    item.btn.borderColor = "#343a3c";
+	}	
+	
+	return item;
+}
+
 function updateUI(nodesByAddressAndStatus){
 	//Each view in the scrollableView i.e. favorites, lighting, etc.
     _.each($.scrollableView.getViews(), function(view){
@@ -414,24 +473,16 @@ function updateUI(nodesByAddressAndStatus){
 	                	item.sensorSwitch.value = (current.value > 0) ? true : false;
                 	} else { // else if item.btn.type == "dimmer" || item.btn.type == "switch" or anything else
 	                    if(current.level > 0){
-	                        //todo: Get this hardcoded image out of here tried applyProperties but that doesn't work here...
-   	                    	if(Alloy.Globals.blueTheme){
-	                    		item.btn.backgroundColor='#31B3E7';	
-	                    	}else {
-	                    		item.btn.backgroundImage = '/images/themes/default/btn-active.png';
-	                    	}
-							
+	                    	item = turnBtnOn(item);
 	                    } else {
-	                    	if(Alloy.Globals.blueTheme){
-	                    		item.btn.backgroundColor='#6CC5CF';
-	                    	}else {
-	                    		item.btn.backgroundImage = '/images/themes/default/btn.png';	
-	                    	}
+	                    	item = turnBtnOff(item);
 	                    }
 						if (item.slider) {
 		                    item.slider.value = item.sliderLbl.text = current.level;
 		//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
 						}
+						// This is for switches to show a label instead of a slider.
+						item.switchLblStatus.text = (current.formatted && current.formatted != " ") ? current.formatted : "unknown";
 					}
             	});
        	 	}
