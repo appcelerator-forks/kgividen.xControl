@@ -6,6 +6,7 @@ Version 1.5.3
 Performance Improvements
 Switches now show the message associated with them and not the dimmer.  i.e. locked, on, off, etc
 Added a yellow border for on to make them look more distinguished.
+Fixed an issue with the data load from ISY where some of the devices weren't going into the correct categories.
 
 Version 1.5.2
 -----------
