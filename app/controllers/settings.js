@@ -393,11 +393,13 @@ function processData(dbData, liveData, devicesInFolder) {
 			 var folderArray = dbData.where({address: folder.address});
 			 //If the folder hasn't been added before then add it.
 			 if (!folderArray[0]) {
-			 	//Create the folder even though we don't add it to a view so we have a record with the proper address
+			 	var defaultFolderAddress = folder.address;
+			 	//Create the folder even though we don't add it to a view.
+			 	//This is so we have a record with the proper address and we will add all devices to it for when add existing views is picked.
 				createFolder({
-					"name" : folder.name + " Default", //Otherwise they all look the same when you add existing to views.
-					"displayName" : folder.name,
-					"address" : folder.address,
+					"name" : folder.name + " All", //Otherwise they all look the same when you add existing to views.
+					"displayName" : folder.name + " All",
+					"address" : defaultFolderAddress,
 					"type" : folder.type,
   				});
 				
@@ -408,16 +410,17 @@ function processData(dbData, liveData, devicesInFolder) {
             	
     			//create a scene version of the folder and link the devices to it
         		if(thisFoldersScenes && thisFoldersScenes.length > 0) {
-        			folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
+        			var folderAddress = Ti.Platform.createUUID(); //so a new guid will be generated
 					createFolder({
-						"name" : folder.name + " Sensors", //Otherwise they all look the same when you add existing to views.
-						"displayName" : folder.name,
-						"address" : folder.address,
+						"name" : folder.name + " Scenes", //Otherwise they all look the same when you add existing to views.
+						"displayName" : folder.name + " S",
+						"address" : folderAddress,
 						"type" : folder.type,
 	  				});
-					linkFolderToView(folder.address, VIEW_ID_SCENES);	
+					linkFolderToView(folderAddress, VIEW_ID_SCENES);	
 					_.each(thisFoldersScenes, function(device) {
-    					linkDeviceToFolder(device.address, folder.address);	
+    					linkDeviceToFolder(device.address, folderAddress);	
+    					linkDeviceToFolder(device.address, defaultFolderAddress);	//add everything to the default folder
 					});
 				}
 				 
@@ -429,16 +432,17 @@ function processData(dbData, liveData, devicesInFolder) {
             	
         		//create a sensor version of the folder and link the devices to it
         		if(thisFoldersSensors && thisFoldersSensors.length > 0) {
-        			folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
+        			var folderAddress = Ti.Platform.createUUID(); //so a new guid will be generated
 					createFolder({
-						"name" : folder.name + " Scenes", //Otherwise they all look the same when you add existing to views.
-						"displayName" : folder.name,
-						"address" : folder.address,
+						"name" : folder.name + " Sensors", //Otherwise they all look the same when you add existing to views.
+						"displayName" : folder.name + " Sensors",
+						"address" : folderAddress,
 						"type" : folder.type,
 	  				});
-					linkFolderToView(folder.address, VIEW_ID_SENSORS);	
+					linkFolderToView(folderAddress, VIEW_ID_SENSORS);	
 					_.each(thisFoldersSensors, function(device) {
-    					linkDeviceToFolder(device.address, folder.address);	
+    					linkDeviceToFolder(device.address, folderAddress);	
+    					linkDeviceToFolder(device.address, defaultFolderAddress);	
 					});
 				}
 				
@@ -447,20 +451,21 @@ function processData(dbData, liveData, devicesInFolder) {
             		return device.type != "scene" && device.type != "sensor" && device.type != "folder" && device.parent == folder.address;
             	});        	
             	
-            	//Add others to lighting view for now so we assume if it's not a scene or a seonsor it's a light
+            	//Add others to lighting view for now so we assume if it's not a scene or a sensor it's a light
             	//create a lighting version of the folder and link the devices to it
             	if(thisFoldersOther && thisFoldersOther.length > 0) {
-            		folder.address = Ti.Platform.createUUID(); //so a new guid will be generated
+            		var folderAddress = Ti.Platform.createUUID(); //so a new guid will be generated
             		createFolder({
 						"name" : folder.name + " Lights", //Otherwise they all look the same when you add existing to views.
-						"displayName" : folder.name,
-						"address" : folder.address,
+						"displayName" : folder.name + " Lights",
+						"address" : folderAddress,
 						"type" : folder.type,
 	  				});
             		//Link this new folder to the lighting view
-            		linkFolderToView(folder.address, VIEW_ID_LIGHTS);	
+            		linkFolderToView(folderAddress, VIEW_ID_LIGHTS);	
             		_.each(thisFoldersOther, function(device) {
-    					linkDeviceToFolder(device.address, folder.address);	
+    					linkDeviceToFolder(device.address, folderAddress);	
+    					linkDeviceToFolder(device.address, defaultFolderAddress);	
 					});
             	}
 
