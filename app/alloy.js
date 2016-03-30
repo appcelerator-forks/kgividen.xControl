@@ -35,7 +35,7 @@ var Q = require('/q');
 
 
 // Helpers
-var xDebug = true;
+var xDebug = false;
 
 var tiInfo = function(label, input){
 	if(xDebug == true){
