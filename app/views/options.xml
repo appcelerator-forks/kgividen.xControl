@@ -17,7 +17,7 @@
                 </HeaderView>
                 <TableViewRow layout="horizontal">
                 	<Label left="10">Disable View Swipe</Label>
-                	<Switch id="switchDisableViewSwipe"></Switch>
+                	<Switch left="10" id="switchDisableViewSwipe"></Switch>
 		        </TableViewRow>
             </TableViewSection>
             <TableViewSection platform="ios">
