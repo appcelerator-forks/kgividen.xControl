@@ -351,44 +351,24 @@ function programBtnClick(e){
 }
 
 function flashBtn(btn) {
-	btn.setBackgroundGradient({});
-	var animation = Titanium.UI.createAnimation();
-	animation.backgroundColor = 'yellow';
-	animation.duration = 500;
-	var animationHandler = function() {
-		animation.removeEventListener('complete', animationHandler);
-		animation.backgroundColor = "transparent";
-	 	btn.animate(animation, function(){
-	 		btn.setBackgroundColor="#272b2c";
-		  	btn.setBackgroundGradient({
-		  		type: 'linear',	
-		    	colors: [ { color: '#3b4b55', offset: 0.0 }, { color: '#2a353c', offset: 0.50}, { color: '#3b4b55', offset: 1.0 } ]
-	 		});	
-	 	});
-	};
-	animation.addEventListener('complete', animationHandler);
-	btn.animate(animation);
+	btn.setBorderColor("yellow");
+	setTimeout(function(){btn.setBorderColor("#2b3032");}, 500);	
 }
 
 function sceneOnBtn(e){
-	Ti.API.info("SceneOnBtn!!");
-	var btn = e.source;
     var item = e.section.items[e.itemIndex];
     var address = item.btn.address;
-    Ti.API.info("address: " + address);
-    Ti.API.info("btn: " + JSON.stringify(btn));
-	flashBtn(btn);
+	flashBtn(e.source);
     if(!address){
         return;
     }
-    // device.sceneOn(address).then(refresh());
-    // e.section.updateItemAt(e.itemIndex, item);
+    device.sceneOn(address).then(refresh());
 }
 
 function sceneOffBtn(e){
     var item = e.section.items[e.itemIndex];
     var address = item.btn.address;
-
+	flashBtn(e.source);
     if(!address){
         return;
     }
