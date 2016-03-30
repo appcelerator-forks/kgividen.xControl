@@ -116,6 +116,13 @@
 },
 
 //Scene Button Styles
+".sceneOn" : {
+	borderColor:"yellow"
+}
+".sceneOff" : {
+	borderColor:"#2b3032"
+}
+
 ".sceneBtn[if=Alloy.Globals.defaultTheme]" : {
     backgroundImage : "",
     color: "#fff",

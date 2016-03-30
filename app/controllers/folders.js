@@ -351,8 +351,14 @@ function programBtnClick(e){
 }
 
 function flashBtn(btn) {
-	btn.setBorderColor("yellow");
-	setTimeout(function(){btn.setBorderColor("#2b3032");}, 500);	
+	var styleOn = $.createStyle({
+		classes : 'sceneOn'
+	});
+	var styleOff = $.createStyle({
+		classes : 'sceneOff'
+	});
+	btn.applyProperties(styleOn);
+	setTimeout(function(){btn.applyProperties(styleOff);}, 500);	
 }
 
 function sceneOnBtn(e){
