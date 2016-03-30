@@ -4,7 +4,6 @@
 			<MenuItem title="Save and Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
 		
-        <!-- <TableView class="tableview-form" platform="ios"> -->
         <TableView class="tableview-form">
             <TableViewSection>
             	<TableViewRow><View class="view-row-separator"/></TableViewRow>
@@ -21,19 +20,11 @@
                 	<Switch id="switchDisableViewSwipe"></Switch>
 		        </TableViewRow>
             </TableViewSection>
-            <TableViewSection>
+            <TableViewSection platform="ios">
             	<TableViewRow><View class="view-row-separator"/></TableViewRow>
                 <TableViewRow><Button id="closeBtn" onClick="closeWin">Save and Close</Button></TableViewRow>
             </TableViewSection>
         </TableView>
-        <!-- <ScrollView class="tableview-form" platform="android">
-            <View top="20%" class="row-container">
-				<View layout="horizontal" left="10" height="50" width="Ti.App.SIZE">
-		            <Button id="enableViewSwipeBtn" onClick="changeViewSwipe">Enabled</Button>
-	            	<Button id="disableViewSwipeBtn" onClick="changeViewSwipe">Disabled</Button>
-	        	</View>
-            </View>
-        </ScrollView> -->
     </Window>
 </Alloy>
 
