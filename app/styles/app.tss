@@ -207,6 +207,26 @@
    height : 96
  }
  
+ "TableView[platform=ios]":{
+	separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
+ },
+ "TableViewRow":{
+	height:Ti.UI.SIZE
+ },
+ "TableViewRow[platform=ios]":{
+	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE
+ },
+
+ //Form
+ ".tableview-form[platform=android]":{
+    layout:'vertical'
+ },
+ ".form-textField": {
+	color:'black',
+	hintTextColor:'gray',
+	height:Ti.UI.SIZE	
+ }
+ 
 //FABs
 
 '.toggleFab': {

@@ -56,6 +56,9 @@ function rowSelect(e) {
         case "settings":
             Alloy.createController("settings").getView().open();
             break;
+        case "options":
+            Alloy.createController("options").getView().open();
+            break;
         case "updateDevices":
             Alloy.createController('settingsMenu/index').getView().open();
             break;
@@ -88,17 +91,23 @@ var rightMenu = [
         iconColor: '#999',
         action: 'settings'
     },{
-        title: 'Programs',
+        title: 'Options',
         type: 'menu',
-        icon: 'fa-play-circle',
+        icon: 'fa-gear',
         iconColor: '#999',
-        action: 'programs'
+        action: 'options'
     },{
         title: 'Edit Mode',
         type: 'menu',
         icon: 'fa-lightbulb-o',
         iconColor: '#999',
         action: 'updateDevices'
+    },{
+        title: 'Programs',
+        type: 'menu',
+        icon: 'fa-play-circle',
+        iconColor: '#999',
+        action: 'programs'
     }
 ];
 

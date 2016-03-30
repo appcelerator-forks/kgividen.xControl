@@ -2,25 +2,6 @@
     zIndex:2
 },
 
-".tableview-form[platform=android]":{
-    layout:'vertical'
-},
-"TableView[platform=ios]":{
-	separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE
-},
-"TableViewRow":{
-	height:Ti.UI.SIZE
-},
-"TableViewRow[platform=ios]":{
-	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE
-},
-
-".form-textField": {
-	color:'black',
-	hintTextColor:'gray',
-	height:Ti.UI.SIZE	
-}
-
 "Label":{
     color:'black'
 },

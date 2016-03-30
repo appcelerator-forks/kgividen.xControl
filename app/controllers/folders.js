@@ -21,6 +21,8 @@ var init = function () {
 };
 
 function loadData() {
+	//set whether the view can scroll.  This is set in the options page.
+	$.scrollableView.setScrollingEnabled(!Titanium.App.Properties.getInt("swipeViewDisabled"));
 	//Get All of the devices and the folders they are in
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
 	var folderInViewTable = Alloy.Collections.folderInView.config.adapter.collection_name;

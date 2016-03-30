@@ -1,0 +1,39 @@
+<Alloy>
+    <Window id="win" class="vertical" title="Options">
+		<Menu platform="android">
+			<MenuItem title="Save and Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+		</Menu>
+		
+        <!-- <TableView class="tableview-form" platform="ios"> -->
+        <TableView class="tableview-form">
+            <TableViewSection>
+            	<TableViewRow><View class="view-row-separator"/></TableViewRow>
+            </TableViewSection>
+            <TableViewSection>
+                <HeaderView>
+                    <View class="view-headerview-form" >
+                        <Label class="label-tableviewsection-header" text="OPTIONS" />
+                        <View class="view-row-separator" />
+                    </View>
+                </HeaderView>
+                <TableViewRow layout="horizontal">
+                	<Label left="10">Disable View Swipe</Label>
+                	<Switch id="switchDisableViewSwipe"></Switch>
+		        </TableViewRow>
+            </TableViewSection>
+            <TableViewSection>
+            	<TableViewRow><View class="view-row-separator"/></TableViewRow>
+                <TableViewRow><Button id="closeBtn" onClick="closeWin">Save and Close</Button></TableViewRow>
+            </TableViewSection>
+        </TableView>
+        <!-- <ScrollView class="tableview-form" platform="android">
+            <View top="20%" class="row-container">
+				<View layout="horizontal" left="10" height="50" width="Ti.App.SIZE">
+		            <Button id="enableViewSwipeBtn" onClick="changeViewSwipe">Enabled</Button>
+	            	<Button id="disableViewSwipeBtn" onClick="changeViewSwipe">Disabled</Button>
+	        	</View>
+            </View>
+        </ScrollView> -->
+    </Window>
+</Alloy>
+
