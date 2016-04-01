@@ -75,9 +75,7 @@
 	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
 	                    <View class="horizontal sceneContainer">
 	                        <Label bindId="label" class="deviceItemLbl"/>
-	                        <View>
-	                        	<Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
-	                        </View>
+	                        <Button bindId="sceneBtnOn" class="sceneBtn" onClick="sceneOnBtn"/>
 	                        <Button bindId="sceneBtnOff" class="sceneBtn" onClick="sceneOffBtn"/>
 	                    </View>
 	            	</ItemTemplate>
