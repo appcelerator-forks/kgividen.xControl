@@ -1,6 +1,12 @@
 ---------------------------------
 Change Log
 ---------------------------------
+Version 1.5.4
+-----------
+Fixed issue on Android where the scene border wasn't turning yellow when pressed.
+
+
+
 Version 1.5.3
 -----------
 Performance Improvements

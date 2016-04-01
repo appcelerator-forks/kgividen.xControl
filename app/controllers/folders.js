@@ -350,21 +350,37 @@ function programBtnClick(e){
     device.runProgram(address, "").then(refresh());;
 }
 
-function flashBtn(btn) {
-	var styleOn = $.createStyle({
-		classes : 'sceneOn'
-	});
-	var styleOff = $.createStyle({
-		classes : 'sceneOff'
-	});
-	btn.applyProperties(styleOn);
-	setTimeout(function(){btn.applyProperties(styleOff);}, 500);	
+function flashBtn(e) {
+	//e.source doesn't work for android but does for iOS.
+	//But applyProperties doesn't work for android so we will branch 
+	//the code here since we want to abstract the styles as much as possible
+	if(OS_IOS) {	    
+		var styleOn = $.createStyle({
+			classes : 'sceneOn'
+		});
+		var styleOff = $.createStyle({
+			classes : 'sceneOff'
+		});
+		e.source.applyProperties(styleOn);
+		setTimeout(function(){e.source.applyProperties(styleOff);}, 500);	
+	} else {
+    	var item = e.section.items[e.itemIndex];
+	    item[e.bindId].borderColor = "yellow";
+		e.section.updateItemAt(e.itemIndex, item);
+		
+		setTimeout(function(){
+			item[e.bindId].borderColor = "#2b3032";
+			e.section.updateItemAt(e.itemIndex, item);
+			}, 500);	
+	}
 }
 
 function sceneOnBtn(e){
     var item = e.section.items[e.itemIndex];
     var address = item.btn.address;
-	flashBtn(e.source);
+    // item.sceneBtnOn.borderColor = "yellow";
+    e.section.updateItemAt(e.itemIndex, item);
+	flashBtn(e);
     if(!address){
         return;
     }
@@ -374,7 +390,7 @@ function sceneOnBtn(e){
 function sceneOffBtn(e){
     var item = e.section.items[e.itemIndex];
     var address = item.btn.address;
-	flashBtn(e.source);
+	flashBtn(e);
     if(!address){
         return;
     }
