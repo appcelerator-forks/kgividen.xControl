@@ -4,8 +4,7 @@ Change Log
 Version 1.5.4
 -----------
 Fixed issue on Android where the scene border wasn't turning yellow when pressed.
-
-
+Changed the slider handle to be silver and bigger for better control.
 
 Version 1.5.3
 -----------
