@@ -57,12 +57,12 @@
     max : 100,
     value : 0,
     width : "42%",
-    left : "49%"
+    left : "49%",
+    thumbImage : "/images/themes/default/metal-slider-handle.png"
 },
 ".slider[platform=ios if=Alloy.Globals.defaultTheme]" : {
     leftTrackImage : "/images/themes/default/metal-slider-progress.png",
     rightTrackImage : "/images/themes/default/metal-slider-channel.png",
-    thumbImage : "/images/themes/default/metal-slider-handle.png",
 },
 ".slider[platform=ios if=Alloy.Globals.blueTheme]" : {
 	height:"10",
