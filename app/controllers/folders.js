@@ -1,4 +1,4 @@
-var REFRESH_DELAY = 700;  // This is used because if we set the level and then immediately get the status the ISY returns the old status.
+var REFRESH_DELAY = 800;  // This is used because if we set the level and then immediately get the status the ISY returns the old status.
 
 var args = arguments[0] || {}, // Any passed in arguments will fall into this property
     folders = null, // Array placeholder for all folders
@@ -105,7 +105,6 @@ function sensorsFilter(collection) {
 }
 
 function processDevicesInFolders(devicesAndFolders){
-	Ti.API.info("devicesAndFolders: " + JSON.stringify(devicesAndFolders));
 	var devices = _.filter(devicesAndFolders, function(d){
 		return d.type != "folder";
 	});
@@ -119,19 +118,15 @@ function processDevicesInFolders(devicesAndFolders){
 		var foldersFound = _.where(listOfFolders, {
 			address : i
 		});
-		Ti.API.info("foldersFound: " + JSON.stringify(foldersFound));
 		_.each(foldersFound, function(f) {
 			//If it's not in a folder don't display it.
-			// if (f) {
-				//We need to clone this because we set the ViewId lower and if we have the same devices in multiple folders 
-				//in multiple views then the viewId has to be unique
-				// f.devices = ds;
-				var devicesCloned = [];
-				_.each(ds, function(d) {
-					devicesCloned.push(_.clone(d));	
-				});
-				f.devices = devicesCloned;
-			// }	
+			//We need to clone this because we set the ViewId lower and if we have the same devices in multiple folders 
+			//in multiple views then the viewId has to be unique
+			var devicesCloned = [];
+			_.each(ds, function(d) {
+				devicesCloned.push(_.clone(d));	
+			});
+			f.devices = devicesCloned;
 		});
 	});
 
@@ -142,8 +137,6 @@ function processDevicesInFolders(devicesAndFolders){
 	_.each(folders, function(folder) {
 		folder.devices = _.sortBy(folder.devices, 'deviceInFolderSortId');
 	});
-	
-	// Ti.API.info("folders: " + JSON.stringify(folders));
 	
 	var flattened = [];
 	
@@ -168,7 +161,6 @@ function processDevicesInFolders(devicesAndFolders){
 	
 	//get rid of the ids since we have some duplicate ones so the listview will load correctly
 	flattened = _.map(flattened, function(o) { return _.omit(o, 'id'); });
-	Ti.API.info("flattened: " + JSON.stringify(flattened));	
 	
 	return flattened;	
 }
@@ -192,7 +184,6 @@ $.sfSensors.addEventListener('change',function(e){
 
 //***************ON EVENTS CALLED FROM THE XML *********************
 function btnClick(e){
-	Ti.API.info("btnClick");
     var item = e.section.items[e.itemIndex];
     var itemType = item.btn.type;
     var address = item.btn.address;
@@ -312,16 +303,25 @@ Ti.App.addEventListener('refresh_ui', function(e){
 });
 
 function setStatus(){
-	// Ti.API.info("SetStatus SdeviceData: " + JSON.stringify(deviceData));
 	var b = Alloy.Collections.devicesAndStatus;
-	// Ti.API.info("b: " + JSON.stringify(b));
+	
+	var connection = device.getConnection();
+	//Convert headers from array to obj
+	var restHeaders = {};
+	if(connection && connection.baseURL){
+		var headers = {};
+		_.each(connection.headers, function(header){
+			restHeaders[header.name] = header.value;
+		});
+		connection.restHeaders = restHeaders;
+	} else {
+		return;
+	}
+	
+	
 	Alloy.Collections.isyStatus.fetch({
-		"url": "http://192.168.111.4/rest/status",
-		headers: 
-		{
-	        'Accept':'application/xml',
-	    	'Authorization':'Basic eGNvbnRyb2w6eGNvbnRyb2wx'
-	    },
+		"url": connection.baseURL + "status",
+		headers: connection.restHeaders,
 		success : function(data) {
 			data.each(function(d){
 				var models = b.where({address: d.id});
@@ -343,7 +343,7 @@ function setStatus(){
 			}
 		},
 		error : function() {
-			alert("Getting devices failed.  Please check the network settings.");
+			Ti.API.info("Getting devices failed.  Please check the network settings.");
 		}
 	});
 }
