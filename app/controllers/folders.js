@@ -1,3 +1,5 @@
+var REFRESH_DELAY = 700;  // This is used because if we set the level and then immediately get the status the ISY returns the old status.
+
 var args = arguments[0] || {}, // Any passed in arguments will fall into this property
     folders = null, // Array placeholder for all folders
     indexes = [];
@@ -23,6 +25,7 @@ var init = function () {
 function loadData() {
 	//set whether the view can scroll.  This is set in the options page.
 	$.scrollableView.setScrollingEnabled(!Titanium.App.Properties.getInt("swipeViewDisabled"));
+	
 	//Get All of the devices and the folders they are in
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
 	var folderInViewTable = Alloy.Collections.folderInView.config.adapter.collection_name;
@@ -40,11 +43,9 @@ function loadData() {
 	Alloy.Collections.device.fetch({
 		query : sql,
 		success : function(data) {
-			processDevicesInFolders(data.toJSON(), VIEW_ID_FAVORITES);
-			processDevicesInFolders(data.toJSON(), VIEW_ID_LIGHTS);
-			processDevicesInFolders(data.toJSON(), VIEW_ID_SCENES);
-			processDevicesInFolders(data.toJSON(), VIEW_ID_SENSORS);
-			refresh();
+			//We set this collection up so we can modify only the status in the setStatus
+			Alloy.Collections.devicesAndStatus.set(processDevicesInFolders(data.toJSON()));
+			setStatus();
 		},
 		error : function() {
 			Ti.API.debug("refreshDevicesInFolder Failed!!!");
@@ -52,20 +53,70 @@ function loadData() {
 	});
 }
 
-function processDevicesInFolders(devicesAndFolders, viewId) {
-	/** Filter the folders themselves out of the list before grouping.
-	 *filter out the ones that aren't for this viewId.
-	 */
+//Data events
+/**
+ * data event transform function for the ListView
+ * @param  {Object} model
+ */
+function transform(model) {
+	var transform = model.toJSON();
+	// Ti.API.info("transform: " + JSON.stringify(transform));
+	transform.template="dimmerOffTemplate";
+	
+	if(transform.type == "dimmer" && transform.value > 0) {
+		transform.template="dimmerOnTemplate";
+	}
+	
+	if(transform.type == "switch") {
+	 	if(transform.value > 0) {
+			transform.template="switchOnTemplate";
+		} else {
+			transform.template="switchOffTemplate";
+		}
+	}
+	
+	if(transform.type=="folder"){
+		transform.template="groupLblTemplate";	
+	}
+	
+	if(transform.type=="sensor"){
+		transform.value = (transform.formatted == "On") ? true : false;
+		transform.template="sensorTemplate";	
+	}
+	
+	if(transform.type=="scene"){
+		transform.template="sceneTemplate";	
+	}
+
+	return transform;
+}
+
+function favFilter(collection) {
+	// Ti.API.info("collection: " + JSON.stringify(collection));
+	return collection.where({ViewId:VIEW_ID_FAVORITES});
+}
+function lightsFilter(collection) {
+	return collection.where({ViewId:VIEW_ID_LIGHTS});
+}
+function scenesFilter(collection) {
+	return collection.where({ViewId:VIEW_ID_SCENES});
+}
+function sensorsFilter(collection) {
+	return collection.where({ViewId:VIEW_ID_SENSORS});
+}
+
+function processDevicesInFolders(devicesAndFolders){
+	Ti.API.info("devicesAndFolders: " + JSON.stringify(devicesAndFolders));
 	var listOfFolders = [];
 	var devices = _.filter(devicesAndFolders, function(folder) {
-		if (folder.type == "folder" && folder.ViewId == viewId) {
+		// if (folder.type == "folder" && folder.ViewId == viewId) {
+		if (folder.type == "folder") {
 			listOfFolders.push(folder);
 		} else {
 			return folder.type != "folder";
 		}
 
 	});
-	
 	//Group all the devices that are in the same Folder
 	var devicesGrouped = _.groupBy(devices, 'FolderAddress');
 
@@ -87,235 +138,44 @@ function processDevicesInFolders(devicesAndFolders, viewId) {
 	_.each(folders, function(folder) {
 		folder.devices = _.sortBy(folder.devices, 'deviceInFolderSortId');
 	});
-
-	var sections = [];
-	if (folders && folders.length > 0) {
-		/**
-		 * Setup our Indexes and Sections Array for building out the ListView components
-		 *
-		 */
-		indexes = [];
-		
-
-
-
-		/**
-		 * Iterate through each folder and prepare the data for the ListView
-		 * (Leverages the UnderscoreJS _.each function)
-		 */
-		_.each(folders, function(folder, i) {
-			/**
-			 * Take the group data that is passed into the function, and parse/transform
-			 * it for use in the ListView templates as defined in the folders.xml file.
-			 */
-			var dataToAdd = preprocessForListView(folder.devices);
-			/**
-			 * Check to make sure that there is data to add to the table,
-			 * if not lets exit
-			 */
-			if (dataToAdd.length < 1)
-				return;
-
-			/**
-			 * Lets take the name of the Folder and push it onto the index
-			 * Array - this will be used to generate the indices for the ListView on IOS
-			 */
-			indexes.push({
-				index : indexes.length,
-				title : folder.displayName
-			});
-
-			/**
-			 * Create the ListViewSection header view
-			 */
-
-			var sectionHeader = Ti.UI.createView();
-
-			/**
-			 * Create and Add the Label to the ListView Section header view
-			 */
-			var sectionLabel = Ti.UI.createLabel({
-				text : folder.displayName
-			});
-
-			/**
-			 * Add the correct style to the label dynamically.
-			 */
-			var rowGroupStyle = $.createStyle({
-				classes : 'groupLbl'
-			});
-			sectionLabel.applyProperties(rowGroupStyle);
-
-			sectionHeader.add(sectionLabel);
-
-			/**
-			 * Create a new ListViewSection, and ADD the header view created above to it.
-			 */
-			var section = Ti.UI.createListSection({
-				headerView : sectionHeader
-			});
-
-			/**
-			 * Add Data to the ListViewSection
-			 */
-			section.items = dataToAdd;
-
-			/**
-			 * Push the newly created ListViewSection onto the `sections` array. This will be used to populate
-			 * the ListView
-			 */
-			sections.push(section);
-		});
-
-	} else {
-			var sectionHeader = Ti.UI.createView();
-			
-			//There's gotta be a better place for this.
-			if(viewId===VIEW_ID_FAVORITES){
-				viewName = "Favorites";	
-			} else if (viewId===VIEW_ID_LIGHTS){
-				viewName = "Lights";	
-			} else if (viewId==VIEW_ID_SCENES) {
-				viewName = "Scenes";	
-			} else if (viewId==VIEW_ID_SENSORS) {
-				viewName = "Sensors";	
-			}
-			/**
-			 * Create and Add the Label to the ListView Section header view
-			 */
-			var sectionLabel = Ti.UI.createLabel({
-				text : "Add something to this " + viewName +" view by choosing Edit Mode in the right menu."
-			});	
-			
-			var rowGroupStyle = $.createStyle({
-				classes : 'infoLbl'
-			});
-			
-			sectionLabel.applyProperties(rowGroupStyle);
-			sectionHeader.add(sectionLabel);
-			
-			var section = Ti.UI.createListSection({
-				headerView : sectionHeader
-			});
-			
-			sections.push(section);
-	}
 	
-		//There is probably a better way to do this instead of hardcoding the views
-	if(viewId===VIEW_ID_FAVORITES){
-		$.favoritesListView.sections = sections;	
-	} else if (viewId===VIEW_ID_LIGHTS){
-		$.lightsListView.sections = sections;	
-	} else if (viewId==VIEW_ID_SCENES) {
-		$.scenesListView.sections = sections;
-	} else if (viewId==VIEW_ID_SENSORS) {
-		$.sensorsListView.sections = sections;
-	}
-}
-
-/**
- *	Convert an array of data from a JSON format into a format that can be added to the ListView
- *
- * 	@param {Object} Raw data elements from the JSON file.
- */
-var preprocessForListView = function(rawData) {
-	/**
-	 * Using the rawData collection, we map data properties of the folders in this array to an array that maps an array to properly
-	 * display the data in the ListView based on the templates defined (levearges the _.map Function of UnderscoreJS)
-	 */
-	return _.map(rawData, function(item) {
-		/**
-		 * Create the new device object which is added to the Array that is returned by the _.map function.
-		 */
-		if(item.type == "scene") {
-			item.template = "sceneTemplate";	
-		} else if (item.type == "sensor") {
-			item.template = "sensorTemplate";
-		} else if (item.type == "dimmer"){
-			item.template = "dimmerTemplate";
-		} else if (item.type == "switch"){
-			item.template = "switchTemplate";
-		} else if (item.type == "program"){
-			item.template = "programTemplate";
-		} else {
-			item.template = "dimmerTemplate";
-		}
-		return {
-			template : item.template,
-			properties : {
-				searchableText : item.displayName,
-				modelId : item.id,
-				light : item,
-			},
-			btn : {
-				title : item.displayName,
-				address : item.address,
-				type : item.type
-			},
-			slider : {
-				value : item.sliderVal
-			},
-			sliderLbl : {
-				text : item.sliderVal
-			},
-			label: {
-				text: item.displayName
-			},
-			switchLblStatus: {
-				text:"checking..."
-			},
-			sceneBtnOn: {
-				title:"On"
-			},
-			sceneBtnOff: {
-				title:"Off"
-			},
-			sensorLblStatus: {
-				text:"checking..."
-			},
-			sensorSwitch: {
-				value:"off"
-			}
-		};
+	var flattened = [];
+	
+	//Now flatten out the devices so they can be in the listView
+	_.each(folders, function(folder) {
+		flattened.push(folder);
+		_.each(folder.devices, function(d) {
+			d.ViewId = folder.ViewId;
+			flattened.push(d);
+		});
 	});
-};
-
-/**
- * event listener set via view to provide a search of the ListView.
- * @param  {Object} e Event
- */
-
-$.sfLights.addEventListener('change',function(e){
-	$.lightsListView.searchText = e.value;
-});
-
-$.sfScenes.addEventListener('change',function(e){
-	$.scenesListView.searchText = e.value;
-});
-
+	
+	//Now that we're flattened let's get rid of the devices under the folder
+	_.each(flattened, function(item) {
+		if(item.devices) delete item.devices;
+	});
+	
+	// Ti.API.info("flattened: " + JSON.stringify(flattened));
+	return flattened;	
+}
 
 //***************ON EVENTS CALLED FROM THE XML *********************
 function btnClick(e){
+	Ti.API.info("btnClick");
     var item = e.section.items[e.itemIndex];
     var itemType = item.btn.type;
     var address = item.btn.address;
 
-
     if(!address){
         return;
     }
-    Ti.API.info("address: " + address);
-    if(itemType == "dimmer"){
-        device.toggle(address)
-            .then(refresh());
-    } else if(itemType == "switch"){
-        device.toggle(address)
-            .then(refresh());
+    if(itemType == "dimmer" || itemType =="switch"){
+    	device.toggle(address);
+    	setTimeout(refresh, REFRESH_DELAY);
     }
 }
 
 function sendSliderVal(e) {
-    Ti.API.debug("sendSliderVal");
     var item = e.section.getItemAt(e.itemIndex);
     Ti.API.debug("e: " + JSON.stringify(e));
     Ti.API.debug("address: " + JSON.stringify(item.btn.address));
@@ -325,14 +185,14 @@ function sendSliderVal(e) {
 
     if(address && itemType == "slider") {
         var level = Math.round(e.source.value);
-        device.setLevel(address, level)
-            .then(refresh());
+        device.setLevel(address, level);
+        setTimeout(refresh, REFRESH_DELAY);
 
         item.sliderLbl.text = level;  //Slider label
         item.slider.value = level;
 
         //TODO Android makes the slider jerky if you update it
-        if(osname == "ios") {
+        if(OS_IOS) {
             e.section.updateItemAt(e.itemIndex, item);  //update the GUI
         }
     }
@@ -413,96 +273,49 @@ function sceneOffBtn(e){
 // }
 //
 var refresh = function (){
-    return device.getAllDevicesStatus().then(updateUI);
+    setStatus();
 };
 
 Ti.App.addEventListener('refresh_ui', function(e){
 	loadData();
 });
 
-function turnBtnOn(item) {
-	// Ti.API.info("turnOnBtn item: " + JSON.stringify(item));
-	//todo: Get this hardcoded styling out of here tried applyProperties but that doesn't work here...
-	if(Alloy.Globals.blueTheme){
-		item.btn.backgroundColor='#31B3E7';	
-	}else {
-	    item.btn.backgroundColor="#272b2c";
-	    item.btn.backgroundGradient = {};   
-	    // item.btn.borderColor="#2b3032";
-	    item.btn.borderColor="yellow";
-	    item.btn.borderRadius="5";
-		item.btn.borderWidth="1"; 
-	}	
-	
-	return item;
+function setStatus(){
+	// Ti.API.info("SetStatus SdeviceData: " + JSON.stringify(deviceData));
+	var b = Alloy.Collections.devicesAndStatus;
+	// Ti.API.info("b: " + JSON.stringify(b));
+	Alloy.Collections.isyStatus.fetch({
+		"url": "http://192.168.111.4/rest/status",
+		headers: 
+		{
+	        'Accept':'application/xml',
+	    	'Authorization':'Basic eGNvbnRyb2w6eGNvbnRyb2wx'
+	    },
+		success : function(data) {
+			data.each(function(d){
+				var models = b.where({address: d.id});
+				//This sets the status for each individual model.
+				_.each(models, function(m) {
+					// //TODO this should be in the isyStatus.js model but it isn't working
+					var value = Math.round(d.get("property").value / 255 * 100);
+					m.set("value", value);
+					m.set("formatted", d.get("property").formatted);
+					m.set("uom", d.get("property").uom);
+				});
+			});
+			// for iOS end the refreshing animation
+			if (OS_IOS) {
+				$.refreshControlFav.endRefreshing();
+				$.refreshControlLight.endRefreshing();
+				$.refreshControlScene.endRefreshing();
+				$.refreshControlSensor.endRefreshing();
+			}
+		},
+		error : function() {
+			alert("Getting devices failed.  Please check the network settings.");
+		}
+	});
 }
-
-function turnBtnOff(item) {
-	if(Alloy.Globals.blueTheme){
-		item.btn.backgroundColor='#6CC5CF';
-	}else {
-		item.btn.backgroundColor = null;	
-		item.btn.backgroundImage = '';	
-	    item.btn.backgroundGradient = {
-		    type: 'linear',
-		    colors: [ { color: '#3b4b55', offset: 0.0 }, { color: '#2a353c', offset: 0.50}, { color: '#3b4b55', offset: 1.0 } ]
-	    };
-	    item.btn.borderRadius="5";
-		item.btn.borderWidth="1"; 
-	    item.btn.borderColor = "#343a3c";
-	}	
-	
-	return item;
-}
-
-function updateUI(nodesByAddressAndStatus){
-	//Each view in the scrollableView i.e. favorites, lighting, etc.
-    _.each($.scrollableView.getViews(), function(view){
-        var viewSections = view.getSections();
-        //We use viewSections[0] because we only have one section on each of the views.
-        _.each(viewSections, function(section){
-        	var items = (section) ? section.getItems() : null;
-	        if (section && items){
-	            _.each(items, function(item, index){
-	            	if(!item.btn) {
-	            		return;
-	            	}
-	            	
-	            	var current = _.findWhere(nodesByAddressAndStatus, {address:item.btn.address});
-                    if(!current) {
-                    	return;
-                    }
-	                if (item.btn.type == "sensor") {
-	                	item.sensorLblStatus.text = (current.formatted && current.formatted != " ") ? current.formatted : "unknown";
-	                	item.sensorSwitch.value = (current.value > 0) ? true : false;
-                	} else { // else if item.btn.type == "dimmer" || item.btn.type == "switch" or anything else
-	                    if(current.level > 0){
-	                    	item = turnBtnOn(item);
-	                    } else {
-	                    	item = turnBtnOff(item);
-	                    }
-						if (item.slider) {
-		                    item.slider.value = item.sliderLbl.text = current.level;
-		//                    viewSections[0].updateItemAt(index,item); //This would be great but it makes the refresh VERY slow.
-						}
-						// This is for switches to show a label instead of a slider.
-						item.switchLblStatus.text = (current.formatted && current.formatted != " ") ? current.formatted : "unknown";
-					}
-            	});
-       	 	}
-        	section.setItems(items);	
-        });
-    });
-	// for iOS end the refreshing animation
-	if (OS_IOS) {
-		//There should be a better way to do this rather than duplicate the control
-		// but if the same one is added to multiple tableViews things crap out
-		$.refreshControlFav.endRefreshing();
-		$.refreshControlLight.endRefreshing();
-		$.refreshControlScene.endRefreshing();
-	}
-}
-
 
 /**
  * Initialize View

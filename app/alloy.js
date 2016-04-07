@@ -23,6 +23,13 @@ Alloy.Collections.device = Alloy.createCollection("Device");
 Alloy.Collections.folderInView = Alloy.createCollection("FolderInView");
 Alloy.Collections.deviceInFolder = Alloy.createCollection("DeviceInFolder");
 Alloy.Collections.programs = Alloy.createCollection("Program");
+Alloy.Collections.isyStatus = Alloy.createCollection("IsyStatus");
+
+//This is a temporary collection used for the listviews
+// since we need all of the devices but then later through REST 
+//want to update the status of those devices.
+var collection = Backbone.Collection.extend({});
+Alloy.Collections.devicesAndStatus = new collection();
 
 var osname = "android";
 if (Ti.Platform.osname === 'iphone' || Ti.Platform.osname === 'ipad') {

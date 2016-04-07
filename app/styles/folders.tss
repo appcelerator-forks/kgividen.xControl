@@ -173,7 +173,29 @@
 },
 
 // Button Styles
-".btn[if=Alloy.Globals.defaultTheme]" : {
+".btnOff[if=Alloy.Globals.defaultTheme]" : {
+    width : "45%",
+    height : "80%",
+    left : "2%",
+    color: "#fff",
+    font : {
+        fontSize : "20%",
+        fontWeight : "bold",
+        fontFamily : "Helvetica Neue"
+    },
+    borderRadius:"5",
+    borderWidth:"1",  
+	backgroundColor :null,	
+	backgroundImage : '',	  
+    backgroundGradient: {
+	    type: 'linear',
+	    colors: [ { color: '#3b4b55', offset: 0.0 }, { color: '#2a353c', offset: 0.50}, { color: '#3b4b55', offset: 1.0 } ]
+    },
+    borderColor:"#343a3c",
+    horizontalWrap : false,
+    zIndex : 5
+},
+".btnOn[if=Alloy.Globals.defaultTheme]" : {
     width : "45%",
     height : "80%",
     left : "2%",
@@ -185,17 +207,32 @@
     },
     borderRadius:"5",
     borderWidth:"1",    
-    backgroundGradient: {
-	    type: 'linear',
-	    colors: [ { color: '#3b4b55', offset: 0.0 }, { color: '#2a353c', offset: 0.50}, { color: '#3b4b55', offset: 1.0 } ]
-    },
-    borderColor:"#2b3032",
+    backgroundGradient: {},
+    backgroundColor : "#272b2c",
+    borderColor:"yellow",
     horizontalWrap : false,
     zIndex : 5
 },
 
-".btn[if=Alloy.Globals.blueTheme]" : {
+".btnOff[if=Alloy.Globals.blueTheme]" : {
     backgroundColor : "#6CC5CF",
+    backgroundSelectedColor : "#31B3E7",
+    backgroundGradient :{},   
+    borderRadius: 10,
+    color: "#fff",
+    width : "45%",
+    height : "80%",
+    left : "2%",
+    font : {
+        fontSize : "20%",
+        fontWeight : "bold",
+        fontFamily : "Helvetica Neue"
+    },
+    horizontalWrap : false,
+    zIndex : 5
+}
+".btnOn[if=Alloy.Globals.blueTheme]" : {
+    backgroundColor : "#31B3E7",
     backgroundSelectedColor : "#31B3E7",
     borderRadius: 10,
     color: "#fff",
