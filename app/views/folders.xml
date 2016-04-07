@@ -88,10 +88,14 @@
 				</Templates>
 			</ListView>
 			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
+				<HeaderView>
+					<TextField id="sfLights" class="searchField"></TextField>
+				</HeaderView>
 		       	<!-- <ListSection>
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
         		</ListSection> -->
+        		            <!-- Sets ListView's headerView property -->
 		       	<ListSection dataFilter="lightsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
@@ -105,6 +109,7 @@
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
 						sensorSwitch:value="{formatted}"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlLight" platform="ios" onRefreshstart="refresh" />
@@ -170,6 +175,9 @@
 				</Templates>
 			</ListView>
             <ListView id="scenesListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
+				<HeaderView>
+					<TextField id="sfScenes" class="searchField"></TextField>
+				</HeaderView>
 		       	<!-- <ListSection>
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
@@ -187,6 +195,7 @@
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
 						sensorSwitch:value="{formatted}"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlScene" platform="ios" onRefreshstart="refresh" />
@@ -252,6 +261,9 @@
 				</Templates>
 			</ListView>
             <ListView id="sensorsListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
+				<HeaderView>
+					<TextField id="sfSensors" class="searchField"></TextField>
+				</HeaderView>
 		       	<!-- <ListSection>
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
@@ -269,6 +281,7 @@
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
 						sensorSwitch:value="{value}"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlSensor" platform="ios" onRefreshstart="refresh" />

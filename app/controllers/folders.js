@@ -44,7 +44,7 @@ function loadData() {
 		query : sql,
 		success : function(data) {
 			//We set this collection up so we can modify only the status in the setStatus
-			Alloy.Collections.devicesAndStatus.set(processDevicesInFolders(data.toJSON()));
+			Alloy.Collections.devicesAndStatus.reset(processDevicesInFolders(data.toJSON()));
 			setStatus();
 		},
 		error : function() {
@@ -60,7 +60,7 @@ function loadData() {
  */
 function transform(model) {
 	var transform = model.toJSON();
-	// Ti.API.info("transform: " + JSON.stringify(transform));
+
 	transform.template="dimmerOffTemplate";
 	
 	if(transform.type == "dimmer" && transform.value > 0) {
@@ -92,7 +92,6 @@ function transform(model) {
 }
 
 function favFilter(collection) {
-	// Ti.API.info("collection: " + JSON.stringify(collection));
 	return collection.where({ViewId:VIEW_ID_FAVORITES});
 }
 function lightsFilter(collection) {
@@ -107,28 +106,33 @@ function sensorsFilter(collection) {
 
 function processDevicesInFolders(devicesAndFolders){
 	Ti.API.info("devicesAndFolders: " + JSON.stringify(devicesAndFolders));
-	var listOfFolders = [];
-	var devices = _.filter(devicesAndFolders, function(folder) {
-		// if (folder.type == "folder" && folder.ViewId == viewId) {
-		if (folder.type == "folder") {
-			listOfFolders.push(folder);
-		} else {
-			return folder.type != "folder";
-		}
-
+	var devices = _.filter(devicesAndFolders, function(d){
+		return d.type != "folder";
 	});
+	var listOfFolders = _.where(devicesAndFolders, {type:"folder"});
+	
 	//Group all the devices that are in the same Folder
 	var devicesGrouped = _.groupBy(devices, 'FolderAddress');
 
 	//Find the folder where the devices should be located and add the devices to that folder
 	_.each(devicesGrouped, function(ds, i) {
-		var f = _.findWhere(listOfFolders, {
+		var foldersFound = _.where(listOfFolders, {
 			address : i
 		});
-		//If it's not in a folder don't display it.
-		if (f) {
-			f.devices = ds;
-		}
+		Ti.API.info("foldersFound: " + JSON.stringify(foldersFound));
+		_.each(foldersFound, function(f) {
+			//If it's not in a folder don't display it.
+			// if (f) {
+				//We need to clone this because we set the ViewId lower and if we have the same devices in multiple folders 
+				//in multiple views then the viewId has to be unique
+				// f.devices = ds;
+				var devicesCloned = [];
+				_.each(ds, function(d) {
+					devicesCloned.push(_.clone(d));	
+				});
+				f.devices = devicesCloned;
+			// }	
+		});
 	});
 
 	//sort all the folders
@@ -138,6 +142,8 @@ function processDevicesInFolders(devicesAndFolders){
 	_.each(folders, function(folder) {
 		folder.devices = _.sortBy(folder.devices, 'deviceInFolderSortId');
 	});
+	
+	// Ti.API.info("folders: " + JSON.stringify(folders));
 	
 	var flattened = [];
 	
@@ -155,9 +161,34 @@ function processDevicesInFolders(devicesAndFolders){
 		if(item.devices) delete item.devices;
 	});
 	
-	// Ti.API.info("flattened: " + JSON.stringify(flattened));
+	//filter out everything that's not on a view so we don't have to iterate through it.
+	flattened = _.filter(flattened, function(item){
+		return item.ViewId != null;
+	});
+	
+	//get rid of the ids since we have some duplicate ones so the listview will load correctly
+	flattened = _.map(flattened, function(o) { return _.omit(o, 'id'); });
+	Ti.API.info("flattened: " + JSON.stringify(flattened));	
+	
 	return flattened;	
 }
+
+/**
+ * event listener set via view to provide a search of the ListView.
+ * @param  {Object} e Event
+ */
+
+$.sfLights.addEventListener('change',function(e){
+	$.lightsListView.searchText = e.value;
+});
+
+$.sfScenes.addEventListener('change',function(e){
+	$.scenesListView.searchText = e.value;
+});
+
+$.sfSensors.addEventListener('change',function(e){
+	$.sensorsListView.searchText = e.value;
+});
 
 //***************ON EVENTS CALLED FROM THE XML *********************
 function btnClick(e){
