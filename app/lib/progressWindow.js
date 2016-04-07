@@ -86,7 +86,7 @@ exports.showIndicator = function(_messageString, _progressBar) {
   // after 15 seconds
   progressTimeout = setTimeout(function() {
     exports.hideIndicator();
-  }, 35000);
+  }, 60000);
 };
 
 exports.setProgressValue = function(_value) {
