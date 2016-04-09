@@ -1,4 +1,8 @@
-var xhr = require('/qxhr');
+var reste = require("reste");
+var api = new reste();
+
+var REFRESH_DELAY = 800;  // This is used because if we set the level and then immediately get the status the ISY returns the old status.
+
 var deviceTypes = require('deviceTypes').types;
 var connection = {};
 //TODO INIT connection so it loads it for ever instance.
@@ -12,20 +16,78 @@ exports.init = function() {
         var authString = conn.username + ':' + conn.password;
         var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());
         //This is the connection we'll send to xhr
-        connection.headers = [
-            {
-                name: 'Accept',
-                value: 'application/xml'},
-            {
-                name: 'Authorization',
-                value: 'Basic ' + b64encodedAuthString
-            }
-
-        ];
-
+        connection.headers = {
+        	'Accept':'application/xml', 
+        	'Authorization':'Basic ' + b64encodedAuthString
+        };
         connection.connectiontype = 'GET';
         connection.username = conn.username; //This is so we can throw an error and let them know what the user was.
-        return true;
+
+	    api.config({
+		    debug: true, // allows logging to console of ::REST:: messages
+		    autoValidateParams: false, // set to true to throw errors if <param> url properties are not passed
+		    timeout: 10000,
+		    url: connection.baseURL,
+		    requestHeaders: connection.headers,
+		    methods: [{
+		        name: "getDeviceStatus",
+		        get: "status/<address>",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error getting the status!");
+		        }
+		    },{
+		        name: "deviceFastOn",
+		        get: "nodes/<address>/cmd/DFON",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error setting device fast on!");
+		        }
+		    },{
+		        name: "deviceFastOff",
+		        get: "nodes/<address>/cmd/DFOF",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error setting device fast off!");
+		        }
+		    },{
+		        name: "deviceOn",
+		        get: "nodes/<address>/cmd/DON/<level>",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error setting device on!");
+		       }
+		    },{
+		        name: "deviceOff",
+		        get: "nodes/<address>/cmd/DOF",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error setting device off!");
+		       }
+		    },{
+		        name: "runProgram",
+		        get: "programs/<id>/run/<runType>",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error running program");
+		       }
+		    },{
+		        name: "enableProgram",
+		        get: "programs/<id>/enable",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error enabling program");
+		       }
+	        },{
+		        name: "disableProgram",
+		        get: "programs/<id>/disable",
+		        onError: function(e, callback){
+		            Ti.API.info("There was an error disabling program");
+		       }
+	        }
+		    ],
+		    onError: function(e) {
+		        Ti.API.info("There was an error accessing the API");
+		    },
+		    onLoad: function(e, callback) {
+		        callback(e);
+		    }
+		});
+		
+    	return true;
     }
 };
 
@@ -38,89 +100,86 @@ exports.getConnection = function () {
 };
 
 // "INTERFACE" calls.  These are calls that all hardware devices will have.
-exports.setLevel = function (address, l){
+exports.setLevel = function (address, l, callback){
+	var encodedAddress = Ti.Network.encodeURIComponent(address);
     var level = Math.round(l / 100 * 255);
     if (level == 0) {
-        return deviceOff(address);
+        api.deviceOff({address: encodedAddress}, function(data){
+        	callback && setTimeout(callback, REFRESH_DELAY);
+        });
     } else {
-        return deviceOn(address, level);
+        api.deviceOn({address: encodedAddress, level:level}, function(data){
+        	callback && setTimeout(callback, REFRESH_DELAY);
+        });
     }
 };
 
-exports.toggle = function (address){
-    return deviceGetStatus(address).then(function (data){
-        var deviceStatus = processDeviceStatusXML(data);
-        if (deviceStatus == 'Off' || deviceStatus == "0%" || deviceStatus == "0" || deviceStatus == "unlocked") {
-            deviceFastOn(address); 
-        } else {
-            deviceFastOff(address);
-        }
-    });
+exports.toggle = function (address, callback){
+    var encodedAddress = Ti.Network.encodeURIComponent(address);
+	api.getDeviceStatus({address: encodedAddress}, function(data){
+	    var deviceStatus = processDeviceStatusXML(data);
+	    if (deviceStatus == 'Off' || deviceStatus == "0%" || deviceStatus == "0" || deviceStatus == "unlocked") {
+	        api.deviceFastOn({address: encodedAddress}, function(data){
+		    	//we have to add a slight delay otherwise the ISY returns the status of what it was before the fastOn fastOff executed even in the callback.
+				callback && setTimeout(callback, REFRESH_DELAY);
+	        });
+	    } else {
+	        api.deviceFastOff({address: encodedAddress}, function(data){
+				//we have to add a slight delay otherwise the ISY returns the status of what it was before the fastOn fastOff executed even in the callback.
+        		callback && setTimeout(callback, REFRESH_DELAY);	
+	        });
+	    }
+	   
+	});
 };
 
-exports.runProgram = function(id, runType){
-    return runProgram(id, runType);
+
+exports.runProgram = function(id, runType, callback){
+	var encodedId = Ti.Network.encodeURIComponent(id);
+	api.runProgram({id:encodedId,runType:runType}, function(data){
+		callback && callback();	
+	});
 };
 
-exports.enableProgram = function(id){
-    enableProgram(id);
+exports.enableProgram = function(id, callback){
+	var encodedId = Ti.Network.encodeURIComponent(id);
+	api.enableProgram({id:encodedId}, function(data){
+		callback && callback();	
+	});
 };
 
-exports.disableProgram = function(id){
-    disableProgram(id);
+exports.disableProgram = function(id, callback){
+	var encodedId = Ti.Network.encodeURIComponent(id);
+	api.disableProgram({id:encodedId}, function(data){
+		callback && callback();	
+	});
 };
 
-exports.sceneOn = function(address){
-    Ti.API.debug("Scene On!");
+exports.sceneOn = function(address, callback){
+	var encodedAddress = Ti.Network.encodeURIComponent(address);
     var level = 255;
-    return deviceOn(address, level);
+    api.deviceOn({address: encodedAddress, level:level}, function(data){
+    	callback && callback();
+    });
+    
 };
 
-exports.sceneOff = function(address){
-    return deviceOff(address);
+exports.sceneOff = function(address, callback){
+	var encodedAddress = Ti.Network.encodeURIComponent(address);
+    api.deviceOff({address: encodedAddress}, function(data){
+    	callback && callback();
+    });
 };
 
 //Should be in the format of
 //[{address: "adress of device",
 // level: "level of device"}]
-exports.getAllDevicesStatus = function(){
-    return getAllDevicesStatus();
-};
 
 exports.getListOfDevices = function(){
     return getListOfDevices();
 };
 
 //HELPER METHODS
-function getAllDevicesStatus(){
-    //We need this delay cause the response can come back faster than when it's updated by a toggle.  i.e. The rest will update but not the one that toggled it.
-    return delayed(1000)
-        .then(devicesGetStatus)
-        .then(function(data){
-            var deferred = Q.defer();
-            // var delay = Q.delay();
-            var xml = Ti.XML.parseString(data);
-            var nodes = xml.documentElement.getElementsByTagName('node');
-            var nodesJSON = convertNodesStatusToJson(nodes);
-            //get all the nodes and addresses into a nice little array
-            var nodesByAddressAndStatus = [];
-            _.each(nodesJSON, function (item) {
-                var itemTmp = {};
-                itemTmp.address = item.id;
-                itemTmp.level = Math.round(item.level / 255 * 100);
-                itemTmp.formatted = item.formatted;
-                nodesByAddressAndStatus.push(itemTmp);
-            });
-            deferred.resolve(nodesByAddressAndStatus);
-            return deferred.promise;
-        });
-}
-
-function delayed(ms) {
-    var defer = Q.defer();
-    setTimeout(defer.resolve, ms);
-    return defer.promise;
-}
 
 //This should return something like this.  Basically it's a list of folders and then the objects in those folders.
 //[{"name":"Back Bed and Bath","id":"8598"},{"id":"20 93 AA 1","name":"Bathroom","parent":"8598","type":"light"},{"id":"20 A8 14 1","name":"Baby Room","parent":"8598","type":"light"},{"id":"20 AF 5F 1","name":"Office","parent":"8598","type":"light"},{"id":"26 88 8D 1","name":"Baby Light On","parent":"8598","type":"light"},{"id":"26 88 8D 2","name":"Baby Light Read","parent":"8598","type":"light"},{"id":"26 88 8D 3","name":"Baby Light Bedtime","parent":"8598","type":"light"},{"id":"26 88 8D 4","name":"Baby Light Very Dim","parent":"8598","type":"light"}]
@@ -174,64 +233,6 @@ var getFoldersAndNodes = function() {
     return xhr.loadUrl(connection);
 };
 
-var getPrograms = function() {
-    connection.url = connection.baseURL + 'programs/';
-    return xhr.loadUrl(connection);
-};
-
-var deviceOff = function(address) {
-    var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DOF/';
-    return xhr.loadUrl(connection);
-};
-
-var deviceOn = function(address,level) {
-    var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DON/' + level;
-    return xhr.loadUrl(connection);
-};
-
-var deviceFastOn = function(address, level) {
-    var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DFON/' + level;
-    return xhr.loadUrl(connection);
-};
-
-var deviceFastOff = function(address) {
-    var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = connection.baseURL + 'nodes/' + encodedAddress + '/cmd/DFOF/';
-    return xhr.loadUrl(connection);
-};
-
-var deviceGetStatus = function(address) {
-    var encodedAddress = Ti.Network.encodeURIComponent(address);
-    connection.url = connection.baseURL + 'status/' + encodedAddress;
-
-    return xhr.loadUrl(connection);
-};
-
-var devicesGetStatus = function() {
-    connection.url = connection.baseURL + 'status';
-    return xhr.loadUrl(connection);
-};
-
-var runProgram = function(id, runType) {
-    var encodedId = Ti.Network.encodeURIComponent(id);
-    connection.url = connection.baseURL + 'programs/' + encodedId + '/run' + runType;
-    return xhr.loadUrl(connection);
-};
-
-var enableProgram = function(id) {
-    var encodedId = Ti.Network.encodeURIComponent(id);
-    connection.url = connection.baseURL + 'programs/' + encodedId + '/enable';
-    return xhr.loadUrl(connection);
-};
-
-var disableProgram = function(id) {
-    var encodedId = Ti.Network.encodeURIComponent(id);
-    connection.url = connection.baseURL + 'programs/' + encodedId + '/disable';
-    return xhr.loadUrl(connection);
-};
 //*************************************HELPER METHODS*************************************
 var processDeviceStatusXML = function(xmlData) {
     var doc = Ti.XML.parseString(xmlData);
