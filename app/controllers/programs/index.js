@@ -35,8 +35,7 @@ function closeProgramsBtnClicked(e) {
 }
 
 function loadFoldersCallback(e) {
-	Ti.API.info("e: " + JSON.stringify(e));
-//create the devices controller with the model and get its view
+	//create the devices controller with the model and get its view
     var params= {
     	"parentId" : e.row.folderId,
         "navWin" : $.navWin
