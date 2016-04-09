@@ -3,7 +3,7 @@ $.navWin = {};
 function getPrograms(connection){
 	Alloy.Collections.programs.fetch({
 		"url": connection.baseURL + "programs?subfolders=true",
-		headers: connection.restHeaders,
+		headers: connection.headers,
 		success : function(data) {
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
 	        // });
@@ -20,17 +20,10 @@ function getPrograms(connection){
 	});
 }
 
-function refresh(connection){
+var refresh = function(connection){
 	device.init();
 	var connection = device.getConnection();
-	//Convert headers from array to obj
-	var restHeaders = {};
 	if(connection && connection.baseURL){
-		var headers = {};
-		_.each(connection.headers, function(header){
-			restHeaders[header.name] = header.value;
-		});
-		connection.restHeaders = restHeaders;
 		getPrograms(connection);
 	} else {
 		if (OS_IOS) {
@@ -38,7 +31,7 @@ function refresh(connection){
 		}
 		Ti.API.info("error refreshing no connection");
 	}	
-}	
+};	
 
 refresh();
 

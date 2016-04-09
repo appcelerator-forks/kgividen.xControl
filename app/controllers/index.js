@@ -66,7 +66,7 @@ function rowSelect(e) {
             Alloy.createController("debug").getView().open();
             break;
         case "refresh":
-            Ti.App.fireEvent('refresh_ui');
+            Ti.App.fireEvent('refresh_status');
             break;
         default:
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);

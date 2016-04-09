@@ -3,10 +3,8 @@ var args = arguments[0] || {};
 function getPrograms(connection){
 	Alloy.Collections.programs.fetch({
 		"url": connection.baseURL + "programs?subfolders=true",
-		headers: connection.restHeaders,
+		headers: connection.headers,
 		success : function(data) {
-	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
-	        // });
 			if (OS_IOS) {
 				$.refreshControl.endRefreshing();
 			}
@@ -22,24 +20,32 @@ function getPrograms(connection){
 	});
 }
 
-function refresh(){
+var refresh = function (){
 	device.init();
 	var connection = device.getConnection();
-	//Convert headers from array to obj
-	var restHeaders = {};
 	if(connection && connection.baseURL){
-		var headers = {};
-		_.each(connection.headers, function(header){
-			restHeaders[header.name] = header.value;
-		});
-		connection.restHeaders = restHeaders;
 		getPrograms(connection);
 	} else {
 		if (OS_IOS) {
 			$.refreshControl.endRefreshing();
 		}
 	}	
-}	
+};	
+
+function runProgram(e){
+    var item = e.section.items[e.itemIndex];
+    var runType = ""; //This is the default
+    if(e.bindId=="btnRunThen") {
+    	runType = "Then";
+    } else if (e.bindId=="btnRunElse") {
+    	runType = "Else";
+    }
+    
+    if(!item.properties.programId){
+        return;
+    }
+    device.runProgram(item.properties.programId, runType, refresh);
+}
 
 Alloy.Globals.PW.showIndicator("Getting Programs");
 refresh();
@@ -100,39 +106,17 @@ function filter(collection) {
 	});
 }
 
-function runProgram(e){
-    var item = e.section.items[e.itemIndex];
-    var runType = ""; //This is the default
-    if(e.bindId=="btnRunThen") {
-    	runType = "Then";
-    } else if (e.bindId=="btnRunElse") {
-    	runType = "Else";
-    }
-    
-    if(!item.properties.programId){
-        return;
-    }
-    device.runProgram(item.properties.programId, runType);
-    //TODO Get either callbacks or promises working again here instead of causing an artificial delay
-    setTimeout(function() {
-    	refresh();
-    }, 400);
 
-}
 
 function programSwitchChanged(e) {
 	var item = e.section.items[e.itemIndex];
     if (e.value) {
     	item.switchEnabled.text = "enabled";
-    	device.enableProgram(item.properties.programId);  
+    	device.enableProgram(item.properties.programId, refresh);  
     } else {
     	item.switchEnabled.text = "disabled";
-      	device.disableProgram(item.properties.programId);
+      	device.disableProgram(item.properties.programId, refresh);
     }
-    //TODO Get either callbacks or promises working again here instead of causing an artificial delay
-    setTimeout(function() {
-    	refresh();
-    }, 400);
 }
 
 function closeWin(){

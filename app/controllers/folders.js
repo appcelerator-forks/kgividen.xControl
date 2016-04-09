@@ -1,5 +1,3 @@
-var REFRESH_DELAY = 800;  // This is used because if we set the level and then immediately get the status the ISY returns the old status.
-
 var args = arguments[0] || {}, // Any passed in arguments will fall into this property
     folders = null, // Array placeholder for all folders
     indexes = [];
@@ -86,6 +84,10 @@ function transform(model) {
 	
 	if(transform.type=="scene"){
 		transform.template="sceneTemplate";	
+	}
+	
+	if(transform.type=="program"){
+		transform.template="programTemplate";	
 	}
 
 	return transform;
@@ -192,8 +194,7 @@ function btnClick(e){
         return;
     }
     if(itemType == "dimmer" || itemType =="switch"){
-    	device.toggle(address);
-    	setTimeout(refresh, REFRESH_DELAY);
+    	device.toggle(address, refresh);
     }
 }
 
@@ -207,9 +208,7 @@ function sendSliderVal(e) {
 
     if(address && itemType == "slider") {
         var level = Math.round(e.source.value);
-        device.setLevel(address, level);
-        setTimeout(refresh, REFRESH_DELAY);
-
+        device.setLevel(address, level, refresh);
         item.sliderLbl.text = level;  //Slider label
         item.slider.value = level;
 
@@ -229,7 +228,8 @@ function programBtnClick(e){
     if(!address){
         return;
     }
-    device.runProgram(address, "").then(refresh());;
+    flashBtn(e);
+    device.runProgram(address, "", refresh);
 }
 
 function flashBtn(e) {
@@ -266,7 +266,7 @@ function sceneOnBtn(e){
     if(!address){
         return;
     }
-    device.sceneOn(address).then(refresh());
+    device.sceneOn(address, refresh);
 }
 
 function sceneOffBtn(e){
@@ -276,7 +276,7 @@ function sceneOffBtn(e){
     if(!address){
         return;
     }
-    device.sceneOff(address).then(refresh());;
+    device.sceneOff(address, refresh);
 }
 
 // function updateSliderLbl(e) {
@@ -302,26 +302,17 @@ Ti.App.addEventListener('refresh_ui', function(e){
 	loadData();
 });
 
+Ti.App.addEventListener('refresh_status', function(e){
+	setStatus();
+});
+
 function setStatus(){
 	var b = Alloy.Collections.devicesAndStatus;
 	
 	var connection = device.getConnection();
-	//Convert headers from array to obj
-	var restHeaders = {};
-	if(connection && connection.baseURL){
-		var headers = {};
-		_.each(connection.headers, function(header){
-			restHeaders[header.name] = header.value;
-		});
-		connection.restHeaders = restHeaders;
-	} else {
-		return;
-	}
-	
-	
 	Alloy.Collections.isyStatus.fetch({
 		"url": connection.baseURL + "status",
-		headers: connection.restHeaders,
+		headers: connection.headers,
 		success : function(data) {
 			data.each(function(d){
 				var models = b.where({address: d.id});

@@ -22,9 +22,10 @@
 		       			slider:value="{value}" 
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
-						sensorSwitch:value="{formatted}"
+						sensorSwitch:value="{value}"
 						sceneBtnOn:title="On"
 						sceneBtnOff:title="Off"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlFav" platform="ios" onRefreshstart="refresh" />
@@ -44,7 +45,7 @@
 	            	</ItemTemplate>
 	            	<ItemTemplate class="deviceItem" name="programTemplate">
 	                    <View>
-	                        <Button bindId="btn" class="btn" onClick="programBtnClick" />
+	                        <Button bindId="btn" class="btnOff" onClick="programBtnClick" />
 	                    </View>
 	            	</ItemTemplate>
 					<ItemTemplate class="deviceItem" id="light" name="dimmerOffTemplate">
@@ -110,9 +111,10 @@
 		       			slider:value="{value}" 
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
-						sensorSwitch:value="{formatted}"
+						sensorSwitch:value="{value}"
 						sceneBtnOn:title="On"
 						sceneBtnOff:title="Off"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlLight" platform="ios" onRefreshstart="refresh" />
@@ -197,9 +199,10 @@
 		       			slider:value="{value}" 
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
-						sensorSwitch:value="{formatted}"
+						sensorSwitch:value="{value}"
 						sceneBtnOn:title="On"
 						sceneBtnOff:title="Off"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlScene" platform="ios" onRefreshstart="refresh" />
@@ -284,9 +287,10 @@
 		       			slider:value="{value}" 
 		       			switchLblStatus:text="{formatted}"
 						sensorLblStatus:text="{formatted}"
-						sensorSwitch:value="{formatted}"
+						sensorSwitch:value="{value}"
 						sceneBtnOn:title="On"
 						sceneBtnOff:title="Off"
+						searchableText="{displayName}"
 					/>
         		</ListSection>
 				<RefreshControl id="refreshControlSensor" platform="ios" onRefreshstart="refresh" />

@@ -95,7 +95,7 @@ function closeWin () {
     if(callbackFunction) {
     	callbackFunction(); //this will refresh because the callback comes from folder.js	
     } else {
-    	Ti.App.fireEvent('refresh_ui'); //refresh all the other times until we get the callbacks setup correctly.	
+    	Ti.App.fireEvent('refresh_status'); //refresh all the other times until we get the callbacks setup correctly.	
     }
     
     $.settingsWin.close();
@@ -240,14 +240,7 @@ function refreshDevices(){
 function getPrograms(dbData, devicesInFolder) {
 	device.init();
 	var connection = device.getConnection();
-	//Convert headers from array to obj
-	var restHeaders = {};
 	if(connection && connection.baseURL){
-		var headers = {};
-		_.each(connection.headers, function(header){
-			restHeaders[header.name] = header.value;
-		});
-		connection.restHeaders = restHeaders;
 		getProgramsLive(connection, dbData);
 	} 
 }
@@ -255,7 +248,7 @@ function getPrograms(dbData, devicesInFolder) {
 function getProgramsLive(connection, dbData) {
 	Alloy.Collections.programs.fetch({
 		"url": connection.baseURL + "programs",
-		headers: connection.restHeaders,
+		headers: connection.headers,
 		success : function(liveData) {
 	        // _.each(Alloy.Collections.programs.models, function(element, index, list){
 	        // });
