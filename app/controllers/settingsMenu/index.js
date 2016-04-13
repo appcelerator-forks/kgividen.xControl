@@ -2,6 +2,7 @@
 
 var args = arguments[0] || {};
 
+var callbackFunction = args.callback;
 /**
  * self-executing function to organize otherwise inline constructor code
  * @param  {Object} args arguments passed to the controller
@@ -39,7 +40,7 @@ function closeSettingsBtnClicked(e) {
     } else {
         $.win.close();
     }
-    Ti.App.fireEvent('refresh_ui');
+    callbackFunction && callbackFunction();
     $.destroy();
 }
 

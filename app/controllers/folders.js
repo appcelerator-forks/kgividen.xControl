@@ -298,13 +298,13 @@ var refresh = function (){
     setStatus();
 };
 
-Ti.App.addEventListener('refresh_ui', function(e){
+exports.reloadData = function (){
 	loadData();
-});
+};
 
-Ti.App.addEventListener('refresh_status', function(e){
+exports.refreshStatus = function () {
 	setStatus();
-});
+};
 
 //This is used to update the data models behind the ListViews
 function refreshListViewUI(){

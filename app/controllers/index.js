@@ -1,10 +1,6 @@
-//TODO DEBUG
-//var data = {"method":"http","server":"192.168.111.4","port":"80","username":"kgividen","password":"pass"};
-//Ti.API.info(data);
-//Ti.App.Properties.setObject('conn_current', data);
-//Ti.App.Properties.setObject('conn_Remote', data);
-//Ti.App.Properties.setObject('conn_Local', data);
 
+//This controller is used for the refresh and is the entry point to the app.
+var foldersController = Alloy.createController("folders");
 //***************************MENU STUFF ***************************
 function createSideMenu(sections, controller) {
     var s = Ti.UI.createTableViewSection();
@@ -54,19 +50,19 @@ function rowSelect(e) {
         	alert("Coming Soon!");
             break;
         case "settings":
-            Alloy.createController("settings").getView().open();
+            Alloy.createController("settings",{callback:foldersController.reloadData}).getView().open();
             break;
         case "options":
-            Alloy.createController("options").getView().open();
+            Alloy.createController("options",{callback:foldersController.reloadData}).getView().open();
             break;
         case "updateDevices":
-            Alloy.createController('settingsMenu/index').getView().open();
+            Alloy.createController('settingsMenu/index',{callback:foldersController.reloadData}).getView().open();
             break;
         case "debug":
             Alloy.createController("debug").getView().open();
             break;
         case "refresh":
-            Ti.App.fireEvent('refresh_status');
+            foldersController.refreshStatus();
             break;
         default:
             dsScrollView.scrollToView(VIEW_ID_FAVORITES);
@@ -272,7 +268,7 @@ function startUI(){
 
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(Alloy.createController("folders").getView());
+    $.ds.contentview.add(foldersController.getView());
     // $.ds.contentview.add(Alloy.createController("folders", {theme: true}).getView());
     
     //tmp

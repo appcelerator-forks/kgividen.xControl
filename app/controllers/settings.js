@@ -92,12 +92,7 @@ function saveConnectionInfo(callback){
 
 function closeWin () {
 	saveConnectionInfo();
-    if(callbackFunction) {
-    	callbackFunction(); //this will refresh because the callback comes from folder.js	
-    } else {
-    	Ti.App.fireEvent('refresh_status'); //refresh all the other times until we get the callbacks setup correctly.	
-    }
-    
+    callbackFunction && callbackFunction(); //this will refresh because the callback comes from folder.js	
     $.settingsWin.close();
 }
 
