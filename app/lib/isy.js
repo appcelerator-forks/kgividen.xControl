@@ -5,7 +5,6 @@ var REFRESH_DELAY = 800;  // This is used because if we set the level and then i
 
 var deviceTypes = require('deviceTypes').types;
 var connection = {};
-//TODO INIT connection so it loads it for ever instance.
 exports.init = function() {
     //This is the saved connection object set by the user
     var conn = Ti.App.Properties.getObject('conn_current');
@@ -15,7 +14,7 @@ exports.init = function() {
         connection.baseURL = conn.method + '://' + conn.server + ':' + conn.port + '/rest/';
         var authString = conn.username + ':' + conn.password;
         var b64encodedAuthString = Ti.Utils.base64encode(authString.toString());
-        //This is the connection we'll send to xhr
+        
         connection.headers = {
         	'Accept':'application/xml', 
         	'Authorization':'Basic ' + b64encodedAuthString
@@ -246,7 +245,6 @@ function convertNodesStatusToJson(xml) {
         });
     }
 
-//    return _.groupBy(nodesJSON,'parent');
     return nodesJSON;
 }
 
