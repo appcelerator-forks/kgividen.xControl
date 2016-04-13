@@ -205,18 +205,9 @@ $.settingsWin.addEventListener("close", function(){
 });
 getConnectionInfo();
 
-function refreshDevices(){
-    //device is set in alloy.js
-    device.getListOfDevices().then(function (liveData) {
-        //TODO Take out fake data line
-        // liveData = fakeData;
-        _.each(data,function(item){
-            //add all of the defaults if they aren't there for the model
-            _.defaults(item,{displayName:item.name}, {parent:"unknown"}, {type:"unknown"});
-        });
-
-        //Add all of the new records in the collection that came from the hardware device.
-        Alloy.Collections.device.fetch({
+function refreshDevices(connection){
+	device.getListOfDevices(function(liveData) {
+		Alloy.Collections.device.fetch({
 			success : function(dbData) {
 				Alloy.Collections.deviceInFolder.fetch({
 					success : function(devicesInFolder) {
@@ -283,7 +274,7 @@ function processProgramData(dbData, liveData) {
 						"parent" : "program"
 					};
 	        	var model = Alloy.createModel('Device', program);
-	        	model.save();
+	        	model.save({silent: true});
 			}
 		});	
 	}
@@ -317,7 +308,7 @@ function processData(dbData, liveData, devicesInFolder) {
 						"parent" : device.parent
 					};
             	var model = Alloy.createModel('Device', device);
-            	model.save();
+            	model.save({silent: true});
 			}
 		});	
 		
@@ -481,7 +472,7 @@ function createFolder(folder) {
 					"type" : folder.type
 				  };
 	var model = Alloy.createModel('Device', folder);
-	model.save();
+	model.save({silent: true});
 }
 
 function linkDeviceToFolder(deviceAddress, folderAddress, sortId) {
@@ -493,7 +484,7 @@ function linkDeviceToFolder(deviceAddress, folderAddress, sortId) {
 		obj.SortId = sortId;
 	}
 	var model = Alloy.createModel('DeviceInFolder', obj);
-	model.save();	
+	model.save({silent: true});	
 }
 
 function linkFolderToView(folderAddress, viewId, sortId) {
@@ -505,5 +496,5 @@ function linkFolderToView(folderAddress, viewId, sortId) {
 		obj.SortId = sortId;
 	}
 	var model = Alloy.createModel('FolderInView', obj);
-	model.save();	
+	model.save({silent: true});	
 }

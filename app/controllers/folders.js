@@ -42,7 +42,7 @@ function loadData() {
 		query : sql,
 		success : function(data) {
 			//We set this collection up so we can modify only the status in the setStatus
-			Alloy.Collections.devicesAndStatus.reset(processDevicesInFolders(data.toJSON()));
+			Alloy.Collections.devicesAndStatus.reset(processDevicesInFolders(data.toJSON()),{silent: true});
 			setStatus();
 		},
 		error : function() {
@@ -306,7 +306,16 @@ Ti.App.addEventListener('refresh_status', function(e){
 	setStatus();
 });
 
+//This is used to update the data models behind the ListViews
+function refreshListViewUI(){
+	updateFavListView();
+	updateLightsListView();	
+	updateScenesListView();	
+	updateSensorsListView();
+}
+
 function setStatus(){
+	Ti.API.info("In set Status");
 	var b = Alloy.Collections.devicesAndStatus;
 	
 	var connection = device.getConnection();
@@ -320,11 +329,12 @@ function setStatus(){
 				_.each(models, function(m) {
 					// //TODO this should be in the isyStatus.js model but it isn't working
 					var value = Math.round(d.get("property").value / 255 * 100);
-					m.set("value", value);
-					m.set("formatted", d.get("property").formatted);
-					m.set("uom", d.get("property").uom);
+					m.set("value", value, {silent: true});
+					m.set("formatted", d.get("property").formatted,{silent: true});
+					m.set("uom", d.get("property").uom,{silent: true});
 				});
 			});
+			refreshListViewUI();
 			// for iOS end the refreshing animation
 			if (OS_IOS) {
 				$.refreshControlFav.endRefreshing();
@@ -334,7 +344,7 @@ function setStatus(){
 			}
 		},
 		error : function() {
-			Ti.API.info("Getting devices failed.  Please check the network settings.");
+			alert("Getting devices failed.  Please check the network settings.");
 		}
 	});
 }

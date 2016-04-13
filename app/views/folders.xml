@@ -10,7 +10,7 @@
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
         		</ListSection> -->
-		       	<ListSection dataFilter="favFilter" dataTransform="transform" dataCollection="devicesAndStatus">
+		       	<ListSection dataFunction="updateFavListView" dataFilter="favFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
 		       			btn:title="{displayName}" 
@@ -99,7 +99,7 @@
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
         		</ListSection> -->
         		            <!-- Sets ListView's headerView property -->
-		       	<ListSection dataFilter="lightsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
+		       	<ListSection dataFunction="updateLightsListView" dataFilter="lightsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
 		       			btn:title="{displayName}" 
@@ -187,7 +187,7 @@
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
         		</ListSection> -->
-		       	<ListSection dataFilter="scenesFilter" dataTransform="transform" dataCollection="devicesAndStatus">
+		       	<ListSection dataFunction="updateScenesListView" dataFilter="scenesFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
 		       			btn:title="{displayName}" 
@@ -275,7 +275,7 @@
     				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
     				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
         		</ListSection> -->
-		       	<ListSection dataFilter="sensorsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
+		       	<ListSection dataFunction="updateSensorsListView" dataFilter="sensorsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
 		       			btn:title="{displayName}" 
