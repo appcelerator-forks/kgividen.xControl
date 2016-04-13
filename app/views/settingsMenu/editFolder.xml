@@ -1,4 +1,7 @@
 <Alloy>
+	
+	<Collection src="Device" instance="true" id="d"/>
+	
     <Window id="mainWindow" navBarHidden="false" onFocus="doOpen">
         <RightNavButton platform="ios">
             <Button onClick="saveButtonClicked">Close</Button>

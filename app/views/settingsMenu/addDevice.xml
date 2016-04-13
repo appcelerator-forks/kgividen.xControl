@@ -1,7 +1,4 @@
 <Alloy>
-    <Collection src="Device"/>
-    <Collection src="DeviceInFolder"/>
-
     <Window id="addDeviceWindow" navBarHidden="false" title="Add Devices" onBlur="exit" onFocus="refresh">
         <RightNavButton platform="ios">
             <Button onClick="exit">Close</Button>
@@ -50,7 +47,7 @@
 
             <ListSection dataFilter="filter"
                          dataTransform="transform"
-                         dataCollection="Device">
+                         dataCollection="device">
                 <ListItem template="{t}" itemId="{id}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" address="{address}" inFolder="{inFolder}" accessoryType="{accessoryType}"/>
             </ListSection>
 

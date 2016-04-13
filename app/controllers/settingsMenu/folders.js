@@ -42,7 +42,7 @@ function refresh(e) {
 			  " INNER JOIN " + folderInViewTable + " ON " + folderInViewTable + ".FolderAddress = " + deviceTable + ".address WHERE ViewId='" + parameters.viewId + "' ORDER BY SortId";
 
 
-	Alloy.Collections.Device.fetch({
+	Alloy.Collections.device.fetch({
 		query:sql,
 		success: function (data) {
 			// for iOS end the refreshing animation
@@ -50,6 +50,7 @@ function refresh(e) {
 				$.refreshControl.endRefreshing();
 			}
 			checkAndDisplayHelp();
+			updateFoldersUI();
 			
 		},
 		error: function () {
@@ -166,13 +167,13 @@ function updateFolderSortOrder(){
  * @param  {Object} e Event
  */
 function editFolderClicked(e) {
-	Ti.API.debug("editFolderClicked function!!!");
 	var item = e.section.getItemAt(e.itemIndex);
 	var params = {
 		parentController: $,
 		item: item,
 		callback: function (event) {
 			win.close();
+			refresh();
 		}
 	};
 	var win = Alloy.createController("settingsMenu/editFolder", params).getView();
@@ -188,9 +189,6 @@ function editFolderClicked(e) {
 	}
 }
 
-
-
-
 /**
  * event listener set on view to open the devices view so devices can be added to the folder.
  * On android if in edit mode this will open the editView so the folder can be renamed.
@@ -200,7 +198,7 @@ function select(e) {
 	'use strict';
 
 	// lookup the model
-	var model = Alloy.Collections.Device.get(e.itemId);
+	var model = Alloy.Collections.device.get(e.itemId);
 
 	// select event on this controller, passing the model with it
 	// Open the edit folder view for android if in edit mode to rename the view.
@@ -212,6 +210,7 @@ function select(e) {
 		model: model,
 		callback: function (event) {
 			win.close();
+			refresh();
 		}
 	};
 	
@@ -380,7 +379,7 @@ function moveDown(e){
  * @param  {Object} e Event
  */
 
-function editFolderBtnClicked(e) {
+function editMenuBtnClicked(e) {
 	var btn = e.source;
 	if(!$.isInEditingMode) {
 		btn.title = "Done";
@@ -388,7 +387,7 @@ function editFolderBtnClicked(e) {
 		if(OS_IOS){
 			$.folderListView.setEditing(true);
 		} else {
-			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
+			updateFoldersUI(); //We need to run updateFoldersUI so the new transform will work now that we are in editMode.
 		}
 		$.toggleFolderFabs.hideMe();
 		hideFolderFabs();
@@ -397,9 +396,8 @@ function editFolderBtnClicked(e) {
 		$.isInEditingMode = false;
 		if(OS_IOS) {
 			$.folderListView.setEditing(false);
-			updateFolderSortOrder();
 		} else {
-			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
+			updateFoldersUI(); //We need to run updateFoldersUI so the new transform will work now that we are in editMode.
 		}
 		$.toggleFolderFabs.showMe();
 	}
@@ -443,6 +441,7 @@ $.addFolderFab.onClick(function(e) {
 			} else {
 				Ti.API.debug("No Folder Added");
 			}
+			refresh();
 		}
 	}).getView();
 
@@ -465,6 +464,7 @@ $.addExistingFolderFab.onClick(function(){
 			} else {
 				Ti.API.debug("No Folder Added");
 			}
+			refresh();
 		}
 	}).getView();
 
@@ -480,6 +480,7 @@ $.addExistingFolderFab.onClick(function(){
  * event listener to destroy all event listeners setup by Alloy.
  */
 $.foldersWin.addEventListener("close", function(){
+	updateFolderSortOrder();
 	$.destroy();
 });
 
@@ -491,3 +492,5 @@ $.foldersWin.addEventListener("close", function(){
 $.sf.addEventListener('change',function(e){
 	$.folderListView.searchText = e.value;
 });
+
+refresh();

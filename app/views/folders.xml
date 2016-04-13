@@ -1,5 +1,4 @@
 <Alloy>
-	<Collection id="device" src="Device" instance="true"/>
 	<!--
 		This view wraps all of the child views/lists etc. Creates a base layout, vertically aligned.
 	-->

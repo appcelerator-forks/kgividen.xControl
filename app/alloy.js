@@ -20,6 +20,7 @@ var VIEW_ID_SCENES = 2;
 var VIEW_ID_SENSORS = 3;
 
 Alloy.Collections.device = Alloy.createCollection("Device");
+Alloy.Collections.folder = Alloy.createCollection("Device"); //This is used on the settingsMenu
 Alloy.Collections.folderInView = Alloy.createCollection("FolderInView");
 Alloy.Collections.deviceInFolder = Alloy.createCollection("DeviceInFolder");
 Alloy.Collections.programs = Alloy.createCollection("Program");

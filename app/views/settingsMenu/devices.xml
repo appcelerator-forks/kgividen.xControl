@@ -52,10 +52,10 @@
 			<HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
 
 			<ListSection  id="devicesListSection"
-						  dataCollection="Device"
+						  dataCollection="device"
 						  dataFilter="filter"
 					 	  dataTransform="transform"
-				          dataFunction="updateUI">
+				          dataFunction="updateDevicesUI">
 
 				<ListItem template="{t}" class="movableItem editableItem" itemId="{id}" itemAddress="{address}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" parent:text="{parent}"/>
 			</ListSection>

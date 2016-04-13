@@ -1,7 +1,5 @@
 <Alloy>
 	<!-- create global instance of collection we'll bind -->
-	<Collection src="Device" />
-	<Collection src="DeviceInFolder" />
 	<NavigationWindow id="navWin" platform="ios" >
 		<Window title="Edit Mode" class="vertical">
 			<LeftNavButton>

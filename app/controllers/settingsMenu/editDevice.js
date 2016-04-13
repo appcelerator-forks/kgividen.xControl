@@ -2,7 +2,6 @@ var parameters = arguments[0] || {};
 var parentController = parameters.parentController || {};
 var callbackFunction = parameters.callback || null;
 var currentDevice = parameters.currentDevice || null;
-Ti.API.debug(JSON.stringify(currentDevice));
 
 // EVENT HANDLERS
 function saveButtonClicked(event) {
@@ -27,17 +26,13 @@ function doOpen() {
 }
 
 function updateDevice(content) {
-    Ti.API.debug("updateDevice content: " + JSON.stringify(content));
     $.dd.fetch({
-        success: function () {
-            var model = $.dd.where({"address":content.address});
-            Ti.API.debug("model before save: " + JSON.stringify(model));
+        success: function (data) {
+            var model = data.where({"address":content.address});
 
             if(model) {
                 model[0].save({"displayName": content.displayName});
             }
-            Ti.API.debug("model after save: " + JSON.stringify(model));
-            Ti.API.debug("updateDevice Success!!!");
 
             var returnParams = {
                 success : true,

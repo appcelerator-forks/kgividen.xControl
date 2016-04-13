@@ -20,9 +20,9 @@
 }
 
 '.addFab': {
-    title: 'Add New'
+    title: 'Add New Folder'
 }
 
 '.addFabSecond': {
-    title: 'Add Existing'
+    title: 'Add Existing Folder'
 }

@@ -22,16 +22,13 @@ function doOpen() {
 
 function updateFolder(content) {
     Ti.API.debug("updateFolder content: " + JSON.stringify(content));
-    Alloy.Collections.device.fetch({
+    $.d.fetch({
         success: function (data) {
             var model = data.where({"address":content.address});
-            Ti.API.debug("model before save: " + JSON.stringify(model));
 
             if(model.length > 0) {
                 model[0].save({"displayName": content.displayName});
             }
-            Ti.API.debug("model after save: " + JSON.stringify(model));
-            Ti.API.debug("updateFolder Success!!!");
 
             var returnParams = {
                 success : true,

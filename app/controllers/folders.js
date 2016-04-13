@@ -315,7 +315,6 @@ function refreshListViewUI(){
 }
 
 function setStatus(){
-	Ti.API.info("In set Status");
 	var b = Alloy.Collections.devicesAndStatus;
 	
 	var connection = device.getConnection();

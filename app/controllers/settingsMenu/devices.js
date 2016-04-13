@@ -1,4 +1,5 @@
 var parameters = arguments[0] || {};
+var callbackFunction = parameters.callback;
 // model passed to the controller from folders controller
 $.folderModel = parameters.model;
 $.navWin = parameters.navWin;
@@ -10,15 +11,16 @@ var preEditSectionAndItems = [];
  */
 function refreshDevicesInFolder(folderAddress) {
 	var deviceInFolderTable = Alloy.Collections.deviceInFolder.config.adapter.collection_name;
-	var deviceTable = Alloy.Collections.Device.config.adapter.collection_name;
+	var deviceTable = Alloy.Collections.device.config.adapter.collection_name;
 	var sql = "SELECT * FROM xControlDevices INNER JOIN " + deviceInFolderTable +
 		" ON " + deviceInFolderTable + ".DeviceAddress =  "+ deviceTable + ".address " +
 		"WHERE " + deviceInFolderTable + ".FolderAddress = '" + folderAddress + "' ORDER BY SortId";
 
-	Alloy.Collections.Device.fetch({
+	Alloy.Collections.device.fetch({
 		query:sql,
 		success: function () {
 			Ti.API.debug("refreshDevicesInFolder Success!!!");
+			updateDevicesUI();
 		},
 		error: function () {
 			Ti.API.debug("refreshDevicesInFolder Failed!!!");
@@ -30,13 +32,10 @@ function refreshDevicesInFolder(folderAddress) {
 }
 
 /**
- * Event listener set via view to be called on when the user taps the home-icon (Android)
+ * Event listener set via view to be called on when the user taps the close (Android)
  */
 function closeWin() {
-	'use strict';
-
-	// close the window, showing the folders window behind it
-	$.devicesWin.close();
+	callbackFunction && callbackFunction();
 }
 
 /**
@@ -45,7 +44,6 @@ function closeWin() {
  * @param
  */
 function doOpen() {
-	Ti.API.debug("Do Open!!!");
 	refreshDevicesInFolder($.folderModel.get("address"));
 }
 
@@ -317,7 +315,7 @@ function editDevicesBtnClicked(e) {
 		if (OS_IOS) {
 			$.devicesListView.setEditing(true);
 		} else {
-			updateUI(); //We need to run updateUI so the new transform will work now that we are in editMode.
+			updateDevicesUI(); //We need to run updateDevicesUI so the new transform will work now that we are in editMode.
 		}
 		$.addDevicesFab.hideMe();
 	} else {
@@ -327,7 +325,7 @@ function editDevicesBtnClicked(e) {
 			$.devicesListView.setEditing(false);
 			updateDeviceSortOrder(); //This is so all of them are numbered correctly because the default is 0
 		} else {
-			updateUI();
+			updateDevicesUI();
 		}
 		$.addDevicesFab.showMe();
 	}

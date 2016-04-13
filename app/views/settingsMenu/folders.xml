@@ -1,15 +1,15 @@
 <Alloy>
-	<Window id="foldersWin" title="Folders" navBarHidden="false" onFocus="refresh">
+	<Window id="foldersWin" title="Folders" navBarHidden="false">
 		<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
 		<RightNavButton platform='ios'>
-			<Button id="editFolderBtn" onClick="editFolderBtnClicked">Edit</Button>
+			<Button id="editFolderBtn" onClick="editMenuBtnClicked">Edit</Button>
 		</RightNavButton>
 		<Widget id="toggleFolderFabs" class="toggleFab" src="com.netsmartcompany.floatingActionButton" />
 		<Widget id="addFolderFab" class="addFab" src="com.netsmartcompany.floatingActionButton" />
 		<Widget id="addExistingFolderFab" class="addFabSecond" src="com.netsmartcompany.floatingActionButton" />
 
 		<Menu platform="android">
-			<MenuItem id="editFolderBtn" title="Edit" onClick="editFolderBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
+			<MenuItem id="editFolderBtn" title="Edit" onClick="editMenuBtnClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 			<MenuItem id="closeBtn" title="Close" onClick="closeWin" showAsAction="Ti.Android.SHOW_AS_ACTION_ALWAYS" />
 		</Menu>
 		
@@ -43,10 +43,11 @@
 			</Templates>
 
 			<HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
-			<ListSection id="folderSection" dataFilter="filter"
-						 dataCollection="Device"
+			<ListSection id="folderSection" 
+						 dataCollection="device"
+						 dataFilter="filter"
 						 dataTransform="transform"
-					     dataFunction="updateUI">
+					     dataFunction="updateFoldersUI">
 
 				<ListItem template="{template}" class="movableItem editableItem" itemId="{id}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" address:text="{address}" />
 			</ListSection>

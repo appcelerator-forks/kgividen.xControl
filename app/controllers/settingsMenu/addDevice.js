@@ -9,7 +9,7 @@ function refresh(e) {
     'use strict';
     getListOfDevicesInFolder(function(e){
         // Get all the devics in the folder and check them if they already have been added.
-        Alloy.Collections.Device.fetch({
+        Alloy.Collections.device.fetch({
             success: function (data) {
                 var devicesInFolder = _.pluck(e.devices,"DeviceAddress");
                 if (e.status === "success") {
@@ -44,7 +44,7 @@ function exit (){
 
 function getListOfDevicesInFolder(callback) {
     //See if the device is already in the view
-    Alloy.Collections.DeviceInFolder.fetch({
+    Alloy.Collections.deviceInFolder.fetch({
         success: function (data) {
             var devicesInFolder = _.where(data.toJSON(),{FolderAddress: folderAddress});
            

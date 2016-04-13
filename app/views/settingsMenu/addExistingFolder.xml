@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="foldersWin" title="Folders" navBarHidden="false">
+	<Window id="foldersWin" title="Folders" navBarHidden="false" onOpen="init">
 		<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
 		<RightNavButton platform='ios'>
 			<Button id="closeBtn" onClick="closeWin">Cancel</Button>
@@ -24,12 +24,11 @@
 			</Templates>
 
 			<HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
-			<ListSection id="folderSection" dataFilter="filter"
-						 dataCollection="Device"
-						 dataTransform="transform"
+			<ListSection id="folderSection" 
+						 dataCollection="folder"
 					     dataFunction="updateUI">
 
-				<ListItem template="template" class="" itemId="{id}" searchableText="{displayName}" name:text="{name}" displayName:text="{displayName}" id:text="{id}" address:text="{address}" />
+				<ListItem template="template" itemId="{id}" searchableText="{displayName}" name:text="{name}" displayName:text="{displayName}" id:text="{id}" address:text="{address}" />
 			</ListSection>
 
 		</ListView>

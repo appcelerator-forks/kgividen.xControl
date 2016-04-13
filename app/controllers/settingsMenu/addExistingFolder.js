@@ -1,16 +1,22 @@
 var parameters = arguments[0] || {};
 var callbackFunction = parameters.callback || null;
 
-Alloy.Collections.Device.fetch({
-	success: function (data) {
-		Ti.API.debug("addexistingFolder fetch success!!!");
-	},
-	error: function () {
-		Ti.API.debug("addexistingFolder fetch Failed!!!");
-	}
-});
+function init(){
 	
-	
+	//We are going to use SQL in this case because it seems to be much faster than using a dataFilter.
+	var deviceTable = Alloy.Collections.device.config.adapter.collection_name;
+	var sql = "SELECT * FROM " + deviceTable + " WHERE type = 'folder'";
+
+	Alloy.Collections.folder.fetch({
+		query:sql,
+		success: function (data) {
+			updateUI();
+		},
+		error: function () {
+			Ti.API.info("addexistingFolder fetch Failed!!!");
+		}
+	});
+}
 	
 // EVENT HANDLERS
 /**
@@ -54,22 +60,3 @@ $.sf.addEventListener('change',function(e){
 $.foldersWin.addEventListener("close", function(){
     $.destroy();
 });
-
-/**
- * data event transform function for the ListView
- * @param  {Object} model
- */
-function transform(model) {
-	
-	return model.toJSON();
-}
-
-/**
- * data event filter for the ListView
- * @param  {Object} collection
- */
-function filter(collection) {
-	return collection.where({
-		type:"folder"
-	});
-}
