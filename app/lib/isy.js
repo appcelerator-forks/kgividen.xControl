@@ -23,7 +23,7 @@ exports.init = function() {
         connection.username = conn.username; //This is so we can throw an error and let them know what the user was.
 
 	    api.config({
-		    debug: true, // allows logging to console of ::REST:: messages
+		    debug: false, // allows logging to console of ::REST:: messages
 		    autoValidateParams: false, // set to true to throw errors if <param> url properties are not passed
 		    timeout: 10000,
 		    url: connection.baseURL,
