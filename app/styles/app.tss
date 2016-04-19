@@ -102,11 +102,22 @@
 }
 
 '.listViewIconLabelRow' : {
-	left : '5%',
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
 	horizontalWrap: false,
 	layout : 'horizontal'
+}
+
+'.settingsListView' : {
+	left:'5%',
+	right:'5%',
+	top: '5%',
+	separatorColor: "#C3C8C9"
+}
+
+
+".settingsListView[platform=ios]" : {
+	top: '10%'
 }
 
 

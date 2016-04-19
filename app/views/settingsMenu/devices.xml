@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="devicesWin" title="Devices" navBarHidden="false" onFocus="doOpen">
+	<Window id="devicesWin" title="Devices" navBarHidden="false">
 		<View platform="android" module="de.marcelpociot.autofocus" /> <!-- This makes the search box not autofocus -->
 		<Widget id="addDevicesFab" class="fab" src="com.netsmartcompany.floatingActionButton" />
 
@@ -14,7 +14,7 @@
 		
 		<Label left="5%" top="10">Click the + icon to add devices or Edit to rename/remove devices</Label>
 
-		<ListView id="devicesListView" platform="ios,android" defaultItemTemplate="dimmerTemplate" onEditaction="onEditactionClick">
+		<ListView id="devicesListView" class="settingsListView" platform="ios,android" defaultItemTemplate="dimmerTemplate" onEditaction="onEditactionClick">
 			<Templates>
 				<ItemTemplate name="dimmerTemplate" class="item">
 					<View class="listViewIconLabelRow">

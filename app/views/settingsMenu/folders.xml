@@ -16,7 +16,7 @@
 		<Label id="helpMsg" visible="false">Press the + icon to add a folder and devices or Edit to rename/remove folders</Label>
 		<Label left="5%" top="10">Choose a folder to Add/Remove Devices</Label>
 		
-		<ListView id="folderListView" platform="ios,android" defaultItemTemplate="template" onEditaction="onEditactionClick" onItemclick="select">
+		<ListView id="folderListView" platform="ios,android" class="settingsListView" defaultItemTemplate="template" onEditaction="onEditactionClick" onItemclick="select">
 			<RefreshControl platform="ios" id="refreshControl" onRefreshstart="refresh" />
 
 			<Templates>

@@ -12,14 +12,6 @@
     ],
     accessoryType:Ti.UI.LIST_ACCESSORY_TYPE_DETAIL
 }
-"#folderListView" : {
-	top: '5%',
-	separatorColor: "#C3C8C9"
-}
-
-"#folderListView[platform=ios]" : {
-	top: '10%'
-}
 
 '.addFab': {
     title: 'Add New Folder'
