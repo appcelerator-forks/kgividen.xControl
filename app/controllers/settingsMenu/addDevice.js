@@ -53,19 +53,19 @@ function exit (){
 }
 
 function getListOfDevicesInFolder(callback) {
-    //See if the device is already in the view
+		var sql = "SELECT * FROM xControlDeviceInFolder " +
+		"WHERE FolderAddress = '" + folderAddress + "' ORDER BY SortId";
+
     Alloy.Collections.deviceInFolder.fetch({
+    	query:sql,
         success: function (data) {
-            var devicesInFolder = _.where(data.toJSON(),{FolderAddress: folderAddress});
-           
             var e = {
                 status:"success",
-                devices:devicesInFolder
+                devices:data.toJSON()
             };
             callback && callback(e);
         },
         error: function () {
-            Ti.API.debug("Setting accessory type Failed!!!");
             var e = {
                 status:"error"
             };

@@ -47,6 +47,8 @@
             <HeaderView><TextField id="sf" class="searchField"></TextField></HeaderView>
 
             <ListSection 
+            			 dataTransform="transform"
+            			 dataFilter="filter"
                          dataCollection="deviceByName"
                          dataFunction="updateAddDeviceUI">
                 <ListItem template="{t}" itemId="{id}" searchableText="{displayName}" title:text="{displayName}" id:text="{id}" address="{address}" inFolder="{inFolder}" accessoryType="{accessoryType}"/>

@@ -371,6 +371,7 @@ $.addDevicesFab.onClick(function (e) {
 		folderModel: folderModel,
 		callback: function (event) {
 			win.close();
+			//don't need to do this on android since we do it when pressing up/down arrows.
 			if(OS_IOS) {
 				updateDeviceSortOrder();
 			}
