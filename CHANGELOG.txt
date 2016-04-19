@@ -7,6 +7,7 @@ Fixed sensor switch to turn on when the sensor is actually on not just display t
 Improved status updates.
 Fixed sliders so they don't jump while sliding and updating.
 Made some performance enhancements.
+When adding a device they are now alphabetically sorted.
 
 
 Version 1.5.4
