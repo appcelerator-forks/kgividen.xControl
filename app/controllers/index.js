@@ -259,7 +259,10 @@ function startUI(){
           });
         }
 
-        $.win.open();
+        $.win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		});
     }
 
     Ti.Gesture.addEventListener('orientationchange', function() {
@@ -273,6 +276,7 @@ function startUI(){
     
     //tmp
     //Alloy.createController("camerasContainer").getView().open();
+    Alloy.createController('settingsMenu/index',{callback:foldersController.reloadData}).getView().open();
     //$.win.close();
 }
 
