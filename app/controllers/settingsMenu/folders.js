@@ -161,9 +161,10 @@ function updateFolderSortOrder(){
  */
 function editFolderClicked(e) {
 	var item = e.section.getItemAt(e.itemIndex);
+	var model = Alloy.Collections.device.get({id:item.properties.itemId});
 	var params = {
 		parentController: $,
-		item: item,
+		model: model,
 		callback: function (event) {
 			win.close();
 			refresh();
@@ -176,9 +177,12 @@ function editFolderClicked(e) {
 	}
 
 	if (OS_IOS) {
-		$.navWin.openWindow(win);
+		$.navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		win.open(); //simply open the window on top for Android (and other platforms)
+		win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		}); //simply open the window on top for Android (and other platforms)
 	}
 }
 
@@ -216,9 +220,12 @@ function select(e) {
 
 	//open the window in the NavigationWindow for iOS
 	if (OS_IOS) {
-		$.navWin.openWindow(win);
+		$.navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		win.open();   //simply open the window on top for Android (and other platforms)
+		win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		});   //simply open the window on top for Android (and other platforms)
 	}
 }
 
@@ -439,9 +446,12 @@ $.addFolderFab.onClick(function(e) {
 	}).getView();
 
 	if (OS_IOS) {
-		$.navWin.openWindow(win);
+		$.navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		win.open(); //simply open the window on top for Android (and other platforms)
+		win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		}); //simply open the window on top for Android (and other platforms)
 	}
 });
 
@@ -462,9 +472,12 @@ $.addExistingFolderFab.onClick(function(){
 	}).getView();
 
 	if (OS_IOS) {
-		$.navWin.openWindow(win);
+		$.navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		win.open(); //simply open the window on top for Android (and other platforms)
+		win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		}); //simply open the window on top for Android (and other platforms)
 	}
 });
 

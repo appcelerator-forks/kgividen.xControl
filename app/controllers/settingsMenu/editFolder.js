@@ -1,47 +1,24 @@
 var parameters = arguments[0] || {};
 var parentController = parameters.parentController || {};
 var callbackFunction = parameters.callback || null;
-var item = parameters.item || null;
+var model = parameters.model || null;
 
 // // EVENT HANDLERS
 function saveButtonClicked(event) {
-
-    var content = {
-        address: item.address.text,
-        displayName: $.folderName.value
-    };
-    updateFolder(content);
+	    model.save({"displayName": $.folderName.value}, {
+		success : function(model, response) {
+			callbackFunction && callbackFunction();
+		},
+		error : function(e) {
+			Ti.API.error('error: ' + e.message);
+		}
+	});
 }
 
-function doOpen() {
+function init() {
     $.folderName.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ALWAYS;
-    $.folderName.value = item.title.text;
+    $.folderName.value = model.get("displayName");
     $.folderName.focus();
-
-}
-
-function updateFolder(content) {
-    Ti.API.debug("updateFolder content: " + JSON.stringify(content));
-    $.d.fetch({
-        success: function (data) {
-            var model = data.where({"address":content.address});
-
-            if(model.length > 0) {
-                model[0].save({"displayName": content.displayName});
-            }
-
-            var returnParams = {
-                success : true,
-                content : content
-            };
-
-            // return to folder.js controller 
-            callbackFunction && callbackFunction(returnParams);
-        },
-        error: function () {
-            Ti.API.debug("updateFolder Failed!!!");
-        }
-    });
 }
 
 /**
@@ -50,3 +27,5 @@ function updateFolder(content) {
 $.mainWindow.addEventListener("close", function(){
     $.destroy();
 });
+
+init();
