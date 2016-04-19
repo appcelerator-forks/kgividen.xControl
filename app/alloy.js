@@ -20,6 +20,14 @@ var VIEW_ID_SCENES = 2;
 var VIEW_ID_SENSORS = 3;
 
 Alloy.Collections.device = Alloy.createCollection("Device");
+
+//DeviceByName for addDevice.xml 
+Alloy.Collections.deviceByName = Alloy.createCollection("Device");
+Alloy.Collections.deviceByName.comparator = function(d) {
+	return d.get("displayName");	
+};
+
+
 Alloy.Collections.folder = Alloy.createCollection("Device"); //This is used on the settingsMenu
 Alloy.Collections.folderInView = Alloy.createCollection("FolderInView");
 Alloy.Collections.deviceInFolder = Alloy.createCollection("DeviceInFolder");
