@@ -22,7 +22,7 @@ function saveButtonClicked(event) {
 /**
  * function to set the cursor on the text field for giving the new folder a name
  */
-function doOpen() {
+function init() {
     // set focus to the text input field, but
     // use set time out to give window time to draw
     setTimeout(function() {
@@ -37,3 +37,5 @@ function doOpen() {
 $.mainWindow.addEventListener("close", function(){
     $.destroy();
 });
+
+init();

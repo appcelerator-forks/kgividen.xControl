@@ -60,3 +60,5 @@ $.sf.addEventListener('change',function(e){
 $.foldersWin.addEventListener("close", function(){
     $.destroy();
 });
+
+init();
