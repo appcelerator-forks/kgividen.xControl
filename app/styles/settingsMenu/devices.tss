@@ -12,7 +12,8 @@
     ]
 }
 "#devicesListView" : {
-	top: '5%'
+	top: '5%',
+	separatorColor: "#C3C8C9"
 }
 
 "#devicesListView[platform=ios]" : {
