@@ -1,7 +1,0 @@
-"#addDeviceListView" : {
-	top: '5%'
-}
-
-"#addDeviceListView[platform=ios]" : {
-	top: '10%'
-}
