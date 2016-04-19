@@ -9,8 +9,7 @@
             color: "#028458",
             title: "RENAME",
         }
-    ],
-    accessoryType:Ti.UI.LIST_ACCESSORY_TYPE_DETAIL
+    ]
 }
 
 '.addFab': {
