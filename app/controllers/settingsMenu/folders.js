@@ -11,14 +11,6 @@ var folderFabsAreShown = false;
 	}
 })(parameters || {});
 
-
-function checkAndDisplayHelp(){
-	var itemsCount = 0;
-	if($.folderListView.getSections()[0]) {
-		itemsCount = $.folderListView.getSections()[0].getItems().length;
-	}
-	(itemsCount < 1) ? $.helpMsg.show() : $.helpMsg.hide();
-}
 /**
  * event listener added via view for the refreshControl (iOS) or button (Android)
  * @param  {Object} e Event, unless it was called from the constructor
@@ -49,7 +41,8 @@ function refresh(e) {
 			if (OS_IOS) {
 				$.refreshControl.endRefreshing();
 			}
-			checkAndDisplayHelp();
+			//display help if there aren't any items in the view
+			(data.length < 1) ? $.helpMsg.show() : $.helpMsg.hide();
 			updateFoldersUI();
 			
 		},
