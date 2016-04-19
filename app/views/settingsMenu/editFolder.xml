@@ -2,7 +2,7 @@
 	
 	<Collection src="Device" instance="true" id="d"/>
 	
-    <Window id="mainWindow" navBarHidden="false" onFocus="doOpen">
+    <Window id="mainWindow" navBarHidden="false">
         <RightNavButton platform="ios">
             <Button onClick="saveButtonClicked">Close</Button>
         </RightNavButton>

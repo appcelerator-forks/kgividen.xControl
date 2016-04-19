@@ -1,53 +1,26 @@
 var parameters = arguments[0] || {};
 var parentController = parameters.parentController || {};
 var callbackFunction = parameters.callback || null;
-var currentDevice = parameters.currentDevice || null;
+var model = parameters.model || null;
 
+Ti.API.info("model: " + JSON.stringify(model));
 // EVENT HANDLERS
 function saveButtonClicked(event) {
-    var content = {
-        address: currentDevice.address,
-        displayName: $.deviceName.value
-    };
-
-    updateDevice(content);
+    model.save({"displayName": $.deviceName.value}, {
+		success : function(model, response) {
+			callbackFunction && callbackFunction();
+		},
+		error : function(e) {
+			Ti.API.error('error: ' + e.message);
+		}
+	});
 }
 
-function doOpen() {
+function init() {
     $.deviceName.clearButtonMode = Titanium.UI.INPUT_BUTTONMODE_ALWAYS;
-    $.deviceName.value = currentDevice.displayName;
-
-    // set focus to the text input field, but
-    // use set time out to give window time to draw
-    setTimeout(function() {
-        $.deviceName.focus();
-    }, 400);
-
+    $.deviceName.value = model.get("displayName");
+    $.deviceName.focus();
 }
-
-function updateDevice(content) {
-    $.dd.fetch({
-        success: function (data) {
-            var model = data.where({"address":content.address});
-
-            if(model) {
-                model[0].save({"displayName": content.displayName});
-            }
-
-            var returnParams = {
-                success : true,
-                content : content
-            };
-
-            callbackFunction && callbackFunction(returnParams);
-
-        },
-        error: function () {
-            Ti.API.debug("updateDevice Failed!!!");
-        }
-    });
-}
-
 
 /**
  * event listener to destroy all event listeners setup by Alloy.
@@ -55,3 +28,5 @@ function updateDevice(content) {
 $.mainWindow.addEventListener("close", function(){
     $.destroy();
 });
+
+init();

@@ -1,7 +1,7 @@
 <Alloy>
     <Collection src="Device" instance="true" id="dd"/>
 
-    <Window id="mainWindow" navBarHidden="false" onOpen="doOpen">
+    <Window id="mainWindow" navBarHidden="false">
         <RightNavButton platform="ios">
             <Button onClick="saveButtonClicked">Save</Button>
         </RightNavButton>

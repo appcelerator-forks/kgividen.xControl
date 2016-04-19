@@ -1,8 +1,8 @@
 var parameters = arguments[0] || {};
 var callbackFunction = parameters.callback;
 // model passed to the controller from folders controller
-$.folderModel = parameters.model;
-$.navWin = parameters.navWin;
+var folderModel = parameters.model;
+var navWin = parameters.navWin;
 var preEditSectionAndItems = [];
 
 /**
@@ -19,16 +19,12 @@ function refreshDevicesInFolder(folderAddress) {
 	Alloy.Collections.device.fetch({
 		query:sql,
 		success: function () {
-			Ti.API.debug("refreshDevicesInFolder Success!!!");
 			updateDevicesUI();
 		},
 		error: function () {
 			Ti.API.debug("refreshDevicesInFolder Failed!!!");
 		}
 	});
-
-	Ti.API.debug("refreshDevicesInFolder");
-
 }
 
 /**
@@ -43,8 +39,8 @@ function closeWin() {
  * Calls the refresh folder to refresh all devices in the folder window.
  * @param
  */
-function doOpen() {
-	refreshDevicesInFolder($.folderModel.get("address"));
+function init() {
+	refreshDevicesInFolder(folderModel.get("address"));
 }
 
 /**
@@ -88,7 +84,7 @@ function filter(collection) {
  * @param  {Object} item
  */
 function deleteItem(item){
-	var folderAddress = $.folderModel.get("address");
+	var folderAddress = folderModel.get("address");
 
 	var deviceAddress = item.properties.itemAddress;
 	Ti.API.debug("Device address: " + deviceAddress + " FolderAddress: " + folderAddress);
@@ -99,7 +95,7 @@ function deleteItem(item){
 			_.each(devicesToDelete, function(device){
 				device.destroy();
 			});
-			refreshDevicesInFolder($.folderModel.get("address")); 
+			refreshDevicesInFolder(folderModel.get("address")); 
 		},
 		error: function () {
 			Ti.API.debug("delete Failed!!!");
@@ -112,26 +108,22 @@ function deleteItem(item){
  * @param  {Object} e Event
  */
 function renameItemBtnClick(e){
-	Ti.API.debug("itemClick e: " + JSON.stringify(e));
 	var item = e.section.getItemAt(e.itemIndex);
-
-	Ti.API.debug("editDeviceClicked");
-	Ti.API.debug("item: " + JSON.stringify(item));
-	var currentDevice = {
-		address: item.properties.itemAddress,
-		displayName: item.title.text
-	};
+	var model = Alloy.Collections.device.get({id:item.properties.itemId});
 	var win = Alloy.createController("settingsMenu/editDevice", {
-		currentDevice: currentDevice,
+		model: model,
 		callback: function (event) {
 			win.close();
 		}
 	}).getView();
 
 	if (OS_IOS) {
-		$.navWin.openWindow(win);
+		navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		win.open(); //simply open the window on top for Android (and other platforms)
+		win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		}); //simply open the window on top for Android (and other platforms)
 	}
 }
 
@@ -140,30 +132,23 @@ function renameItemBtnClick(e){
  * @param  {Object} e Event
  */
 function moveUp(e){
-	Ti.API.debug("IN moveUp!");
-	var folderAddress = $.folderModel.get("address");
+	var folderAddress = folderModel.get("address");
 	//Get the item we clicked on.
 	var item = e.section.getItemAt(e.itemIndex);
-	Ti.API.debug("item : " + JSON.stringify(item));
-
 	//Get the item above the item we clicked on
 	var itemAbove = e.section.getItemAt(e.itemIndex - 1);
-	Ti.API.debug("itemAbove : " + JSON.stringify(itemAbove));
 	if(!itemAbove){  //first one in the list
 		return;
 	}
 
 	var address = item.properties.itemAddress;
 	var addressAbove = itemAbove.properties.itemAddress;
-	Ti.API.debug("address : " + address + "addressAbove: " + addressAbove);
 	Alloy.Collections.deviceInFolder.fetch({
 		success: function (data) {
 			Ti.API.debug("data: " + JSON.stringify(data));
 			var modelInFolder = data.where({DeviceAddress: address, FolderAddress: folderAddress});
-			Ti.API.debug("modelInFolder : " + JSON.stringify(modelInFolder));
 
 			var modelInFolderAbove = data.where({DeviceAddress: addressAbove, FolderAddress: folderAddress});
-			Ti.API.debug("modelInFolderAbove : " + JSON.stringify(modelInFolderAbove));
 
 			//where returns an array but we just need the first one if it's there.
 			if (modelInFolder.length > 0) {
@@ -184,8 +169,7 @@ function moveUp(e){
  * @param  {Object} e Event
  */
 function moveDown(e){
-	Ti.API.debug("IN moveDown!");
-	var folderAddress = $.folderModel.get("address");
+	var folderAddress = folderModel.get("address");
 	var item = e.section.getItemAt(e.itemIndex);
 	//Get the item below the item we clicked on
 
@@ -199,8 +183,6 @@ function moveDown(e){
 
 	Alloy.Collections.deviceInFolder.fetch({
 		success: function (data) {
-			Ti.API.debug("data: " + JSON.stringify(data));
-
 			var modelInFolder = data.where({DeviceAddress: address, FolderAddress: folderAddress});
 			var modelInFolderBelow = data.where({DeviceAddress: addressBelow, FolderAddress: folderAddress});
 
@@ -235,7 +217,7 @@ function reportMove(e) {
 	var item = e.section.getItemAt(e.itemIndex);
 	Ti.API.debug('Item ' + e.itemIndex + ' was ' + e.type + 'd! and new index is ' + e.targetItemIndex);
 
-	var folderAddress = $.folderModel.get("address");
+	var folderAddress = folderModel.get("address");
 	var deviceAddress = item.properties.itemAddress;
 
 	Ti.API.debug("folderAddress: " + folderAddress + " deviceAddress: " + deviceAddress);
@@ -260,7 +242,7 @@ function reportMove(e) {
 function updateDeviceSortOrder(){
 	Alloy.Collections.deviceInFolder.fetch({
 		success: function (data) {
-			var folderAddress = $.folderModel.get("address");
+			var folderAddress = folderModel.get("address");
 			var deviceList = $.devicesListSection.getItems();
 			//Ti.API.debug("deviceList: " + JSON.stringify(deviceList));
 			var i = 0;
@@ -384,22 +366,25 @@ if (OS_IOS) {
  * event listener set via view for when the user clicks the floating add button.
  */
 $.addDevicesFab.onClick(function (e) {
+	Ti.API.info("addDevicesFab onClick");
 	var win = Alloy.createController("settingsMenu/addDevice", {
-		folderModel: $.folderModel,
+		folderModel: folderModel,
 		callback: function (event) {
 			win.close();
 			if(OS_IOS) {
 				updateDeviceSortOrder();
 			}
-			refreshDevicesInFolder($.folderModel.get("address"));
+			refreshDevicesInFolder(folderModel.get("address"));
 		}
 	}).getView();
-
 	//open the window in the NavigationWindow for iOS
 	if (OS_IOS) {
-		$.navWin.openWindow(win);
+		navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 	} else {
-		win.open();   //simply open the window on top for Android (and other platforms)
+		win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		});   //simply open the window on top for Android (and other platforms)
 	}
 });
 
@@ -418,4 +403,4 @@ $.devicesWin.addEventListener("close", function(){
 	$.destroy();
 });
 
-
+init();
