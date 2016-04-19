@@ -276,7 +276,7 @@ function startUI(){
     
     //tmp
     //Alloy.createController("camerasContainer").getView().open();
-    Alloy.createController('settingsMenu/index',{callback:foldersController.reloadData}).getView().open();
+    // Alloy.createController('settingsMenu/index',{callback:foldersController.reloadData}).getView().open();
     //$.win.close();
 }
 
