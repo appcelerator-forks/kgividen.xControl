@@ -15,7 +15,10 @@ var args = arguments[0] || {};
     if (OS_IOS) {
         $.navWin.open();
     } else {
-        $.win.open();
+        $.win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		});
     }
 
 })(arguments[0] || {});
@@ -44,9 +47,12 @@ function loadFoldersCallback(e) {
 
 //open the window in the NavigationWindow for iOS
     if (OS_IOS) {
-        $.navWin.openWindow(win);
+        $.navWin.openWindow(win, {transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
     } else {
-        win.open();   //simply open the window on top for Android (and other platforms)
+        win.open({
+    		activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    		activityExitAnimation: Ti.Android.R.anim.slide_out_right
+		});   //simply open the window on top for Android (and other platforms)
     }
 }
 
