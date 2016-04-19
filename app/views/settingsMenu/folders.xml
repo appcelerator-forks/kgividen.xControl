@@ -33,7 +33,7 @@
 					</View>
 				</ItemTemplate>
 				
-				<ItemTemplate name="editTemplate" class="item" platform="android">
+				<ItemTemplate name="editTemplate" platform="android">
 					<Label bindId="title" class="title"/>
 					<Label class="trashIcon" onClick="deleteBtnClick"/>
 					<Label class="infoIcon" onClick="editFolderClicked"/>
