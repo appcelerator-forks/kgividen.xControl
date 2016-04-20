@@ -1,6 +1,11 @@
 ---------------------------------
 Change Log
 ---------------------------------
+Version 1.5.6
+-----------
+Added some more help messages when favorites are blank.
+
+
 Version 1.5.5
 -----------
 Fixed sensor switch to turn on when the sensor is actually on not just display the message "on"
