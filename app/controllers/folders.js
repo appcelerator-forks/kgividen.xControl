@@ -41,6 +41,10 @@ function loadData() {
 	Alloy.Collections.device.fetch({
 		query : sql,
 		success : function(data) {
+			//Show help message if favorite doesn't exist.
+			var favoriteExists = data.where({ViewId:0});
+			(favoriteExists.length < 1) ? $.helpMsg.show() : $.helpMsg.hide();
+			
 			//We set this collection up so we can modify only the status in the setStatus
 			Alloy.Collections.devicesAndStatus.reset(processDevicesInFolders(data.toJSON()),{silent: true});
 			setStatus();

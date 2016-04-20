@@ -4,100 +4,99 @@
 	-->
 	<View id="wrapper" class="deviceContainerView">
 		<ScrollableView id="scrollableView" showPagingControl="true">
-			<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
-		       	<!-- <ListSection>
-    				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
-    				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
-        		</ListSection> -->
-		       	<ListSection dataFunction="updateFavListView" dataFilter="favFilter" dataTransform="transform" dataCollection="devicesAndStatus">
-		       		<ListItem 
-		       			template="{template}"
-		       			btn:title="{displayName}" 
-						btn:address="{address}"
-						btn:type="{type}"
-		       			label:text="{displayName}" 
-		       			groupLbl:text="{displayName}" 
-		       			sliderLbl:text="{value}" 
-		       			slider:value="{value}" 
-		       			switchLblStatus:text="{formatted}"
-						sensorLblStatus:text="{formatted}"
-						sensorSwitch:value="{value}"
-						sceneBtnOn:title="On"
-						sceneBtnOff:title="Off"
-						searchableText="{displayName}"
-					/>
-        		</ListSection>
-				<RefreshControl id="refreshControlFav" platform="ios" onRefreshstart="refresh" />
-				<Templates>
-					<ItemTemplate class="deviceItem" name="infoLblTemplate">
-	                    <Label bindId="infoLbl" class="infoLbl" />
-	                </ItemTemplate>
-					<ItemTemplate class="deviceItem" name="groupLblTemplate">
-	                    <Label bindId="groupLbl" class="groupLbl" />
-	                </ItemTemplate>
-	            	<ItemTemplate class="deviceItem" name="sceneTemplate">
-	                    <View class="horizontal sceneContainer">
-	                        <Label bindId="label" class="deviceItemLbl"/>
-	                        <Button bindId="sceneBtnOn" class="sceneBtn" title="On" onClick="sceneOnBtn"/>
-	                        <Button bindId="sceneBtnOff" class="sceneBtn" title="Off" onClick="sceneOffBtn"/>
-	                    </View>
-	            	</ItemTemplate>
-	            	<ItemTemplate class="deviceItem" name="programTemplate">
-	                    <View>
-	                        <Button bindId="btn" class="btnOff" onClick="programBtnClick" />
-	                    </View>
-	            	</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="dimmerOffTemplate">
-	                    <View>
-	                        <Button bindId="btn" class="btnOff" onClick="btnClick" />
-	                        <View>
-	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
-	                            <Label bindId="sliderLbl" class="sliderLbl" />
-	                        </View>
-	                    </View>
-					</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="dimmerOnTemplate">
-	                    <View>
-	                        <Button bindId="btn" class="btnOn" onClick="btnClick" />
-	                        <View>
-	                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
-	                            <Label bindId="sliderLbl" class="sliderLbl" />
-	                        </View>
-	                    </View>
-					</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="switchOffTemplate">
-	                    <View>
-	                        <Button bindId="btn" class="btnOff" text="checking..." onClick="btnClick" />
-                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
-	                    </View>
-					</ItemTemplate>
-					<ItemTemplate class="deviceItem" id="light" name="switchOnTemplate">
-	                    <View>
-	                        <Button bindId="btn" class="btnOn" text="checking..." onClick="btnClick" />
-                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
-	                    </View>
-					</ItemTemplate>
-            		<ItemTemplate class="deviceItem" name="sensorTemplate">
-	                    <View class="horizontal">
-	                        <Label bindId="label" class="deviceItemLbl"/>
-	                        <Label bindId="sensorLblStatus" />
-                            <View top="20%" width="Ti.UI.SIZE" class="horizontal">
-	                        	<Switch touchEnabled="false" left="5%" bindId="sensorSwitch" />
-	                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
-                       	 	</View>
-	                    </View>
-	            	</ItemTemplate>
-				</Templates>
-			</ListView>
+			<View>
+	    		<View id="helpMsg" layout="vertical" visible="false">
+	    			<Label class="groupLbl">Favorites</Label>
+	    			<Label class="helpMsgDetail">Add favorites, lights, scenes, etc by going to edit mode on the right menu.</Label>
+	    			<Label class="helpMsgDetail">Swipe left and right to change between views.</Label>	
+	    		</View>
+				<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
+			       	<ListSection dataFunction="updateFavListView" dataFilter="favFilter" dataTransform="transform" dataCollection="devicesAndStatus">
+			       		<ListItem 
+			       			template="{template}"
+			       			btn:title="{displayName}" 
+							btn:address="{address}"
+							btn:type="{type}"
+			       			label:text="{displayName}" 
+			       			groupLbl:text="{displayName}" 
+			       			sliderLbl:text="{value}" 
+			       			slider:value="{value}" 
+			       			switchLblStatus:text="{formatted}"
+							sensorLblStatus:text="{formatted}"
+							sensorSwitch:value="{value}"
+							sceneBtnOn:title="On"
+							sceneBtnOff:title="Off"
+							searchableText="{displayName}"
+						/>
+	        		</ListSection>
+					<RefreshControl id="refreshControlFav" platform="ios" onRefreshstart="refresh" />
+					<Templates>
+						<ItemTemplate class="deviceItem" name="infoLblTemplate">
+		                    <Label bindId="infoLbl" class="infoLbl" />
+		                </ItemTemplate>
+						<ItemTemplate class="deviceItem" name="groupLblTemplate">
+		                    <Label bindId="groupLbl" class="groupLbl" />
+		                </ItemTemplate>
+		            	<ItemTemplate class="deviceItem" name="sceneTemplate">
+		                    <View class="horizontal sceneContainer">
+		                        <Label bindId="label" class="deviceItemLbl"/>
+		                        <Button bindId="sceneBtnOn" class="sceneBtn" title="On" onClick="sceneOnBtn"/>
+		                        <Button bindId="sceneBtnOff" class="sceneBtn" title="Off" onClick="sceneOffBtn"/>
+		                    </View>
+		            	</ItemTemplate>
+		            	<ItemTemplate class="deviceItem" name="programTemplate">
+		                    <View>
+		                        <Button bindId="btn" class="btnOff" onClick="programBtnClick" />
+		                    </View>
+		            	</ItemTemplate>
+						<ItemTemplate class="deviceItem" id="light" name="dimmerOffTemplate">
+		                    <View>
+		                        <Button bindId="btn" class="btnOff" onClick="btnClick" />
+		                        <View>
+		                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
+		                            <Label bindId="sliderLbl" class="sliderLbl" />
+		                        </View>
+		                    </View>
+						</ItemTemplate>
+						<ItemTemplate class="deviceItem" id="light" name="dimmerOnTemplate">
+		                    <View>
+		                        <Button bindId="btn" class="btnOn" onClick="btnClick" />
+		                        <View>
+		                            <Slider bindId="slider" class="slider" onStop="sendSliderVal"/>
+		                            <Label bindId="sliderLbl" class="sliderLbl" />
+		                        </View>
+		                    </View>
+						</ItemTemplate>
+						<ItemTemplate class="deviceItem" id="light" name="switchOffTemplate">
+		                    <View>
+		                        <Button bindId="btn" class="btnOff" text="checking..." onClick="btnClick" />
+	                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
+		                    </View>
+						</ItemTemplate>
+						<ItemTemplate class="deviceItem" id="light" name="switchOnTemplate">
+		                    <View>
+		                        <Button bindId="btn" class="btnOn" text="checking..." onClick="btnClick" />
+	                        	<Label left="60%" bindId="switchLblStatus" color="white" />	
+		                    </View>
+						</ItemTemplate>
+	            		<ItemTemplate class="deviceItem" name="sensorTemplate">
+		                    <View class="horizontal">
+		                        <Label bindId="label" class="deviceItemLbl"/>
+		                        <Label bindId="sensorLblStatus" />
+	                            <View top="20%" width="Ti.UI.SIZE" class="horizontal">
+		                        	<Switch touchEnabled="false" left="5%" bindId="sensorSwitch" />
+		                        	<Label left="10%" bindId="sensorLblStatus" color="white" />	
+	                       	 	</View>
+		                    </View>
+		            	</ItemTemplate>
+					</Templates>
+				</ListView>
+			</View>
 			<ListView id="lightsListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
 				<HeaderView>
 					<TextField id="sfLights" class="searchField"></TextField>
 				</HeaderView>
-		       	<!-- <ListSection>
-    				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
-    				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
-        		</ListSection> -->
-        		            <!-- Sets ListView's headerView property -->
+	            <!-- Sets ListView's headerView property -->
 		       	<ListSection dataFunction="updateLightsListView" dataFilter="lightsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
@@ -182,10 +181,6 @@
 				<HeaderView>
 					<TextField id="sfScenes" class="searchField"></TextField>
 				</HeaderView>
-		       	<!-- <ListSection>
-    				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
-    				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
-        		</ListSection> -->
 		       	<ListSection dataFunction="updateScenesListView" dataFilter="scenesFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
@@ -270,10 +265,6 @@
 				<HeaderView>
 					<TextField id="sfSensors" class="searchField"></TextField>
 				</HeaderView>
-		       	<!-- <ListSection>
-    				<ListItem  template="infoLblTemplate" infoLbl:text="Add favorites by going to edit mode on the right menu"></ListItem>
-    				<ListItem template="infoLblTemplate" infoLbl:text="Swipe left and right to change between views"></ListItem>
-        		</ListSection> -->
 		       	<ListSection dataFunction="updateSensorsListView" dataFilter="sensorsFilter" dataTransform="transform" dataCollection="devicesAndStatus">
 		       		<ListItem 
 		       			template="{template}"
