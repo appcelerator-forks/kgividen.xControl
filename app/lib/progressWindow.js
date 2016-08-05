@@ -1,35 +1,19 @@
 var activityIndicator, showingIndicator, activityIndicatorWindow, progressTimeout;
-var androidContainer = null;
 
 /**
  *
  * @param {Object} _messageString
  */
 exports.showIndicator = function(_messageString, _progressBar) {
-
-  // if adroid, we need a container for progress bar to make
-  // it more visible
-  if (OS_ANDROID) {
-    androidContainer = Ti.UI.createView({
-      top : "200dp",
-      width : Ti.UI.FILL,
-      height : Ti.UI.SIZE,
-      opacity : 1.0,
-      backgroundColor : 'black',
-      color : 'black',
-      visible : true
-    });
-  }
-
-  activityIndicatorWindow = Titanium.UI.createWindow({
-    top : 0,
-    left : 0,
-    width : "100%",
-    height : "100%",
-    backgroundColor : "#58585A",
-    opacity : .7,
-    fullscreen : true
-  });
+	activityIndicatorWindow = Titanium.UI.createWindow({
+	    top : 0,
+	    left : 0,
+	    width : "100%",
+	    height : "100%",
+	    backgroundColor : "#58585A",
+	    opacity : .7,
+	    fullscreen : true
+	});
 
   if (_progressBar === true) {
     // adjust spacing, size and color based on platform
@@ -52,81 +36,62 @@ exports.showIndicator = function(_messageString, _progressBar) {
       backgroundColor : ( OS_ANDROID ? 'black' : 'transparent')
     });
   } else {
-    activityIndicator = Ti.UI.createActivityIndicator({
-      style : OS_IOS ? Ti.UI.iPhone.ActivityIndicatorStyle.BIG : Ti.UI.ActivityIndicatorStyle.BIG,
-      top : "10dp",
-      right : "30dp",
-      bottom : "10dp",
-      left : "30dp",
-      message : _messageString || "Loading, please wait.",
-      color : "white",
-      font : {
-        fontSize : '20dp',
-        fontWeight : "bold"
-      },
-      // style : 0
-    });
+	activityIndicator = Ti.UI.createActivityIndicator({
+	 	style : OS_IOS ? Ti.UI.iPhone.ActivityIndicatorStyle.BIG : Ti.UI.ActivityIndicatorStyle.BIG,
+	    top : "10dp",
+	 	right : "30dp",
+	  	bottom : "10dp",
+	  	left : "30dp",
+	  	message : _messageString || "Loading, please wait.",
+	  	color : "white",
+	  	font : {
+	    	fontSize : '20dp',
+			fontWeight : "bold"
+	  	},
+	});	
   }
 
-  // if android, you need to account for container when
-  // setting up window for display
-  if (OS_ANDROID) {
-    androidContainer.add(activityIndicator);
-    activityIndicatorWindow.add(androidContainer);
-    activityIndicatorWindow.open();
-  } else {
-    activityIndicatorWindow.add(activityIndicator);
-    activityIndicatorWindow.open();
-  }
+	activityIndicatorWindow.add(activityIndicator);
+	activityIndicatorWindow.open();
+	activityIndicator.show();
+	showingIndicator = true;
 
-  activityIndicator.show();
-  showingIndicator = true;
-
-  // safety catch all to ensure the screen eventually clears
-  // after 15 seconds
-  progressTimeout = setTimeout(function() {
-    exports.hideIndicator();
-  }, 60000);
-};
+	  // safety catch all to ensure the screen eventually clears
+	  // after 60 seconds
+	progressTimeout = setTimeout(function() {
+	    exports.hideIndicator();
+	  }, 60000);
+	};
 
 exports.setProgressValue = function(_value) {
-  activityIndicator && activityIndicator.setValue(_value);
+  	activityIndicator && activityIndicator.setValue(_value);
 };
 
 /**
  *
  */
 exports.hideIndicator = function(callback) {
-
-  if (progressTimeout) {
-    clearTimeout(progressTimeout);
-    progressTimeout = null;
-  }
-
-  if (!showingIndicator) {
-    return;
-  }
-
-  activityIndicator.hide();
-
-  // if android, you need to account for container when
-  // cleaning up window
-  if (OS_ANDROID) {
-    androidContainer.remove(activityIndicator);
-    activityIndicatorWindow.remove(androidContainer);
-    androidContainer = null;
-  } else {
-    activityIndicator && activityIndicatorWindow.remove(activityIndicator);
-  }
-  activityIndicatorWindow.close();
-  activityIndicatorWindow = null;
-
-  // clean up variables
-  showingIndicator = false;
-  activityIndicator = null;
+	if (progressTimeout) {
+    	clearTimeout(progressTimeout);
+    	progressTimeout = null;
+  	}
+	
+	if (!showingIndicator) {
+    	return;
+  	}
   
-  if (callback) {
-  	callback();
-  }
-};
+  	activityIndicator.hide();
 
+	activityIndicator && activityIndicatorWindow.remove(activityIndicator);
+	activityIndicatorWindow.close();
+	activityIndicatorWindow = null;
+
+
+  	// clean up variables
+  	showingIndicator = false;
+  	activityIndicator = null;
+  
+  	if (callback) {
+  		callback();
+  	}
+};
