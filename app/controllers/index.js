@@ -271,13 +271,14 @@ function startUI(){
 
     //Empty the current contentView
     //$.ds.contentview.removeAllChildren();
-    $.ds.contentview.add(foldersController.getView());
+   	$.ds.contentview.add(foldersController.getView());	
+    if(!Ti.App.Properties.getBool('hasStartedBefore')){
+    	Ti.App.Properties.setBool('hasStartedBefore', true);
+    	Alloy.createController("settings",{callback:foldersController.reloadData}).getView().open();			
+    } 
+
     // $.ds.contentview.add(Alloy.createController("folders", {theme: true}).getView());
     
-    //tmp
-    //Alloy.createController("camerasContainer").getView().open();
-    // Alloy.createController('settingsMenu/index',{callback:foldersController.reloadData}).getView().open();
-    //$.win.close();
 }
 
 // if(Ti.App.Properties.getObject('conn_current')) startUI(); //starts here
