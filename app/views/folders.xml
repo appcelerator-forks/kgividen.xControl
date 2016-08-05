@@ -7,7 +7,7 @@
 			<View>
 	    		<View id="helpMsg" layout="vertical" visible="false">
 	    			<Label class="groupLbl">Favorites</Label>
-	    			<Label class="helpMsgDetail">Add favorites, lights, scenes, etc by going to edit mode on the right menu.</Label>
+	    			<Label class="helpMsgDetail">Add favorites, lights, scenes, etc. by going to edit mode on the right menu..</Label>
 	    			<Label class="helpMsgDetail">Swipe left and right to change between views.</Label>	
 	    		</View>
 				<ListView id="favoritesListView" class="deviceListView" defaultItemTemplate="dimmerOffTemplate">
