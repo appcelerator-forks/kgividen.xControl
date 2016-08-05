@@ -16,7 +16,7 @@ var init = function () {
 			"callback": init
 		};
 		Alloy.createController("settings", params).getView().open();	
-		alert('Connection Error! Please check the connection information. No connection info set.');
+		alert('Please check/update the connection information.');
 	}
 };
 

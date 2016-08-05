@@ -455,7 +455,7 @@ function processData(dbData, liveData, devicesInFolder) {
 function openSettingsMenuCallback(){
 	Alloy.Globals.PW.hideIndicator();
 	Alloy.createController('settingsMenu/index').getView().open();
-	alert("Devices and programs were refreshed.  All devices that were not in a folder have been added to the Default Folder.  You can now add/modify them here or in the future by going to Edit Mode using the right menu from the home screen.  Scenes have been added to the scenes view and everything else for now under the lighting view.  But feel free to add/remove things as you wish.");
+	alert("Devices and programs were refreshed.  Devices have been added for you by default to their various views.  You can now add/modify them here or in the future by going to Edit Mode using the right menu from the home screen.");
 	closeWin();
 }
 
