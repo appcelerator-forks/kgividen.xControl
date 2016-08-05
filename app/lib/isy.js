@@ -39,6 +39,8 @@ exports.init = function() {
 		        get: "nodes",
 		        onError: function(e, callback){
 		            Ti.API.info("There was an error getting the nodes!");
+		            alert("There was an error getting the nodes.  Please verify your connection information");
+		            Alloy.Globals.PW.hideIndicator();
 		        }
 		    },{
 		        name: "deviceFastOn",
